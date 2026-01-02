@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "purpose": "Track recent registrations to prevent duplicate submissions",
+    "retentionPeriod": "30 days",
+    "lastUpdated": "2025-12-25T17:00:00+05:30",
+    "version": "1.0",
+    "notes": "This file is automatically updated by PHP registration forms. Old entries (>30 days) are automatically purged to keep file size manageable."
+  },
+  "events": {
+    "evt-001": [
+      "example.participant1@gmail.com",
+      "example.participant2@yahoo.com"
+    ],
+    "evt-002": [
+      "example.participant3@outlook.com"
+    ]
+  },
+  "trainings": {
+    "trn-001": [
+      "example.trainee1@gmail.com",
+      "example.trainee2@hotmail.com"
+    ],
+    "trn-002": [
+      "example.trainee3@gmail.com"
+    ]
+  },
+  "donations": [
+    {
+      "email": "example.donor@gmail.com",
+      "date": "2025-12-20T14:30:00+05:30",
+      "amount": 1000
+    },
+    {
+      "email": "example.donor2@yahoo.com",
+      "date": "2025-12-22T10:15:00+05:30",
+      "amount": 5000
+    }
+  ],
+  "purgeHistory": [
+    {
+      "date": "2025-12-25T00:00:00+05:30",
+      "entriesRemoved": 15,
+      "reason": "Automatic 30-day cleanup"
+    }
+  ],
+  "instructions": {
+    "usage": "PHP registration forms check this file before accepting new registrations",
+    "eventRegistrations": "Store as array of email addresses under event ID key",
+    "trainingRegistrations": "Store as array of email addresses under training ID key",
+    "donationRegistrations": "Store as array of objects with email, date, and amount",
+    "duplicateCheck": "Before accepting registration, check if email exists in array for that specific event/training",
+    "automaticCleanup": "Set up cron job to remove entries older than 30 days every night at midnight",
+    "backupRecommendation": "Weekly backup recommended before automatic cleanup"
+  }
+}

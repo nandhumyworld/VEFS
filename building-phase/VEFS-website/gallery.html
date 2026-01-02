@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse VEFS Foundation's photo gallery. View images from our tree plantation drives, community workshops, training programs, and environmental initiatives across Tamil Nadu.">
+  <meta name="keywords" content="VEFS photos, environmental NGO gallery, tree plantation images, community programs Tamil Nadu, VEFS events">
+
+  <title>Photo Gallery - Our Journey in Pictures | VEFS Foundation</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="images/icons/vefs-favicon.ico">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <!-- Header/Navigation -->
+  <header class="header" id="main-header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="header-logo">
+          <img src="images/logos/vefs-logo.png" alt="VEFS Foundation Logo" width="60" height="60">
+          <span class="logo-text">VEFS Foundation</span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-controls="main-nav" aria-expanded="false">
+          <span class="nav-toggle-icon"></span>
+        </button>
+
+        <nav class="nav" id="main-nav">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="programs.html" class="nav-link">Programs</a></li>
+            <li><a href="trainings.html" class="nav-link">Trainings</a></li>
+            <li><a href="events.html" class="nav-link">Events</a></li>
+            <li><a href="gallery.html" class="nav-link active" aria-current="page">Gallery</a></li>
+            <li><a href="future-plans.html" class="nav-link">Future Plans</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li><a href="donate.html" class="btn btn-primary btn-sm">Donate</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Hero -->
+    <section class="section" style="background: linear-gradient(135deg, rgba(107, 142, 35, 0.9), rgba(139, 115, 85, 0.9)); color: var(--color-white); text-align: center; padding: var(--space-3xl) 0;">
+      <div class="container">
+        <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-md); font-weight: 700; background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none;">Our Journey in Pictures</h1>
+        <p style="font-size: var(--font-size-xl); max-width: 800px; margin: 0 auto; opacity: 0.95;">Witness the Impact Through Images - Capturing Moments of Growth, Learning, and Change</p>
+      </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="section section-py" style="text-align: center;">
+      <div class="container" style="max-width: 800px;">
+        <p style="font-size: var(--font-size-lg); color: var(--color-gray-700); line-height: 1.8;">
+          Explore our visual journey of environmental conservation, community empowerment, and indigenous tree restoration across Tamil Nadu. Each photo tells a story of hope, growth, and sustainable change.
+        </p>
+      </div>
+    </section>
+
+    <!-- Search & Filters (Sticky) -->
+    <section class="section" style="position: sticky; top: 70px; z-index: 10; background-color: var(--color-white); box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: var(--space-lg) 0;">
+      <div class="container">
+        <div style="margin-bottom: var(--space-md);">
+          <input
+            type="text"
+            id="gallery-search"
+            placeholder="🔍 Search photos..."
+            class="form-input"
+            style="max-width: 400px;"
+          >
+        </div>
+
+        <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap; align-items: center;" id="gallery-filters">
+          <span style="font-weight: 600; color: var(--color-gray-700); margin-right: var(--space-xs);">Filter:</span>
+
+          <!-- Category Filters -->
+          <button class="btn btn-outline btn-sm active" data-filter-type="category" data-filter-value="all">All Photos</button>
+          <button class="btn btn-outline btn-sm" data-filter-type="category" data-filter-value="programs">Programs</button>
+          <button class="btn btn-outline btn-sm" data-filter-type="category" data-filter-value="trainings">Trainings</button>
+          <button class="btn btn-outline btn-sm" data-filter-type="category" data-filter-value="events">Events</button>
+          <button class="btn btn-outline btn-sm" data-filter-type="category" data-filter-value="nature">Nature & Trees</button>
+
+          <span style="margin: 0 var(--space-xs); color: var(--color-gray-400);">|</span>
+
+          <!-- Year Filters -->
+          <button class="btn btn-outline btn-sm" data-filter-type="year" data-filter-value="2025">2025</button>
+          <button class="btn btn-outline btn-sm" data-filter-type="year" data-filter-value="2024">2024</button>
+          <button class="btn btn-outline btn-sm" data-filter-type="year" data-filter-value="2023">2023</button>
+
+          <button class="btn btn-sm" id="reset-filters" style="margin-left: auto; background-color: var(--color-gray-200);">Reset</button>
+        </div>
+
+        <div style="margin-top: var(--space-md); color: var(--color-gray-600); font-size: var(--font-size-sm);" id="results-count">
+          Showing <strong id="count-current">0</strong> of <strong id="count-total">0</strong> photos
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="section section-py" style="background-color: var(--color-gray-50);">
+      <div class="container">
+        <div id="gallery-grid">
+          <!-- Loading spinner -->
+          <div class="text-center" id="loading-spinner">
+            <div class="spinner" style="margin: var(--space-3xl) auto;"></div>
+            <p style="color: var(--color-gray-600);">Loading gallery...</p>
+          </div>
+
+          <!-- Grid will be populated by JavaScript -->
+          <div id="photos-grid" style="display: none; column-count: 4; column-gap: 16px;">
+            <!-- Photos will be inserted here -->
+          </div>
+
+          <!-- No results message -->
+          <div id="no-results" style="display: none; text-align: center; padding: var(--space-3xl) 0;">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: var(--space-lg); color: var(--color-gray-400);">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-md); color: var(--color-gray-700);">No Photos Found</h3>
+            <p style="color: var(--color-gray-600); margin-bottom: var(--space-lg);">Try adjusting your filters or search terms</p>
+            <button class="btn btn-outline" onclick="document.getElementById('reset-filters').click()">Clear Filters</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="modal" id="gallery-lightbox" role="dialog" aria-hidden="true" style="background-color: rgba(0,0,0,0.95);">
+      <div class="modal-dialog" style="max-width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0;">
+        <div class="modal-content" style="background: transparent; box-shadow: none; max-width: 90vw; max-height: 90vh;">
+          <button class="modal-close" aria-label="Close lightbox" style="position: fixed; top: 20px; right: 20px; z-index: 1001; background-color: rgba(255,255,255,0.2); color: white;">&times;</button>
+
+          <div style="position: relative;">
+            <!-- Navigation Arrows -->
+            <button id="lightbox-prev" style="position: fixed; left: 20px; top: 50%; transform: translateY(-50%); background-color: rgba(255,255,255,0.2); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 24px; z-index: 1001;">‹</button>
+            <button id="lightbox-next" style="position: fixed; right: 20px; top: 50%; transform: translateY(-50%); background-color: rgba(255,255,255,0.2); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 24px; z-index: 1001;">›</button>
+
+            <!-- Image -->
+            <img id="lightbox-image" src="" alt="" style="max-width: 90vw; max-height: 85vh; display: block; margin: 0 auto;">
+
+            <!-- Photo Info -->
+            <div style="position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: var(--space-xl); color: white; z-index: 1000;">
+              <div class="container" style="max-width: 800px;">
+                <h3 id="lightbox-title" style="font-size: var(--font-size-xl); margin-bottom: var(--space-sm);"></h3>
+                <div style="display: flex; gap: var(--space-md); flex-wrap: wrap; font-size: var(--font-size-sm); opacity: 0.9;">
+                  <span id="lightbox-date"></span>
+                  <span id="lightbox-category"></span>
+                  <span id="lightbox-location"></span>
+                </div>
+                <p id="lightbox-description" style="margin-top: var(--space-sm); opacity: 0.9;"></p>
+                <div style="margin-top: var(--space-md); opacity: 0.7; font-size: var(--font-size-sm);" id="lightbox-counter"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call-to-Action Section -->
+    <section class="section section-py" style="background-color: var(--color-primary-light); text-align: center;">
+      <div class="container" style="max-width: 800px;">
+        <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-md); background: linear-gradient(135deg, #1a4d2e 0%, #2563a0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">Want to Experience These Moments?</h2>
+        <p style="font-size: var(--font-size-lg); margin-bottom: var(--space-xl); color: var(--color-gray-700);">
+          Join us in our mission to conserve indigenous trees and empower communities. Be part of the change.
+        </p>
+        <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+          <a href="events.html" class="btn btn-primary">Attend Events</a>
+          <a href="trainings.html" class="btn btn-outline">Join Trainings</a>
+          <a href="donate.html" class="btn btn-outline">Support Our Work</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h3 class="footer-heading">About VEFS</h3>
+          <p class="footer-text">Valluvam Ecological Farming and Social Welfare Foundation promotes indigenous tree conservation and environmental education across Tamil Nadu.</p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/people/VEFS-Foundation/61582906514169/" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@VEFSFOUNDATION" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener">
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-heading">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="trainings.html">Trainings</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-heading">Contact Us</h3>
+          <ul class="footer-contact">
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Nilakottai, Dindigul, Tamil Nadu
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <a href="mailto:vefsfoundation@gmail.com">vefsfoundation@gmail.com</a>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              <a href="tel:+919876543210">+91 95666 67708</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-heading">Newsletter</h3>
+          <p class="footer-text">Get updates on our environmental initiatives</p>
+          <form class="footer-newsletter">
+            <input type="email" placeholder="Your email" aria-label="Email for newsletter" required>
+            <button type="submit" class="btn btn-sm btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2025 VEFS Foundation. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/components/navigation.js"></script>
+  <script src="js/components/modal.js"></script>
+  <script src="js/gallery.js"></script>
+
+  <style>
+    /* Masonry Grid Responsive */
+    @media (max-width: 1023px) {
+      #photos-grid {
+        column-count: 3 !important;
+      }
+    }
+
+    @media (max-width: 767px) {
+      #photos-grid {
+        column-count: 2 !important;
+        column-gap: 12px !important;
+      }
+    }
+
+    /* Photo Item Styles */
+    .photo-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      position: relative;
+      cursor: pointer;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .photo-item:hover {
+      transform: translateY(-4px);
+    }
+
+    .photo-item img {
+      width: 100%;
+      display: block;
+      border-radius: var(--radius-md);
+    }
+
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-md);
+      color: white;
+    }
+
+    .photo-item:hover .photo-overlay {
+      opacity: 1;
+    }
+  </style>
+</body>
+</html>

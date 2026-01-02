@@ -1,0 +1,1068 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2025-12-25T16:00:00+05:30",
+    "totalTrainings": 7,
+    "categories": ["farming", "conservation", "skills-development"],
+    "statusCounts": {
+      "open": 4,
+      "full": 2,
+      "upcoming": 1
+    }
+  },
+  "trainings": [
+    {
+      "id": "trn-001",
+      "title": "Sustainable Organic Farming Techniques - 3 Week Program",
+      "slug": "sustainable-organic-farming-2026",
+      "category": "farming",
+      "status": "open",
+      "featured": true,
+      "schedule": {
+        "type": "multi-session",
+        "sessions": [
+          {
+            "sessionNumber": 1,
+            "date": "2026-03-01T09:00:00+05:30",
+            "duration": 4,
+            "topic": "Introduction to Sustainable Farming & Soil Health"
+          },
+          {
+            "sessionNumber": 2,
+            "date": "2026-03-08T09:00:00+05:30",
+            "duration": 4,
+            "topic": "Organic Pest Management & Natural Pesticides"
+          },
+          {
+            "sessionNumber": 3,
+            "date": "2026-03-15T09:00:00+05:30",
+            "duration": 4,
+            "topic": "Composting, Water Conservation & Crop Rotation"
+          }
+        ],
+        "timezone": "Asia/Kolkata"
+      },
+      "totalDuration": {
+        "value": 3,
+        "unit": "weeks"
+      },
+      "location": {
+        "type": "hybrid",
+        "venue": "VEFS Training Center",
+        "address": "456 Farm Road, Pollachi, Tamil Nadu 642001",
+        "city": "Pollachi",
+        "state": "Tamil Nadu",
+        "onlineLink": "https://meet.vefs.org/trn-001",
+        "coordinates": {
+          "lat": 10.6579,
+          "lng": 77.0089
+        }
+      },
+      "audience": ["farmers"],
+      "targetAudience": "Farmers seeking sustainable agricultural practices and organic certification",
+      "capacity": {
+        "total": 30,
+        "registered": 18,
+        "available": 12
+      },
+      "description": {
+        "brief": "Comprehensive three-week training program on sustainable and organic farming techniques for small and medium-scale farmers.",
+        "full": "This intensive training program covers essential sustainable farming practices including organic pest management, soil health improvement, water conservation, and crop rotation strategies. Participants gain hands-on experience through field demonstrations, practical exercises, and real farm visits. The course is designed to help farmers transition to organic methods and potentially achieve organic certification.",
+        "objectives": [
+          "Master principles of sustainable agriculture and organic farming",
+          "Implement organic pest control methods without chemical pesticides",
+          "Improve soil health through natural composting techniques",
+          "Develop water conservation and irrigation strategies",
+          "Plan and execute effective crop rotation systems"
+        ],
+        "curriculum": [
+          {
+            "week": 1,
+            "topics": [
+              "Sustainable farming principles and benefits",
+              "Assessment of current farming practices",
+              "Introduction to organic methods and certification",
+              "Soil testing and health analysis",
+              "Field visit to successful organic farm"
+            ]
+          },
+          {
+            "week": 2,
+            "topics": [
+              "Natural pest management techniques",
+              "Beneficial insects and bio-control agents",
+              "Organic pesticide preparation from neem, chili, etc.",
+              "Integrated pest management (IPM)",
+              "Practical field demonstration"
+            ]
+          },
+          {
+            "week": 3,
+            "topics": [
+              "Advanced composting techniques (aerobic, vermi, NADEP)",
+              "Green manure and cover cropping",
+              "Water management and drip irrigation",
+              "Crop rotation planning",
+              "Marketing organic produce and certification process"
+            ]
+          }
+        ],
+        "outcomes": [
+          "Ability to implement sustainable practices on own farm",
+          "Reduced dependency on chemical inputs by 70%+",
+          "Improved soil health and long-term crop yields",
+          "Cost savings of ₹15,000-₹25,000 per acre annually",
+          "Preparation for organic certification process"
+        ]
+      },
+      "facilitators": [
+        {
+          "name": "Mr. Senthil Kumar",
+          "title": "Organic Farming Expert & Certified Trainer",
+          "bio": "15 years of experience in sustainable agriculture training with 2000+ farmers trained",
+          "photo": "/images/facilitators/senthil-kumar.jpg"
+        },
+        {
+          "name": "Dr. Priya Devi",
+          "title": "Soil Scientist & Agricultural Consultant",
+          "bio": "PhD in Soil Science, specialist in organic farming systems and soil health",
+          "photo": "/images/facilitators/priya-devi.jpg"
+        }
+      ],
+      "registration": {
+        "required": true,
+        "url": "/trainings/trn-001/register",
+        "deadline": "2026-02-20T23:59:59+05:30",
+        "fee": {
+          "amount": 500,
+          "currency": "INR",
+          "type": "paid",
+          "scholarships": true,
+          "earlyBird": {
+            "amount": 400,
+            "deadline": "2026-02-10T23:59:59+05:30"
+          }
+        }
+      },
+      "requirements": {
+        "prerequisites": "Basic farming experience preferred but not mandatory",
+        "whatToBring": [
+          "Notebook and pen",
+          "Soil samples from own farm (optional)",
+          "Comfortable outdoor clothing",
+          "Water bottle"
+        ],
+        "language": ["Tamil", "English"],
+        "education": "No formal education requirement"
+      },
+      "certificate": {
+        "provided": true,
+        "type": "Certificate of Completion in Sustainable Organic Farming",
+        "criteria": "Attend all 3 sessions (minimum 90% attendance) and complete practical assignments"
+      },
+      "logistics": {
+        "meals": ["Lunch", "Tea/Coffee breaks"],
+        "materials": "All training materials, workbooks, and digital resources provided",
+        "parking": true,
+        "accommodation": false,
+        "accessibility": "Ground floor venue, wheelchair accessible"
+      },
+      "media": {
+        "featuredImage": "/images/trainings/trn-001-featured.jpg",
+        "gallery": [
+          "/images/trainings/trn-001-1.jpg",
+          "/images/trainings/trn-001-2.jpg",
+          "/images/trainings/trn-001-3.jpg"
+        ],
+        "video": "/videos/trainings/trn-001-intro.mp4"
+      },
+      "tags": ["organic-farming", "sustainable-agriculture", "farmers", "certification"],
+      "relatedPrograms": ["prog-002"],
+      "metadata": {
+        "createdAt": "2025-11-10T10:00:00+05:30",
+        "updatedAt": "2025-12-24T14:00:00+05:30",
+        "createdBy": "admin",
+        "publishedAt": "2025-11-15T09:00:00+05:30"
+      }
+    },
+    {
+      "id": "trn-002",
+      "title": "Traditional Seed Preservation & Seed Bank Management",
+      "slug": "seed-preservation-training-2026",
+      "category": "conservation",
+      "status": "open",
+      "featured": false,
+      "schedule": {
+        "type": "single-session",
+        "sessions": [
+          {
+            "sessionNumber": 1,
+            "date": "2026-02-14T10:00:00+05:30",
+            "duration": 6,
+            "topic": "Complete Seed Preservation Workshop"
+          }
+        ],
+        "timezone": "Asia/Kolkata"
+      },
+      "totalDuration": {
+        "value": 1,
+        "unit": "days"
+      },
+      "location": {
+        "type": "in-person",
+        "venue": "Rural Development Center",
+        "address": "Thondamuthur, Coimbatore, Tamil Nadu 641109",
+        "city": "Coimbatore",
+        "state": "Tamil Nadu",
+        "onlineLink": null,
+        "coordinates": {
+          "lat": 10.9862,
+          "lng": 76.8365
+        }
+      },
+      "audience": ["farmers", "women"],
+      "targetAudience": "Farmers, homemakers, and seed savers interested in preserving indigenous crop varieties",
+      "capacity": {
+        "total": 40,
+        "registered": 25,
+        "available": 15
+      },
+      "description": {
+        "brief": "One-day intensive training on traditional seed preservation methods, seed bank setup, and maintaining indigenous crop diversity.",
+        "full": "Learn the art and science of preserving indigenous seeds through this comprehensive hands-on training. Participants will master traditional and modern seed storage techniques, understand seed viability testing, and learn to establish community seed banks. This training emphasizes the critical importance of maintaining genetic diversity in crops for food security and climate resilience.",
+        "objectives": [
+          "Understand importance of seed preservation for food security and biodiversity",
+          "Master traditional seed cleaning, drying, and storage techniques",
+          "Learn to identify high-quality seeds and test viability",
+          "Set up home or community seed banks",
+          "Document and catalog indigenous seed varieties"
+        ],
+        "curriculum": [
+          {
+            "week": 1,
+            "topics": [
+              "Introduction to seed sovereignty and biodiversity",
+              "Traditional vs modern seed preservation methods",
+              "Seed biology and germination science",
+              "Hands-on seed cleaning and drying techniques",
+              "Seed storage containers and environmental control",
+              "Seed viability testing methods",
+              "Community seed bank management",
+              "Seed exchange networks and legal aspects"
+            ]
+          }
+        ],
+        "outcomes": [
+          "Ability to preserve seeds for 2-5 years with high viability",
+          "Knowledge of 20+ indigenous crop varieties suitable for region",
+          "Skills to run home or community seed bank",
+          "Understanding of seed laws and farmers' rights",
+          "Network with other seed savers in Tamil Nadu"
+        ]
+      },
+      "facilitators": [
+        {
+          "name": "Mrs. Lakshmi Raman",
+          "title": "Traditional Seed Keeper & Community Organizer",
+          "bio": "30+ years maintaining indigenous seed varieties, trained 500+ farmers in seed preservation",
+          "photo": "/images/facilitators/lakshmi-raman.jpg"
+        }
+      ],
+      "registration": {
+        "required": true,
+        "url": "/trainings/trn-002/register",
+        "deadline": "2026-02-10T23:59:59+05:30",
+        "fee": {
+          "amount": 0,
+          "currency": "INR",
+          "type": "free",
+          "scholarships": false,
+          "earlyBird": null
+        }
+      },
+      "requirements": {
+        "prerequisites": "Interest in seed preservation, gardening, or farming",
+        "whatToBring": [
+          "Notebook",
+          "Seeds from home garden (optional for practice)",
+          "Small cloth bags or pouches",
+          "Lunch (or registration for provided lunch)"
+        ],
+        "language": ["Tamil"],
+        "education": "No educational requirement"
+      },
+      "certificate": {
+        "provided": true,
+        "type": "Participation Certificate",
+        "criteria": "Full day attendance"
+      },
+      "logistics": {
+        "meals": ["Lunch (optional registration)", "Tea/Snacks"],
+        "materials": "Seed preservation starter kit worth ₹300 provided to all participants",
+        "parking": true,
+        "accommodation": false,
+        "accessibility": "Ground floor, accessible"
+      },
+      "media": {
+        "featuredImage": "/images/trainings/trn-002-featured.jpg",
+        "gallery": [],
+        "video": null
+      },
+      "tags": ["seeds", "preservation", "biodiversity", "food-security"],
+      "relatedPrograms": ["prog-003"],
+      "metadata": {
+        "createdAt": "2025-11-25T11:00:00+05:30",
+        "updatedAt": "2025-12-22T15:00:00+05:30",
+        "createdBy": "admin",
+        "publishedAt": "2025-12-01T09:00:00+05:30"
+      }
+    },
+    {
+      "id": "trn-003",
+      "title": "Natural Water Harvesting & Farm Pond Construction",
+      "slug": "water-harvesting-training-2026",
+      "category": "farming",
+      "status": "full",
+      "featured": true,
+      "schedule": {
+        "type": "multi-session",
+        "sessions": [
+          {
+            "sessionNumber": 1,
+            "date": "2026-03-22T09:00:00+05:30",
+            "duration": 5,
+            "topic": "Theory: Water Harvesting Principles & Design"
+          },
+          {
+            "sessionNumber": 2,
+            "date": "2026-03-23T08:00:00+05:30",
+            "duration": 6,
+            "topic": "Practical: Farm Pond Construction Demo"
+          }
+        ],
+        "timezone": "Asia/Kolkata"
+      },
+      "totalDuration": {
+        "value": 2,
+        "unit": "days"
+      },
+      "location": {
+        "type": "in-person",
+        "venue": "Model Farm, Mettupalayam",
+        "address": "Mettupalayam Road, Coimbatore, Tamil Nadu 641029",
+        "city": "Coimbatore",
+        "state": "Tamil Nadu",
+        "onlineLink": null,
+        "coordinates": {
+          "lat": 11.0505,
+          "lng": 76.9098
+        }
+      },
+      "audience": ["farmers"],
+      "targetAudience": "Small and medium farmers facing water scarcity issues",
+      "capacity": {
+        "total": 25,
+        "registered": 25,
+        "available": 0
+      },
+      "description": {
+        "brief": "Two-day practical training on designing and constructing farm ponds, check dams, and rainwater harvesting structures.",
+        "full": "This hands-on training addresses critical water scarcity challenges faced by farmers. Participants learn to design site-specific water harvesting structures, calculate water storage capacity, construct farm ponds using low-cost techniques, and implement rainwater harvesting systems. Day 1 covers theory and design, Day 2 is full practical construction demonstration at a real farm site.",
+        "objectives": [
+          "Design cost-effective farm ponds suitable for land size and rainfall",
+          "Calculate water storage requirements for crops and livestock",
+          "Construct check dams and contour bunds",
+          "Implement rooftop and surface rainwater harvesting",
+          "Understand government subsidies and schemes for water harvesting"
+        ],
+        "curriculum": [
+          {
+            "week": 1,
+            "topics": [
+              "Water crisis in agriculture - current scenario",
+              "Principles of rainwater harvesting",
+              "Farm pond design considerations (size, depth, location)",
+              "Soil type and water retention capacity",
+              "Cost estimation and material selection",
+              "Government schemes: MGNREGA, NABARD subsidies"
+            ]
+          },
+          {
+            "week": 2,
+            "topics": [
+              "On-site visit to model farm",
+              "Survey and marking of pond location",
+              "Excavation techniques and safety",
+              "Lining options (clay, plastic, cement)",
+              "Inlet and outlet construction",
+              "Maintenance and algae control",
+              "Integration with drip irrigation systems"
+            ]
+          }
+        ],
+        "outcomes": [
+          "Ability to design farm pond for own land",
+          "Knowledge to construct 20,000-50,000 liter capacity pond",
+          "Water security for at least 2-3 dry months",
+          "Potential water cost savings of ₹20,000-₹40,000 annually",
+          "Access to government subsidy programs (up to 60% cost)"
+        ]
+      },
+      "facilitators": [
+        {
+          "name": "Mr. Vijay Kumar",
+          "title": "Water Conservation Engineer",
+          "bio": "12 years designing water harvesting structures for 300+ farms across Tamil Nadu",
+          "photo": "/images/facilitators/vijay-kumar.jpg"
+        },
+        {
+          "name": "Mr. Murugan Natarajan",
+          "title": "Experienced Farmer & Water Harvesting Practitioner",
+          "bio": "Successfully implemented 5 farm ponds, saved ₹50,000 annually on water",
+          "photo": "/images/facilitators/murugan-natarajan.jpg"
+        }
+      },
+      "registration": {
+        "required": true,
+        "url": "/trainings/trn-003/register",
+        "deadline": "2026-03-15T23:59:59+05:30",
+        "fee": {
+          "amount": 800,
+          "currency": "INR",
+          "type": "paid",
+          "scholarships": true,
+          "earlyBird": null
+        }
+      },
+      "requirements": {
+        "prerequisites": "Must own or lease farmland (minimum 1 acre)",
+        "whatToBring": [
+          "Farm details (size, soil type, crop pattern)",
+          "Measuring tape or rope (50 feet)",
+          "Notebook, camera/phone for photos",
+          "Work clothes for Day 2 practical",
+          "Packed lunch or lunch registration"
+        ],
+        "language": ["Tamil", "English"],
+        "education": "No formal requirement"
+      },
+      "certificate": {
+        "provided": true,
+        "type": "Training Completion Certificate",
+        "criteria": "Attend both days (mandatory)"
+      },
+      "logistics": {
+        "meals": ["Lunch both days", "Tea/Snacks"],
+        "materials": "Design workbook, calculation sheets, subsidy application templates",
+        "parking": true,
+        "accommodation": false,
+        "accessibility": "Field training - not wheelchair accessible"
+      },
+      "media": {
+        "featuredImage": "/images/trainings/trn-003-featured.jpg",
+        "gallery": [
+          "/images/trainings/trn-003-1.jpg",
+          "/images/trainings/trn-003-2.jpg"
+        ],
+        "video": null
+      },
+      "tags": ["water-harvesting", "farm-pond", "water-conservation", "practical"],
+      "relatedPrograms": ["prog-002"],
+      "metadata": {
+        "createdAt": "2025-12-01T09:00:00+05:30",
+        "updatedAt": "2025-12-20T11:00:00+05:30",
+        "createdBy": "admin",
+        "publishedAt": "2025-12-05T10:00:00+05:30"
+      }
+    },
+    {
+      "id": "trn-004",
+      "title": "Vermicomposting & Organic Manure Production",
+      "slug": "vermicomposting-training-2026",
+      "category": "skills-development",
+      "status": "open",
+      "featured": false,
+      "schedule": {
+        "type": "single-session",
+        "sessions": [
+          {
+            "sessionNumber": 1,
+            "date": "2026-04-05T10:00:00+05:30",
+            "duration": 5,
+            "topic": "Vermicomposting Setup & Management"
+          }
+        ],
+        "timezone": "Asia/Kolkata"
+      },
+      "totalDuration": {
+        "value": 5,
+        "unit": "hours"
+      },
+      "location": {
+        "type": "in-person",
+        "venue": "VEFS Organic Farm",
+        "address": "Kuniyamuthur, Coimbatore, Tamil Nadu 641008",
+        "city": "Coimbatore",
+        "state": "Tamil Nadu",
+        "onlineLink": null,
+        "coordinates": {
+          "lat": 11.0138,
+          "lng": 76.9515
+        }
+      },
+      "audience": ["farmers", "general-public"],
+      "targetAudience": "Farmers, home gardeners, and entrepreneurs interested in organic fertilizer production",
+      "capacity": {
+        "total": 35,
+        "registered": 14,
+        "available": 21
+      },
+      "description": {
+        "brief": "Learn to set up profitable vermicomposting units for organic fertilizer production and supplementary income.",
+        "full": "This practical training teaches participants to establish and manage vermicomposting units for both personal use and commercial production. Learn about earthworm biology, composting techniques, harvesting methods, and business opportunities. Participants receive earthworm starter culture and setup guidelines. Ideal for farmers wanting to reduce fertilizer costs or create additional income stream through vermicompost sales.",
+        "objectives": [
+          "Understand vermicomposting science and earthworm biology",
+          "Set up 6x3 feet vermicompost bed at home/farm",
+          "Manage moisture, temperature, and feeding schedules",
+          "Harvest and package vermicompost for use or sale",
+          "Calculate costs and potential income from vermicomposting"
+        ],
+        "curriculum": [
+          {
+            "week": 1,
+            "topics": [
+              "Introduction to vermicomposting and its benefits",
+              "Earthworm species (Eisenia fetida) and biology",
+              "Setting up vermicompost beds (size, location, materials)",
+              "Bed preparation and earthworm introduction",
+              "Feed materials and feeding schedule",
+              "Moisture and temperature management",
+              "Common problems and troubleshooting",
+              "Harvesting techniques",
+              "Quality testing of finished compost",
+              "Business model and market opportunities"
+            ]
+          }
+        ],
+        "outcomes": [
+          "Functional vermicompost unit at home within 2 weeks",
+          "Production of 50-100 kg organic fertilizer monthly",
+          "Savings of ₹500-₹1000 on fertilizer costs monthly",
+          "Potential additional income of ₹3000-₹5000 per month",
+          "Waste management solution for kitchen and farm waste"
+        ]
+      },
+      "facilitators": [
+        {
+          "name": "Mr. Ramesh Babu",
+          "title": "Vermicomposting Specialist",
+          "bio": "10 years running successful commercial vermicomposting unit, trained 200+ farmers",
+          "photo": "/images/facilitators/ramesh-babu.jpg"
+        }
+      ],
+      "registration": {
+        "required": true,
+        "url": "/trainings/trn-004/register",
+        "deadline": "2026-04-02T23:59:59+05:30",
+        "fee": {
+          "amount": 250,
+          "currency": "INR",
+          "type": "paid",
+          "scholarships": false,
+          "earlyBird": null
+        }
+      },
+      "requirements": {
+        "prerequisites": "Interest in composting or organic farming",
+        "whatToBring": [
+          "Notebook and pen",
+          "Container for earthworm culture (small box/bag)",
+          "Samples of organic waste (optional)"
+        ],
+        "language": ["Tamil"],
+        "education": "No requirement"
+      },
+      "certificate": {
+        "provided": true,
+        "type": "Participation Certificate",
+        "criteria": "Attend full session"
+      },
+      "logistics": {
+        "meals": ["Lunch", "Tea/Coffee"],
+        "materials": "Earthworm starter culture (500g), setup manual, ongoing support",
+        "parking": true,
+        "accommodation": false,
+        "accessibility": "Farm location - limited wheelchair access"
+      },
+      "media": {
+        "featuredImage": "/images/trainings/trn-004-featured.jpg",
+        "gallery": [],
+        "video": "/videos/trainings/trn-004-demo.mp4"
+      },
+      "tags": ["vermicomposting", "organic-fertilizer", "entrepreneurship", "waste-management"],
+      "relatedPrograms": ["prog-006"],
+      "metadata": {
+        "createdAt": "2025-12-10T14:00:00+05:30",
+        "updatedAt": "2025-12-24T10:00:00+05:30",
+        "createdBy": "admin",
+        "publishedAt": "2025-12-15T09:00:00+05:30"
+      }
+    },
+    {
+      "id": "trn-005",
+      "title": "Indigenous Tree Identification & Propagation",
+      "slug": "tree-identification-training-2026",
+      "category": "conservation",
+      "status": "upcoming",
+      "featured": false,
+      "schedule": {
+        "type": "multi-session",
+        "sessions": [
+          {
+            "sessionNumber": 1,
+            "date": "2026-05-10T09:00:00+05:30",
+            "duration": 4,
+            "topic": "Tree Identification in Field"
+          },
+          {
+            "sessionNumber": 2,
+            "date": "2026-05-17T09:00:00+05:30",
+            "duration": 4,
+            "topic": "Propagation Techniques - Seeds & Cuttings"
+          }
+        ],
+        "timezone": "Asia/Kolkata"
+      },
+      "totalDuration": {
+        "value": 2,
+        "unit": "weeks"
+      },
+      "location": {
+        "type": "in-person",
+        "venue": "VEFS Botanical Garden",
+        "address": "Mettupalayam Road, Coimbatore, Tamil Nadu 641029",
+        "city": "Coimbatore",
+        "state": "Tamil Nadu",
+        "onlineLink": null,
+        "coordinates": {
+          "lat": 11.0505,
+          "lng": 76.9098
+        }
+      },
+      "audience": ["students", "general-public"],
+      "targetAudience": "Nature enthusiasts, students, teachers, and conservationists",
+      "capacity": {
+        "total": 30,
+        "registered": 0,
+        "available": 30
+      },
+      "description": {
+        "brief": "Two-week training on identifying 30+ indigenous tree species and learning propagation techniques for conservation.",
+        "full": "Master the skills of tree identification and propagation through this unique training program. Session 1 focuses on identifying indigenous trees using botanical keys, leaf morphology, and habitat. Session 2 teaches practical propagation methods including seed collection, treatment, germination, and vegetative propagation. Participants receive seed collection kit and propagation materials.",
+        "objectives": [
+          "Identify 30+ indigenous tree species native to Tamil Nadu",
+          "Use botanical identification keys and field guides",
+          "Collect and process tree seeds properly",
+          "Practice seed germination and vegetative propagation",
+          "Understand conservation importance of native trees"
+        ],
+        "curriculum": [
+          {
+            "week": 1,
+            "topics": [
+              "Introduction to indigenous trees of Tamil Nadu",
+              "Botanical terminology and identification keys",
+              "Leaf morphology and tree structure",
+              "Guided nature walk in botanical garden",
+              "Identification practice with specimens",
+              "Documentation and photography techniques"
+            ]
+          },
+          {
+            "week": 2,
+            "topics": [
+              "Seed biology and collection methods",
+              "Seed treatment and storage",
+              "Germination techniques",
+              "Vegetative propagation (cuttings, layering)",
+              "Nursery management basics",
+              "Planting and aftercare",
+              "Conservation strategies"
+            ]
+          }
+        ],
+        "outcomes": [
+          "Ability to identify common indigenous trees in the region",
+          "Skills to propagate trees from seeds and cuttings",
+          "Knowledge to establish small home nursery",
+          "Understanding of tree conservation needs",
+          "Network with conservation community"
+        ]
+      },
+      "facilitators": [
+        {
+          "name": "Dr. Rajesh Kumar",
+          "title": "Botanist & Environmental Scientist",
+          "bio": "20+ years researching indigenous trees and conducting conservation programs",
+          "photo": "/images/facilitators/rajesh-kumar.jpg"
+        }
+      ],
+      "registration": {
+        "required": true,
+        "url": "/trainings/trn-005/register",
+        "deadline": "2026-05-05T23:59:59+05:30",
+        "fee": {
+          "amount": 400,
+          "currency": "INR",
+          "type": "paid",
+          "scholarships": true,
+          "earlyBird": {
+            "amount": 300,
+            "deadline": "2026-04-25T23:59:59+05:30"
+          }
+        }
+      },
+      "requirements": {
+        "prerequisites": "Interest in trees, nature, and conservation",
+        "whatToBring": [
+          "Notebook and colored pencils for sketching",
+          "Camera/phone for documentation",
+          "Water bottle and sun protection",
+          "Comfortable outdoor clothing"
+        ],
+        "language": ["Tamil", "English"],
+        "education": "Open to all - No requirement"
+      },
+      "certificate": {
+        "provided": true,
+        "type": "Certificate in Indigenous Tree Identification",
+        "criteria": "Attend both sessions and pass identification test"
+      },
+      "logistics": {
+        "meals": ["Tea/Snacks each session"],
+        "materials": "Tree identification guide, seed collection kit, propagation tools",
+        "parking": true,
+        "accommodation": false,
+        "accessibility": "Garden paths - limited wheelchair access"
+      },
+      "media": {
+        "featuredImage": "/images/trainings/trn-005-featured.jpg",
+        "gallery": [],
+        "video": null
+      },
+      "tags": ["trees", "identification", "conservation", "propagation", "indigenous"],
+      "relatedPrograms": ["prog-001", "prog-004"],
+      "metadata": {
+        "createdAt": "2025-12-15T10:00:00+05:30",
+        "updatedAt": "2025-12-24T16:00:00+05:30",
+        "createdBy": "admin",
+        "publishedAt": "2025-12-20T09:00:00+05:30"
+      }
+    },
+    {
+      "id": "trn-006",
+      "title": "Kitchen Gardening & Urban Farming for Beginners",
+      "slug": "kitchen-garden-training-2026",
+      "category": "skills-development",
+      "status": "open",
+      "featured": false,
+      "schedule": {
+        "type": "single-session",
+        "sessions": [
+          {
+            "sessionNumber": 1,
+            "date": "2026-03-12T15:00:00+05:30",
+            "duration": 3,
+            "topic": "Complete Kitchen Gardening Workshop"
+          }
+        ],
+        "timezone": "Asia/Kolkata"
+      },
+      "totalDuration": {
+        "value": 3,
+        "unit": "hours"
+      },
+      "location": {
+        "type": "in-person",
+        "venue": "Urban Community Center",
+        "address": "RS Puram, Coimbatore, Tamil Nadu 641002",
+        "city": "Coimbatore",
+        "state": "Tamil Nadu",
+        "onlineLink": null,
+        "coordinates": {
+          "lat": 11.0041,
+          "lng": 76.9598
+        }
+      },
+      "audience": ["general-public", "families"],
+      "targetAudience": "Apartment residents and homemakers interested in growing vegetables at home",
+      "capacity": {
+        "total": 50,
+        "registered": 38,
+        "available": 12
+      },
+      "description": {
+        "brief": "Practical workshop on starting a kitchen garden in small spaces - balconies, terraces, and small yards.",
+        "full": "Perfect for urban residents with limited space! Learn to grow fresh vegetables, herbs, and greens at home using containers, grow bags, and vertical gardening techniques. This beginner-friendly workshop covers plant selection for limited space, soil preparation, watering schedules, pest management, and harvesting. Each participant receives starter seeds and a planting guide.",
+        "objectives": [
+          "Set up productive kitchen garden in limited space",
+          "Grow 10-15 common vegetables and herbs",
+          "Practice organic pest control for home gardens",
+          "Harvest fresh vegetables year-round",
+          "Reduce monthly vegetable expenses by 30-40%"
+        ],
+        "curriculum": [
+          {
+            "week": 1,
+            "topics": [
+              "Benefits of kitchen gardening",
+              "Assessing your space (balcony, terrace, yard)",
+              "Container selection and preparation",
+              "Soil mix for container gardening",
+              "Plant selection for beginners (tomato, chili, coriander, mint, etc.)",
+              "Seed vs seedling - when to use which",
+              "Watering and sunlight requirements",
+              "Natural pest control for home gardens",
+              "Harvesting and succession planting",
+              "Common mistakes to avoid"
+            ]
+          }
+        ],
+        "outcomes": [
+          "Functional kitchen garden setup within 1 week",
+          "Fresh vegetables and herbs available in 30-45 days",
+          "Monthly savings of ₹500-₹1000 on vegetables",
+          "Chemical-free homegrown produce",
+          "Rewarding hobby and stress relief"
+        ]
+      },
+      "facilitators": [
+        {
+          "name": "Mrs. Kavitha Menon",
+          "title": "Urban Gardening Expert",
+          "bio": "8 years helping urban families start kitchen gardens, trained 1000+ apartment dwellers",
+          "photo": "/images/facilitators/kavitha-menon.jpg"
+        }
+      ],
+      "registration": {
+        "required": true,
+        "url": "/trainings/trn-006/register",
+        "deadline": "2026-03-10T23:59:59+05:30",
+        "fee": {
+          "amount": 200,
+          "currency": "INR",
+          "type": "paid",
+          "scholarships": false,
+          "earlyBird": null
+        }
+      },
+      "requirements": {
+        "prerequisites": "None - Complete beginners welcome",
+        "whatToBring": [
+          "Notebook",
+          "Photos of your space (balcony/terrace - optional)",
+          "Questions about your specific situation"
+        ],
+        "language": ["Tamil", "English"],
+        "education": "No requirement"
+      },
+      "certificate": {
+        "provided": false,
+        "type": null,
+        "criteria": null
+      },
+      "logistics": {
+        "meals": ["Tea/Snacks"],
+        "materials": "Seed packets (10 varieties), planting calendar, ongoing WhatsApp support group",
+        "parking": true,
+        "accommodation": false,
+        "accessibility": "Fully wheelchair accessible"
+      },
+      "media": {
+        "featuredImage": "/images/trainings/trn-006-featured.jpg",
+        "gallery": [
+          "/images/trainings/trn-006-1.jpg"
+        ],
+        "video": null
+      },
+      "tags": ["kitchen-garden", "urban-farming", "vegetables", "beginners", "containers"],
+      "relatedPrograms": ["prog-006"],
+      "metadata": {
+        "createdAt": "2025-12-08T11:00:00+05:30",
+        "updatedAt": "2025-12-23T14:00:00+05:30",
+        "createdBy": "admin",
+        "publishedAt": "2025-12-12T09:00:00+05:30"
+      }
+    },
+    {
+      "id": "trn-007",
+      "title": "Bee Keeping & Honey Production - Complete Course",
+      "slug": "beekeeping-training-2026",
+      "category": "skills-development",
+      "status": "full",
+      "featured": true,
+      "schedule": {
+        "type": "multi-session",
+        "sessions": [
+          {
+            "sessionNumber": 1,
+            "date": "2026-04-18T09:00:00+05:30",
+            "duration": 5,
+            "topic": "Bee Biology & Apiary Setup"
+          },
+          {
+            "sessionNumber": 2,
+            "date": "2026-04-25T09:00:00+05:30",
+            "duration": 5,
+            "topic": "Hive Management & Disease Control"
+          },
+          {
+            "sessionNumber": 3,
+            "date": "2026-05-02T09:00:00+05:30",
+            "duration": 5,
+            "topic": "Honey Harvesting & Value Addition"
+          }
+        ],
+        "timezone": "Asia/Kolkata"
+      },
+      "totalDuration": {
+        "value": 3,
+        "unit": "weeks"
+      },
+      "location": {
+        "type": "in-person",
+        "venue": "VEFS Apiary & Training Center",
+        "address": "Pollachi, Tamil Nadu 642002",
+        "city": "Pollachi",
+        "state": "Tamil Nadu",
+        "onlineLink": null,
+        "coordinates": {
+          "lat": 10.6615,
+          "lng": 77.0124
+        }
+      },
+      "audience": ["farmers", "general-public"],
+      "targetAudience": "Farmers and entrepreneurs interested in beekeeping as livelihood or supplementary income",
+      "capacity": {
+        "total": 20,
+        "registered": 20,
+        "available": 0
+      },
+      "description": {
+        "brief": "Comprehensive 3-week beekeeping training covering setup, management, harvesting, and marketing for profitable honey production.",
+        "full": "Transform beekeeping into a profitable venture through this intensive practical training. Learn every aspect from apiary setup to honey marketing. The course includes hands-on practice with live bee colonies, harvesting demonstrations, and business planning. Graduates receive 2 bee boxes, protective equipment, and ongoing mentorship. Average ROI within 8-10 months with proper management.",
+        "objectives": [
+          "Set up and manage apiary with 5-10 bee colonies",
+          "Understand bee biology, behavior, and colony dynamics",
+          "Prevent and treat common bee diseases",
+          "Harvest honey using modern equipment",
+          "Process, package, and market honey products",
+          "Generate ₹50,000-₹100,000 annual income from 10 boxes"
+        ],
+        "curriculum": [
+          {
+            "week": 1,
+            "topics": [
+              "Bee biology and colony structure",
+              "Beekeeping equipment and protective gear",
+              "Apiary site selection and setup",
+              "Bee box types and assembly",
+              "Capturing swarms and colony establishment",
+              "Safety and first aid for bee stings"
+            ]
+          },
+          {
+            "week": 2,
+            "topics": [
+              "Seasonal colony management",
+              "Feeding and supplementation",
+              "Queen rearing and colony splitting",
+              "Common bee diseases and pests",
+              "Disease prevention and treatment",
+              "Record keeping and hive inspection"
+            ]
+          },
+          {
+            "week": 3,
+            "topics": [
+              "Identifying honey flow periods",
+              "Honey harvesting techniques",
+              "Extraction and filtration equipment",
+              "Honey processing and quality testing",
+              "Packaging and labeling (FSSAI compliance)",
+              "Marketing strategies and pricing",
+              "Value addition (beeswax, propolis, royal jelly)",
+              "Government schemes and subsidies"
+            ]
+          }
+        ],
+        "outcomes": [
+          "Fully functional apiary with 2 colonies (provided)",
+          "Production of 20-30 kg honey per box annually",
+          "Income potential: ₹50,000-₹100,000 from 10 boxes",
+          "Low maintenance business (2-3 hours weekly)",
+          "Contribution to agriculture through pollination",
+          "Access to bee keeping network and marketing channels"
+        ]
+      },
+      "facilitators": [
+        {
+          "name": "Mr. Selvam Pandian",
+          "title": "Professional Bee Keeper & Trainer",
+          "bio": "15 years commercial beekeeping, managing 100+ colonies, trained 300+ bee keepers",
+          "photo": "/images/facilitators/selvam-pandian.jpg"
+        }
+      ],
+      "registration": {
+        "required": true,
+        "url": "/trainings/trn-007/register",
+        "deadline": "2026-04-10T23:59:59+05:30",
+        "fee": {
+          "amount": 3500,
+          "currency": "INR",
+          "type": "paid",
+          "scholarships": true,
+          "earlyBird": null
+        }
+      },
+      "requirements": {
+        "prerequisites": "Space for apiary (backyard, farmland), no allergies to bee stings",
+        "whatToBring": [
+          "Full-sleeve shirt and long pants (light colored)",
+          "Notebook",
+          "Commitment to attend all 3 sessions"
+        ],
+        "language": ["Tamil"],
+        "education": "No requirement"
+      },
+      "certificate": {
+        "provided": true,
+        "type": "Professional Bee Keeper Certificate",
+        "criteria": "Attend all 3 sessions, pass practical assessment"
+      },
+      "logistics": {
+        "meals": ["Lunch all 3 days", "Tea/Snacks"],
+        "materials": "2 bee boxes with colonies, protective suit, smoker, harvesting tools, ongoing mentorship",
+        "parking": true,
+        "accommodation": false,
+        "accessibility": "Farm location - not wheelchair accessible"
+      },
+      "media": {
+        "featuredImage": "/images/trainings/trn-007-featured.jpg",
+        "gallery": [
+          "/images/trainings/trn-007-1.jpg",
+          "/images/trainings/trn-007-2.jpg"
+        ],
+        "video": "/videos/trainings/trn-007-intro.mp4"
+      },
+      "tags": ["beekeeping", "honey", "entrepreneurship", "income-generation", "apiculture"],
+      "relatedPrograms": ["prog-002"],
+      "metadata": {
+        "createdAt": "2025-11-18T10:00:00+05:30",
+        "updatedAt": "2025-12-22T13:00:00+05:30",
+        "createdBy": "admin",
+        "publishedAt": "2025-11-25T09:00:00+05:30"
+      }
+    }
+  ]
+}
