@@ -1,0 +1,50 @@
+{
+  "$schema": "https://spec.modelcontextprotocol.io/schema/mcp-config.schema.json",
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@executeautomation/playwright-mcp-server"
+      ],
+      "description": "Playwright MCP server for automated browser testing of VEFS website",
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "0"
+      }
+    }
+  },
+  "testing": {
+    "framework": "playwright",
+    "baseUrl": "file://C:/Users/NANDHU/Documents/SocialEagle/Digital Clients/VEFS/building-phase/VEFS-website",
+    "browsers": ["chromium", "firefox"],
+    "screenshots": true,
+    "video": false,
+    "testDir": "./tests",
+    "notes": [
+      "Playwright MCP server allows Claude to:",
+      "1. Navigate to pages and verify CSS/JS loading",
+      "2. Take screenshots for visual verification",
+      "3. Test responsive design across viewports",
+      "4. Verify accessibility (WCAG AA compliance)",
+      "5. Test form validation and interactions",
+      "6. Check for console errors",
+      "7. Verify navigation and links work correctly",
+      "8. Test dynamic content loading (when using local server)",
+      "",
+      "Usage Instructions for Claude:",
+      "- Use Playwright MCP to test any bug fixes before marking as complete",
+      "- Take screenshots to verify visual changes",
+      "- Check browser console for JavaScript errors",
+      "- Verify responsive design on mobile (375px) and desktop (1920px) viewports",
+      "- Test all navigation links work correctly",
+      "- Verify forms have proper validation",
+      "",
+      "For testing with local server:",
+      "Start server first: python -m http.server 8000 (from VEFS-website folder)",
+      "Then update baseUrl to: http://localhost:8000",
+      "",
+      "For testing static files (current setup):",
+      "Use file:// protocol URLs (already configured above)"
+    ]
+  }
+}

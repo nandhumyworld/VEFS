@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(dir:*)",
+      "Bash(wc:*)",
+      "Bash(ls:*)",
+      "Bash(for file in trainings.html events.html gallery.html future-plans.html privacy.html terms.html)",
+      "Bash(do sed:*)",
+      "Bash(done)",
+      "Bash(for file in programs.html trainings.html events.html gallery.html contact.html donate.html future-plans.html privacy.html terms.html)",
+      "Bash(grep:*)",
+      "Bash(for file in *.html)"
+    ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-code-plugins": true
+  },
+  "outputStyle": "Explanatory"
+}
