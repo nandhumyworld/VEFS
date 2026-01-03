@@ -18,9 +18,9 @@ The home page serves as the main entry point for visitors. It should provide a b
   - Navigation Menu with links to:
     - Home
     - About
-    - Programs
     - Trainings
     - Events
+    - Volunteer
     - Gallery
     - Future Plans
     - Donate
@@ -52,33 +52,26 @@ The home page serves as the main entry point for visitors. It should provide a b
 ### 3. Hero Section (Scrolling/Carousel Slides)
 - **Status:** Required
 - **Specifications:**
-  - 4 rotating hero slides (auto-scroll or manual navigation)
+  - 3 rotating hero slides (auto-scroll or manual navigation)
   - Each slide contains:
     - Background image
     - Text overlay with heading and subheading
     - Call-to-Action (CTA) button
     - Slide navigation controls (dots/arrows)
 
-#### Slide 1: Programs
-- **Background:** Image representing VEFS programs/activities
-- **Heading:** "Our Programs"
-- **Subheading:** "Explore our initiatives for ecological and social welfare"
-- **CTA Button:** "View Programs" → Links to Programs page
-- **Text Alignment:** Centered or bottom-left
-
-#### Slide 2: Trainings
+#### Slide 1: Trainings
 - **Background:** Image related to training/education activities
 - **Heading:** "Trainings & Workshops"
 - **Subheading:** "Join our eco-education programs"
 - **CTA Button:** "Browse Trainings" → Links to Trainings page
 
-#### Slide 3: Events
+#### Slide 2: Events
 - **Background:** Image from past events or nature-based activities
 - **Heading:** "Upcoming Events"
 - **Subheading:** "Register for our workshops and field visits"
 - **CTA Button:** "View Events" → Links to Events page
 
-#### Slide 4: Donation & Future Plans
+#### Slide 3: Donation & Support
 - **Background:** Inspirational image (nature, plantation, community)
 - **Heading:** "Support Our Mission"
 - **Subheading:** "Help us restore ecological balance | Discover our future vision"
@@ -121,25 +114,7 @@ The home page serves as the main entry point for visitors. It should provide a b
 
 ---
 
-### 6. Programs Preview Section
-- **Status:** Required
-- **Format:** Brief overview of main programs
-- **Content:**
-  - Section heading: "Our Programs"
-  - 3-4 featured program cards showing:
-    - Program image/icon
-    - Program name
-    - Brief description (1-2 sentences)
-    - "Learn More" button → Links to Programs page
-  - Optional: "View All Programs" button
-
-**Design Notes:**
-- Cards should be visually distinct but cohesive
-- Grid layout responsive to device size
-
----
-
-### 7. Trainings Preview Section
+### 6. Trainings Preview Section
 - **Status:** Required
 - **Format:** Highlights of upcoming/featured trainings
 - **Content:**

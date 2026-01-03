@@ -1,0 +1,290 @@
+{
+  "metadata": {
+    "lastUpdated": "2026-01-03T00:00:00.000Z",
+    "version": "1.0",
+    "totalOpportunities": 5
+  },
+  "volunteers": [
+    {
+      "id": "vol-001",
+      "title": "Organic Farm Assistant",
+      "slug": "organic-farm-assistant",
+      "description": {
+        "brief": "Join our team to work hands-on with organic farming practices, learn sustainable agriculture, and help restore ecological balance in rural Tamil Nadu.",
+        "full": "As an Organic Farm Assistant, you'll immerse yourself in the daily operations of our demonstration farm in Nilakottai. You'll gain practical experience in organic cultivation methods, composting, seed preservation, and natural pest management. This is an excellent opportunity for students, agriculture enthusiasts, or anyone passionate about sustainable food systems to learn while contributing to environmental restoration. You'll work alongside experienced farmers and participate in community outreach programs to share organic farming knowledge with local farmers."
+      },
+      "dates": {
+        "start": "2026-02-15T00:00:00.000Z",
+        "end": "2026-04-15T23:59:59.999Z"
+      },
+      "duration": {
+        "value": 2,
+        "unit": "months"
+      },
+      "commitment": "Full-time",
+      "requirements": {
+        "age": { "min": 18, "max": 35 },
+        "skills": ["Physical fitness", "Interest in agriculture", "Basic English/Tamil communication"],
+        "physical": "Must be comfortable with outdoor work, lifting up to 20kg, and working in variable weather conditions",
+        "education": "No formal education requirements - open to all passionate learners"
+      },
+      "benefits": {
+        "learning": [
+          "Hands-on organic farming techniques",
+          "Seed saving and propagation methods",
+          "Natural composting and soil management",
+          "Traditional agricultural knowledge"
+        ],
+        "certificate": true,
+        "meals": true,
+        "accommodation": true,
+        "stipend": { "provided": true, "amount": 3000 }
+      },
+      "relatedEvents": [],
+      "location": {
+        "city": "Nilakottai",
+        "state": "Tamil Nadu",
+        "type": "on-site"
+      },
+      "spots": {
+        "total": 4,
+        "filled": 1,
+        "available": 3
+      },
+      "status": "open",
+      "contact": {
+        "name": "K. Rajasekaran",
+        "email": "vefsfoundation@gmail.com",
+        "phone": "+91 95666 67708"
+      },
+      "media": {
+        "featuredImage": "/images/volunteers/organic-farm.jpg"
+      }
+    },
+    {
+      "id": "vol-002",
+      "title": "Environmental Education Coordinator",
+      "slug": "environmental-education-coordinator",
+      "description": {
+        "brief": "Design and deliver engaging environmental education programs for schools and communities across Dindigul district. Help inspire the next generation of eco-conscious citizens.",
+        "full": "The Environmental Education Coordinator will develop and implement educational workshops, field trips, and awareness campaigns focused on indigenous tree species, water conservation, and ecological restoration. You'll work with schools, youth groups, and community organizations to create impactful learning experiences. This role combines curriculum development, public speaking, and hands-on activity facilitation. You'll have the opportunity to create educational materials, organize nature walks, and measure the impact of our outreach efforts. Ideal for educators, environmental science graduates, or anyone passionate about youth environmental education."
+      },
+      "dates": {
+        "start": "2026-03-01T00:00:00.000Z",
+        "end": "2026-05-31T23:59:59.999Z"
+      },
+      "duration": {
+        "value": 3,
+        "unit": "months"
+      },
+      "commitment": "Full-time",
+      "requirements": {
+        "age": { "min": 21, "max": 40 },
+        "skills": ["Public speaking", "Curriculum development", "Basic graphic design", "Tamil and English fluency"],
+        "physical": "Ability to conduct outdoor field activities and travel within Dindigul district",
+        "education": "Bachelor's degree in Environmental Science, Education, or related field preferred (not mandatory)"
+      },
+      "benefits": {
+        "learning": [
+          "Environmental education best practices",
+          "Community engagement strategies",
+          "Indigenous ecological knowledge",
+          "Program design and impact measurement"
+        ],
+        "certificate": true,
+        "meals": true,
+        "accommodation": false,
+        "stipend": { "provided": true, "amount": 5000 }
+      },
+      "relatedEvents": [],
+      "location": {
+        "city": "Dindigul",
+        "state": "Tamil Nadu",
+        "type": "on-site"
+      },
+      "spots": {
+        "total": 2,
+        "filled": 0,
+        "available": 2
+      },
+      "status": "open",
+      "contact": {
+        "name": "K. Rajasekaran",
+        "email": "vefsfoundation@gmail.com",
+        "phone": "+91 95666 67708"
+      },
+      "media": {
+        "featuredImage": "/images/volunteers/education-coordinator.jpg"
+      }
+    },
+    {
+      "id": "vol-003",
+      "title": "Pond Restoration Volunteer",
+      "slug": "pond-restoration-volunteer",
+      "description": {
+        "brief": "Participate in traditional pond restoration work to revive water bodies and support local biodiversity. A physically intensive but deeply rewarding conservation experience.",
+        "full": "Join our intensive pond restoration project in Batlagundu, where you'll help restore traditional water harvesting structures that have fallen into disrepair. This hands-on conservation work involves desilting, bund strengthening, tree planting along pond perimeters, and community mobilization. You'll learn traditional water management techniques passed down through generations while contributing directly to drought resilience and biodiversity conservation. The work is physically demanding but offers the satisfaction of seeing immediate environmental impact. You'll work alongside local communities and experienced conservationists in this critical water security initiative."
+      },
+      "dates": {
+        "start": "2026-04-01T00:00:00.000Z",
+        "end": "2026-04-30T23:59:59.999Z"
+      },
+      "duration": {
+        "value": 1,
+        "unit": "month"
+      },
+      "commitment": "Full-time",
+      "requirements": {
+        "age": { "min": 18, "max": 45 },
+        "skills": ["Physical stamina", "Teamwork", "Basic Tamil communication helpful"],
+        "physical": "Must be in good physical health - work involves manual labor, lifting, digging, and outdoor work in hot conditions",
+        "education": "No formal education requirements"
+      },
+      "benefits": {
+        "learning": [
+          "Traditional water management systems",
+          "Pond ecosystem restoration",
+          "Community-based conservation approaches",
+          "Biodiversity monitoring techniques"
+        ],
+        "certificate": true,
+        "meals": true,
+        "accommodation": true,
+        "stipend": { "provided": true, "amount": 2500 }
+      },
+      "relatedEvents": [],
+      "location": {
+        "city": "Batlagundu",
+        "state": "Tamil Nadu",
+        "type": "on-site"
+      },
+      "spots": {
+        "total": 8,
+        "filled": 3,
+        "available": 5
+      },
+      "status": "open",
+      "contact": {
+        "name": "K. Rajasekaran",
+        "email": "vefsfoundation@gmail.com",
+        "phone": "+91 95666 67708"
+      },
+      "media": {
+        "featuredImage": "/images/volunteers/pond-restoration.jpg"
+      }
+    },
+    {
+      "id": "vol-004",
+      "title": "Social Media & Content Volunteer",
+      "slug": "social-media-content-volunteer",
+      "description": {
+        "brief": "Help amplify VEFS Foundation's environmental message through compelling digital content, social media management, and online community engagement. Work remotely from anywhere.",
+        "full": "As our Social Media & Content Volunteer, you'll craft the digital narrative of VEFS Foundation's conservation work. This remote role involves creating engaging social media posts, writing blog articles, producing photo/video content, managing our Facebook and YouTube channels, and building online community engagement. You'll document our field activities, interview beneficiaries, share success stories, and raise awareness about environmental issues. This position offers flexibility to work from home while making a real impact on environmental awareness. Ideal for digital marketing enthusiasts, content creators, journalism students, or anyone passionate about environmental communication. You'll receive mentorship in nonprofit digital strategy and have creative freedom to experiment with content formats."
+      },
+      "dates": {
+        "start": "2026-02-01T00:00:00.000Z",
+        "end": "2026-06-30T23:59:59.999Z"
+      },
+      "duration": {
+        "value": 5,
+        "unit": "months"
+      },
+      "commitment": "Part-time",
+      "requirements": {
+        "age": { "min": 18, "max": 35 },
+        "skills": ["Social media management", "Content writing", "Basic photo/video editing", "English writing proficiency", "Tamil knowledge helpful"],
+        "physical": "None - fully remote position",
+        "education": "No formal requirements, but portfolio or samples of previous work appreciated"
+      },
+      "benefits": {
+        "learning": [
+          "Nonprofit digital marketing strategies",
+          "Environmental storytelling techniques",
+          "Social media analytics and growth",
+          "Content strategy development"
+        ],
+        "certificate": true,
+        "meals": false,
+        "accommodation": false,
+        "stipend": { "provided": true, "amount": 2000 }
+      },
+      "relatedEvents": [],
+      "location": {
+        "city": "Remote",
+        "state": "Tamil Nadu",
+        "type": "remote"
+      },
+      "spots": {
+        "total": 3,
+        "filled": 1,
+        "available": 2
+      },
+      "status": "open",
+      "contact": {
+        "name": "K. Rajasekaran",
+        "email": "vefsfoundation@gmail.com",
+        "phone": "+91 95666 67708"
+      },
+      "media": {
+        "featuredImage": "/images/volunteers/social-media.jpg"
+      }
+    },
+    {
+      "id": "vol-005",
+      "title": "Weekend Biodiversity Survey Assistant",
+      "slug": "weekend-biodiversity-survey-assistant",
+      "description": {
+        "brief": "Contribute to citizen science by documenting flora and fauna during weekend field surveys across diverse ecosystems in Dindigul district. Perfect for nature enthusiasts with weekday commitments.",
+        "full": "Join our ongoing biodiversity documentation project that runs every weekend across various locations in Dindigul district. You'll assist in systematic surveys to document plant species, bird populations, butterfly diversity, and other wildlife. This role combines scientific data collection with nature exploration and photography. You'll learn species identification, survey methodologies, GPS mapping, and ecological monitoring techniques. Each weekend focuses on different habitats - from sacred groves to riverbanks to agricultural landscapes. The flexible weekend-only format makes this ideal for working professionals, college students, or anyone who wants to contribute to conservation science without a full-time commitment. Field sites rotate, offering exposure to diverse ecosystems and conservation challenges."
+      },
+      "dates": {
+        "start": "2026-02-08T00:00:00.000Z",
+        "end": "2026-06-28T23:59:59.999Z"
+      },
+      "duration": {
+        "value": 18,
+        "unit": "weeks"
+      },
+      "commitment": "Weekend",
+      "requirements": {
+        "age": { "min": 16, "max": 60 },
+        "skills": ["Interest in nature and wildlife", "Photography skills helpful", "Smartphone with camera", "Willingness to walk long distances"],
+        "physical": "Ability to walk 5-8 km in outdoor terrain, comfort with early morning starts (6 AM)",
+        "education": "No formal requirements - training provided on field survey methods"
+      },
+      "benefits": {
+        "learning": [
+          "Species identification (birds, butterflies, plants)",
+          "Ecological survey methodologies",
+          "GPS and mapping tools",
+          "Citizen science data collection",
+          "Wildlife photography basics"
+        ],
+        "certificate": true,
+        "meals": true,
+        "accommodation": false,
+        "stipend": { "provided": false, "amount": 0 }
+      },
+      "relatedEvents": [],
+      "location": {
+        "city": "Various locations (Dindigul district)",
+        "state": "Tamil Nadu",
+        "type": "on-site"
+      },
+      "spots": {
+        "total": 10,
+        "filled": 4,
+        "available": 6
+      },
+      "status": "open",
+      "contact": {
+        "name": "K. Rajasekaran",
+        "email": "vefsfoundation@gmail.com",
+        "phone": "+91 95666 67708"
+      },
+      "media": {
+        "featuredImage": "/images/volunteers/biodiversity-survey.jpg"
+      }
+    }
+  ]
+}

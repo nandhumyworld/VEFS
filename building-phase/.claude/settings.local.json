@@ -11,9 +11,15 @@
       "Bash(done)",
       "Bash(for file in programs.html trainings.html events.html gallery.html contact.html donate.html future-plans.html privacy.html terms.html)",
       "Bash(grep:*)",
-      "Bash(for file in *.html)"
+      "Bash(for file in *.html)",
+      "Bash(python:*)",
+      "Bash(powershell:*)"
     ]
   },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "playwright"
+  ],
   "enabledPlugins": {
     "frontend-design@claude-code-plugins": true
   },

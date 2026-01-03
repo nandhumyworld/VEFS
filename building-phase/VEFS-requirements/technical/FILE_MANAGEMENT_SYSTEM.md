@@ -11,7 +11,7 @@
 
 This document defines the file management and content organization system for the VEFS website. Since the site uses **Hostinger static hosting** without a custom admin dashboard, all content is managed manually through:
 
-- JSON files for dynamic content (events, trainings, programs)
+- JSON files for dynamic content (events, trainings, volunteer opportunities)
 - Image folders for media assets
 - FTP/File Manager for file uploads
 - Text editors for JSON editing
@@ -28,9 +28,9 @@ This document defines the file management and content organization system for th
 public_html/
 ├── index.html
 ├── about.html
-├── programs.html
 ├── trainings.html
 ├── events.html
+├── volunteer.html
 ├── gallery.html
 ├── contact.html
 ├── donate.html
@@ -57,14 +57,14 @@ public_html/
 │   │   └── scroll-animations.js
 │   ├── events.js
 │   ├── trainings.js
-│   ├── programs.js
+│   ├── volunteers.js
 │   ├── gallery.js
 │   └── main.js
 │
 ├── data/
 │   ├── events.json
 │   ├── trainings.json
-│   ├── programs.json
+│   ├── volunteers.json
 │   └── recent-registrations.json
 │
 ├── images/
@@ -90,13 +90,12 @@ public_html/
 │   │   ├── composting-workshop-march-2025.jpg
 │   │   └── ...
 │   │
-│   ├── programs/
-│   │   ├── school-awareness-thumb.jpg
-│   │   ├── school-awareness-hero.jpg
-│   │   ├── school-awareness-gallery-1.jpg
-│   │   ├── school-awareness-gallery-2.jpg
-│   │   ├── farmer-training-thumb.jpg
-│   │   ├── farmer-training-hero.jpg
+│   ├── volunteers/
+│   │   ├── organic-farm.jpg
+│   │   ├── education-coordinator.jpg
+│   │   ├── pond-restoration.jpg
+│   │   ├── social-media.jpg
+│   │   ├── biodiversity-survey.jpg
 │   │   └── ...
 │   │
 │   ├── gallery/

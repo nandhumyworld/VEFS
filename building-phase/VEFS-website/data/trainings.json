@@ -421,7 +421,7 @@
           "bio": "Successfully implemented 5 farm ponds, saved ₹50,000 annually on water",
           "photo": "/images/facilitators/murugan-natarajan.jpg"
         }
-      },
+      ],
       "registration": {
         "required": true,
         "url": "/trainings/trn-003/register",

@@ -6,7 +6,7 @@
 
 ## Overview
 
-This document defines the data management approach for VEFS website dynamic content. Events and Trainings are stored in JSON files that can be directly edited and uploaded to Hostinger shared hosting. The website uses vanilla JavaScript and PHP to read and display the data.
+This document defines the data management approach for VEFS website dynamic content. Events, Trainings, and Volunteer Opportunities are stored in JSON files that can be directly edited and uploaded to Hostinger shared hosting. The website uses vanilla JavaScript and PHP to read and display the data.
 
 **Hosting Environment:** Hostinger shared hosting (PHP + JavaScript)
 **No Build Process:** Static HTML/CSS/JS with client-side rendering
@@ -56,6 +56,7 @@ project-root/
 ├── data/
 │   ├── events.json          # All events data
 │   ├── trainings.json       # All trainings data
+│   ├── volunteers.json      # All volunteer opportunities data
 │   └── schemas/             # JSON schema definitions
 │       ├── event-schema.json
 │       └── training-schema.json

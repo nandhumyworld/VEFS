@@ -1,8 +1,32 @@
 # VEFS Programs Page Requirements
 
-**Status:** In Progress
-**Priority:** High
+**Status:** ⚠️ DEPRECATED - Page Removed (2026-01-03)
+**Priority:** N/A - Replaced by Volunteer Page
 **Created:** 2025-12-23
+**Deprecated:** 2026-01-03
+
+## ⚠️ DEPRECATION NOTICE
+
+**This page has been removed from the VEFS website and replaced with the Volunteer Opportunities page.**
+
+**Reason for Change:**
+- Programs section was too generic and didn't provide actionable engagement opportunities
+- Volunteer page provides concrete, time-bound opportunities with clear application process
+- Better aligns with "Work, Learn, Grow" mission
+- More engaging for users looking to get involved
+
+**Replacement:** See `VOLUNTEER_PAGE.md` for the new volunteer opportunities page specifications.
+
+**Files Deleted:**
+- `VEFS-website/programs.html`
+- `VEFS-website/js/programs.js`
+- `VEFS-website/data/programs.json`
+
+**Navigation Updated:** "Programs" link replaced with "Volunteer" across all pages.
+
+---
+
+## Original Requirements (Archived)
 
 ## Page Overview
 

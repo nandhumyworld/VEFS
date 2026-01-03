@@ -244,9 +244,7 @@ Secretary
 
 **Profile Photo:**
 ```
-[File name: k-rajasekaran-secretary.jpg]
-[Recommended size: 300x300px]
-[Status: Information not available in current documentation]
+k-rajasekaran-secretary.png
 ```
 
 **Short Bio (2-3 sentences):**
@@ -270,9 +268,7 @@ Treasurer
 
 **Profile Photo:**
 ```
-[File name: s-prajana-treasurer.jpg]
-[Recommended size: 300x300px]
-[Status: Information not available in current documentation]
+s-prajana-treasurer.png
 ```
 
 **Short Bio (2-3 sentences):**
@@ -703,15 +699,14 @@ Title:
   - Subject: [e.g., "Founders with community members"]
 
 ### Team Photos
-? TBD
 - [ ] **Founder Photo** (headshot)
   - File: `founder-profile.jpg` (400x400px)
 
 - [ ] **Trustee 1 Photo**
-  - File: `trustee-1.jpg` (300x300px)
+  - File: `k-rajasekaran-secretary..png` (300x300px)
 
 - [ ] **Trustee 2 Photo**
-  - File: `trustee-2.jpg` (300x300px)
+  - File: `s-prajana-treasurer..png` (300x300px)
 
 - [ ] **Trustee 3 Photo**
   - File: `trustee-3.jpg` (300x300px)

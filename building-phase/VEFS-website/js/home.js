@@ -1,11 +1,10 @@
 /**
  * Home Page JavaScript
- * Loads and displays featured programs, upcoming events, and trainings
+ * Loads and displays upcoming events and featured trainings
  */
 
 class HomePage {
   constructor() {
-    this.programs = [];
     this.events = [];
     this.trainings = [];
 
@@ -14,31 +13,13 @@ class HomePage {
 
   async init() {
     await Promise.all([
-      this.loadPrograms(),
       this.loadEvents(),
       this.loadTrainings()
     ]);
 
-    this.renderFeaturedPrograms();
     this.renderUpcomingEvents();
     this.renderFeaturedTrainings();
     this.setupNewsletterForm();
-  }
-
-  /**
-   * Load programs data from JSON
-   */
-  async loadPrograms() {
-    try {
-      const response = await fetch('data/programs.json');
-      if (!response.ok) throw new Error('Failed to load programs');
-
-      const data = await response.json();
-      this.programs = data.programs.filter(p => p.active);
-    } catch (error) {
-      console.error('Error loading programs:', error);
-      this.programs = [];
-    }
   }
 
   /**
@@ -80,51 +61,6 @@ class HomePage {
       console.error('Error loading trainings:', error);
       this.trainings = [];
     }
-  }
-
-  /**
-   * Render featured programs (max 4)
-   */
-  renderFeaturedPrograms() {
-    const container = document.getElementById('featured-programs-container');
-    if (!container) return;
-
-    // Get featured programs
-    const featured = this.programs
-      .filter(p => p.featured)
-      .slice(0, 4);
-
-    if (featured.length === 0) {
-      container.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: var(--space-2xl); color: var(--color-gray-600);">
-          <p>No featured programs available at this time.</p>
-        </div>
-      `;
-      return;
-    }
-
-    container.innerHTML = featured.map(program => `
-      <div class="card">
-        <div class="card-icon" style="font-size: 3rem; text-align: center; padding: var(--space-lg) 0;">
-          ${this.getIconEmoji(program.icon)}
-        </div>
-        <div class="card-body">
-          <span class="card-badge">${this.formatTargetAudience(program.targetAudience)}</span>
-          <h3 class="card-title">${program.title}</h3>
-          <p class="card-description">${program.shortDescription}</p>
-
-          ${program.impact ? `
-            <div class="card-meta" style="margin-top: var(--space-md); font-size: var(--font-size-sm); color: var(--color-gray-600);">
-              <strong>Impact:</strong> ${this.formatFirstImpact(program.impact)}
-            </div>
-          ` : ''}
-
-          <a href="/programs.html#${program.slug}" class="btn btn-text" style="margin-top: var(--space-md);">
-            Learn More →
-          </a>
-        </div>
-      </div>
-    `).join('');
   }
 
   /**
@@ -182,11 +118,17 @@ class HomePage {
    */
   renderFeaturedTrainings() {
     const container = document.getElementById('featured-trainings-container');
-    if (!container) return;
+    if (!container) {
+      console.error('Featured trainings container not found');
+      return;
+    }
+
+    console.log('Rendering featured trainings:', this.trainings.length, 'trainings loaded');
 
     const featured = this.trainings.slice(0, 3);
 
     if (featured.length === 0) {
+      console.log('No featured trainings to display');
       container.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: var(--space-2xl); color: var(--color-gray-600);">
           <p>No trainings available for registration at this time.</p>
@@ -195,27 +137,29 @@ class HomePage {
       return;
     }
 
+    try {
+
     container.innerHTML = featured.map(training => {
-      const isFree = training.registration.fee === 0;
+      const isFree = training.registration.fee.amount === 0;
       const statusClass = training.status === 'full' ? 'card-badge-danger' :
                          training.status === 'upcoming' ? 'card-badge-warning' :
                          'card-badge-success';
 
       return `
         <div class="card">
-          ${training.images?.featured ? `
+          ${training.media?.featuredImage ? `
             <div class="card-image">
-              <img src="${training.images.featured}" alt="${training.title}" loading="lazy">
+              <img src="${training.media.featuredImage}" alt="${training.title}" loading="lazy">
             </div>
           ` : ''}
           <div class="card-body">
             <span class="card-badge ${statusClass}">${this.formatTrainingStatus(training.status)}</span>
             <h3 class="card-title">${training.title}</h3>
-            <p class="card-description">${training.description}</p>
+            <p class="card-description">${training.description.brief}</p>
 
             <div class="card-meta" style="margin-top: var(--space-md);">
               <div style="margin-bottom: var(--space-xs);">
-                <strong>Duration:</strong> ${this.formatDuration(training.duration)}
+                <strong>Duration:</strong> ${this.formatDuration(training.totalDuration)}
               </div>
               <div style="margin-bottom: var(--space-xs);">
                 <strong>Category:</strong> ${this.capitalize(training.category)}
@@ -228,7 +172,7 @@ class HomePage {
             </div>
 
             <div class="card-footer" style="margin-top: var(--space-md); display: flex; justify-content: space-between; align-items: center;">
-              <span class="card-price">${isFree ? 'FREE' : '₹' + training.registration.fee}</span>
+              <span class="card-price">${isFree ? 'FREE' : '₹' + training.registration.fee.amount}</span>
               <a href="/trainings.html#${training.id}" class="btn btn-sm ${training.status === 'full' ? 'btn-outline' : 'btn-primary'}">
                 ${training.status === 'full' ? 'View Details' : 'Register Now'}
               </a>
@@ -237,6 +181,15 @@ class HomePage {
         </div>
       `;
     }).join('');
+
+    } catch (error) {
+      console.error('Error rendering featured trainings:', error);
+      container.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: var(--space-2xl); color: var(--color-error);">
+          <p>Error loading trainings. Please refresh the page.</p>
+        </div>
+      `;
+    }
   }
 
   /**
@@ -276,65 +229,6 @@ class HomePage {
   }
 
   /**
-   * Helper: Get icon emoji from icon name
-   */
-  getIconEmoji(iconName) {
-    const iconMap = {
-      'graduation-cap': '🎓',
-      'tractor': '🚜',
-      'users': '👥',
-      'leaf': '🍃',
-      'heart': '❤️',
-      'megaphone': '📢',
-      'book': '📚',
-      'tree': '🌳',
-      'briefcase': '💼'
-    };
-    return iconMap[iconName] || '🌱';
-  }
-
-  /**
-   * Helper: Format target audience for display
-   */
-  formatTargetAudience(audience) {
-    const labels = {
-      'students': 'Students',
-      'farmers': 'Farmers',
-      'women': 'Women',
-      'public': 'Public',
-      'youth': 'Youth',
-      'seniors': 'Seniors',
-      'professionals': 'Professionals',
-      'all': 'All Ages'
-    };
-    return labels[audience] || audience;
-  }
-
-  /**
-   * Helper: Format first impact metric
-   */
-  formatFirstImpact(impact) {
-    const keys = Object.keys(impact).filter(k => k !== 'since');
-    if (keys.length === 0) return '';
-
-    const firstKey = keys[0];
-    const value = impact[firstKey];
-    const label = this.humanizeKey(firstKey);
-
-    return `${value.toLocaleString()} ${label}`;
-  }
-
-  /**
-   * Helper: Humanize camelCase key
-   */
-  humanizeKey(key) {
-    return key
-      .replace(/([A-Z])/g, ' $1')
-      .replace(/^./, str => str.toUpperCase())
-      .toLowerCase();
-  }
-
-  /**
    * Helper: Format training status
    */
   formatTrainingStatus(status) {
@@ -351,7 +245,9 @@ class HomePage {
    */
   formatDuration(duration) {
     if (typeof duration === 'string') return duration;
-    if (duration.total) return duration.total;
+    if (duration && duration.value && duration.unit) {
+      return `${duration.value} ${duration.unit}`;
+    }
     return 'TBD';
   }
 
@@ -359,6 +255,7 @@ class HomePage {
    * Helper: Capitalize first letter
    */
   capitalize(str) {
+    if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }

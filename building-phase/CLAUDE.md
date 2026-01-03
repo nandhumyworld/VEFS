@@ -59,13 +59,13 @@ A static website for a Trust focused on creating awareness about indigenous tree
 ## Data Architecture
 
 ### JSON-Based Content Management
-All dynamic content (events, trainings, programs) is stored in JSON files:
+All dynamic content (events, trainings, volunteers) is stored in JSON files:
 
 ```
 public_html/data/
 ├── events.json       # All events with metadata
 ├── trainings.json    # Training programs and schedules
-├── programs.json     # Program descriptions and details
+├── volunteers.json   # Volunteer opportunities with requirements and benefits
 └── recent-registrations.json  # For duplicate checking
 ```
 
@@ -87,7 +87,7 @@ The site has **no admin dashboard**. Form submissions are:
 ### Directory Structure
 ```
 public_html/
-├── index.html, about.html, programs.html, etc.  # 9 main pages
+├── index.html, about.html, volunteer.html, etc.  # 9 main pages
 ├── css/
 │   ├── theme.css          # CSS variables and theming
 │   ├── layout.css         # Grid and responsive layouts
@@ -96,10 +96,10 @@ public_html/
 │   ├── components/        # Reusable JS modules
 │   ├── events.js          # Event page logic
 │   ├── trainings.js       # Training page logic
-│   └── programs.js        # Programs page logic
+│   └── volunteers.js      # Volunteer page logic
 ├── data/                  # JSON content files
 ├── images/
-│   ├── hero/, events/, trainings/, programs/
+│   ├── hero/, events/, trainings/, volunteers/
 │   └── gallery/           # Organized by year/month
 ├── forms/                 # PHP form processors
 └── email-templates/       # HTML email templates
@@ -128,7 +128,7 @@ See `VEFS-requirements/technical/FILE_MANAGEMENT_SYSTEM.md` for complete structu
 ### Component Patterns
 All components are defined in `VEFS-requirements/technical/COMPONENT_LIBRARY.md`:
 - Buttons (primary/secondary variants)
-- Cards (event, program, training)
+- Cards (event, training, volunteer)
 - Forms (validation, accessibility)
 - Modals (with focus trap)
 - Navigation (responsive, mobile-first)
@@ -138,11 +138,11 @@ All components are defined in `VEFS-requirements/technical/COMPONENT_LIBRARY.md`
 ## Page Architecture
 
 ### Nine Main Pages
-1. **Home** - Hero carousel (4 slides), video, featured content
+1. **Home** - Hero carousel (3 slides), video, featured content
 2. **About** - Story, mission/vision, values, impact metrics, timeline, founder profile
-3. **Programs** - 5-8 programs organized by target audience (students, farmers, women, public)
-4. **Trainings** - Timeline view with calendar, registration forms
-5. **Events** - Grid view with filters, detail modals
+3. **Trainings** - Timeline view with calendar, registration forms
+4. **Events** - Grid view with filters, detail modals
+5. **Volunteer** - Opportunity grid with requirements, benefits, and embedded registration forms
 6. **Gallery** - Masonry grid with lightbox, organized by year/category
 7. **Contact** - Multiple contact methods, inquiry form, Google Maps embed
 8. **Donation** - Impact showcase, payment integration (UPI QR, bank transfer, optional Razorpay)
@@ -152,10 +152,11 @@ All components are defined in `VEFS-requirements/technical/COMPONENT_LIBRARY.md`
 
 ## Registration System Architecture
 
-### Three Registration Types
+### Four Registration Types
 1. **Event Registration** - Community events, workshops
 2. **Training Registration** - Structured programs with detailed participant requirements
-3. **Donation Processing** - Contribution form with 80G compliance
+3. **Volunteer Applications** - Opportunity-based applications with age validation and motivation assessment
+4. **Donation Processing** - Contribution form with 80G compliance
 
 ### Registration Flow
 ```

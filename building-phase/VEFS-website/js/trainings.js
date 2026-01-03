@@ -35,8 +35,8 @@ class TrainingsPage {
 
       // Sort by start date (ascending - earliest first)
       this.trainings.sort((a, b) => {
-        const dateA = new Date(a.schedule.startDate);
-        const dateB = new Date(b.schedule.startDate);
+        const dateA = new Date(a.schedule.sessions[0].date);
+        const dateB = new Date(b.schedule.sessions[0].date);
         return dateA - dateB;
       });
 
@@ -107,18 +107,18 @@ class TrainingsPage {
         }
       }
 
-      // Type filter
+      // Type filter (using location.type for workshop/field-visit/online)
       if (this.filters.type) {
-        if (training.type !== this.filters.type) {
+        if (training.location.type !== this.filters.type) {
           return false;
         }
       }
 
       // Audience filter (check if training has multiple audiences)
       if (this.filters.audience) {
-        const audiences = Array.isArray(training.targetAudience)
-          ? training.targetAudience
-          : [training.targetAudience];
+        const audiences = Array.isArray(training.audience)
+          ? training.audience
+          : [training.audience];
 
         if (!audiences.includes(this.filters.audience)) {
           return false;
@@ -127,7 +127,7 @@ class TrainingsPage {
 
       // Search filter
       if (this.filters.search) {
-        const searchableText = `${training.title} ${training.shortDescription} ${training.category}`.toLowerCase();
+        const searchableText = `${training.title} ${training.description.brief} ${training.category}`.toLowerCase();
         if (!searchableText.includes(this.filters.search)) {
           return false;
         }
@@ -145,8 +145,9 @@ class TrainingsPage {
    */
   matchesDateFilter(training, dateFilter) {
     const now = new Date();
-    const startDate = new Date(training.schedule.startDate);
-    const endDate = new Date(training.schedule.endDate);
+    const startDate = new Date(training.schedule.sessions[0].date);
+    const lastSession = training.schedule.sessions[training.schedule.sessions.length - 1];
+    const endDate = new Date(lastSession.date);
 
     switch (dateFilter) {
       case 'upcoming':
@@ -248,7 +249,7 @@ class TrainingsPage {
    */
   groupByYearMonth(trainings) {
     return trainings.reduce((groups, training) => {
-      const date = new Date(training.schedule.startDate);
+      const date = new Date(training.schedule.sessions[0].date);
       const yearMonth = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
 
       if (!groups[yearMonth]) {
@@ -264,13 +265,14 @@ class TrainingsPage {
    * Render individual training card
    */
   renderTrainingCard(training) {
-    const startDate = new Date(training.schedule.startDate);
-    const endDate = new Date(training.schedule.endDate);
+    const startDate = new Date(training.schedule.sessions[0].date);
+    const lastSession = training.schedule.sessions[training.schedule.sessions.length - 1];
+    const endDate = new Date(lastSession.date);
     const isUpcoming = startDate > new Date();
     const isPast = endDate < new Date();
     const isFull = training.status === 'full';
     const isOpen = training.status === 'open';
-    const isFree = training.fee === 0;
+    const isFree = training.registration.fee.amount === 0;
 
     // Status badge
     let statusBadge = '';
@@ -290,9 +292,19 @@ class TrainingsPage {
     }
 
     // Audience labels
-    const audiences = Array.isArray(training.targetAudience)
-      ? training.targetAudience
-      : [training.targetAudience];
+    const audiences = Array.isArray(training.audience)
+      ? training.audience
+      : [training.audience];
+
+    // Format duration
+    const duration = `${training.totalDuration.value} ${training.totalDuration.unit}`;
+
+    // Extract time from first session (format: HH:MM from ISO datetime)
+    const sessionTime = new Date(training.schedule.sessions[0].date).toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
 
     return `
       <div class="card animate-fade-in" style="position: relative; margin-left: var(--space-lg); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;"
@@ -307,7 +319,7 @@ class TrainingsPage {
           <!-- Training Image -->
           <div style="flex-shrink: 0; width: 120px; height: 120px; border-radius: var(--radius-md); overflow: hidden; background-color: var(--color-gray-200);">
             <img
-              src="${training.images?.featured || '/images/trainings/default-training.jpg'}"
+              src="${training.media?.featuredImage || '/images/trainings/default-training.jpg'}"
               alt="${training.title}"
               style="width: 100%; height: 100%; object-fit: cover;"
               loading="lazy"
@@ -323,14 +335,14 @@ class TrainingsPage {
 
             <div style="display: flex; flex-wrap: wrap; gap: var(--space-md); margin-bottom: var(--space-sm); color: var(--color-gray-600); font-size: var(--font-size-sm);">
               <span>📅 ${window.VEFSUtils.formatDate(startDate)}</span>
-              <span>⏰ ${training.schedule.time || 'TBA'}</span>
-              <span>📍 ${training.location.mode === 'online' ? 'Online' : training.location.city}</span>
-              <span>⏳ ${training.schedule.duration}</span>
+              <span>⏰ ${sessionTime}</span>
+              <span>📍 ${training.location.type === 'online' ? 'Online' : training.location.city}</span>
+              <span>⏳ ${duration}</span>
             </div>
 
             <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-bottom: var(--space-sm);">
               <span style="background-color: var(--color-primary-light); color: var(--color-primary); padding: var(--space-2xs) var(--space-sm); border-radius: var(--radius-sm); font-size: var(--font-size-sm);">
-                ${this.getTypeLabel(training.type)}
+                ${this.getCategoryLabel(training.category)}
               </span>
               ${audiences.map(aud => `
                 <span style="background-color: var(--color-gray-200); color: var(--color-gray-700); padding: var(--space-2xs) var(--space-sm); border-radius: var(--radius-sm); font-size: var(--font-size-sm);">
@@ -340,12 +352,12 @@ class TrainingsPage {
             </div>
 
             <p style="color: var(--color-gray-700); margin-bottom: var(--space-md); line-height: 1.6;">
-              ${training.shortDescription}
+              ${training.description.brief}
             </p>
 
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span style="font-weight: 600; color: ${isFree ? 'var(--color-success)' : 'var(--color-gray-900)'}; font-size: var(--font-size-lg);">
-                ${isFree ? 'FREE' : '₹' + training.fee}
+                ${isFree ? 'FREE' : '₹' + training.registration.fee.amount}
               </span>
               <button class="btn btn-sm ${isPast || isFull ? 'btn-outline' : 'btn-primary'}"
                       onclick="event.stopPropagation(); trainingsPageInstance.showDetails('${training.id}')">
@@ -368,19 +380,28 @@ class TrainingsPage {
     // Update URL hash
     window.location.hash = training.slug || trainingId;
 
-    const startDate = new Date(training.schedule.startDate);
-    const endDate = new Date(training.schedule.endDate);
+    const startDate = new Date(training.schedule.sessions[0].date);
+    const lastSession = training.schedule.sessions[training.schedule.sessions.length - 1];
+    const endDate = new Date(lastSession.date);
     const isPast = endDate < new Date();
     const isFull = training.status === 'full';
-    const isFree = training.fee === 0;
+    const isFree = training.registration.fee.amount === 0;
 
     const modalBody = document.getElementById('training-modal-body');
+
+    // Format duration and time
+    const duration = `${training.totalDuration.value} ${training.totalDuration.unit}`;
+    const sessionTime = new Date(training.schedule.sessions[0].date).toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
 
     modalBody.innerHTML = `
       <div>
         <!-- Header Image -->
-        ${training.images?.hero ? `
-          <img src="${training.images.hero}" alt="${training.title}"
+        ${training.media?.featuredImage ? `
+          <img src="${training.media.featuredImage}" alt="${training.title}"
                style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: var(--space-lg);">
         ` : ''}
 
@@ -390,7 +411,7 @@ class TrainingsPage {
             ${training.title}
           </h2>
           <p style="font-size: var(--font-size-lg); color: var(--color-gray-700);">
-            ${training.shortDescription}
+            ${training.description.brief}
           </p>
         </div>
 
@@ -402,85 +423,89 @@ class TrainingsPage {
           </div>
           <div>
             <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">⏰ Time</div>
-            <div style="font-weight: 600;">${training.schedule.time || 'TBA'}</div>
+            <div style="font-weight: 600;">${sessionTime}</div>
           </div>
           <div>
             <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">⏳ Duration</div>
-            <div style="font-weight: 600;">${training.schedule.duration}</div>
+            <div style="font-weight: 600;">${duration}</div>
           </div>
           <div>
             <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">📍 Location</div>
-            <div style="font-weight: 600;">${training.location.mode === 'online' ? 'Online' : training.location.venue}</div>
+            <div style="font-weight: 600;">${training.location.type === 'online' ? 'Online' : training.location.venue}</div>
           </div>
           <div>
             <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">💰 Fee</div>
             <div style="font-weight: 600; color: ${isFree ? 'var(--color-success)' : 'var(--color-gray-900)'};">
-              ${isFree ? 'FREE' : '₹' + training.fee}
+              ${isFree ? 'FREE' : '₹' + training.registration.fee.amount}
             </div>
           </div>
           <div>
             <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">👥 Capacity</div>
-            <div style="font-weight: 600;">${training.capacity} participants</div>
+            <div style="font-weight: 600;">${training.capacity.total} participants</div>
           </div>
         </div>
 
         <!-- Description -->
         <div style="margin-bottom: var(--space-xl);">
           <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--space-md);">About This Training</h3>
-          <p style="color: var(--color-gray-700); line-height: 1.8; white-space: pre-line;">${training.fullDescription || training.shortDescription}</p>
+          <p style="color: var(--color-gray-700); line-height: 1.8; white-space: pre-line;">${training.description.full || training.description.brief}</p>
         </div>
 
         <!-- Curriculum -->
-        ${training.curriculum && training.curriculum.length > 0 ? `
+        ${training.description.curriculum && training.description.curriculum.length > 0 ? `
           <div style="margin-bottom: var(--space-xl);">
             <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--space-md);">Curriculum</h3>
-            <ul style="list-style: none; padding: 0;">
-              ${training.curriculum.map((module, index) => `
-                <li style="padding: var(--space-md); margin-bottom: var(--space-sm); background-color: var(--color-gray-50); border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm);">
-                  <strong>Module ${index + 1}:</strong> ${module}
-                </li>
-              `).join('')}
-            </ul>
+            ${training.description.curriculum.map((weekModule) => `
+              <div style="padding: var(--space-md); margin-bottom: var(--space-md); background-color: var(--color-gray-50); border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm);">
+                <strong>Week ${weekModule.week}:</strong>
+                <ul style="margin-top: var(--space-sm); padding-left: var(--space-lg);">
+                  ${weekModule.topics.map(topic => `<li>${topic}</li>`).join('')}
+                </ul>
+              </div>
+            `).join('')}
           </div>
         ` : ''}
 
         <!-- Prerequisites -->
-        ${training.prerequisites ? `
+        ${training.requirements?.prerequisites ? `
           <div style="margin-bottom: var(--space-xl);">
             <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--space-md);">Prerequisites</h3>
-            <p style="color: var(--color-gray-700);">${training.prerequisites}</p>
+            <p style="color: var(--color-gray-700);">${training.requirements.prerequisites}</p>
           </div>
         ` : ''}
 
         <!-- Certificate Info -->
-        ${training.certificate ? `
+        ${training.certificate?.provided ? `
           <div style="padding: var(--space-lg); background-color: var(--color-success-light); border-radius: var(--radius-md); margin-bottom: var(--space-xl);">
             <div style="display: flex; align-items: center; gap: var(--space-md);">
               <span style="font-size: 2rem;">🎓</span>
               <div>
-                <div style="font-weight: 600; color: var(--color-success); margin-bottom: var(--space-2xs);">Certificate Provided</div>
+                <div style="font-weight: 600; color: var(--color-success); margin-bottom: var(--space-2xs);">${training.certificate.type}</div>
                 <div style="color: var(--color-gray-700); font-size: var(--font-size-sm);">
-                  Participants who complete the full program will receive a Certificate of Completion from VEFS Foundation.
+                  ${training.certificate.criteria}
                 </div>
               </div>
             </div>
           </div>
         ` : ''}
 
-        <!-- Instructor -->
-        ${training.instructor ? `
+        <!-- Facilitators -->
+        ${training.facilitators && training.facilitators.length > 0 ? `
           <div style="margin-bottom: var(--space-xl);">
-            <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--space-md);">Facilitator</h3>
-            <div style="display: flex; gap: var(--space-lg); align-items: start; padding: var(--space-lg); background-color: var(--color-gray-50); border-radius: var(--radius-md);">
-              ${training.instructor.photo ? `
-                <img src="${training.instructor.photo}" alt="${training.instructor.name}"
-                     style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-              ` : ''}
-              <div>
-                <div style="font-weight: 600; font-size: var(--font-size-lg); margin-bottom: var(--space-xs);">${training.instructor.name}</div>
-                <p style="color: var(--color-gray-700); margin: 0;">${training.instructor.bio}</p>
+            <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--space-md);">Facilitator${training.facilitators.length > 1 ? 's' : ''}</h3>
+            ${training.facilitators.map(facilitator => `
+              <div style="display: flex; gap: var(--space-lg); align-items: start; padding: var(--space-lg); background-color: var(--color-gray-50); border-radius: var(--radius-md); margin-bottom: var(--space-md);">
+                ${facilitator.photo ? `
+                  <img src="${facilitator.photo}" alt="${facilitator.name}"
+                       style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+                ` : ''}
+                <div>
+                  <div style="font-weight: 600; font-size: var(--font-size-lg); margin-bottom: var(--space-xs);">${facilitator.name}</div>
+                  <div style="color: var(--color-gray-600); font-size: var(--font-size-sm); margin-bottom: var(--space-xs);">${facilitator.title}</div>
+                  <p style="color: var(--color-gray-700); margin: 0;">${facilitator.bio}</p>
+                </div>
               </div>
-            </div>
+            `).join('')}
           </div>
         ` : ''}
 
@@ -529,6 +554,18 @@ class TrainingsPage {
   }
 
   /**
+   * Get human-readable category label
+   */
+  getCategoryLabel(category) {
+    const labels = {
+      'farming': 'Farming',
+      'conservation': 'Conservation',
+      'skills-development': 'Skills Development'
+    };
+    return labels[category] || this.capitalize(category);
+  }
+
+  /**
    * Get human-readable type label
    */
   getTypeLabel(type) {
@@ -546,6 +583,7 @@ class TrainingsPage {
    * Capitalize string
    */
   capitalize(str) {
+    if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }

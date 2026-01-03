@@ -13,7 +13,7 @@ Below is a comprehensive checklist of possible website components. Items marked 
 ### Pages & Sections
 - [x] Home/Landing Page
 - [x] About Us/Mission & Vision (with Trustees, Founder Profile)
-- [x] Our Programs/Services
+- [x] Volunteer Opportunities Page
 - [ ] Indigenous Trees Database/Catalog
 - [ ] News & Blog
 - [x] Events & Workshops
@@ -39,7 +39,7 @@ Below is a comprehensive checklist of possible website components. Items marked 
 - [ ] Tree Database/Knowledge Base
 - [ ] Progress Tracking (plantations, reach metrics)
 - [x] Donation Management
-- [ ] Volunteer Registration
+- [x] Volunteer Registration & Application System
 - [ ] Feedback/Survey Forms
 - [x] Trainings Schedule & Registration
 
