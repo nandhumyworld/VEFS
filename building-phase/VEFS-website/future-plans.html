@@ -14,10 +14,11 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/responsive-mobile.css">
 </head>
 <body>
   <!-- Header/Navigation -->
@@ -25,8 +26,13 @@
     <div class="container">
       <div class="header-content">
         <a href="index.html" class="header-logo">
-          <img src="images/logos/vefs-logo.png" alt="VEFS Foundation Logo" width="60" height="60">
-          <span class="logo-text">VEFS Foundation</span>
+          <div class="logo-image-wrapper">
+            <img src="images/logos/vefs-logo.png" alt="VEFS Foundation Logo" width="60" height="60">
+          </div>
+          <div class="logo-text-wrapper">
+            <span class="logo-text">VEFS Foundation</span>
+            <span class="logo-text-full">Valluvam Ecological Farming and Social welfare foundation</span>
+          </div>
         </a>
 
         <button class="nav-toggle" aria-label="Toggle navigation menu" aria-controls="main-nav" aria-expanded="false">
@@ -79,7 +85,7 @@
           Since our establishment, VEFS has made significant strides in environmental conservation and community empowerment across Tamil Nadu.
         </p>
 
-        <div class="grid grid-cols-3" style="gap: var(--space-xl);">
+        <div class="grid grid-cols-3 stats-grid" style="gap: var(--space-xl);">
           <div class="card" style="text-align: center;">
             <div style="font-size: var(--font-size-3xl); font-weight: 700; color: var(--color-primary); margin-bottom: var(--space-sm);">50,000+</div>
             <div style="color: var(--color-gray-700);">Indigenous Trees Planted</div>
@@ -101,21 +107,21 @@
       <div class="container" style="max-width: 1000px;">
         <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-2xl); text-align: center; color: var(--color-primary);">Our Strategic Roadmap</h2>
 
-        <div style="position: relative;">
+        <div class="timeline-container" style="position: relative;">
           <!-- Vertical Timeline Line -->
-          <div style="position: absolute; left: 60px; top: 0; bottom: 0; width: 4px; background-color: var(--color-primary-light);"></div>
+          <div class="timeline-line" style="position: absolute; left: 60px; top: 0; bottom: 0; width: 4px; background-color: var(--color-primary-light);"></div>
 
           <!-- Timeline Items -->
           <div style="display: flex; flex-direction: column; gap: var(--space-3xl);">
             <!-- 2026 -->
-            <div style="display: flex; gap: var(--space-xl); align-items: start;">
-              <div style="flex-shrink: 0; width: 80px; text-align: right;">
+            <div class="timeline-item" style="display: flex; gap: var(--space-xl); align-items: start;">
+              <div class="timeline-year" style="flex-shrink: 0; width: 80px; text-align: right;">
                 <span style="display: inline-block; background-color: var(--color-secondary); color: white; padding: var(--space-xs) var(--space-md); border-radius: var(--radius-full); font-weight: 600;">2026</span>
               </div>
               <div style="flex-shrink: 0; position: relative; z-index: 1;">
-                <div style="width: 20px; height: 20px; border-radius: 50%; background-color: var(--color-secondary); border: 4px solid white; box-shadow: 0 0 0 4px var(--color-secondary-light);"></div>
+                <div class="timeline-dot" style="width: 20px; height: 20px; border-radius: 50%; background-color: var(--color-secondary); border: 4px solid white; box-shadow: 0 0 0 4px var(--color-secondary-light);"></div>
               </div>
-              <div class="card" style="flex: 1;">
+              <div class="card timeline-card" style="flex: 1;">
                 <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: var(--color-primary);">Expand to 20 Districts</h3>
                 <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-sm);">
                   <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
@@ -135,14 +141,14 @@
             </div>
 
             <!-- 2027 -->
-            <div style="display: flex; gap: var(--space-xl); align-items: start;">
-              <div style="flex-shrink: 0; width: 80px; text-align: right;">
+            <div class="timeline-item" style="display: flex; gap: var(--space-xl); align-items: start;">
+              <div class="timeline-year" style="flex-shrink: 0; width: 80px; text-align: right;">
                 <span style="display: inline-block; background-color: var(--color-primary); color: white; padding: var(--space-xs) var(--space-md); border-radius: var(--radius-full); font-weight: 600;">2027</span>
               </div>
               <div style="flex-shrink: 0; position: relative; z-index: 1;">
-                <div style="width: 20px; height: 20px; border-radius: 50%; background-color: var(--color-primary); border: 4px solid white; box-shadow: 0 0 0 4px var(--color-primary-light);"></div>
+                <div class="timeline-dot" style="width: 20px; height: 20px; border-radius: 50%; background-color: var(--color-primary); border: 4px solid white; box-shadow: 0 0 0 4px var(--color-primary-light);"></div>
               </div>
-              <div class="card" style="flex: 1;">
+              <div class="card timeline-card" style="flex: 1;">
                 <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: var(--color-primary);">Establish Tree Conservation Center</h3>
                 <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-sm);">
                   <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
@@ -162,14 +168,14 @@
             </div>
 
             <!-- 2028 -->
-            <div style="display: flex; gap: var(--space-xl); align-items: start;">
-              <div style="flex-shrink: 0; width: 80px; text-align: right;">
+            <div class="timeline-item" style="display: flex; gap: var(--space-xl); align-items: start;">
+              <div class="timeline-year" style="flex-shrink: 0; width: 80px; text-align: right;">
                 <span style="display: inline-block; background-color: var(--color-primary); color: white; padding: var(--space-xs) var(--space-md); border-radius: var(--radius-full); font-weight: 600;">2028</span>
               </div>
               <div style="flex-shrink: 0; position: relative; z-index: 1;">
-                <div style="width: 20px; height: 20px; border-radius: 50%; background-color: var(--color-primary); border: 4px solid white; box-shadow: 0 0 0 4px var(--color-primary-light);"></div>
+                <div class="timeline-dot" style="width: 20px; height: 20px; border-radius: 50%; background-color: var(--color-primary); border: 4px solid white; box-shadow: 0 0 0 4px var(--color-primary-light);"></div>
               </div>
-              <div class="card" style="flex: 1;">
+              <div class="card timeline-card" style="flex: 1;">
                 <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: var(--color-primary);">Launch Online Training Platform</h3>
                 <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-sm);">
                   <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
@@ -189,14 +195,14 @@
             </div>
 
             <!-- 2029 -->
-            <div style="display: flex; gap: var(--space-xl); align-items: start;">
-              <div style="flex-shrink: 0; width: 80px; text-align: right;">
+            <div class="timeline-item" style="display: flex; gap: var(--space-xl); align-items: start;">
+              <div class="timeline-year" style="flex-shrink: 0; width: 80px; text-align: right;">
                 <span style="display: inline-block; background-color: var(--color-primary); color: white; padding: var(--space-xs) var(--space-md); border-radius: var(--radius-full); font-weight: 600;">2029</span>
               </div>
               <div style="flex-shrink: 0; position: relative; z-index: 1;">
-                <div style="width: 20px; height: 20px; border-radius: 50%; background-color: var(--color-primary); border: 4px solid white; box-shadow: 0 0 0 4px var(--color-primary-light);"></div>
+                <div class="timeline-dot" style="width: 20px; height: 20px; border-radius: 50%; background-color: var(--color-primary); border: 4px solid white; box-shadow: 0 0 0 4px var(--color-primary-light);"></div>
               </div>
-              <div class="card" style="flex: 1;">
+              <div class="card timeline-card" style="flex: 1;">
                 <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: var(--color-primary);">Policy Advocacy & Partnerships</h3>
                 <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-sm);">
                   <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
@@ -267,7 +273,7 @@
       <div class="footer-grid">
         <div class="footer-column">
           <h3 class="footer-heading">About VEFS</h3>
-          <p class="footer-text">Valluvam Ecological Farming and Social Welfare Foundation promotes indigenous tree conservation and environmental education across Tamil Nadu.</p>
+          <p class="footer-text">Valluvam Ecological Farming and Social welfare foundation promotes indigenous tree conservation and environmental education across Tamil Nadu.</p>
           <div class="footer-social">
             <a href="https://www.facebook.com/people/VEFS-Foundation/61582906514169/" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
               <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>

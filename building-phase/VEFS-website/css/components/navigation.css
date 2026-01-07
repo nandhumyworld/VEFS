@@ -27,31 +27,55 @@
 .header-logo {
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
+  gap: var(--space-sm); /* Increased from xs to sm for better spacing */
   text-decoration: none;
   color: var(--color-gray-800);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-lg);
-  transition: opacity var(--transition-fast);
+  cursor: default; /* Remove pointer cursor */
+  pointer-events: none; /* Disable clicking - logo is not a link */
 }
 
-.header-logo:hover {
-  opacity: 0.8;
+/* Hover effect removed as requested */
+
+/* Focus effect removed since logo is no longer clickable */
+
+/* Logo image wrapper */
+.logo-image-wrapper {
+  flex-shrink: 0; /* Prevent image from shrinking */
 }
 
-.header-logo:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 4px;
-  border-radius: var(--radius-sm);
+.logo-image-wrapper img {
+  display: block;
+  width: 60px;
+  height: 60px;
 }
 
-.logo-img {
-  height: 40px;
-  width: auto;
+/* Logo text wrapper - vertical stack */
+.logo-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; /* Small gap between short name and full name */
 }
 
-.logo-text {
+/* Short name (VEFS Foundation) */
+.header-logo .logo-text {
   font-family: var(--font-serif);
+  font-weight: var(--font-weight-bold);
+  font-size: 1.25rem; /* 20px - explicit size instead of variable */
+  color: var(--color-gray-800) !important;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+/* Full organization name */
+.header-logo .logo-text-full {
+  font-family: 'Annie Use Your Telescope', cursive;
+  font-size: 12px; /* Smaller than short name */
+  color: #5A5A5A !important; /* Explicit gray color - prevents link color override */
+  line-height: 1.3;
+  letter-spacing: 0.3px; /* Improve readability */
+  max-width: 280px; /* Prevent excessive line length */
+  text-decoration: none;
+  font-weight: 600; /* Normal weight for handwritten font */
 }
 
 /* Mobile toggle button */
@@ -167,6 +191,25 @@
 
 /* Mobile Navigation */
 @media (max-width: 768px) {
+  /* Logo adjustments for mobile */
+  .header-logo {
+    gap: var(--space-xs); /* Reduce gap on mobile */
+  }
+
+  .logo-image-wrapper img {
+    width: 50px; /* Smaller logo on mobile */
+    height: 50px;
+  }
+
+  .header-logo .logo-text {
+    font-size: 1rem; /* 16px on mobile */
+  }
+
+  .header-logo .logo-text-full {
+    font-size: 9px; /* Even smaller on mobile */
+    max-width: 200px;
+  }
+
   .nav-toggle {
     display: block;
     position: relative;
@@ -228,35 +271,32 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
+  right: 280px; /* Don't cover the menu - stop before menu area */
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
   z-index: 1050;
   opacity: 0;
   transition: opacity var(--transition-base);
-  pointer-events: none;
+  pointer-events: auto; /* Make overlay clickable to close menu */
+  cursor: pointer;
 }
 
 .nav-overlay.active {
   display: block;
   opacity: 1;
-  pointer-events: none;
+  pointer-events: auto; /* Enable clicking on overlay to close menu */
 }
 
-/* Clickable overlay area (excludes menu zone on right) */
-.nav-overlay.active::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 280px;
-  bottom: 0;
-  pointer-events: auto;
-  cursor: pointer;
-}
+/* No need for ::before pseudo-element anymore since overlay itself is clickable */
 
 /* Tablet adjustments */
 @media (min-width: 769px) and (max-width: 1024px) {
+  /* Logo adjustments for tablet */
+  .header-logo .logo-text-full {
+    font-size: 10px;
+    max-width: 240px;
+  }
+
   .nav-list {
     gap: var(--space-xs);
   }
