@@ -13,7 +13,20 @@
       "Bash(grep:*)",
       "Bash(for file in *.html)",
       "Bash(python:*)",
-      "Bash(powershell:*)"
+      "Bash(powershell:*)",
+      "mcp__playwright__playwright_navigate",
+      "Bash(npm install:*)",
+      "Bash(npx playwright install chromium)",
+      "Bash(npx:*)",
+      "Bash(set PLAYWRIGHT_BROWSERS_PATH=%USERPROFILE%.playwright)",
+      "Bash(node cli.js:*)",
+      "Bash(playwright install:*)",
+      "Bash(echo:*)",
+      "mcp__playwright__playwright_screenshot",
+      "mcp__playwright__playwright_evaluate",
+      "mcp__playwright__playwright_close",
+      "Bash(for file in about.html trainings.html events.html volunteer.html gallery.html contact.html future-plans.html)",
+      "Bash(do echo \"Processing $file...\")"
     ]
   },
   "enableAllProjectMcpServers": true,

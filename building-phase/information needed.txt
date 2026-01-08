@@ -1,3 +1,7 @@
+cd VEFS-website
+  python -m http.server 8000
+
+
 Short Bio (2-3 sentences) of K. Rajasekaran and S. Prajana
 [Background, expertise, role in VEFS]
 

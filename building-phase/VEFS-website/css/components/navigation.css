@@ -18,10 +18,43 @@
 
 .header-content {
   display: flex;
+  flex-direction: row;             /* Single row layout */
   align-items: center;
-  justify-content: space-between;
-  padding: var(--space-sm) 0;
+  justify-content: space-between;  /* Distribute sections evenly */
+  gap: var(--space-xl);            /* Increased gap to prevent overlap */
+  padding: var(--space-md) 0;
 }
+
+/* Three main sections in header */
+.header-logo-section {
+  flex: 0 0 auto;                  /* Logo takes natural width, no shrinking */
+  display: flex;
+  align-items: center;
+  min-width: 300px;                /* Ensure logo has enough space */
+}
+
+.header-nav-section {
+  flex: 1 1 auto;                  /* Navigation takes remaining space */
+  display: flex;
+  justify-content: center;         /* Center the navigation */
+  align-items: center;
+  margin: 0 var(--space-lg);       /* Extra margin on both sides */
+}
+
+.header-social-section {
+  flex: 0 0 auto;                  /* Social icons take natural width, no shrinking */
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-width: 160px;                /* Ensure social icons have enough space */
+  justify-content: flex-end;       /* Align icons to the right */
+}
+
+.logo-text-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 
 /* Logo */
 .header-logo {
@@ -73,9 +106,56 @@
   color: #5A5A5A !important; /* Explicit gray color - prevents link color override */
   line-height: 1.3;
   letter-spacing: 0.3px; /* Improve readability */
-  max-width: 280px; /* Prevent excessive line length */
   text-decoration: none;
   font-weight: 600; /* Normal weight for handwritten font */
+
+  /* Prevent wrapping - force single line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Allow full width, don't constrain */
+}
+
+/* Mobile social icons - hidden on desktop, shown only in hamburger menu on mobile */
+.nav-social-mobile {
+  display: none;
+}
+
+/* Header Social Media Links - Legacy class kept for compatibility */
+.header-social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.header-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background-color: transparent; /* No background - let brand colors shine */
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  text-decoration: none;
+}
+
+/* Icon sizing for PNG images */
+.header-social-link img {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+/* Hover: Subtle scale and shadow */
+.header-social-link:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header-social-link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 /* Mobile toggle button */
@@ -156,6 +236,7 @@
   border-radius: var(--radius-md);
   transition: color var(--transition-fast), background-color var(--transition-fast);
   position: relative;
+  white-space: nowrap; /* Prevent navigation links from wrapping to multiple lines */
 }
 
 .nav-link:hover {
@@ -169,19 +250,14 @@
 }
 
 .nav-link.active {
-  color: var(--color-primary);
+  color: var(--color-white); /* White text for better contrast */
+  background-color: var(--color-primary); /* Sage green background */
   font-weight: var(--font-weight-semibold);
 }
 
+/* Remove bottom border indicator since we now have background color */
 .nav-link.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: var(--space-sm);
-  right: var(--space-sm);
-  height: 2px;
-  background-color: var(--color-primary);
-  border-radius: var(--radius-full);
+  display: none;
 }
 
 /* CTA button in nav */
@@ -191,23 +267,46 @@
 
 /* Mobile Navigation */
 @media (max-width: 768px) {
+  /* Single row layout on mobile: Logo left, Nav toggle right */
+  .header-content {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .header-logo-section {
+    flex: 0 1 auto;
+    min-width: auto;
+  }
+
+  /* Navigation section on mobile */
+  .header-nav-section {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  /* HIDE desktop social icons on mobile - they'll appear in the hamburger menu */
+  .header-social-section {
+    display: none;
+  }
+
   /* Logo adjustments for mobile */
   .header-logo {
-    gap: var(--space-xs); /* Reduce gap on mobile */
+    gap: var(--space-xs);
   }
 
   .logo-image-wrapper img {
-    width: 50px; /* Smaller logo on mobile */
+    width: 50px;
     height: 50px;
   }
 
   .header-logo .logo-text {
-    font-size: 1rem; /* 16px on mobile */
+    font-size: 1rem;
   }
 
   .header-logo .logo-text-full {
-    font-size: 9px; /* Even smaller on mobile */
-    max-width: 200px;
+    font-size: 9px;
+    max-width: 100%;
   }
 
   .nav-toggle {
@@ -243,15 +342,38 @@
     padding: var(--space-md);
   }
 
+  /* Mobile social icons inside hamburger menu - shown first */
+  .nav-social-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg) var(--space-md);
+    border-bottom: 2px solid var(--color-gray-300);
+    margin-bottom: var(--space-sm);
+  }
+
+  .nav-social-mobile .header-social-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-social-mobile .header-social-link img {
+    width: 24px;
+    height: 24px;
+  }
+
   .nav-link {
     padding: var(--space-md);
     border-bottom: 1px solid var(--color-gray-200);
   }
 
-  .nav-link.active::after {
-    left: 0;
-    right: 0;
-    bottom: -1px;
+  /* Mobile: active link maintains background color styling (no ::after needed) */
+  .nav-link.active {
+    border-bottom-color: var(--color-primary); /* Match background color for continuity */
   }
 
   .nav-item-cta {
@@ -289,12 +411,22 @@
 
 /* No need for ::before pseudo-element anymore since overlay itself is clickable */
 
-/* Tablet adjustments */
-@media (min-width: 769px) and (max-width: 1024px) {
-  /* Logo adjustments for tablet */
-  .header-logo .logo-text-full {
-    font-size: 10px;
-    max-width: 240px;
+/* Medium screens - prevent social icons cutoff */
+@media (min-width: 769px) and (max-width: 1280px) {
+  .header-content {
+    gap: var(--space-md);
+  }
+
+  .header-logo-section {
+    min-width: 250px;
+  }
+
+  .header-nav-section {
+    margin: 0 var(--space-sm);
+  }
+
+  .header-social-section {
+    min-width: 140px;
   }
 
   .nav-list {
@@ -308,5 +440,68 @@
 
   .nav-item-cta {
     margin-left: var(--space-xs);
+  }
+
+  .header-logo .logo-text-full {
+    font-size: 10px;
+  }
+}
+
+/* Small desktop/tablet screens - three-row centered layout (handles 110% zoom) */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .header-content {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: var(--space-sm) 0;
+  }
+
+  .header-logo-section {
+    order: 1;
+    flex: 1 0 100%;
+    justify-content: center;
+    min-width: auto;
+    margin-bottom: var(--space-xs);
+  }
+
+  .header-nav-section {
+    order: 2;
+    flex: 1 0 100%;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .header-social-section {
+    order: 3;
+    flex: 1 0 100%;
+    justify-content: center;
+    min-width: auto;
+    margin: var(--space-xs) 0 0 0;
+  }
+}
+
+/* Larger screens - single row layout (Logo left | Nav center | Social right) */
+@media (min-width: 1201px) {
+  .header-content {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--space-sm); /* Reduced gap from --space-xl to --space-sm */
+  }
+
+  .header-logo-section {
+    order: 1;
+    justify-content: flex-start;
+  }
+
+  .header-nav-section {
+    order: 2;
+    justify-content: center;
+    margin: 0 var(--space-sm); /* Reduced from --space-lg */
+  }
+
+  .header-social-section {
+    order: 3;
+    justify-content: flex-end;
+    min-width: 160px;
   }
 }

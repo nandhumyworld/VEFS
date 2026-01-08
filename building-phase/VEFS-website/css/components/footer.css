@@ -9,11 +9,17 @@
 }
 
 /* Footer main content */
-.footer-main {
+.footer-main,
+.footer-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-xl);
   margin-bottom: var(--space-xl);
+}
+
+/* 2-column footer grid override */
+.footer-grid-2col {
+  grid-template-columns: repeat(2, 1fr) !important;
 }
 
 /* Footer column */
@@ -131,26 +137,27 @@
   width: 40px;
   height: 40px;
   border-radius: var(--radius-md);
-  background-color: var(--color-gray-700);
-  color: var(--color-white);
+  background-color: var(--color-gray-700); /* Keep dark background for footer */
   text-decoration: none;
-  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
+/* Footer icon sizing for PNG images */
+.social-link img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* Hover: Subtle lift and glow */
 .social-link:hover {
-  background-color: var(--color-primary);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .social-link:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
-}
-
-.social-link svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
 }
 
 /* Newsletter signup */
@@ -243,8 +250,14 @@
 
 /* Responsive behavior */
 @media (max-width: 1024px) {
-  .footer-main {
+  .footer-main,
+  .footer-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 2-column layout already displays as 2 columns, no change needed */
+  .footer-grid-2col {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
@@ -253,8 +266,10 @@
     padding: var(--space-xl) 0 var(--space-md);
   }
 
-  .footer-main {
-    grid-template-columns: 1fr;
+  .footer-main,
+  .footer-grid,
+  .footer-grid-2col {
+    grid-template-columns: 1fr !important;
     gap: var(--space-lg);
   }
 

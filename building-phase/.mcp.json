@@ -9,7 +9,6 @@
       ],
       "description": "Playwright MCP server for automated browser testing of VEFS website",
       "env": {
-        "PLAYWRIGHT_BROWSERS_PATH": "0"
       }
     }
   },
