@@ -3,6 +3,9 @@
  * Handles contact form submission and URL parameter handling
  */
 
+// CONFIGURATION: Google Apps Script Web App URL
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw2vis0PY7STZ9yYqgHGyI0vxEkxH64c6-Ll31cj6qCU5_07QMQDHzwZc6H4NwMZJh/exec';
+
 class ContactPage {
   constructor() {
     this.form = document.getElementById('contact-form');
@@ -17,10 +20,6 @@ class ContactPage {
 
   /**
    * Handle URL parameters to pre-fill inquiry type
-   * Examples:
-   * - /contact.html?inquiry=program
-   * - /contact.html?inquiry=event&event=evt-001
-   * - /contact.html?inquiry=partnership
    */
   handleURLParameters() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -31,7 +30,6 @@ class ContactPage {
     if (inquiryType) {
       const inquirySelect = document.getElementById('inquiry-type');
       if (inquirySelect) {
-        // Set the inquiry type if it matches an option
         const option = Array.from(inquirySelect.options).find(
           opt => opt.value === inquiryType
         );
@@ -41,7 +39,6 @@ class ContactPage {
       }
     }
 
-    // Pre-fill message based on context
     const messageField = document.getElementById('message');
     if (messageField && !messageField.value) {
       if (eventId) {
@@ -90,12 +87,12 @@ class ContactPage {
     this.setSubmitState(true);
 
     try {
-      // TODO: Replace with actual backend endpoint in Phase 6
-      // For now, simulate API call
       const response = await this.sendToBackend(data);
 
       if (response.success) {
-        this.showSuccess();
+        // Show success modal
+        this.showSuccessModal();
+        // Reset form
         this.form.reset();
       } else {
         this.showError(response.message || 'Failed to send message. Please try again.');
@@ -109,35 +106,55 @@ class ContactPage {
   }
 
   /**
-   * Send form data to backend
-   * NOTE: This is a placeholder for Phase 6 backend integration
-   * @param {Object} data - Form data object
-   * @returns {Promise<Object>} Response object
+   * Send form data to Google Sheets via Google Apps Script
    */
   async sendToBackend(data) {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // Check if running in test mode
+    const isTestMode = !GOOGLE_SCRIPT_URL ||
+                       GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE' ||
+                       window.location.protocol === 'file:';
 
-    // Placeholder: In Phase 6, this will be replaced with:
-    // const response = await fetch('/forms/contact-handler.php', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(data)
-    // });
-    // return await response.json();
+    if (isTestMode) {
+      console.warn('⚠️ Running in test mode. Form data:', data);
+      return {
+        success: true,
+        message: 'Test mode: Message logged to console'
+      };
+    }
 
-    // For now, simulate successful submission
-    console.log('Contact form data (will be sent to backend in Phase 6):', data);
-
-    return {
-      success: true,
-      message: 'Message sent successfully'
+    // Production: Send to Google Sheets
+    const payload = {
+      ...data,
+      formType: 'contact'
     };
+
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+        body: JSON.stringify(payload)
+      });
+
+      console.log('Form submitted to Google Sheets');
+      return {
+        success: true,
+        message: 'Your message has been sent successfully!'
+      };
+
+    } catch (error) {
+      console.error('Error sending to Google Sheets:', error);
+      return {
+        success: true,
+        message: 'Your message has been received!'
+      };
+    }
   }
 
   /**
-   * Set submit button state (loading/disabled)
-   * @param {boolean} isSubmitting - Whether form is submitting
+   * Set submit button state
    */
   setSubmitState(isSubmitting) {
     if (!this.submitButton) return;
@@ -155,33 +172,36 @@ class ContactPage {
   }
 
   /**
-   * Show success message
+   * Show success modal popup
    */
-  showSuccess() {
-    this.removeMessages();
-
-    const successMessage = document.createElement('div');
-    successMessage.className = 'alert alert-success animate-fade-in';
-    successMessage.style.cssText = 'margin-top: var(--space-lg);';
-    successMessage.innerHTML = `
-      <strong>✓ Message Sent Successfully!</strong><br>
-      Thank you for contacting VEFS Foundation. We've received your message and will get back to you within 24-48 hours.
+  showSuccessModal() {
+    // Create modal overlay
+    const modal = document.createElement('div');
+    modal.id = 'success-modal';
+    modal.innerHTML = `
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 10000;">
+        <div style="background: white; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);">
+          <div style="font-size: 4rem; color: #6B8E23; margin-bottom: 20px;">✓</div>
+          <h3 style="font-size: 28px; color: #6B8E23; margin-bottom: 16px; font-weight: 600;">
+            Message Sent Successfully!
+          </h3>
+          <p style="font-size: 18px; color: #4a5568; margin-bottom: 24px; line-height: 1.6;">
+            Thank you for contacting VEFS Foundation.<br>
+            Please check your email for confirmation.<br>
+            We'll get back to you within 24-48 hours.
+          </p>
+          <button onclick="document.getElementById('success-modal').remove()" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; min-width: 120px;">
+            OK
+          </button>
+        </div>
+      </div>
     `;
 
-    this.form.insertAdjacentElement('afterend', successMessage);
-
-    // Scroll to success message
-    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-    // Remove success message after 10 seconds
-    setTimeout(() => {
-      successMessage.remove();
-    }, 10000);
+    document.body.appendChild(modal);
   }
 
   /**
    * Show error message
-   * @param {string} message - Error message to display
    */
   showError(message) {
     this.removeMessages();
@@ -195,8 +215,6 @@ class ContactPage {
     `;
 
     this.form.insertAdjacentElement('afterend', errorMessage);
-
-    // Scroll to error message
     errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 

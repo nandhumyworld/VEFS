@@ -14,6 +14,8 @@ class FormValidation {
       pan: this.validatePAN.bind(this),
       minLength: this.validateMinLength.bind(this),
       maxLength: this.validateMaxLength.bind(this),
+      min: this.validateMin.bind(this),
+      max: this.validateMax.bind(this),
       pattern: this.validatePattern.bind(this),
     };
 
@@ -151,6 +153,22 @@ class FormValidation {
       });
     }
 
+    // Min value (for number inputs)
+    if (field.hasAttribute('min')) {
+      rules.push({
+        type: 'min',
+        value: parseFloat(field.getAttribute('min')),
+      });
+    }
+
+    // Max value (for number inputs)
+    if (field.hasAttribute('max')) {
+      rules.push({
+        type: 'max',
+        value: parseFloat(field.getAttribute('max')),
+      });
+    }
+
     // Pattern (custom regex)
     if (field.hasAttribute('pattern')) {
       rules.push({
@@ -227,6 +245,30 @@ class FormValidation {
     return {
       isValid,
       message: `Maximum ${maxLength} characters allowed`,
+    };
+  }
+
+  validateMin(value, minValue) {
+    if (!value) return { isValid: true, message: '' };
+
+    const numValue = parseFloat(value);
+    const isValid = !isNaN(numValue) && numValue >= minValue;
+
+    return {
+      isValid,
+      message: `Must be at least ${minValue}`,
+    };
+  }
+
+  validateMax(value, maxValue) {
+    if (!value) return { isValid: true, message: '' };
+
+    const numValue = parseFloat(value);
+    const isValid = !isNaN(numValue) && numValue <= maxValue;
+
+    return {
+      isValid,
+      message: `Must be no more than ${maxValue}`,
     };
   }
 

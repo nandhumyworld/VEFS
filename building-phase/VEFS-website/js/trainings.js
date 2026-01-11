@@ -10,8 +10,7 @@ class TrainingsPage {
     this.filters = {
       date: 'all',
       type: null,
-      audience: null,
-      search: ''
+      audience: null
     };
     this.init();
   }
@@ -19,7 +18,6 @@ class TrainingsPage {
   async init() {
     await this.loadTrainings();
     this.setupFilters();
-    this.setupSearch();
     this.handleHashNavigation();
     this.renderTimeline();
   }
@@ -41,7 +39,6 @@ class TrainingsPage {
       });
 
       this.filteredTrainings = [...this.trainings];
-      this.updateResultsCount();
     } catch (error) {
       console.error('Error loading trainings:', error);
       document.getElementById('loading-spinner').innerHTML = `
@@ -76,23 +73,6 @@ class TrainingsPage {
         this.applyFilters();
       });
     });
-
-    // Reset button
-    document.getElementById('reset-filters').addEventListener('click', () => {
-      this.resetFilters();
-    });
-  }
-
-  /**
-   * Setup search input handler
-   */
-  setupSearch() {
-    const searchInput = document.getElementById('training-search');
-
-    searchInput.addEventListener('input', (e) => {
-      this.filters.search = e.target.value.toLowerCase();
-      this.applyFilters();
-    });
   }
 
   /**
@@ -125,18 +105,9 @@ class TrainingsPage {
         }
       }
 
-      // Search filter
-      if (this.filters.search) {
-        const searchableText = `${training.title} ${training.description.brief} ${training.category}`.toLowerCase();
-        if (!searchableText.includes(this.filters.search)) {
-          return false;
-        }
-      }
-
       return true;
     });
 
-    this.updateResultsCount();
     this.renderTimeline();
   }
 
@@ -164,35 +135,6 @@ class TrainingsPage {
       default:
         return true;
     }
-  }
-
-  /**
-   * Reset all filters
-   */
-  resetFilters() {
-    this.filters = {
-      date: 'all',
-      type: null,
-      audience: null,
-      search: ''
-    };
-
-    // Reset UI
-    document.querySelectorAll('[data-filter-type]').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    document.querySelector('[data-filter-value="all"]').classList.add('active');
-    document.getElementById('training-search').value = '';
-
-    this.applyFilters();
-  }
-
-  /**
-   * Update results count display
-   */
-  updateResultsCount() {
-    document.getElementById('count-current').textContent = this.filteredTrainings.length;
-    document.getElementById('count-total').textContent = this.trainings.length;
   }
 
   /**
@@ -509,32 +451,172 @@ class TrainingsPage {
           </div>
         ` : ''}
 
-        <!-- Call to Action -->
-        <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200);">
-          ${isPast ? `
+        <!-- Call to Action / Registration Form -->
+        ${isPast ? `
+          <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200);">
             <p style="text-align: center; color: var(--color-gray-600); margin-bottom: var(--space-md);">
               This training has been completed. Check back for future sessions!
             </p>
             <a href="/trainings.html" class="btn btn-outline" style="width: 100%;">View All Trainings</a>
-          ` : isFull ? `
+          </div>
+        ` : isFull ? `
+          <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200);">
             <p style="text-align: center; color: var(--color-gray-600); margin-bottom: var(--space-md);">
               This training is currently full. Contact us to join the waitlist.
             </p>
             <a href="/contact.html?inquiry=training&training=${training.id}" class="btn btn-primary" style="width: 100%;">Join Waitlist</a>
-          ` : `
-            <p style="text-align: center; color: var(--color-gray-700); margin-bottom: var(--space-md); font-size: var(--font-size-lg);">
-              Ready to join this training? Register now to secure your spot!
-            </p>
-            <a href="/contact.html?inquiry=training&training=${training.id}" class="btn btn-primary btn-lg" style="width: 100%;">Register Now</a>
-          `}
-        </div>
+          </div>
+        ` : `
+          <div style="background: var(--color-gray-50); padding: var(--space-xl); border-radius: var(--radius-md); margin-top: var(--space-2xl);">
+            <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: var(--color-primary);">Register for This Training</h3>
+            <form id="training-registration-form" class="form" data-training-id="${training.id}">
+              ${this.generateTrainingFormFields(training)}
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                ${isFree ? 'Register Now' : 'Register & View Payment Details'}
+              </button>
+            </form>
+          </div>
+        `}
       </div>
     `;
+
+    // Setup form validation and submission if form is present
+    if (!isPast && !isFull) {
+      setTimeout(() => this.setupTrainingRegistrationForm(training), 100);
+    }
 
     // Open modal
     if (window.modalInstance) {
       window.modalInstance.open('training-modal');
     }
+  }
+
+  /**
+   * Generate form fields for training registration
+   * @param {Object} training - Training object
+   * @returns {string} HTML string for form fields
+   */
+  generateTrainingFormFields(training) {
+    const minAge = training.requirements?.age?.min || 18;
+    const maxAge = training.requirements?.age?.max || 65;
+
+    return `
+      <div class="form-row">
+        <div class="form-group">
+          <label for="training-name" class="form-label">Full Name <span style="color: var(--color-error);">*</span></label>
+          <input type="text" id="training-name" name="name" class="form-input" required>
+          <div class="form-error"></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="training-email" class="form-label">Email <span style="color: var(--color-error);">*</span></label>
+          <input type="email" id="training-email" name="email" class="form-input" required>
+          <div class="form-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="training-phone" class="form-label">Phone <span style="color: var(--color-error);">*</span></label>
+          <input type="tel" id="training-phone" name="phone" class="form-input" required pattern="[6-9][0-9]{9}" placeholder="98765 43210">
+          <div class="form-error"></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="training-age" class="form-label">Age <span style="color: var(--color-error);">*</span></label>
+          <input type="number" id="training-age" name="age" class="form-input" min="${minAge}" max="${maxAge}" required>
+          <div class="form-error"></div>
+          <small style="color: var(--color-gray-600); font-size: var(--font-size-sm);">Must be between ${minAge} and ${maxAge} years</small>
+        </div>
+
+        <div class="form-group">
+          <label for="training-education" class="form-label">Education Level <span style="color: var(--color-error);">*</span></label>
+          <select id="training-education" name="education" class="form-input" required>
+            <option value="">Select...</option>
+            <option value="high-school">High School</option>
+            <option value="undergraduate">Undergraduate</option>
+            <option value="graduate">Graduate</option>
+            <option value="post-graduate">Post-Graduate</option>
+            <option value="vocational">Vocational/Diploma</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="form-error"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="training-occupation" class="form-label">Occupation/Organization <span style="color: var(--color-error);">*</span></label>
+        <input type="text" id="training-occupation" name="occupation" class="form-input" required>
+        <div class="form-error"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="training-background" class="form-label">Prior Experience/Background <span style="color: var(--color-error);">*</span></label>
+        <textarea id="training-background" name="background" class="form-input" rows="4" required minlength="20"></textarea>
+        <div class="form-error"></div>
+        <small style="color: var(--color-gray-600); font-size: var(--font-size-sm);">Minimum 20 characters</small>
+      </div>
+    `;
+  }
+
+  /**
+   * Setup training registration form validation and submission
+   * @param {Object} training - Training object
+   */
+  setupTrainingRegistrationForm(training) {
+    const form = document.getElementById('training-registration-form');
+    if (!form) {
+      console.warn('Training registration form not found');
+      return;
+    }
+
+    // Initialize form validation
+    if (window.FormValidation) {
+      const minAge = training.requirements?.age?.min || 18;
+      const maxAge = training.requirements?.age?.max || 65;
+
+      new window.FormValidation(form, {
+        name: { required: true, minLength: 2 },
+        email: { required: true, email: true },
+        phone: { required: true, phone: true },
+        age: { required: true, min: minAge, max: maxAge },
+        education: { required: true },
+        occupation: { required: true, minLength: 2 },
+        background: { required: true, minLength: 20 }
+      });
+    }
+
+    // Handle form submission
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const registrationData = {
+        type: 'training',
+        trainingId: training.id,
+        trainingTitle: training.title,
+        trainingDate: training.schedule.sessions[0].date,
+        trainingFee: training.registration.fee.amount || 0,
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        age: formData.get('age'),
+        education: formData.get('education'),
+        occupation: formData.get('occupation'),
+        background: formData.get('background'),
+        submittedAt: new Date().toISOString()
+      };
+
+      console.log('Training registration submitted:', registrationData);
+
+      // Store in sessionStorage
+      sessionStorage.setItem('vefs_registration_training', JSON.stringify(registrationData));
+
+      // Redirect to confirmation page
+      window.location.href = `registration-confirmation.html?type=training&id=${training.id}`;
+    });
   }
 
   /**

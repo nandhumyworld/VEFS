@@ -174,45 +174,18 @@
     </section>
 
     <!-- Filter Section (Sticky) -->
-    <section class="section" style="position: sticky; top: 70px; z-index: 10; background-color: var(--color-white); box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: var(--space-lg) 0;">
+    <section class="section" style="padding: var(--space-xl) 0; background-color: var(--color-white); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); position: sticky; top: 70px; z-index: 10;">
       <div class="container">
-        <div style="margin-bottom: var(--space-md);">
-          <input
-            type="text"
-            id="training-search"
-            placeholder="🔍 Search trainings by name or keyword..."
-            class="form-input"
-            style="max-width: 400px;"
-          >
-        </div>
-
-        <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap; align-items: center;" id="training-filters">
-          <span style="font-weight: 600; color: var(--color-gray-700); margin-right: var(--space-xs);">Filter:</span>
-
-          <!-- Date Filters -->
+        <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap; justify-content: center;" id="training-filters">
           <button class="btn btn-outline btn-sm active" data-filter-type="date" data-filter-value="all">All Trainings</button>
           <button class="btn btn-outline btn-sm" data-filter-type="date" data-filter-value="upcoming">Upcoming</button>
           <button class="btn btn-outline btn-sm" data-filter-type="date" data-filter-value="this-month">This Month</button>
-
-          <span style="margin: 0 var(--space-xs); color: var(--color-gray-400);">|</span>
-
-          <!-- Type Filters -->
           <button class="btn btn-outline btn-sm" data-filter-type="type" data-filter-value="workshop">Workshops</button>
           <button class="btn btn-outline btn-sm" data-filter-type="type" data-filter-value="field-visit">Field Visits</button>
           <button class="btn btn-outline btn-sm" data-filter-type="type" data-filter-value="online">Online</button>
-
-          <span style="margin: 0 var(--space-xs); color: var(--color-gray-400);">|</span>
-
-          <!-- Audience Filters -->
           <button class="btn btn-outline btn-sm" data-filter-type="audience" data-filter-value="students">Students</button>
           <button class="btn btn-outline btn-sm" data-filter-type="audience" data-filter-value="farmers">Farmers</button>
           <button class="btn btn-outline btn-sm" data-filter-type="audience" data-filter-value="women">Women</button>
-
-          <button class="btn btn-sm" id="reset-filters" style="margin-left: auto; background-color: var(--color-gray-200);">Reset</button>
-        </div>
-
-        <div style="margin-top: var(--space-md); color: var(--color-gray-600); font-size: var(--font-size-sm);" id="results-count">
-          Showing <strong id="count-current">0</strong> of <strong id="count-total">0</strong> trainings
         </div>
       </div>
     </section>
@@ -239,8 +212,7 @@
               <path d="m21 21-4.35-4.35"></path>
             </svg>
             <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-md); color: var(--color-gray-700);">No Trainings Found</h3>
-            <p style="color: var(--color-gray-600); margin-bottom: var(--space-lg);">Try adjusting your filters or search terms</p>
-            <button class="btn btn-outline" onclick="document.getElementById('reset-filters').click()">Clear Filters</button>
+            <p style="color: var(--color-gray-600);">Try selecting a different category</p>
           </div>
         </div>
       </div>

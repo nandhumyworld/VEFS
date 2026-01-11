@@ -120,22 +120,28 @@ class VolunteersPage {
     const volunteer = this.volunteers.find(v => v.id === volunteerId);
     if (!volunteer) return;
 
-    const modal = document.getElementById('volunteer-modal');
-    const modalTitle = document.getElementById('volunteer-modal-title');
     const modalBody = document.getElementById('volunteer-modal-body');
 
-    if (!modal || !modalTitle || !modalBody) {
+    if (!modalBody) {
       console.error('Modal elements not found');
       return;
     }
-
-    modalTitle.textContent = volunteer.title;
 
     const startDate = new Date(volunteer.dates.start);
     const endDate = new Date(volunteer.dates.end);
     const hasStipend = volunteer.benefits.stipend.provided;
 
     modalBody.innerHTML = `
+      <!-- Featured Image -->
+      ${volunteer.media?.featuredImage ? `
+        <img src="${volunteer.media.featuredImage}" alt="${volunteer.title}" style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: var(--space-lg);">
+      ` : ''}
+
+      <!-- Title -->
+      <h2 id="volunteer-modal-title" style="font-size: var(--font-size-3xl); color: var(--color-primary); margin-bottom: var(--space-lg);">
+        ${volunteer.title}
+      </h2>
+
       <!-- Volunteer Details -->
       <div style="margin-bottom: var(--space-xl);">
         <h3 style="margin-bottom: var(--space-md); color: var(--color-primary);">About This Opportunity</h3>
@@ -280,7 +286,7 @@ class VolunteersPage {
 
     // Open modal
     if (window.modalInstance) {
-      window.modalInstance.open(modal);
+      window.modalInstance.open('volunteer-modal');
     }
 
     // Update URL hash
@@ -334,8 +340,7 @@ class VolunteersPage {
       // Close modal after short delay
       setTimeout(() => {
         if (window.modalInstance) {
-          const modal = document.getElementById('volunteer-modal');
-          window.modalInstance.close(modal);
+          window.modalInstance.close('volunteer-modal');
         }
       }, 3000);
     });

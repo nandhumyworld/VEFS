@@ -107,6 +107,35 @@ public_html/
 
 See `VEFS-requirements/technical/FILE_MANAGEMENT_SYSTEM.md` for complete structure.
 
+### VEFS-builder Project Organization
+
+**CRITICAL:** All generated documentation, test artifacts, and deployment files MUST be organized within the `VEFS-builder/` folder structure:
+
+```
+VEFS-builder/
+├── 00-PROJECT-MANAGEMENT/    # Project planning, timelines, status tracking
+├── 01-CORE-COMPONENTS/        # Reusable component specifications
+├── 02-CONTENT-PREPARATION/    # Content templates and preparation guides
+├── 04-TESTING/                # Testing documentation and artifacts
+│   ├── TESTING-GUIDE.md       # Testing procedures and checklists
+│   └── screenshots/           # Test screenshots and visual verification
+├── 05-DEPLOYMENT/             # Deployment guides and scripts
+│   ├── DEPLOYMENT_CHECKLIST.md
+│   ├── GOOGLE_APPS_SCRIPT.js
+│   └── GOOGLE_SHEETS_SETUP_GUIDE.md
+└── 06-DOCUMENTATION/          # User guides and content documentation
+    ├── CONTENT_QUICKSTART_GUIDE.md
+    ├── CONTENT_REPLACEMENT_MAP.md
+    └── CONTENT_TO_PROVIDE.md
+```
+
+**File Organization Rules:**
+- **Never** create documentation files in the project root directory
+- **Always** place test screenshots in `VEFS-builder/04-TESTING/screenshots/`
+- **Always** place deployment guides and scripts in `VEFS-builder/05-DEPLOYMENT/`
+- **Always** place content documentation in `VEFS-builder/06-DOCUMENTATION/`
+- Keep the root directory clean - only essential files (CLAUDE.md, package.json, .mcp.json) should be in the root
+
 ## Design System
 
 ### Brand Colors (CSS Variables)

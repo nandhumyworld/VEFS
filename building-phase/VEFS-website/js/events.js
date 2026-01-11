@@ -108,44 +108,247 @@ class EventsPage {
     const endDate = new Date(event.date.end);
     const isPast = event.status === 'completed';
     const isFull = event.status === 'full';
+    const isFree = event.fee === 0;
 
     modalBody.innerHTML = `
+      <!-- Header Image -->
       ${event.images?.hero ? `
         <img src="${event.images.hero}" alt="${event.title}" style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: var(--space-lg);">
       ` : ''}
 
-      <h3>${event.title}</h3>
-
-      <div style="display: flex; gap: var(--space-md); margin: var(--space-md) 0; flex-wrap: wrap;">
-        <div><strong>📅 Date:</strong> ${window.VEFSUtils.formatDate(startDate)}</div>
-        <div><strong>⏰ Time:</strong> ${window.VEFSUtils.formatTime(startDate)} - ${window.VEFSUtils.formatTime(endDate)}</div>
-        <div><strong>📍 Location:</strong> ${event.location.venue}, ${event.location.city}</div>
-        <div><strong>💰 Fee:</strong> ${event.fee === 0 ? 'FREE' : '₹' + event.fee}</div>
+      <!-- Title and Description -->
+      <div style="margin-bottom: var(--space-lg);">
+        <h2 id="event-modal-title" style="font-size: var(--font-size-3xl); color: var(--color-primary); margin-bottom: var(--space-sm);">
+          ${event.title}
+        </h2>
+        <p style="font-size: var(--font-size-lg); color: var(--color-gray-700);">
+          ${event.shortDescription}
+        </p>
       </div>
 
-      <p style="margin-bottom: var(--space-lg); line-height: 1.7;">${event.fullDescription || event.shortDescription}</p>
+      <!-- Key Details Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl); padding: var(--space-lg); background-color: var(--color-gray-50); border-radius: var(--radius-md);">
+        <div>
+          <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">📅 Date</div>
+          <div style="font-weight: 600;">${window.VEFSUtils.formatDate(startDate)}</div>
+        </div>
+        <div>
+          <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">⏰ Time</div>
+          <div style="font-weight: 600;">${window.VEFSUtils.formatDate(startDate, 'time')} - ${window.VEFSUtils.formatDate(endDate, 'time')}</div>
+        </div>
+        <div>
+          <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">📍 Location</div>
+          <div style="font-weight: 600;">${event.location.venue || event.location.city}</div>
+        </div>
+        <div>
+          <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">💰 Fee</div>
+          <div style="font-weight: 600; color: ${isFree ? 'var(--color-success)' : 'var(--color-gray-900)'};">
+            ${isFree ? 'FREE' : '₹' + event.fee}
+          </div>
+        </div>
+        ${event.capacity ? `
+          <div>
+            <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">👥 Capacity</div>
+            <div style="font-weight: 600;">${event.capacity} participants</div>
+          </div>
+        ` : ''}
+      </div>
 
-      ${event.organizer ? `
-        <div style="margin: var(--space-lg) 0; padding: var(--space-md); background-color: var(--color-gray-50); border-radius: var(--radius-md);">
-          <strong>Organizer:</strong> ${event.organizer.name}<br>
-          <strong>Contact:</strong> ${event.organizer.email} | ${event.organizer.phone}
+      <!-- Full Description -->
+      ${event.fullDescription ? `
+        <div style="margin-bottom: var(--space-xl);">
+          <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--space-md);">About This Event</h3>
+          <p style="color: var(--color-gray-700); line-height: 1.8; white-space: pre-line;">${event.fullDescription}</p>
         </div>
       ` : ''}
 
-      ${!isPast && !isFull ? `
-        <a href="/contact.html?inquiry=event&event=${event.id}" class="btn btn-primary btn-lg" style="width: 100%; margin-top: var(--space-lg);">
-          Register for This Event
-        </a>
-      ` : isPast ? `
-        <div class="alert alert-info" style="margin-top: var(--space-lg);">This event has been completed.</div>
+      <!-- Agenda/Schedule -->
+      ${event.agenda && event.agenda.length > 0 ? `
+        <div style="margin-bottom: var(--space-xl);">
+          <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--space-md);">Event Agenda</h3>
+          ${event.agenda.map(item => `
+            <div style="padding: var(--space-md); margin-bottom: var(--space-sm); background-color: var(--color-gray-50); border-left: 4px solid var(--color-primary); border-radius: var(--radius-sm);">
+              <div style="display: flex; justify-content: space-between; align-items: start;">
+                <div style="font-weight: 600;">${item.title}</div>
+                <div style="color: var(--color-gray-600); font-size: var(--font-size-sm);">${item.time}</div>
+              </div>
+              ${item.description ? `<p style="margin-top: var(--space-xs); color: var(--color-gray-700);">${item.description}</p>` : ''}
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+
+      <!-- Speakers/Facilitators -->
+      ${event.speakers && event.speakers.length > 0 ? `
+        <div style="margin-bottom: var(--space-xl);">
+          <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--space-md);">Speaker${event.speakers.length > 1 ? 's' : ''}</h3>
+          ${event.speakers.map(speaker => `
+            <div style="display: flex; gap: var(--space-lg); align-items: start; padding: var(--space-lg); background-color: var(--color-gray-50); border-radius: var(--radius-md); margin-bottom: var(--space-md);">
+              ${speaker.photo ? `
+                <img src="${speaker.photo}" alt="${speaker.name}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+              ` : ''}
+              <div>
+                <div style="font-weight: 600; font-size: var(--font-size-lg); margin-bottom: var(--space-xs);">${speaker.name}</div>
+                <div style="color: var(--color-gray-600); font-size: var(--font-size-sm); margin-bottom: var(--space-xs);">${speaker.title || speaker.role}</div>
+                ${speaker.bio ? `<p style="color: var(--color-gray-700); margin: 0;">${speaker.bio}</p>` : ''}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+
+      <!-- Organizer Info -->
+      ${event.organizer ? `
+        <div style="padding: var(--space-lg); background-color: var(--color-primary-light); border-radius: var(--radius-md); margin-bottom: var(--space-xl);">
+          <h4 style="color: var(--color-primary); margin-bottom: var(--space-sm);">Event Organizer</h4>
+          <div style="color: var(--color-gray-700);">
+            <strong>${event.organizer.name}</strong><br>
+            ${event.organizer.email ? `<a href="mailto:${event.organizer.email}" style="color: var(--color-primary);">${event.organizer.email}</a>` : ''}
+            ${event.organizer.phone ? ` | <a href="tel:${event.organizer.phone}" style="color: var(--color-primary);">${event.organizer.phone}</a>` : ''}
+          </div>
+        </div>
+      ` : ''}
+
+      <!-- Call to Action / Registration Form -->
+      ${isPast ? `
+        <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200);">
+          <p style="text-align: center; color: var(--color-gray-600); margin-bottom: var(--space-md);">
+            This event has been completed. Check back for future events!
+          </p>
+          <a href="/events.html" class="btn btn-outline" style="width: 100%;">View All Events</a>
+        </div>
+      ` : isFull ? `
+        <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200);">
+          <p style="text-align: center; color: var(--color-gray-600); margin-bottom: var(--space-md);">
+            This event is currently full. Contact us to join the waitlist.
+          </p>
+          <a href="/contact.html?inquiry=event&event=${event.id}" class="btn btn-primary" style="width: 100%;">Join Waitlist</a>
+        </div>
       ` : `
-        <div class="alert alert-warning" style="margin-top: var(--space-lg);">This event is now full. Contact us to be added to the waitlist.</div>
+        <div style="background: var(--color-gray-50); padding: var(--space-xl); border-radius: var(--radius-md); margin-top: var(--space-2xl);">
+          <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: var(--color-primary);">Register for This Event</h3>
+          <form id="event-registration-form" class="form" data-event-id="${event.id}">
+            ${this.generateEventFormFields(event)}
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+              ${isFree ? 'Register Now' : 'Register & View Payment Details'}
+            </button>
+          </form>
+        </div>
       `}
     `;
+
+    // Setup form validation and submission if form is present
+    if (!isPast && !isFull) {
+      setTimeout(() => this.setupEventRegistrationForm(event), 100);
+    }
 
     if (window.modalInstance) {
       window.modalInstance.open('event-modal');
     }
+  }
+
+  /**
+   * Generate form fields for event registration
+   * @param {Object} event - Event object
+   * @returns {string} HTML string for form fields
+   */
+  generateEventFormFields(event) {
+    const minAge = event.requirements?.age?.min || 0;
+    const maxAge = event.requirements?.age?.max || 100;
+
+    return `
+      <div class="form-row">
+        <div class="form-group">
+          <label for="event-name" class="form-label">Full Name <span style="color: var(--color-error);">*</span></label>
+          <input type="text" id="event-name" name="name" class="form-input" required>
+          <div class="form-error"></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="event-email" class="form-label">Email <span style="color: var(--color-error);">*</span></label>
+          <input type="email" id="event-email" name="email" class="form-input" required>
+          <div class="form-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="event-phone" class="form-label">Phone <span style="color: var(--color-error);">*</span></label>
+          <input type="tel" id="event-phone" name="phone" class="form-input" required pattern="[6-9][0-9]{9}" placeholder="98765 43210">
+          <div class="form-error"></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="event-age" class="form-label">Age <span style="color: var(--color-error);">*</span></label>
+          <input type="number" id="event-age" name="age" class="form-input" min="${minAge}" max="${maxAge}" required>
+          <div class="form-error"></div>
+          ${minAge > 0 ? `<small style="color: var(--color-gray-600); font-size: var(--font-size-sm);">Must be between ${minAge} and ${maxAge} years</small>` : ''}
+        </div>
+
+        <div class="form-group">
+          <label for="event-attendees" class="form-label">Number of Attendees <span style="color: var(--color-error);">*</span></label>
+          <input type="number" id="event-attendees" name="attendees" class="form-input" min="1" max="10" value="1" required>
+          <div class="form-error"></div>
+          <small style="color: var(--color-gray-600); font-size: var(--font-size-sm);">Maximum 10 attendees per registration</small>
+        </div>
+      </div>
+    `;
+  }
+
+  /**
+   * Setup event registration form validation and submission
+   * @param {Object} event - Event object
+   */
+  setupEventRegistrationForm(event) {
+    const form = document.getElementById('event-registration-form');
+    if (!form) {
+      console.warn('Event registration form not found');
+      return;
+    }
+
+    // Initialize form validation
+    if (window.FormValidation) {
+      const minAge = event.requirements?.age?.min || 0;
+      const maxAge = event.requirements?.age?.max || 100;
+
+      new window.FormValidation(form, {
+        name: { required: true, minLength: 2 },
+        email: { required: true, email: true },
+        phone: { required: true, phone: true },
+        age: { required: true, min: minAge, max: maxAge },
+        attendees: { required: true, min: 1, max: 10 }
+      });
+    }
+
+    // Handle form submission
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const registrationData = {
+        type: 'event',
+        eventId: event.id,
+        eventTitle: event.title,
+        eventDate: event.date.start,
+        eventFee: event.fee || 0,
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        age: formData.get('age'),
+        attendees: formData.get('attendees'),
+        submittedAt: new Date().toISOString()
+      };
+
+      console.log('Event registration submitted:', registrationData);
+
+      // Store in sessionStorage
+      sessionStorage.setItem('vefs_registration_event', JSON.stringify(registrationData));
+
+      // Redirect to confirmation page
+      window.location.href = `registration-confirmation.html?type=event&id=${event.id}`;
+    });
   }
 
   setupFilters() {
