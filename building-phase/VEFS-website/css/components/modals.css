@@ -10,7 +10,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: var(--z-modal);
+  z-index: var(--z-index-modal);
   overflow-y: auto;
   animation: fadeIn var(--transition-base);
 }
@@ -36,14 +36,14 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: var(--z-modal-backdrop);
+  z-index: var(--z-index-modal-backdrop);
   cursor: pointer;
 }
 
 /* Modal dialog - Content wrapper */
 .modal-dialog {
   position: relative;
-  z-index: var(--z-modal);
+  z-index: var(--z-index-modal);
   max-width: 600px;
   margin: var(--space-2xl) auto;
   padding: var(--space-md);

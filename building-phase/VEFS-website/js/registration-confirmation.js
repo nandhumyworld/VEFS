@@ -147,7 +147,7 @@ class RegistrationConfirmation {
           </div>
           ${hasFee ? `
           <div>
-            <p style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">Fee</p>
+            <p style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">Donation</p>
             <p style="font-weight: 600; color: var(--color-secondary);">₹${eventFee}</p>
           </div>
           ` : ''}
@@ -236,7 +236,7 @@ class RegistrationConfirmation {
           </div>
           ${hasFee ? `
           <div>
-            <p style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">Fee</p>
+            <p style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">Donation</p>
             <p style="font-weight: 600; color: var(--color-secondary);">₹${trainingFee}</p>
           </div>
           ` : ''}
@@ -330,7 +330,7 @@ class RegistrationConfirmation {
 
         <div style="background: white; padding: var(--space-lg); border-radius: 8px; margin-bottom: var(--space-lg);">
           <p style="font-size: var(--font-size-lg); margin-bottom: var(--space-sm);"><strong>Donation Amount: ₹${fee}</strong></p>
-          <p style="font-size: var(--font-size-sm); color: var(--color-gray-600);">This fee is treated as a donation to support our environmental conservation efforts.</p>
+          <p style="font-size: var(--font-size-sm); color: var(--color-gray-600);">This amount is treated as a donation to support our environmental conservation efforts.</p>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-xl); margin-bottom: var(--space-xl);">

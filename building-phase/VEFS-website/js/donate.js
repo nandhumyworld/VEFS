@@ -241,49 +241,104 @@ class DonatePage {
   }
 
   /**
-   * Show success message
+   * Show success message with payment instructions modal
    */
   showSuccess(donationData) {
-    const form = document.getElementById('donation-form');
+    const PAYMENT_INFO = {
+      upi: { id: '9566667708@hdfcbank' },
+      bank: {
+        name: 'HDFC Bank',
+        accountNumber: '50200115917889',
+        ifsc: 'HDFC0002301',
+        branch: 'Dindigul'
+      },
+      contact: {
+        email: 'vefsfoundation@gmail.com',
+        phone: '+91 95666 67708',
+        whatsapp: '+91 95666 67708'
+      }
+    };
 
-    // Create success message
-    const successMessage = document.createElement('div');
-    successMessage.className = 'alert alert-success animate-fade-in';
-    successMessage.style.cssText = 'margin-top: var(--space-xl); padding: var(--space-2xl); text-align: center;';
-    successMessage.innerHTML = `
-      <div style="font-size: 4rem; margin-bottom: var(--space-md);">🎉</div>
-      <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-md); color: var(--color-success);">
-        Thank You for Your Generous Donation!
-      </h3>
-      <p style="font-size: var(--font-size-lg); margin-bottom: var(--space-md);">
-        Your contribution of <strong>₹${donationData.amount.toLocaleString('en-IN')}</strong> will make a real difference in our mission to conserve indigenous trees and empower communities.
-      </p>
-      <p style="color: var(--color-gray-700); margin-bottom: var(--space-lg);">
-        A confirmation email has been sent to <strong>${donationData.donor.email}</strong>.
-      </p>
-      <div style="padding: var(--space-lg); background-color: var(--color-primary-light); border-radius: var(--radius-md); margin-bottom: var(--space-lg);">
-        <p style="margin: 0; color: var(--color-gray-800);">
-          <strong>Next Steps:</strong> Our team will contact you shortly with payment instructions and details${donationData.options.taxBenefit ? ', including information about your 80G tax exemption certificate' : ''}.
-        </p>
-      </div>
-      <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
-        <a href="/programs.html" class="btn btn-outline">Explore Our Programs</a>
-        <a href="/" class="btn btn-primary">Return to Home</a>
+    const modal = document.createElement('div');
+    modal.id = 'donation-success-modal';
+    modal.innerHTML = `
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 10000; overflow-y: auto; padding: 20px;">
+        <div style="background: white; padding: 32px; border-radius: 12px; max-width: 700px; width: 100%; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); max-height: 90vh; overflow-y: auto;">
+
+          <!-- Success Header -->
+          <div style="text-align: center; margin-bottom: 32px;">
+            <div style="font-size: 4rem; color: #6B8E23; margin-bottom: 16px;">✓</div>
+            <h3 style="font-size: 28px; color: #6B8E23; margin: 0 0 12px 0; font-weight: 600;">Thank You for Your Donation!</h3>
+            <p style="font-size: 18px; color: #4a5568; margin: 0;">
+              Your contribution of <strong>₹${donationData.amount.toLocaleString('en-IN')}</strong> will make a real difference.<br>
+              Please check your email for confirmation.
+            </p>
+          </div>
+
+          <!-- Payment Instructions -->
+          <div style="background: #FFF9E6; padding: 20px; border-radius: 8px; margin-bottom: 24px; border: 2px solid #D4A574;">
+            <h4 style="font-size: 20px; margin: 0 0 16px 0; color: #D4A574; text-align: center;">💳 Complete Your Donation</h4>
+            <p style="font-size: 16px; margin: 0 0 8px 0; font-weight: 600; color: #333; text-align: center;">Donation Amount: ₹${donationData.amount.toLocaleString('en-IN')}</p>
+            <p style="font-size: 14px; margin: 0; color: #666; text-align: center;">Please make your payment using one of the options below:</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+            <!-- UPI Payment -->
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0;">
+              <h4 style="font-size: 18px; margin: 0 0 12px 0; color: #6B8E23;">Option 1: UPI Payment</h4>
+              <p style="font-weight: 600; margin: 0 0 8px 0; color: #333;">UPI ID: ${PAYMENT_INFO.upi.id}</p>
+              <p style="font-size: 13px; color: #666; margin: 0;">Use any UPI app (GPay, PhonePe, Paytm)</p>
+            </div>
+
+            <!-- Bank Transfer -->
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0;">
+              <h4 style="font-size: 18px; margin: 0 0 12px 0; color: #6B8E23;">Option 2: Bank Transfer</h4>
+              <div style="font-size: 13px; color: #333;">
+                <p style="margin: 0 0 4px 0;"><strong>Bank:</strong> ${PAYMENT_INFO.bank.name}</p>
+                <p style="margin: 0 0 4px 0;"><strong>A/C:</strong> ${PAYMENT_INFO.bank.accountNumber}</p>
+                <p style="margin: 0 0 4px 0;"><strong>IFSC:</strong> ${PAYMENT_INFO.bank.ifsc}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Important: Send Confirmation -->
+          <div style="background: linear-gradient(135deg, rgba(212, 165, 116, 0.2), rgba(107, 142, 35, 0.2)); padding: 20px; border-radius: 8px; border-left: 4px solid #D4A574; margin-bottom: 24px;">
+            <h4 style="font-size: 18px; margin: 0 0 12px 0; color: #D4A574;">📸 Important: Send Payment Confirmation</h4>
+            <p style="margin: 0 0 16px 0; color: #333; font-size: 14px;">After making the payment, please send a screenshot of the payment confirmation <strong>along with your name</strong> to:</p>
+
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="https://wa.me/${PAYMENT_INFO.contact.whatsapp.replace(/[^0-9]/g, '')}?text=Payment%20confirmation%20for%20donation%20of%20₹${donationData.amount}"
+                 target="_blank"
+                 rel="noopener"
+                 style="display: inline-flex; align-items: center; gap: 8px; background-color: #25D366; color: white; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 500;">
+                📱 WhatsApp
+              </a>
+
+              <a href="mailto:${PAYMENT_INFO.contact.email}?subject=Payment%20Confirmation%20-%20Donation"
+                 style="display: inline-flex; align-items: center; gap: 8px; background-color: #6B8E23; color: white; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 500;">
+                ✉️ Email
+              </a>
+            </div>
+          </div>
+
+          ${donationData.options.taxBenefit ? `
+          <div style="background: #e8f5e9; padding: 16px; border-radius: 8px; margin-bottom: 24px; border-left: 4px solid #6B8E23;">
+            <p style="margin: 0; color: #2e7d32; font-size: 14px;">
+              <strong>✓ 80G Tax Exemption:</strong> Your 80G certificate will be sent to your email after payment verification.
+            </p>
+          </div>
+          ` : ''}
+
+          <div style="text-align: center;">
+            <button onclick="document.getElementById('donation-success-modal').remove();" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer;">
+              Close
+            </button>
+          </div>
+        </div>
       </div>
     `;
 
-    // Hide form and show success message
-    form.style.display = 'none';
-    form.parentElement.insertBefore(successMessage, form);
-
-    // Scroll to success message
-    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-    // Reset form
-    form.reset();
-    this.selectedAmount = 0;
-    this.donationType = 'one-time';
-    this.updateTotalDisplay();
+    document.body.appendChild(modal);
   }
 
   /**

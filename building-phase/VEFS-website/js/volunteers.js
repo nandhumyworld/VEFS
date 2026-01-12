@@ -277,10 +277,10 @@ class VolunteersPage {
       </div>
 
       <!-- Contact Information -->
-      <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--color-primary-light); border-radius: 8px;">
-        <strong>Questions?</strong> Contact ${volunteer.contact.name} at
-        <a href="mailto:${volunteer.contact.email}">${volunteer.contact.email}</a> or
-        <a href="tel:${volunteer.contact.phone}">${volunteer.contact.phone}</a>
+      <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--color-primary-light); border-radius: 8px; color: var(--color-white);">
+        <strong>Questions?</strong> Contact
+        <a href="mailto:vefsfoundation@gmail.com" style="color: var(--color-white); font-weight: bold; text-decoration: underline;">vefsfoundation@gmail.com</a> or
+        <a href="tel:+919342211488" style="color: var(--color-white); font-weight: bold; text-decoration: underline;">+91 9342211488</a>
       </div>
     `;
 
@@ -406,20 +406,33 @@ class VolunteersPage {
    * Show success modal after application submission
    */
   showSuccessModal(volunteer) {
-    const alertHtml = `
-      <div class="alert alert-success" role="alert" style="position: fixed; top: 80px; right: 20px; z-index: 1100; max-width: 400px; animation: slideInRight 0.3s ease-out;">
-        <strong>Application Submitted!</strong>
-        <p>Thank you for applying to <strong>${volunteer.title}</strong>. We'll review your application and contact you soon via email.</p>
-        <button class="alert-close" onclick="this.parentElement.remove()" aria-label="Close alert">×</button>
+    const modal = document.createElement('div');
+    modal.id = 'volunteer-success-modal';
+    modal.innerHTML = `
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 10000;">
+        <div style="background: white; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);">
+          <div style="font-size: 4rem; color: #6B8E23; margin-bottom: 20px;">✓</div>
+          <h3 style="font-size: 28px; color: #6B8E23; margin-bottom: 16px; font-weight: 600;">
+            Application Submitted!
+          </h3>
+          <p style="font-size: 18px; color: #4a5568; margin-bottom: 24px; line-height: 1.6;">
+            Thank you for applying to <strong>${volunteer.title}</strong>!<br>
+            Please check your email for confirmation.<br>
+            We'll review your application and contact you soon.
+          </p>
+          <button onclick="document.getElementById('volunteer-success-modal').remove(); if(window.modalInstance) window.modalInstance.close();" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; min-width: 120px;">
+            OK
+          </button>
+        </div>
       </div>
     `;
-    document.body.insertAdjacentHTML('beforeend', alertHtml);
 
-    // Remove alert after 8 seconds
-    setTimeout(() => {
-      const alert = document.querySelector('.alert-success');
-      if (alert) alert.remove();
-    }, 8000);
+    document.body.appendChild(modal);
+
+    // Close the volunteer modal if it's open
+    if (window.modalInstance) {
+      window.modalInstance.close();
+    }
   }
 
   /**

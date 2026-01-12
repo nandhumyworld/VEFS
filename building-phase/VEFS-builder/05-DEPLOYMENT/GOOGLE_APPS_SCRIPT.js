@@ -160,7 +160,7 @@ function handleEventRegistration(data) {
 
     if (!sheet) {
       sheet = ss.insertSheet(CONFIG.SHEETS.EVENTS);
-      sheet.appendRow(['Timestamp', 'Name', 'Email', 'Phone', 'Age', 'Attendees', 'Event ID', 'Event Title', 'Event Date', 'Event Fee', 'Status', 'Notes']);
+      sheet.appendRow(['Timestamp', 'Name', 'Email', 'Phone', 'Age', 'Attendees', 'Event ID', 'Event Title', 'Event Date', 'Event Donation', 'Status', 'Notes']);
       sheet.getRange('A1:L1').setFontWeight('bold').setBackground('#6B8E23').setFontColor('#ffffff');
     }
 
@@ -207,7 +207,7 @@ function handleTrainingRegistration(data) {
 
     if (!sheet) {
       sheet = ss.insertSheet(CONFIG.SHEETS.TRAININGS);
-      sheet.appendRow(['Timestamp', 'Name', 'Email', 'Phone', 'Age', 'Education Level', 'Occupation', 'Background/Experience', 'Training ID', 'Training Title', 'Training Date', 'Fee', 'Status', 'Notes']);
+      sheet.appendRow(['Timestamp', 'Name', 'Email', 'Phone', 'Age', 'Education Level', 'Occupation', 'Background/Experience', 'Training ID', 'Training Title', 'Training Date', 'Donation', 'Status', 'Notes']);
       sheet.getRange('A1:N1').setFontWeight('bold').setBackground('#6B8E23').setFontColor('#ffffff');
     }
 
@@ -619,8 +619,8 @@ function createAdminEventEmail(data) {
             <div class="value">${data.eventDate || 'N/A'}</div>
           </div>
           <div class="field">
-            <div class="label">Fee:</div>
-            <div class="value">₹${data.eventFee || 0}</div>
+            <div class="label">Donation:</div>
+            <div class="value">${data.eventFee ? '₹' + data.eventFee : 'FREE'}</div>
           </div>
           <div class="field">
             <div class="label">Submitted:</div>
@@ -664,7 +664,7 @@ function createUserEventEmail(data) {
             <strong>Event Details:</strong><br>
             📅 Date: ${data.eventDate || 'TBA'}<br>
             👥 Attendees: ${data.attendees || 1} person(s)<br>
-            💰 Fee: ${data.eventFee ? '₹' + data.eventFee : 'Free'}
+            💰 Donation: ${data.eventFee ? '₹' + data.eventFee : 'FREE'}
           </div>
           <p>We've received your registration and will send you more details about the event via email at <strong>${data.email}</strong>${data.phone ? ' or call you at <strong>' + data.phone + '</strong>' : ''}.</p>
           <p>Please arrive 15 minutes before the scheduled start time.</p>
@@ -745,8 +745,8 @@ function createAdminTrainingEmail(data) {
             <div class="value">${data.trainingDate || 'N/A'}</div>
           </div>
           <div class="field">
-            <div class="label">Fee:</div>
-            <div class="value">₹${data.trainingFee || 0}</div>
+            <div class="label">Donation:</div>
+            <div class="value">${data.trainingFee ? '₹' + data.trainingFee : 'FREE'}</div>
           </div>
           <div class="field">
             <div class="label">Submitted:</div>
@@ -789,7 +789,7 @@ function createUserTrainingEmail(data) {
           <div class="highlight">
             <strong>Training Details:</strong><br>
             📅 Start Date: ${data.trainingDate || 'TBA'}<br>
-            💰 Fee: ${data.trainingFee ? '₹' + data.trainingFee : 'Free'}
+            💰 Donation: ${data.trainingFee ? '₹' + data.trainingFee : 'FREE'}
           </div>
           <p>We've received your registration. Our team will review your application and send you further details including:</p>
           <ul>

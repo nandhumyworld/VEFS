@@ -1,6 +1,27 @@
 cd VEFS-website &&  python -m http.server 8000
 
 
+Things todo
+I checked the contact inquiry form it works perfect And also I don't think you need a progress bar so the button itself is disabling and it says sending when I send the inquiry so it all has to work in the same way. Read the code flow of this forms and verify if its implement the same way
+
+In the training programme So once I click on register button there should be a progress bar Coming up because right now it is allowing user to click multiple clicks Taking the multiple registrations So that should be a progress bar oregon icon that should be coming up until we get Model response or error response back And on payment any paid registration So there is a pop up that is Move for payment Page that is not working, So basically proceed to payment is not working in the training modal
+
+
+While registering for the events The pop up still shows donation is undefined and also the capacity is not proper it says the object object That needs to be corrected and also the same Progress Bar should be appearing once the user click the registration Until the pop up confirmation appears and even in events Registration as well
+
+On volunteer registration so once after register the progress bar Should be coming and also once currently if I click on the registration So it just flashes and it again the same model is on top without any information it has to go off act And the confirmation model is not appearing as well in the volunteer registration
+
+I see the donation form has not been fixed yet as per our plan So it also needs to be fixed 
+
+Also all registration that is happening that has been recorded in She Should first get recorded in a file internal to the website In our adjacent format or text format for registration any registration It has to be tagged and then it's it is just a safe copy it has to register there first It has to go to the process of getting updated in the Google sheet.
+
+Also What I wanted for the donation is the same sort of form Which is appearing for paid event or training where We enter the amount and get all the details and Justice click Register It should show the amount where the amount has to be paid those payment methods Bank transfer or anything then ask the user to confirm with the screenshot to that particular contact Whatsapp Contact number So that they will process it for the future Certificate or anything
+
+Still the email received for training,events Registration says fees not donation Needs to be corrected as donation
+
+
+
+
 Short Bio (2-3 sentences) of K. Rajasekaran and S. Prajana
 [Background, expertise, role in VEFS]
 

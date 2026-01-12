@@ -144,7 +144,7 @@ class EventsPage {
           <div style="font-weight: 600;">${event.location.venue || event.location.city}</div>
         </div>
         <div>
-          <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">💰 Fee</div>
+          <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">💰 Donation</div>
           <div style="font-weight: 600; color: ${isFree ? 'var(--color-success)' : 'var(--color-gray-900)'};">
             ${isFree ? 'FREE' : '₹' + event.fee}
           </div>
@@ -455,6 +455,8 @@ class EventsPage {
    * Show success modal after registration
    */
   showSuccessModal(event) {
+    const hasFee = event.fee && event.fee > 0;
+
     const modal = document.createElement('div');
     modal.id = 'registration-success-modal';
     modal.innerHTML = `
@@ -466,12 +468,101 @@ class EventsPage {
           </h3>
           <p style="font-size: 18px; color: #4a5568; margin-bottom: 24px; line-height: 1.6;">
             Thank you for registering for <strong>${event.title}</strong>!<br>
-            Please check your email for confirmation.<br>
-            We'll send you event details shortly.
+            Please check your email for confirmation.${hasFee ? '<br>Click below to proceed with payment.' : '<br>We\'ll send you event details shortly.'}
           </p>
-          <button onclick="document.getElementById('registration-success-modal').remove(); if(window.modalInstance) window.modalInstance.close('event-registration-modal');" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; min-width: 120px;">
-            OK
+          <button onclick="document.getElementById('registration-success-modal').remove(); ${hasFee ? 'window.eventsPageInstance.showPaymentModal(' + JSON.stringify(event) + ');' : 'if(window.modalInstance) window.modalInstance.close();'}" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; min-width: 120px;">
+            ${hasFee ? 'Proceed to Payment' : 'OK'}
           </button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Close the registration modal if it's open
+    if (window.modalInstance) {
+      window.modalInstance.close();
+    }
+  }
+
+  /**
+   * Show payment instructions modal
+   */
+  showPaymentModal(event) {
+    const PAYMENT_INFO = {
+      upi: { id: '9566667708@hdfcbank' },
+      bank: {
+        name: 'HDFC Bank',
+        accountNumber: '50200115917889',
+        ifsc: 'HDFC0002301',
+        branch: 'Dindigul'
+      },
+      contact: {
+        email: 'vefsfoundation@gmail.com',
+        phone: '+91 95666 67708',
+        whatsapp: '+91 95666 67708'
+      }
+    };
+
+    const modal = document.createElement('div');
+    modal.id = 'payment-modal';
+    modal.innerHTML = `
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 10000; overflow-y: auto; padding: 20px;">
+        <div style="background: white; padding: 32px; border-radius: 12px; max-width: 700px; width: 100%; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); max-height: 90vh; overflow-y: auto;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <h3 style="font-size: 24px; color: #D4A574; margin: 0; font-weight: 600;">💳 Payment Instructions</h3>
+            <button onclick="document.getElementById('payment-modal').remove();" style="background: none; border: none; font-size: 28px; color: #999; cursor: pointer; padding: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">&times;</button>
+          </div>
+
+          <div style="background: #FFF9E6; padding: 20px; border-radius: 8px; margin-bottom: 24px; border: 2px solid #D4A574;">
+            <p style="font-size: 20px; margin: 0 0 8px 0; font-weight: 600; color: #333;">Donation Amount: ₹${event.fee}</p>
+            <p style="font-size: 14px; margin: 0; color: #666;">This amount is treated as a donation to support our environmental conservation efforts.</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+            <!-- UPI Payment -->
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0;">
+              <h4 style="font-size: 18px; margin: 0 0 12px 0; color: #6B8E23;">Option 1: UPI Payment</h4>
+              <p style="font-weight: 600; margin: 0 0 8px 0; color: #333;">UPI ID: ${PAYMENT_INFO.upi.id}</p>
+              <p style="font-size: 13px; color: #666; margin: 0;">Use any UPI app (GPay, PhonePe, Paytm)</p>
+            </div>
+
+            <!-- Bank Transfer -->
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0;">
+              <h4 style="font-size: 18px; margin: 0 0 12px 0; color: #6B8E23;">Option 2: Bank Transfer</h4>
+              <div style="font-size: 13px; color: #333;">
+                <p style="margin: 0 0 4px 0;"><strong>Bank:</strong> ${PAYMENT_INFO.bank.name}</p>
+                <p style="margin: 0 0 4px 0;"><strong>A/C:</strong> ${PAYMENT_INFO.bank.accountNumber}</p>
+                <p style="margin: 0 0 4px 0;"><strong>IFSC:</strong> ${PAYMENT_INFO.bank.ifsc}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Important: Send Confirmation -->
+          <div style="background: linear-gradient(135deg, rgba(212, 165, 116, 0.2), rgba(107, 142, 35, 0.2)); padding: 20px; border-radius: 8px; border-left: 4px solid #D4A574;">
+            <h4 style="font-size: 18px; margin: 0 0 12px 0; color: #D4A574;">📸 Important: Send Payment Confirmation</h4>
+            <p style="margin: 0 0 16px 0; color: #333; font-size: 14px;">After making the payment, please send a screenshot of the payment confirmation <strong>along with your name</strong> to:</p>
+
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="https://wa.me/${PAYMENT_INFO.contact.whatsapp.replace(/[^0-9]/g, '')}?text=Payment%20confirmation%20for%20${encodeURIComponent(event.title)}"
+                 target="_blank"
+                 rel="noopener"
+                 style="display: inline-flex; align-items: center; gap: 8px; background-color: #25D366; color: white; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 500;">
+                📱 WhatsApp
+              </a>
+
+              <a href="mailto:${PAYMENT_INFO.contact.email}?subject=Payment%20Confirmation%20-%20${encodeURIComponent(event.title)}"
+                 style="display: inline-flex; align-items: center; gap: 8px; background-color: #6B8E23; color: white; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 500;">
+                ✉️ Email
+              </a>
+            </div>
+          </div>
+
+          <div style="margin-top: 24px; text-align: center;">
+            <button onclick="document.getElementById('payment-modal').remove();" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer;">
+              Close
+            </button>
+          </div>
         </div>
       </div>
     `;
@@ -500,11 +591,10 @@ class EventsPage {
   }
 }
 
-let eventsPageInstance;
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    eventsPageInstance = new EventsPage();
+    window.eventsPageInstance = new EventsPage();
   });
 } else {
-  eventsPageInstance = new EventsPage();
+  window.eventsPageInstance = new EventsPage();
 }
