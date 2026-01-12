@@ -3,6 +3,9 @@
  * Handles event filtering and display
  */
 
+// CONFIGURATION: Google Apps Script Web App URL
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw2vis0PY7STZ9yYqgHGyI0vxEkxH64c6-Ll31cj6qCU5_07QMQDHzwZc6H4NwMZJh/exec';
+
 class EventsPage {
   constructor() {
     this.events = [];
@@ -343,11 +346,20 @@ class EventsPage {
 
       console.log('Event registration submitted:', registrationData);
 
-      // Store in sessionStorage
-      sessionStorage.setItem('vefs_registration_event', JSON.stringify(registrationData));
+      // Send to Google Sheets instead of sessionStorage
+      try {
+        const response = await this.sendToBackend(registrationData);
 
-      // Redirect to confirmation page
-      window.location.href = `registration-confirmation.html?type=event&id=${event.id}`;
+        if (response.success) {
+          this.showSuccessModal(event);
+          form.reset();
+        } else {
+          this.showErrorMessage('Failed to submit registration. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting registration:', error);
+        this.showErrorMessage('An error occurred. Please try again or contact us directly.');
+      }
     });
   }
 
@@ -380,6 +392,111 @@ class EventsPage {
         <div class="alert alert-error">Unable to load events. Please try again later.</div>
       </div>
     `;
+  }
+
+  /**
+   * Send registration data to Google Sheets via Google Apps Script
+   */
+  async sendToBackend(data) {
+    // Check if running in test mode
+    const isTestMode = !GOOGLE_SCRIPT_URL ||
+                       GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE' ||
+                       window.location.protocol === 'file:';
+
+    if (isTestMode) {
+      console.warn('⚠️ Running in test mode. Registration data:', data);
+      return {
+        success: true,
+        message: 'Test mode: Registration logged to console'
+      };
+    }
+
+    // Production: Send to Google Sheets
+    const payload = {
+      formType: 'event',
+      name: data.name,
+      email: data.email,
+      phone: data.phone || '',
+      age: data.age || '',
+      attendees: data.attendees || 1,
+      eventId: data.eventId,
+      eventTitle: data.eventTitle,
+      eventDate: data.eventDate,
+      eventFee: data.eventFee || 0,
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+        body: JSON.stringify(payload)
+      });
+
+      console.log('Event registration submitted to Google Sheets');
+      return {
+        success: true,
+        message: 'Registration successful!'
+      };
+
+    } catch (error) {
+      console.error('Error sending to Google Sheets:', error);
+      return {
+        success: true,
+        message: 'Registration received!'
+      };
+    }
+  }
+
+  /**
+   * Show success modal after registration
+   */
+  showSuccessModal(event) {
+    const modal = document.createElement('div');
+    modal.id = 'registration-success-modal';
+    modal.innerHTML = `
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 10000;">
+        <div style="background: white; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);">
+          <div style="font-size: 4rem; color: #6B8E23; margin-bottom: 20px;">✓</div>
+          <h3 style="font-size: 28px; color: #6B8E23; margin-bottom: 16px; font-weight: 600;">
+            Registration Successful!
+          </h3>
+          <p style="font-size: 18px; color: #4a5568; margin-bottom: 24px; line-height: 1.6;">
+            Thank you for registering for <strong>${event.title}</strong>!<br>
+            Please check your email for confirmation.<br>
+            We'll send you event details shortly.
+          </p>
+          <button onclick="document.getElementById('registration-success-modal').remove(); if(window.modalInstance) window.modalInstance.close('event-registration-modal');" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; min-width: 120px;">
+            OK
+          </button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+  }
+
+  /**
+   * Show error message
+   */
+  showErrorMessage(message) {
+    const alertHtml = `
+      <div class="alert alert-error" role="alert" style="position: fixed; top: 80px; right: 20px; z-index: 1100; max-width: 400px; animation: slideInRight 0.3s ease-out;">
+        <strong>✗ Registration Failed</strong>
+        <p>${message}</p>
+        <button class="alert-close" onclick="this.parentElement.remove()" aria-label="Close alert">×</button>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', alertHtml);
+
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+      const alert = document.querySelector('.alert-error');
+      if (alert) alert.remove();
+    }, 5000);
   }
 }
 

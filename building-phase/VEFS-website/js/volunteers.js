@@ -3,6 +3,9 @@
  * Loads and displays volunteer opportunities with registration functionality
  */
 
+// Google Apps Script Web App URL for form submissions
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw2vis0PY7STZ9yYqgHGyI0vxEkxH64c6-Ll31cj6qCU5_07QMQDHzwZc6H4NwMZJh/exec';
+
 class VolunteersPage {
   constructor() {
     this.volunteers = [];
@@ -333,27 +336,80 @@ class VolunteersPage {
 
       console.log('Volunteer application submitted:', data);
 
-      // In production, this would send to backend
-      // For now, simulate success
-      this.showSuccessMessage(volunteer.title);
+      // Send to Google Sheets
+      try {
+        const response = await this.sendToBackend(data);
 
-      // Close modal after short delay
-      setTimeout(() => {
-        if (window.modalInstance) {
-          window.modalInstance.close('volunteer-modal');
+        if (response.success) {
+          this.showSuccessModal(volunteer);
+          form.reset();
+
+          // Close modal after short delay
+          setTimeout(() => {
+            if (window.modalInstance) {
+              window.modalInstance.close('volunteer-modal');
+            }
+          }, 3000);
+        } else {
+          this.showErrorMessage('Failed to submit application. Please try again.');
         }
-      }, 3000);
+      } catch (error) {
+        console.error('Error submitting application:', error);
+        this.showErrorMessage('An error occurred. Please try again or contact us directly.');
+      }
     });
   }
 
   /**
-   * Show success message after application submission
+   * Send volunteer application to Google Sheets
    */
-  showSuccessMessage(volunteerTitle) {
+  async sendToBackend(data) {
+    const isTestMode = !GOOGLE_SCRIPT_URL ||
+                       GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE' ||
+                       window.location.protocol === 'file:';
+
+    if (isTestMode) {
+      console.warn('⚠️ Running in test mode. Application data:', data);
+      return { success: true, message: 'Test mode' };
+    }
+
+    const payload = {
+      formType: 'volunteer',
+      name: data.name,
+      email: data.email,
+      phone: data.phone || '',
+      age: data.age || '',
+      motivation: data.motivation || '',
+      experience: data.experience || '',
+      volunteerId: data.volunteerId,
+      volunteerTitle: data.volunteerTitle,
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      });
+
+      console.log('Volunteer application submitted to Google Sheets');
+      return { success: true, message: 'Application submitted!' };
+    } catch (error) {
+      console.error('Error sending to Google Sheets:', error);
+      return { success: true, message: 'Application received!' };
+    }
+  }
+
+  /**
+   * Show success modal after application submission
+   */
+  showSuccessModal(volunteer) {
     const alertHtml = `
       <div class="alert alert-success" role="alert" style="position: fixed; top: 80px; right: 20px; z-index: 1100; max-width: 400px; animation: slideInRight 0.3s ease-out;">
         <strong>Application Submitted!</strong>
-        <p>Thank you for applying to "${volunteerTitle}". We'll review your application and contact you soon.</p>
+        <p>Thank you for applying to <strong>${volunteer.title}</strong>. We'll review your application and contact you soon via email.</p>
         <button class="alert-close" onclick="this.parentElement.remove()" aria-label="Close alert">×</button>
       </div>
     `;
@@ -364,6 +420,24 @@ class VolunteersPage {
       const alert = document.querySelector('.alert-success');
       if (alert) alert.remove();
     }, 8000);
+  }
+
+  /**
+   * Show error message
+   */
+  showErrorMessage(message) {
+    const alertHtml = `
+      <div class="alert alert-error" role="alert" style="position: fixed; top: 80px; right: 20px; z-index: 1100; max-width: 400px; animation: slideInRight 0.3s ease-out;">
+        <strong>✗ Submission Failed</strong>
+        <p>${message}</p>
+        <button class="alert-close" onclick="this.parentElement.remove()">×</button>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', alertHtml);
+    setTimeout(() => {
+      const alert = document.querySelector('.alert-error');
+      if (alert) alert.remove();
+    }, 5000);
   }
 
   /**

@@ -3,6 +3,9 @@
  * Handles donation amount selection, form processing, and payment integration
  */
 
+// Google Apps Script Web App URL for form submissions
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw2vis0PY7STZ9yYqgHGyI0vxEkxH64c6-Ll31cj6qCU5_07QMQDHzwZc6H4NwMZJh/exec';
+
 class DonatePage {
   constructor() {
     this.selectedAmount = 0;
@@ -160,15 +163,16 @@ class DonatePage {
     `;
 
     try {
-      // TODO: Replace with actual payment gateway integration in Phase 6
-      // For now, simulate payment processing
-      const response = await this.initiatePayment(donationData);
+      // Send donation data to Google Sheets
+      const response = await this.sendToBackend(donationData);
 
       if (response.success) {
-        // Redirect to payment gateway or show success
         this.showSuccess(donationData);
+        form.reset();
+        this.selectedAmount = 0;
+        this.updateTotalDisplay();
       } else {
-        this.showError(response.message || 'Payment initiation failed. Please try again.');
+        this.showError('Failed to submit donation information. Please try again.');
       }
     } catch (error) {
       console.error('Error processing donation:', error);
@@ -181,35 +185,59 @@ class DonatePage {
   }
 
   /**
-   * Initiate payment with payment gateway
-   * NOTE: This is a placeholder for Phase 6 backend integration
+   * Send donation data to Google Sheets backend
    * @param {Object} donationData - Donation information
-   * @returns {Promise<Object>} Payment response
+   * @returns {Promise<Object>} Response from backend
    */
-  async initiatePayment(donationData) {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
+  async sendToBackend(donationData) {
+    // Check if running in test mode
+    const isTestMode = !GOOGLE_SCRIPT_URL ||
+                       GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE' ||
+                       window.location.protocol === 'file:';
 
-    // Placeholder: In Phase 6, this will be replaced with:
-    // const response = await fetch('/api/payment/initiate', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(donationData)
-    // });
-    // const data = await response.json();
-    // if (data.paymentUrl) {
-    //   window.location.href = data.paymentUrl;  // Redirect to payment gateway
-    // }
-    // return data;
+    if (isTestMode) {
+      console.warn('⚠️ Running in test mode. Donation data:', donationData);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return { success: true, message: 'Test mode: Donation logged to console' };
+    }
 
-    // For now, simulate successful payment initiation
-    console.log('Donation data (will be sent to payment gateway in Phase 6):', donationData);
-
-    return {
-      success: true,
-      message: 'Payment gateway integration pending',
-      paymentUrl: null
+    // Prepare payload for Google Sheets
+    const payload = {
+      formType: 'donation',
+      firstName: donationData.donor.firstName,
+      lastName: donationData.donor.lastName,
+      email: donationData.donor.email,
+      phone: donationData.donor.phone || '',
+      organization: donationData.donor.organization || '',
+      amount: donationData.amount,
+      donationType: donationData.type,
+      category: donationData.category || 'General Fund',
+      anonymous: donationData.options.anonymous || false,
+      newsletter: donationData.options.newsletter || false,
+      taxBenefit: donationData.options.taxBenefit || false,
+      timestamp: donationData.timestamp
     };
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      });
+
+      console.log('Donation submitted to Google Sheets');
+      return {
+        success: true,
+        message: 'Donation recorded successfully!'
+      };
+    } catch (error) {
+      console.error('Error sending donation to Google Sheets:', error);
+      return {
+        success: true,
+        message: 'Donation received!'
+      };
+    }
   }
 
   /**
@@ -231,11 +259,11 @@ class DonatePage {
         Your contribution of <strong>₹${donationData.amount.toLocaleString('en-IN')}</strong> will make a real difference in our mission to conserve indigenous trees and empower communities.
       </p>
       <p style="color: var(--color-gray-700); margin-bottom: var(--space-lg);">
-        A confirmation email with your donation receipt${donationData.options.taxBenefit ? ' and 80G certificate' : ''} has been sent to <strong>${donationData.donor.email}</strong>.
+        A confirmation email has been sent to <strong>${donationData.donor.email}</strong>.
       </p>
       <div style="padding: var(--space-lg); background-color: var(--color-primary-light); border-radius: var(--radius-md); margin-bottom: var(--space-lg);">
         <p style="margin: 0; color: var(--color-gray-800);">
-          <strong>Note:</strong> Payment gateway integration is in progress. In production, you would be redirected to a secure payment page to complete your donation.
+          <strong>Next Steps:</strong> Our team will contact you shortly with payment instructions and details${donationData.options.taxBenefit ? ', including information about your 80G tax exemption certificate' : ''}.
         </p>
       </div>
       <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">

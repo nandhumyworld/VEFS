@@ -3,6 +3,9 @@
  * Handles training data loading, filtering, timeline display, and modal interactions
  */
 
+// CONFIGURATION: Google Apps Script Web App URL
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw2vis0PY7STZ9yYqgHGyI0vxEkxH64c6-Ll31cj6qCU5_07QMQDHzwZc6H4NwMZJh/exec';
+
 class TrainingsPage {
   constructor() {
     this.trainings = [];
@@ -611,11 +614,20 @@ class TrainingsPage {
 
       console.log('Training registration submitted:', registrationData);
 
-      // Store in sessionStorage
-      sessionStorage.setItem('vefs_registration_training', JSON.stringify(registrationData));
+      // Send to Google Sheets
+      try {
+        const response = await this.sendToBackend(registrationData);
 
-      // Redirect to confirmation page
-      window.location.href = `registration-confirmation.html?type=training&id=${training.id}`;
+        if (response.success) {
+          this.showSuccessModal(training);
+          form.reset();
+        } else {
+          this.showErrorMessage('Failed to submit registration. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting registration:', error);
+        this.showErrorMessage('An error occurred. Please try again or contact us directly.');
+      }
     });
   }
 
@@ -667,6 +679,54 @@ class TrainingsPage {
   capitalize(str) {
     if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  /**
+   * Send registration data to Google Sheets backend
+   */
+  async sendToBackend(data) {
+    const payload = {
+      ...data,
+      formType: 'training'
+    };
+
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    });
+
+    // Note: no-cors mode means we can't read the response
+    // We assume success if no error is thrown
+    return { success: true };
+  }
+
+  /**
+   * Show success modal after registration
+   */
+  showSuccessModal(training) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+      <div class="modal-content">
+        <h2>Registration Successful!</h2>
+        <p>Thank you for registering for <strong>${training.title}</strong>.</p>
+        <p>We've sent a confirmation email with all the details.</p>
+        <button class="btn btn-primary" onclick="this.closest('.modal').remove()">Close</button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    modal.style.display = 'flex';
+  }
+
+  /**
+   * Show error message
+   */
+  showErrorMessage(message) {
+    alert(message);
   }
 }
 
