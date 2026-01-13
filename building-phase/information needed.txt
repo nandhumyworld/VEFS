@@ -20,122 +20,55 @@ Also What I wanted for the donation is the same sort of form Which is appearing 
 Still the email received for training,events Registration says fees not donation Needs to be corrected as donation
 
 
+### Logo Tag line
 
-
-Short Bio (2-3 sentences) of K. Rajasekaran and S. Prajana
+### Short Bio (2-3 sentences) of K. Rajasekaran and S. Prajana
 [Background, expertise, role in VEFS]
-
 
 **Mission (1-2 sentences):**
 
 **Vision (1-2 sentences):**
 
 
-### Statistics Since Founding
+### Statistics Since Founding [Number - e.g., 25+]
 
 **Trees Planted:**
-```
-[Number - e.g., 50,000+]
-```
 
 **Farmers Trained:**
-```
-[Number - e.g., 1,200+]
-```
 
 **Students Reached:**
-```
-[Number - e.g., 15,000+]
-```
 
 **Programs Conducted:**
-```
-[Number - e.g., 300+]
-```
 
 **Districts Covered:**
-```
-[Number - e.g., 12]
-```
 
 **Women Empowered:**
-```
-[Number - e.g., 500+]
-```
 
 **Hectares Conserved:**
-```
-[Number - e.g., 200+]
-```
 
 **Partner Organizations:**
-```
-[Number - e.g., 25+]
 
 
-### Key Milestones
+### Key Milestones Year wise
 
 **Milestone 1:**
-```
-? Need to check 
-Year: [e.g., 2019]
-Title: [e.g., Foundation Established]
-Description (2-3 sentences): [What happened, significance]
-
-
-```
 
 **Milestone 2:**
-```
-Year: [e.g., 2020]
-Title: [e.g., First Major Tree Plantation Drive]
-Description:
-
-
-```
 
 **Milestone 3:**
-```
-Year: [e.g., 2021]
-Title: [e.g., Launched Educational Programs]
-Description:
-
-
-```
 
 **Milestone 4:**
-```
-Year: [e.g., 2022]
-Title: [e.g., Expanded to 10 Districts]
-Description:
-
-
-```
 
 **Milestone 5:**
-```
-Year: [e.g., 2023]
-Title: [e.g., Recognition/Award/Partnership]
-Description:
-
-
-```
 
 **Milestone 6:**
-```
-Year: [e.g., 2024]
-Title: [e.g., Major Achievement]
-Description:
-
-
-```
 
 **Milestone 7:**
-```
-Year: [2025 and beyond]
-Title: [e.g., Future Plans]
-Description:
 
-
+### Future plans Year wise - future Road map
 
 **UPI QR Code:**
+
+**Training Programs details** - With previous photos
+**Events details** - With previous photos
+**Volunteering details**

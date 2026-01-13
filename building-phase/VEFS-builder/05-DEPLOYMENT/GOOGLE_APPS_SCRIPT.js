@@ -64,8 +64,30 @@ function doPost(e) {
     const formType = data.formType || 'contact'; // Default to contact form
 
     // Basic validation - all forms need at least name and email
-    if (!data.name || !data.email) {
+    // Note: Donation form uses firstName/lastName instead of name
+    const hasName = data.name || (data.firstName && data.lastName);
+    if (!hasName || !data.email) {
       return createResponseWithCORS(false, 'Missing required fields (name and email)');
+    }
+
+    // Validate email format
+    if (!isValidEmail(data.email)) {
+      return createResponseWithCORS(false, 'Invalid email format');
+    }
+
+    // Validate phone if provided
+    if (data.phone && !isValidPhone(data.phone)) {
+      return createResponseWithCORS(false, 'Invalid phone number format');
+    }
+
+    // Validate age if provided
+    if (data.age && !isValidAge(data.age)) {
+      return createResponseWithCORS(false, 'Age must be between 13 and 100');
+    }
+
+    // Validate amount for donations
+    if (formType === 'donation' && data.amount && !isValidAmount(data.amount)) {
+      return createResponseWithCORS(false, 'Donation amount must be between ₹1 and ₹100,000');
     }
 
     switch (formType) {
@@ -456,27 +478,27 @@ function createAdminContactEmail(data) {
         <div class="content">
           <div class="field">
             <div class="label">Name:</div>
-            <div class="value">${data.name}</div>
+            <div class="value">${escapeHtml(data.name)}</div>
           </div>
 
           <div class="field">
             <div class="label">Email:</div>
-            <div class="value"><a href="mailto:${data.email}">${data.email}</a></div>
+            <div class="value"><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></div>
           </div>
 
           <div class="field">
             <div class="label">Phone:</div>
-            <div class="value">${data.phone || 'Not provided'}</div>
+            <div class="value">${escapeHtml(data.phone || 'Not provided')}</div>
           </div>
 
           <div class="field">
             <div class="label">Inquiry Type:</div>
-            <div class="value">${data.inquiryType}</div>
+            <div class="value">${escapeHtml(data.inquiryType)}</div>
           </div>
 
           <div class="field">
             <div class="label">Message:</div>
-            <div class="value">${data.message.replace(/\n/g, '<br>')}</div>
+            <div class="value">${escapeHtml(data.message).replace(/\n/g, '<br>')}</div>
           </div>
 
           <div class="field">
@@ -521,16 +543,16 @@ function createUserContactEmail(data) {
         </div>
 
         <div class="content">
-          <p>Dear ${data.name},</p>
+          <p>Dear ${escapeHtml(data.name)},</p>
 
-          <p>Thank you for reaching out to VEFS Foundation. We have received your inquiry regarding <strong>${data.inquiryType}</strong>.</p>
+          <p>Thank you for reaching out to VEFS Foundation. We have received your inquiry regarding <strong>${escapeHtml(data.inquiryType)}</strong>.</p>
 
           <div class="highlight">
             <strong>Your Message:</strong><br>
-            ${data.message.replace(/\n/g, '<br>')}
+            ${escapeHtml(data.message).replace(/\n/g, '<br>')}
           </div>
 
-          <p>Our team will review your message and get back to you within 24-48 hours via email at <strong>${data.email}</strong>${data.phone ? ' or phone at <strong>' + data.phone + '</strong>' : ''}.</p>
+          <p>Our team will review your message and get back to you within 24-48 hours via email at <strong>${escapeHtml(data.email)}</strong>${data.phone ? ' or phone at <strong>' + escapeHtml(data.phone) + '</strong>' : ''}.</p>
 
           <p>In the meantime, feel free to:</p>
           <ul>
@@ -592,35 +614,35 @@ function createAdminEventEmail(data) {
         <div class="content">
           <div class="field">
             <div class="label">Event:</div>
-            <div class="value">${data.eventTitle || 'N/A'}</div>
+            <div class="value">${escapeHtml(data.eventTitle || 'N/A')}</div>
           </div>
           <div class="field">
             <div class="label">Name:</div>
-            <div class="value">${data.name}</div>
+            <div class="value">${escapeHtml(data.name)}</div>
           </div>
           <div class="field">
             <div class="label">Email:</div>
-            <div class="value"><a href="mailto:${data.email}">${data.email}</a></div>
+            <div class="value"><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></div>
           </div>
           <div class="field">
             <div class="label">Phone:</div>
-            <div class="value">${data.phone || 'Not provided'}</div>
+            <div class="value">${escapeHtml(data.phone || 'Not provided')}</div>
           </div>
           <div class="field">
             <div class="label">Age:</div>
-            <div class="value">${data.age || 'Not provided'}</div>
+            <div class="value">${escapeHtml(data.age || 'Not provided')}</div>
           </div>
           <div class="field">
             <div class="label">Number of Attendees:</div>
-            <div class="value">${data.attendees || 1}</div>
+            <div class="value">${escapeHtml(String(data.attendees || 1))}</div>
           </div>
           <div class="field">
             <div class="label">Event Date:</div>
-            <div class="value">${data.eventDate || 'N/A'}</div>
+            <div class="value">${escapeHtml(data.eventDate || 'N/A')}</div>
           </div>
           <div class="field">
             <div class="label">Donation:</div>
-            <div class="value">${data.eventFee ? '₹' + data.eventFee : 'FREE'}</div>
+            <div class="value">${data.eventFee ? '₹' + escapeHtml(String(data.eventFee)) : 'FREE'}</div>
           </div>
           <div class="field">
             <div class="label">Submitted:</div>
@@ -658,15 +680,15 @@ function createUserEventEmail(data) {
           <p style="margin: 10px 0 0 0; opacity: 0.9;">VEFS Foundation</p>
         </div>
         <div class="content">
-          <p>Dear ${data.name},</p>
-          <p>Thank you for registering for <strong>${data.eventTitle || 'our event'}</strong>!</p>
+          <p>Dear ${escapeHtml(data.name)},</p>
+          <p>Thank you for registering for <strong>${escapeHtml(data.eventTitle || 'our event')}</strong>!</p>
           <div class="highlight">
             <strong>Event Details:</strong><br>
-            📅 Date: ${data.eventDate || 'TBA'}<br>
-            👥 Attendees: ${data.attendees || 1} person(s)<br>
-            💰 Donation: ${data.eventFee ? '₹' + data.eventFee : 'FREE'}
+            📅 Date: ${escapeHtml(data.eventDate || 'TBA')}<br>
+            👥 Attendees: ${escapeHtml(String(data.attendees || 1))} person(s)<br>
+            💰 Donation: ${data.eventFee ? '₹' + escapeHtml(String(data.eventFee)) : 'FREE'}
           </div>
-          <p>We've received your registration and will send you more details about the event via email at <strong>${data.email}</strong>${data.phone ? ' or call you at <strong>' + data.phone + '</strong>' : ''}.</p>
+          <p>We've received your registration and will send you more details about the event via email at <strong>${escapeHtml(data.email)}</strong>${data.phone ? ' or call you at <strong>' + escapeHtml(data.phone) + '</strong>' : ''}.</p>
           <p>Please arrive 15 minutes before the scheduled start time.</p>
           <p style="margin-top: 30px;">Best regards,<br>
           <strong>VEFS Foundation Team</strong><br>
@@ -710,39 +732,39 @@ function createAdminTrainingEmail(data) {
         <div class="content">
           <div class="field">
             <div class="label">Training:</div>
-            <div class="value">${data.trainingTitle || 'N/A'}</div>
+            <div class="value">${escapeHtml(data.trainingTitle || 'N/A')}</div>
           </div>
           <div class="field">
             <div class="label">Name:</div>
-            <div class="value">${data.name}</div>
+            <div class="value">${escapeHtml(data.name)}</div>
           </div>
           <div class="field">
             <div class="label">Email:</div>
-            <div class="value"><a href="mailto:${data.email}">${data.email}</a></div>
+            <div class="value"><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></div>
           </div>
           <div class="field">
             <div class="label">Phone:</div>
-            <div class="value">${data.phone || 'Not provided'}</div>
+            <div class="value">${escapeHtml(data.phone || 'Not provided')}</div>
           </div>
           <div class="field">
             <div class="label">Age:</div>
-            <div class="value">${data.age || 'Not provided'}</div>
+            <div class="value">${escapeHtml(data.age || 'Not provided')}</div>
           </div>
           <div class="field">
             <div class="label">Education Level:</div>
-            <div class="value">${data.education || 'Not provided'}</div>
+            <div class="value">${escapeHtml(data.education || 'Not provided')}</div>
           </div>
           <div class="field">
             <div class="label">Occupation/Organization:</div>
-            <div class="value">${data.occupation || 'Not provided'}</div>
+            <div class="value">${escapeHtml(data.occupation || 'Not provided')}</div>
           </div>
           <div class="field">
             <div class="label">Background/Experience:</div>
-            <div class="value">${data.background ? data.background.replace(/\n/g, '<br>') : 'Not provided'}</div>
+            <div class="value">${data.background ? escapeHtml(data.background).replace(/\n/g, '<br>') : 'Not provided'}</div>
           </div>
           <div class="field">
             <div class="label">Training Date:</div>
-            <div class="value">${data.trainingDate || 'N/A'}</div>
+            <div class="value">${escapeHtml(data.trainingDate || 'N/A')}</div>
           </div>
           <div class="field">
             <div class="label">Donation:</div>
@@ -784,12 +806,12 @@ function createUserTrainingEmail(data) {
           <p style="margin: 10px 0 0 0; opacity: 0.9;">VEFS Foundation</p>
         </div>
         <div class="content">
-          <p>Dear ${data.name},</p>
-          <p>Thank you for registering for <strong>${data.trainingTitle || 'our training program'}</strong>!</p>
+          <p>Dear ${escapeHtml(data.name)},</p>
+          <p>Thank you for registering for <strong>${escapeHtml(data.trainingTitle || 'our training program')}</strong>!</p>
           <div class="highlight">
             <strong>Training Details:</strong><br>
-            📅 Start Date: ${data.trainingDate || 'TBA'}<br>
-            💰 Donation: ${data.trainingFee ? '₹' + data.trainingFee : 'FREE'}
+            📅 Start Date: ${escapeHtml(data.trainingDate || 'TBA')}<br>
+            💰 Donation: ${data.trainingFee ? '₹' + escapeHtml(String(data.trainingFee)) : 'FREE'}
           </div>
           <p>We've received your registration. Our team will review your application and send you further details including:</p>
           <ul>
@@ -798,7 +820,7 @@ function createUserTrainingEmail(data) {
             <li>Location and timing details</li>
             ${data.trainingFee && data.trainingFee > 0 ? '<li>Payment instructions</li>' : ''}
           </ul>
-          <p>We'll contact you at <strong>${data.email}</strong>${data.phone ? ' or <strong>' + data.phone + '</strong>' : ''} within 24-48 hours.</p>
+          <p>We'll contact you at <strong>${escapeHtml(data.email)}</strong>${data.phone ? ' or <strong>' + escapeHtml(data.phone) + '</strong>' : ''} within 24-48 hours.</p>
           <p style="margin-top: 30px;">Best regards,<br>
           <strong>VEFS Foundation Team</strong><br>
           Valluvam Ecological Farming and Social Welfare Foundation</p>
@@ -841,31 +863,31 @@ function createAdminVolunteerEmail(data) {
         <div class="content">
           <div class="field">
             <div class="label">Opportunity:</div>
-            <div class="value">${data.volunteerTitle || 'N/A'}</div>
+            <div class="value">${escapeHtml(data.volunteerTitle || 'N/A')}</div>
           </div>
           <div class="field">
             <div class="label">Name:</div>
-            <div class="value">${data.name}</div>
+            <div class="value">${escapeHtml(data.name)}</div>
           </div>
           <div class="field">
             <div class="label">Email:</div>
-            <div class="value"><a href="mailto:${data.email}">${data.email}</a></div>
+            <div class="value"><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></div>
           </div>
           <div class="field">
             <div class="label">Phone:</div>
-            <div class="value">${data.phone || 'Not provided'}</div>
+            <div class="value">${escapeHtml(data.phone || 'Not provided')}</div>
           </div>
           <div class="field">
             <div class="label">Age:</div>
-            <div class="value">${data.age || 'Not provided'}</div>
+            <div class="value">${escapeHtml(data.age || 'Not provided')}</div>
           </div>
           <div class="field">
             <div class="label">Motivation:</div>
-            <div class="value">${data.motivation ? data.motivation.replace(/\n/g, '<br>') : 'Not provided'}</div>
+            <div class="value">${data.motivation ? escapeHtml(data.motivation).replace(/\n/g, '<br>') : 'Not provided'}</div>
           </div>
           <div class="field">
             <div class="label">Skills/Experience:</div>
-            <div class="value">${data.experience ? data.experience.replace(/\n/g, '<br>') : 'Not provided'}</div>
+            <div class="value">${data.experience ? escapeHtml(data.experience).replace(/\n/g, '<br>') : 'Not provided'}</div>
           </div>
           <div class="field">
             <div class="label">Submitted:</div>
@@ -903,14 +925,14 @@ function createUserVolunteerEmail(data) {
           <p style="margin: 10px 0 0 0; opacity: 0.9;">VEFS Foundation</p>
         </div>
         <div class="content">
-          <p>Dear ${data.name},</p>
-          <p>Thank you for your interest in volunteering with VEFS Foundation for <strong>${data.volunteerTitle || 'our program'}</strong>!</p>
+          <p>Dear ${escapeHtml(data.name)},</p>
+          <p>Thank you for your interest in volunteering with VEFS Foundation for <strong>${escapeHtml(data.volunteerTitle || 'our program')}</strong>!</p>
           <div class="highlight">
             <strong>Your Motivation:</strong><br>
-            ${data.motivation ? data.motivation.replace(/\n/g, '<br>') : 'Thank you for your interest!'}
+            ${data.motivation ? escapeHtml(data.motivation).replace(/\n/g, '<br>') : 'Thank you for your interest!'}
           </div>
           <p>We're grateful for your willingness to contribute to our mission of ecological conservation and community development.</p>
-          <p>Our team will review your application and reach out to you within 3-5 business days at <strong>${data.email}</strong>${data.phone ? ' or <strong>' + data.phone + '</strong>' : ''}.</p>
+          <p>Our team will review your application and reach out to you within 3-5 business days at <strong>${escapeHtml(data.email)}</strong>${data.phone ? ' or <strong>' + escapeHtml(data.phone) + '</strong>' : ''}.</p>
           <p>In the meantime, feel free to explore more about our work and initiatives on our website.</p>
           <p style="margin-top: 30px;">Best regards,<br>
           <strong>VEFS Foundation Team</strong><br>
@@ -955,31 +977,31 @@ function createAdminDonationEmail(data) {
         <div class="content">
           <div class="field">
             <div class="label">Amount:</div>
-            <div class="value amount-highlight">₹${data.amount || 0}</div>
+            <div class="value amount-highlight">₹${escapeHtml(String(data.amount || 0))}</div>
           </div>
           <div class="field">
             <div class="label">Type:</div>
-            <div class="value">${data.donationType || 'one-time'}</div>
+            <div class="value">${escapeHtml(data.donationType || 'one-time')}</div>
           </div>
           <div class="field">
             <div class="label">Category:</div>
-            <div class="value">${data.category || 'General Fund'}</div>
+            <div class="value">${escapeHtml(data.category || 'General Fund')}</div>
           </div>
           <div class="field">
             <div class="label">Donor Name:</div>
-            <div class="value">${data.anonymous ? 'Anonymous' : (data.firstName || '') + ' ' + (data.lastName || '')}</div>
+            <div class="value">${data.anonymous ? 'Anonymous' : escapeHtml((data.firstName || '') + ' ' + (data.lastName || ''))}</div>
           </div>
           <div class="field">
             <div class="label">Email:</div>
-            <div class="value"><a href="mailto:${data.email}">${data.email}</a></div>
+            <div class="value"><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></div>
           </div>
           <div class="field">
             <div class="label">Phone:</div>
-            <div class="value">${data.phone || 'Not provided'}</div>
+            <div class="value">${escapeHtml(data.phone || 'Not provided')}</div>
           </div>
           <div class="field">
             <div class="label">Organization:</div>
-            <div class="value">${data.organization || 'Not provided'}</div>
+            <div class="value">${escapeHtml(data.organization || 'Not provided')}</div>
           </div>
           <div class="field">
             <div class="label">Tax Benefit Requested:</div>
@@ -1027,30 +1049,32 @@ function createUserDonationEmail(data) {
           <p style="margin: 10px 0 0 0; opacity: 0.9;">VEFS Foundation</p>
         </div>
         <div class="content">
-          <p>Dear ${data.anonymous ? 'Supporter' : (data.firstName || '') + ' ' + (data.lastName || '')},</p>
-          <p>Thank you for your generous donation of <strong>₹${data.amount}</strong> to VEFS Foundation!</p>
+          <p>Dear ${data.anonymous ? 'Supporter' : escapeHtml((data.firstName || '') + ' ' + (data.lastName || ''))},</p>
+          <p>Thank you for your generous donation of <strong>₹${escapeHtml(String(data.amount))}</strong> to VEFS Foundation!</p>
 
           <div class="payment-box">
             <h3 style="margin-top: 0; color: #92400E;">Next Steps - Payment Information</h3>
             <p>To complete your donation, please transfer ₹${data.amount} using one of the following methods:</p>
 
             <strong>UPI Payment:</strong><br>
-            UPI ID: <code style="background: white; padding: 2px 8px; border-radius: 4px;">vefsfoundation@upi</code><br><br>
+            UPI ID: <code style="background: white; padding: 2px 8px; border-radius: 4px;">9566667708@hdfcbank</code><br>
+            <em style="font-size: 13px; color: #666;">Use any UPI app (GPay, PhonePe, Paytm)</em><br><br>
 
             <strong>Bank Transfer:</strong><br>
             Account Name: VEFS Foundation<br>
-            Account Number: 1234567890<br>
-            IFSC Code: SBIN0001234<br>
-            Bank: State Bank of India<br><br>
+            Bank: HDFC Bank<br>
+            Account Number: 50200115917889<br>
+            IFSC Code: HDFC0002301<br>
+            Branch: Dindigul<br><br>
 
-            <p style="margin-top: 15px;"><strong>Important:</strong> After making the payment, please email the transaction screenshot to <a href="mailto:vefsfoundation@gmail.com">vefsfoundation@gmail.com</a> with reference "Donation - ${data.email}"</p>
+            <p style="margin-top: 15px;"><strong>Important:</strong> After making the payment, please email the transaction screenshot to <a href="mailto:vefsfoundation@gmail.com" style="color: #D97706;">vefsfoundation@gmail.com</a> with your name and reference "Donation - ${escapeHtml(data.email)}"</p>
           </div>
 
           <div class="highlight">
             <strong>Your Donation Details:</strong><br>
-            Amount: ₹${data.amount}<br>
-            Type: ${data.donationType || 'one-time'}<br>
-            Category: ${data.category || 'General Fund'}<br>
+            Amount: ₹${escapeHtml(String(data.amount))}<br>
+            Type: ${escapeHtml(data.donationType || 'one-time')}<br>
+            Category: ${escapeHtml(data.category || 'General Fund')}<br>
             ${data.taxBenefit ? '✓ 80G Tax benefit certificate will be issued after payment verification' : ''}
           </div>
 
@@ -1114,5 +1138,62 @@ function createResponseWithCORS(success, message, data = {}) {
 
   return ContentService
     .createTextOutput(JSON.stringify(response))
-    .setMimeType(ContentService.MimeType.JSON);
+    .setMimeType(ContentService.MimeType.JSON)
+    .addHeader('Access-Control-Allow-Origin', '*')
+    .addHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+    .addHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
+
+// ===========================
+// VALIDATION & ESCAPING FUNCTIONS
+// ===========================
+
+/**
+ * Escape HTML special characters to prevent XSS
+ */
+function escapeHtml(text) {
+  if (!text) return '';
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return String(text).replace(/[&<>"']/g, m => map[m]);
+}
+
+/**
+ * Validate email format
+ */
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+/**
+ * Validate phone format (Indian format)
+ */
+function isValidPhone(phone) {
+  if (!phone) return true; // Phone is optional in some forms
+  const phoneRegex = /^[6-9][0-9]{9}$/;
+  return phoneRegex.test(phone.replace(/\D/g, ''));
+}
+
+/**
+ * Validate age (between 13 and 100)
+ */
+function isValidAge(age) {
+  if (!age) return true; // Age is optional in some forms
+  const ageNum = parseInt(age);
+  return !isNaN(ageNum) && ageNum >= 13 && ageNum <= 100;
+}
+
+/**
+ * Validate amount (for donations)
+ */
+function isValidAmount(amount) {
+  if (!amount) return true;
+  const amountNum = parseFloat(amount);
+  return !isNaN(amountNum) && amountNum > 0 && amountNum <= 100000;
 }

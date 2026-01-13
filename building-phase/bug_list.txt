@@ -1,0 +1,4 @@
+Remaining Bugs (Not Fixed - Require Additional Work):
+
+Volunteer regitraion confirmation modal does not appear. Fix this, Where it works great for all other
+Also the value is not stored in the google sheet. it shoud work same way how events, training works

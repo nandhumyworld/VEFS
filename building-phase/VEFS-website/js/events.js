@@ -66,7 +66,9 @@ class EventsPage {
       const startDate = new Date(event.date.start);
       const isPast = event.status === 'completed';
       const isFull = event.status === 'full';
-      const isFree = event.fee === 0;
+      // Handle fee - support both old format (event.fee) and new format (event.registration.fee.amount)
+      const feeAmount = event.registration?.fee?.amount !== undefined ? event.registration.fee.amount : (event.fee || 0);
+      const isFree = feeAmount === 0;
 
       return `
         <div class="card animate-fade-in">
@@ -87,7 +89,7 @@ class EventsPage {
             <p class="card-description">${event.shortDescription}</p>
 
             <div class="card-footer" style="margin-top: var(--space-md); display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-weight: 600; color: var(--color-primary);">${isFree ? 'FREE' : '₹' + event.fee}</span>
+              <span style="font-weight: 600; color: var(--color-primary);">${isFree ? 'FREE' : '₹' + feeAmount}</span>
               <button class="btn btn-sm ${isFull || isPast ? 'btn-outline' : 'btn-primary'}" onclick="eventsPageInstance.showDetails('${event.id}')">
                 ${isPast ? 'View Details' : isFull ? 'View Details' : 'Register'}
               </button>
@@ -111,7 +113,10 @@ class EventsPage {
     const endDate = new Date(event.date.end);
     const isPast = event.status === 'completed';
     const isFull = event.status === 'full';
-    const isFree = event.fee === 0;
+
+    // Handle fee - support both old format (event.fee) and new format (event.registration.fee.amount)
+    const feeAmount = event.registration?.fee?.amount !== undefined ? event.registration.fee.amount : (event.fee || 0);
+    const isFree = feeAmount === 0;
 
     modalBody.innerHTML = `
       <!-- Header Image -->
@@ -146,13 +151,13 @@ class EventsPage {
         <div>
           <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">💰 Donation</div>
           <div style="font-weight: 600; color: ${isFree ? 'var(--color-success)' : 'var(--color-gray-900)'};">
-            ${isFree ? 'FREE' : '₹' + event.fee}
+            ${isFree ? 'FREE' : '₹' + feeAmount}
           </div>
         </div>
         ${event.capacity ? `
           <div>
             <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">👥 Capacity</div>
-            <div style="font-weight: 600;">${event.capacity} participants</div>
+            <div style="font-weight: 600;">${typeof event.capacity === 'object' ? (event.capacity.total + ' participants' + (event.capacity.available !== undefined ? ' (' + event.capacity.available + ' available)' : '')) : (event.capacity + ' participants')}</div>
           </div>
         ` : ''}
       </div>
@@ -311,6 +316,9 @@ class EventsPage {
       return;
     }
 
+    // Get submit button reference
+    const submitButton = form.querySelector('button[type="submit"]');
+
     // Initialize form validation
     if (window.FormValidation) {
       const minAge = event.requirements?.age?.min || 0;
@@ -330,12 +338,14 @@ class EventsPage {
       e.preventDefault();
 
       const formData = new FormData(form);
+      // Handle fee - support both old format (event.fee) and new format (event.registration.fee.amount)
+      const feeAmount = event.registration?.fee?.amount !== undefined ? event.registration.fee.amount : (event.fee || 0);
       const registrationData = {
         type: 'event',
         eventId: event.id,
         eventTitle: event.title,
         eventDate: event.date.start,
-        eventFee: event.fee || 0,
+        eventFee: feeAmount,
         name: formData.get('name'),
         email: formData.get('email'),
         phone: formData.get('phone'),
@@ -345,6 +355,9 @@ class EventsPage {
       };
 
       console.log('Event registration submitted:', registrationData);
+
+      // Disable submit button and show progress indicator
+      this.setSubmitState(submitButton, true);
 
       // Send to Google Sheets instead of sessionStorage
       try {
@@ -359,6 +372,9 @@ class EventsPage {
       } catch (error) {
         console.error('Error submitting registration:', error);
         this.showErrorMessage('An error occurred. Please try again or contact us directly.');
+      } finally {
+        // Re-enable submit button
+        this.setSubmitState(submitButton, false);
       }
     });
   }
@@ -398,7 +414,8 @@ class EventsPage {
    * Send registration data to Google Sheets via Google Apps Script
    */
   async sendToBackend(data) {
-    // Check if running in test mode
+    // Check if running in test mode (file protocol or placeholder URL)
+    // Note: localhost is allowed to enable testing with Google Sheets
     const isTestMode = !GOOGLE_SCRIPT_URL ||
                        GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE' ||
                        window.location.protocol === 'file:';
@@ -407,7 +424,7 @@ class EventsPage {
       console.warn('⚠️ Running in test mode. Registration data:', data);
       return {
         success: true,
-        message: 'Test mode: Registration logged to console'
+        message: 'Test mode - Registration logged to console'
       };
     }
 
@@ -455,7 +472,9 @@ class EventsPage {
    * Show success modal after registration
    */
   showSuccessModal(event) {
-    const hasFee = event.fee && event.fee > 0;
+    // Handle fee - support both old format (event.fee) and new format (event.registration.fee.amount)
+    const feeAmount = event.registration?.fee?.amount !== undefined ? event.registration.fee.amount : (event.fee || 0);
+    const hasFee = feeAmount > 0;
 
     const modal = document.createElement('div');
     modal.id = 'registration-success-modal';
@@ -470,7 +489,7 @@ class EventsPage {
             Thank you for registering for <strong>${event.title}</strong>!<br>
             Please check your email for confirmation.${hasFee ? '<br>Click below to proceed with payment.' : '<br>We\'ll send you event details shortly.'}
           </p>
-          <button onclick="document.getElementById('registration-success-modal').remove(); ${hasFee ? 'window.eventsPageInstance.showPaymentModal(' + JSON.stringify(event) + ');' : 'if(window.modalInstance) window.modalInstance.close();'}" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; min-width: 120px;">
+          <button id="success-modal-btn" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; min-width: 120px;">
             ${hasFee ? 'Proceed to Payment' : 'OK'}
           </button>
         </div>
@@ -478,6 +497,21 @@ class EventsPage {
     `;
 
     document.body.appendChild(modal);
+
+    // Add event listener instead of inline onclick
+    const button = document.getElementById('success-modal-btn');
+    if (button) {
+      button.addEventListener('click', () => {
+        document.getElementById('registration-success-modal').remove();
+        if (hasFee) {
+          this.showPaymentModal(event);
+        } else {
+          if (window.modalInstance) {
+            window.modalInstance.close();
+          }
+        }
+      });
+    }
 
     // Close the registration modal if it's open
     if (window.modalInstance) {
@@ -489,6 +523,9 @@ class EventsPage {
    * Show payment instructions modal
    */
   showPaymentModal(event) {
+    // Handle fee - support both old format (event.fee) and new format (event.registration.fee.amount)
+    const feeAmount = event.registration?.fee?.amount !== undefined ? event.registration.fee.amount : (event.fee || 0);
+
     const PAYMENT_INFO = {
       upi: { id: '9566667708@hdfcbank' },
       bank: {
@@ -515,7 +552,7 @@ class EventsPage {
           </div>
 
           <div style="background: #FFF9E6; padding: 20px; border-radius: 8px; margin-bottom: 24px; border: 2px solid #D4A574;">
-            <p style="font-size: 20px; margin: 0 0 8px 0; font-weight: 600; color: #333;">Donation Amount: ₹${event.fee}</p>
+            <p style="font-size: 20px; margin: 0 0 8px 0; font-weight: 600; color: #333;">Donation Amount: ₹${feeAmount}</p>
             <p style="font-size: 14px; margin: 0; color: #666;">This amount is treated as a donation to support our environmental conservation efforts.</p>
           </div>
 
@@ -568,6 +605,27 @@ class EventsPage {
     `;
 
     document.body.appendChild(modal);
+  }
+
+  /**
+   * Set submit button state (disable/enable with progress indicator)
+   * @param {HTMLElement} button - Submit button element
+   * @param {boolean} isSubmitting - Whether form is currently submitting
+   */
+  setSubmitState(button, isSubmitting) {
+    if (!button) return;
+
+    if (isSubmitting) {
+      button.disabled = true;
+      button.dataset.originalText = button.textContent;
+      button.innerHTML = `
+        <span class="spinner spinner-sm" style="display: inline-block; width: 20px; height: 20px; margin-right: 8px; border-width: 2px;"></span>
+        Registering...
+      `;
+    } else {
+      button.disabled = false;
+      button.textContent = button.dataset.originalText || 'Register';
+    }
   }
 
   /**

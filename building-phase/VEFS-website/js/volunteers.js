@@ -1,14 +1,15 @@
 /**
- * Volunteer Page JavaScript
+ * Volunteers Page JavaScript
  * Loads and displays volunteer opportunities with registration functionality
  */
 
-// Google Apps Script Web App URL for form submissions
+// CONFIGURATION: Google Apps Script Web App URL
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw2vis0PY7STZ9yYqgHGyI0vxEkxH64c6-Ll31cj6qCU5_07QMQDHzwZc6H4NwMZJh/exec';
 
 class VolunteersPage {
   constructor() {
     this.volunteers = [];
+    this.filteredVolunteers = [];
     this.init();
   }
 
@@ -33,10 +34,12 @@ class VolunteersPage {
         .filter(v => v.status === 'open')
         .sort((a, b) => new Date(a.dates.start) - new Date(b.dates.start));
 
+      this.filteredVolunteers = [...this.volunteers];
+
       console.log('Loaded volunteers:', this.volunteers.length);
     } catch (error) {
       console.error('Error loading volunteers:', error);
-      this.volunteers = [];
+      this.showError();
     }
   }
 
@@ -50,7 +53,7 @@ class VolunteersPage {
       return;
     }
 
-    if (this.volunteers.length === 0) {
+    if (this.filteredVolunteers.length === 0) {
       container.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: var(--space-2xl); color: var(--color-gray-600);">
           <p>No volunteer opportunities available at this time. Check back soon!</p>
@@ -60,13 +63,16 @@ class VolunteersPage {
     }
 
     try {
-      container.innerHTML = this.volunteers.map(volunteer => {
+      container.innerHTML = this.filteredVolunteers.map(volunteer => {
         const startDate = new Date(volunteer.dates.start);
         const hasStipend = volunteer.benefits.stipend.provided;
         const spotsRemaining = volunteer.spots.available;
 
         return `
-          <div class="card">
+          <div class="card animate-fade-in" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;"
+               onclick="volunteersPageInstance.showDetails('${volunteer.id}')"
+               onmouseenter="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'"
+               onmouseleave="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.08)'">
             ${volunteer.media?.featuredImage ? `
               <div class="card-image">
                 <img src="${volunteer.media.featuredImage}" alt="${volunteer.title}" loading="lazy" onerror="this.parentElement.style.display='none'">
@@ -98,7 +104,7 @@ class VolunteersPage {
                 <span style="color: var(--color-gray-600); font-size: var(--font-sm);">
                   ${spotsRemaining} ${spotsRemaining === 1 ? 'spot' : 'spots'} available
                 </span>
-                <button onclick="volunteersPage.showDetails('${volunteer.id}')" class="btn btn-sm btn-primary">
+                <button onclick="event.stopPropagation(); volunteersPageInstance.showDetails('${volunteer.id}')" class="btn btn-sm btn-primary">
                   Apply Now
                 </button>
               </div>
@@ -108,12 +114,21 @@ class VolunteersPage {
       }).join('');
     } catch (error) {
       console.error('Error rendering volunteers:', error);
-      container.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: var(--space-2xl); color: var(--color-error);">
-          <p>Error loading volunteer opportunities. Please refresh the page.</p>
-        </div>
-      `;
+      this.showError();
     }
+  }
+
+  /**
+   * Show error message when data loading fails
+   */
+  showError() {
+    const container = document.getElementById('volunteers-container');
+    if (!container) return;
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: var(--space-3xl);">
+        <div class="alert alert-error">Unable to load volunteer opportunities. Please try again later.</div>
+      </div>
+    `;
   }
 
   /**
@@ -129,6 +144,9 @@ class VolunteersPage {
       console.error('Modal elements not found');
       return;
     }
+
+    // Update URL hash
+    window.location.hash = volunteer.slug || volunteer.id;
 
     const startDate = new Date(volunteer.dates.start);
     const endDate = new Date(volunteer.dates.end);
@@ -227,49 +245,7 @@ class VolunteersPage {
       <div style="background: var(--color-gray-50); padding: var(--space-lg); border-radius: 8px;">
         <h3 style="margin-bottom: var(--space-md); color: var(--color-primary);">Apply for This Opportunity</h3>
         <form id="volunteer-registration-form" class="form" data-volunteer-id="${volunteer.id}">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="vol-name" class="form-label">Full Name <span style="color: var(--color-error);">*</span></label>
-              <input type="text" id="vol-name" name="name" class="form-input" required>
-              <div class="form-error"></div>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="vol-email" class="form-label">Email <span style="color: var(--color-error);">*</span></label>
-              <input type="email" id="vol-email" name="email" class="form-input" required>
-              <div class="form-error"></div>
-            </div>
-
-            <div class="form-group">
-              <label for="vol-phone" class="form-label">Phone <span style="color: var(--color-error);">*</span></label>
-              <input type="tel" id="vol-phone" name="phone" class="form-input" required>
-              <div class="form-error"></div>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="vol-age" class="form-label">Age <span style="color: var(--color-error);">*</span></label>
-              <input type="number" id="vol-age" name="age" class="form-input" min="${volunteer.requirements.age.min}" max="${volunteer.requirements.age.max}" required>
-              <div class="form-error"></div>
-              <small style="color: var(--color-gray-600);">Must be between ${volunteer.requirements.age.min} and ${volunteer.requirements.age.max} years</small>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="vol-motivation" class="form-label">Why do you want to volunteer with us? <span style="color: var(--color-error);">*</span></label>
-            <textarea id="vol-motivation" name="motivation" class="form-input" rows="4" required></textarea>
-            <div class="form-error"></div>
-          </div>
-
-          <div class="form-group">
-            <label for="vol-experience" class="form-label">Relevant Skills/Experience (Optional)</label>
-            <textarea id="vol-experience" name="experience" class="form-input" rows="3"></textarea>
-            <div class="form-error"></div>
-          </div>
-
+          ${this.generateVolunteerFormFields(volunteer)}
           <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
             Submit Application
           </button>
@@ -284,45 +260,106 @@ class VolunteersPage {
       </div>
     `;
 
-    // Setup form validation and submission
-    this.setupRegistrationForm(volunteer);
+    // Setup form validation and submission with delay to ensure modal is rendered
+    setTimeout(() => this.setupVolunteerRegistrationForm(volunteer), 100);
 
     // Open modal
     if (window.modalInstance) {
       window.modalInstance.open('volunteer-modal');
     }
-
-    // Update URL hash
-    window.location.hash = volunteer.slug;
   }
 
   /**
-   * Setup registration form validation and submission
+   * Generate form fields for volunteer registration
+   * @param {Object} volunteer - Volunteer object
+   * @returns {string} HTML string for form fields
    */
-  setupRegistrationForm(volunteer) {
-    const form = document.getElementById('volunteer-registration-form');
-    if (!form) return;
+  generateVolunteerFormFields(volunteer) {
+    const minAge = volunteer.requirements.age.min;
+    const maxAge = volunteer.requirements.age.max;
 
-    // Initialize form validation if available
+    return `
+      <div class="form-row">
+        <div class="form-group">
+          <label for="vol-name" class="form-label">Full Name <span style="color: var(--color-error);">*</span></label>
+          <input type="text" id="vol-name" name="name" class="form-input" required>
+          <div class="form-error"></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="vol-email" class="form-label">Email <span style="color: var(--color-error);">*</span></label>
+          <input type="email" id="vol-email" name="email" class="form-input" required>
+          <div class="form-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="vol-phone" class="form-label">Phone <span style="color: var(--color-error);">*</span></label>
+          <input type="tel" id="vol-phone" name="phone" class="form-input" required pattern="[6-9][0-9]{9}" placeholder="98765 43210">
+          <div class="form-error"></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="vol-age" class="form-label">Age <span style="color: var(--color-error);">*</span></label>
+          <input type="number" id="vol-age" name="age" class="form-input" min="${minAge}" max="${maxAge}" required>
+          <div class="form-error"></div>
+          <small style="color: var(--color-gray-600); font-size: var(--font-size-sm);">Must be between ${minAge} and ${maxAge} years</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vol-motivation" class="form-label">Why do you want to volunteer with us? <span style="color: var(--color-error);">*</span></label>
+        <textarea id="vol-motivation" name="motivation" class="form-input" rows="4" required minlength="20"></textarea>
+        <div class="form-error"></div>
+        <small style="color: var(--color-gray-600); font-size: var(--font-size-sm);">Minimum 20 characters</small>
+      </div>
+
+      <div class="form-group">
+        <label for="vol-experience" class="form-label">Relevant Skills/Experience (Optional)</label>
+        <textarea id="vol-experience" name="experience" class="form-input" rows="3"></textarea>
+        <div class="form-error"></div>
+      </div>
+    `;
+  }
+
+  /**
+   * Setup volunteer registration form validation and submission
+   * @param {Object} volunteer - Volunteer object
+   */
+  setupVolunteerRegistrationForm(volunteer) {
+    const form = document.getElementById('volunteer-registration-form');
+    if (!form) {
+      console.warn('Volunteer registration form not found');
+      return;
+    }
+
+    // Get submit button reference
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    // Initialize form validation
     if (window.FormValidation) {
+      const minAge = volunteer.requirements.age.min;
+      const maxAge = volunteer.requirements.age.max;
+
       new window.FormValidation(form, {
         name: { required: true, minLength: 2 },
         email: { required: true, email: true },
         phone: { required: true, phone: true },
-        age: {
-          required: true,
-          min: volunteer.requirements.age.min,
-          max: volunteer.requirements.age.max
-        },
+        age: { required: true, min: minAge, max: maxAge },
         motivation: { required: true, minLength: 20 }
       });
     }
 
+    // Handle form submission
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const formData = new FormData(form);
-      const data = {
+      const registrationData = {
+        type: 'volunteer',
         volunteerId: volunteer.id,
         volunteerTitle: volunteer.title,
         name: formData.get('name'),
@@ -334,43 +371,74 @@ class VolunteersPage {
         submittedAt: new Date().toISOString()
       };
 
-      console.log('Volunteer application submitted:', data);
+      console.log('Volunteer registration submitted:', registrationData);
+
+      // Disable submit button and show progress indicator
+      this.setSubmitState(submitButton, true);
 
       // Send to Google Sheets
       try {
-        const response = await this.sendToBackend(data);
+        const response = await this.sendToBackend(registrationData);
 
         if (response.success) {
           this.showSuccessModal(volunteer);
           form.reset();
-
-          // Close modal after short delay
-          setTimeout(() => {
-            if (window.modalInstance) {
-              window.modalInstance.close('volunteer-modal');
-            }
-          }, 3000);
         } else {
           this.showErrorMessage('Failed to submit application. Please try again.');
         }
       } catch (error) {
         console.error('Error submitting application:', error);
         this.showErrorMessage('An error occurred. Please try again or contact us directly.');
+      } finally {
+        // Re-enable submit button
+        this.setSubmitState(submitButton, false);
       }
     });
   }
 
   /**
-   * Send volunteer application to Google Sheets
+   * Handle hash navigation for direct links to volunteers
+   */
+  handleHashNavigation() {
+    if (window.location.hash) {
+      const hash = window.location.hash.slice(1);
+      const volunteer = this.volunteers.find(v => v.slug === hash || v.id === hash);
+
+      if (volunteer) {
+        setTimeout(() => {
+          this.showDetails(volunteer.id);
+        }, 100);
+      }
+    }
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', () => {
+      const newHash = window.location.hash.slice(1);
+      if (newHash) {
+        const volunteer = this.volunteers.find(v => v.slug === newHash || v.id === newHash);
+        if (volunteer) {
+          this.showDetails(volunteer.id);
+        }
+      }
+    });
+  }
+
+  /**
+   * Send volunteer application to Google Sheets via Google Apps Script
    */
   async sendToBackend(data) {
+    // Check if running in test mode (file protocol or placeholder URL)
+    // Note: localhost is allowed to enable testing with Google Sheets
     const isTestMode = !GOOGLE_SCRIPT_URL ||
                        GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE' ||
                        window.location.protocol === 'file:';
 
     if (isTestMode) {
       console.warn('⚠️ Running in test mode. Application data:', data);
-      return { success: true, message: 'Test mode' };
+      return {
+        success: true,
+        message: 'Test mode - Application logged to console'
+      };
     }
 
     const payload = {
@@ -387,30 +455,40 @@ class VolunteersPage {
     };
 
     try {
-      await fetch(GOOGLE_SCRIPT_URL, {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
+        headers: {
+          'Content-Type': 'text/plain',
+        },
         body: JSON.stringify(payload)
       });
 
       console.log('Volunteer application submitted to Google Sheets');
-      return { success: true, message: 'Application submitted!' };
+      return {
+        success: true,
+        message: 'Application successful!'
+      };
+
     } catch (error) {
       console.error('Error sending to Google Sheets:', error);
-      return { success: true, message: 'Application received!' };
+      return {
+        success: false,
+        message: 'Failed to submit application. Please try again.'
+      };
     }
   }
 
   /**
    * Show success modal after application submission
+   * @param {Object} volunteer - Volunteer opportunity object
    */
   showSuccessModal(volunteer) {
     const modal = document.createElement('div');
     modal.id = 'volunteer-success-modal';
     modal.innerHTML = `
-      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 10000;">
-        <div style="background: white; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);">
+      <div id="success-modal-backdrop" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 10000; cursor: pointer;">
+        <div id="success-modal-content" style="background: white; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); cursor: default;">
           <div style="font-size: 4rem; color: #6B8E23; margin-bottom: 20px;">✓</div>
           <h3 style="font-size: 28px; color: #6B8E23; margin-bottom: 16px; font-weight: 600;">
             Application Submitted!
@@ -420,7 +498,7 @@ class VolunteersPage {
             Please check your email for confirmation.<br>
             We'll review your application and contact you soon.
           </p>
-          <button onclick="document.getElementById('volunteer-success-modal').remove(); if(window.modalInstance) window.modalInstance.close();" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; min-width: 120px;">
+          <button id="success-modal-btn" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: not-allowed; min-width: 120px; opacity: 0.6;" disabled>
             OK
           </button>
         </div>
@@ -429,9 +507,84 @@ class VolunteersPage {
 
     document.body.appendChild(modal);
 
-    // Close the volunteer modal if it's open
+    // Track whether modal can be closed
+    let canClose = false;
+
+    // Function to close modal and navigate back to volunteer page
+    const closeModalAndNavigate = () => {
+      if (!canClose) return;
+
+      // Remove success modal
+      document.getElementById('volunteer-success-modal').remove();
+
+      // Clear the hash to go back to main volunteer page
+      window.location.hash = '';
+
+      // Scroll to top of page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Enable closing after 3 seconds
+    setTimeout(() => {
+      canClose = true;
+      const button = document.getElementById('success-modal-btn');
+      if (button) {
+        button.disabled = false;
+        button.style.cursor = 'pointer';
+        button.style.opacity = '1';
+      }
+    }, 3000);
+
+    // Add event listener to OK button
+    const button = document.getElementById('success-modal-btn');
+    if (button) {
+      button.addEventListener('click', closeModalAndNavigate);
+    }
+
+    // Add event listener to backdrop (click anywhere outside)
+    const backdrop = document.getElementById('success-modal-backdrop');
+    if (backdrop) {
+      backdrop.addEventListener('click', (e) => {
+        // Only close if clicking the backdrop itself, not the modal content
+        if (e.target === backdrop) {
+          closeModalAndNavigate();
+        }
+      });
+    }
+
+    // Prevent clicks on modal content from bubbling to backdrop
+    const content = document.getElementById('success-modal-content');
+    if (content) {
+      content.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
+
+    // Close the volunteer details modal immediately (matching events.js pattern)
+    // This ensures when success modal closes, user sees the main volunteer page
     if (window.modalInstance) {
       window.modalInstance.close();
+    }
+  }
+
+  /**
+   * Set submit button state (disable/enable with progress indicator)
+   * @param {HTMLElement} button - Submit button element
+   * @param {boolean} isSubmitting - Whether form is currently submitting
+   */
+  setSubmitState(button, isSubmitting) {
+    if (!button) return;
+
+    if (isSubmitting) {
+      button.disabled = true;
+      button.dataset.originalText = button.textContent;
+      button.innerHTML = `
+        <span class="spinner spinner-sm" style="display: inline-block; width: 20px; height: 20px; margin-right: 8px; border-width: 2px;"></span>
+        Submitting...
+      `;
+    } else {
+      button.disabled = false;
+      button.textContent = button.dataset.originalText || 'Apply Now';
     }
   }
 
@@ -447,35 +600,12 @@ class VolunteersPage {
       </div>
     `;
     document.body.insertAdjacentHTML('beforeend', alertHtml);
+
+    // Auto-remove after 5 seconds
     setTimeout(() => {
       const alert = document.querySelector('.alert-error');
       if (alert) alert.remove();
     }, 5000);
-  }
-
-  /**
-   * Handle hash navigation (direct links to specific volunteers)
-   */
-  handleHashNavigation() {
-    const hash = window.location.hash.slice(1);
-    if (hash) {
-      const volunteer = this.volunteers.find(v => v.slug === hash);
-      if (volunteer) {
-        // Small delay to ensure page is loaded
-        setTimeout(() => this.showDetails(volunteer.id), 100);
-      }
-    }
-
-    // Listen for hash changes
-    window.addEventListener('hashchange', () => {
-      const newHash = window.location.hash.slice(1);
-      if (newHash) {
-        const volunteer = this.volunteers.find(v => v.slug === newHash);
-        if (volunteer) {
-          this.showDetails(volunteer.id);
-        }
-      }
-    });
   }
 
   /**
@@ -498,12 +628,11 @@ class VolunteersPage {
   }
 }
 
-// Initialize when DOM is ready and expose globally
-let volunteersPage;
+// Initialize when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    volunteersPage = new VolunteersPage();
+    window.volunteersPageInstance = new VolunteersPage();
   });
 } else {
-  volunteersPage = new VolunteersPage();
+  window.volunteersPageInstance = new VolunteersPage();
 }

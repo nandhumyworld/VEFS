@@ -11,6 +11,106 @@
   },
   "events": [
     {
+      "id": "evt-011",
+      "title": "Medicinal Plants Identification & Cultivation",
+      "slug": "medicinal-plants-workshop-2026",
+      "type": "workshop",
+      "status": "upcoming",
+      "featured": true,
+      "date": {
+        "start": "2026-04-10T09:00:00+05:30",
+        "end": "2026-04-10T17:00:00+05:30",
+        "timezone": "Asia/Kolkata"
+      },
+      "duration": {
+        "value": 8,
+        "unit": "hours"
+      },
+      "location": {
+        "type": "in-person",
+        "venue": "VEFS Botanical Garden & Herbal Center",
+        "address": "Mettupalayam Road, Coimbatore, Tamil Nadu 641029",
+        "city": "Coimbatore",
+        "state": "Tamil Nadu",
+        "coordinates": {
+          "lat": 11.0505,
+          "lng": 76.9098
+        }
+      },
+      "audience": ["general-public", "students"],
+      "targetAudience": "Nature enthusiasts, students, and people interested in traditional medicine",
+      "capacity": {
+        "total": 40,
+        "registered": 12,
+        "available": 28
+      },
+      "description": {
+        "brief": "Comprehensive workshop on identifying, cultivating, and using common medicinal plants from Ayurvedic and Siddha traditions.",
+        "full": "Discover the world of traditional Indian medicinal plants through this immersive workshop. Learn to identify 25+ medicinal plants, understand their therapeutic properties, cultivation requirements, and sustainable harvesting practices. Participants will receive seeds/cuttings of medicinal plants and a detailed identification guide.",
+        "objectives": [
+          "Identify common medicinal plants used in Ayurveda and Siddha",
+          "Understand cultivation and care requirements",
+          "Learn sustainable harvesting and processing methods",
+          "Create a home medicinal garden plan"
+        ],
+        "activities": [
+          "Guided tour of VEFS medicinal plant garden",
+          "Plant identification and naming session",
+          "Cultivation techniques demonstration",
+          "Processing and preservation methods",
+          "Seed/cutting distribution",
+          "Q&A with Siddha medicine practitioner"
+        ]
+      },
+      "facilitators": [
+        {
+          "name": "Dr. Meenakshi Sundaram",
+          "title": "Siddha Medicine Practitioner & Botanist",
+          "bio": "25 years experience in traditional medicine and medicinal plant cultivation",
+          "photo": "/images/facilitators/meenakshi-sundaram.jpg"
+        }
+      ],
+      "registration": {
+        "required": true,
+        "url": "/events/evt-011/register",
+        "deadline": "2026-04-05T23:59:59+05:30",
+        "fee": {
+          "amount": 300,
+          "currency": "INR",
+          "type": "paid"
+        }
+      },
+      "requirements": {
+        "age": {
+          "min": 16,
+          "max": null
+        },
+        "prerequisites": "Interest in medicinal plants and traditional medicine",
+        "whatToBring": ["Notebook", "Camera/phone for photos", "Water bottle", "Sun protection"],
+        "dressCode": "Comfortable outdoor clothing, closed shoes"
+      },
+      "logistics": {
+        "meals": ["Lunch", "Tea/Snacks"],
+        "parking": true,
+        "accessibility": "Garden paths may be uneven - wheelchair access limited",
+        "transportation": "On main road, public transport available"
+      },
+      "media": {
+        "featuredImage": "/images/events/evt-011-featured.jpg",
+        "gallery": [],
+        "video": null
+      },
+      "tags": ["medicinal-plants", "ayurveda", "siddha", "workshop", "herbs"],
+      "relatedPrograms": ["prog-004"],
+      "cancellationPolicy": "Full refund if cancelled 3+ days before event",
+      "metadata": {
+        "createdAt": "2025-12-20T14:00:00+05:30",
+        "updatedAt": "2025-12-25T10:00:00+05:30",
+        "createdBy": "admin",
+        "publishedAt": "2025-12-22T09:00:00+05:30"
+      }
+    },
+    {
       "id": "evt-001",
       "title": "Workshop on Indigenous Trees of Tamil Nadu",
       "slug": "workshop-indigenous-trees-2025",
@@ -110,409 +210,6 @@
         "updatedAt": "2025-12-20T15:30:00+05:30",
         "createdBy": "admin",
         "publishedAt": "2025-12-05T09:00:00+05:30"
-      }
-    },
-    {
-      "id": "evt-002",
-      "title": "Community Tree Plantation Drive",
-      "slug": "community-tree-plantation-jan-2026",
-      "type": "field-visit",
-      "status": "upcoming",
-      "featured": true,
-      "date": {
-        "start": "2026-01-26T07:00:00+05:30",
-        "end": "2026-01-26T12:00:00+05:30",
-        "timezone": "Asia/Kolkata"
-      },
-      "duration": {
-        "value": 5,
-        "unit": "hours"
-      },
-      "location": {
-        "type": "in-person",
-        "venue": "Siruvani Foothills",
-        "address": "Siruvani Hills Road, Coimbatore West, Tamil Nadu",
-        "city": "Coimbatore",
-        "state": "Tamil Nadu",
-        "coordinates": {
-          "lat": 10.9852,
-          "lng": 76.7606
-        }
-      },
-      "audience": ["general-public", "families"],
-      "targetAudience": "Community members and families interested in environmental action",
-      "capacity": {
-        "total": 100,
-        "registered": 67,
-        "available": 33
-      },
-      "description": {
-        "brief": "Join us for a community-driven tree plantation event to plant 500+ indigenous saplings in Siruvani foothills.",
-        "full": "Republic Day special event! Join VEFS Foundation in our mission to restore local biodiversity by planting 500+ indigenous tree saplings. This community event brings together volunteers of all ages to contribute to reforestation efforts while learning about native species and their ecological importance.",
-        "objectives": [
-          "Plant 500+ indigenous tree saplings",
-          "Create awareness about reforestation and biodiversity",
-          "Build community engagement in environmental conservation",
-          "Document and tag planted trees for future monitoring"
-        ],
-        "activities": [
-          "Morning assembly and event inauguration",
-          "Tree planting demonstration by experts",
-          "Group-wise sapling distribution and planting",
-          "Sapling care instructions and Q&A",
-          "Group photo and certificate distribution"
-        ]
-      },
-      "facilitators": [
-        {
-          "name": "Mr. Senthil Kumar",
-          "title": "Field Coordinator, VEFS",
-          "bio": "10 years experience organizing community plantation drives across Tamil Nadu",
-          "photo": "/images/facilitators/senthil-kumar.jpg"
-        }
-      ],
-      "registration": {
-        "required": true,
-        "url": "/events/evt-002/register",
-        "deadline": "2026-01-24T23:59:59+05:30",
-        "fee": {
-          "amount": 0,
-          "currency": "INR",
-          "type": "free"
-        }
-      },
-      "requirements": {
-        "age": {
-          "min": 8,
-          "max": null
-        },
-        "prerequisites": "None - Families and children welcome",
-        "whatToBring": ["Water bottle", "Gloves (if available)", "Sun protection (hat/sunscreen)", "Enthusiasm!"],
-        "dressCode": "Old clothes suitable for outdoor work, sturdy shoes"
-      },
-      "logistics": {
-        "meals": ["Breakfast", "Lunch packets"],
-        "parking": true,
-        "accessibility": "Uneven terrain - not wheelchair accessible",
-        "transportation": "Shuttle buses from VEFS office at 6:30 AM"
-      },
-      "media": {
-        "featuredImage": "/images/events/evt-002-featured.jpg",
-        "gallery": [],
-        "video": null
-      },
-      "tags": ["plantation", "community", "environment", "republic-day"],
-      "relatedPrograms": ["prog-005"],
-      "cancellationPolicy": "Free cancellation up to 1 day before event",
-      "metadata": {
-        "createdAt": "2025-11-15T14:00:00+05:30",
-        "updatedAt": "2025-12-22T10:00:00+05:30",
-        "createdBy": "admin",
-        "publishedAt": "2025-11-20T09:00:00+05:30"
-      }
-    },
-    {
-      "id": "evt-003",
-      "title": "Organic Farming Awareness Seminar",
-      "slug": "organic-farming-seminar-feb-2026",
-      "type": "seminar",
-      "status": "upcoming",
-      "featured": false,
-      "date": {
-        "start": "2026-02-22T10:00:00+05:30",
-        "end": "2026-02-22T16:00:00+05:30",
-        "timezone": "Asia/Kolkata"
-      },
-      "duration": {
-        "value": 6,
-        "unit": "hours"
-      },
-      "location": {
-        "type": "in-person",
-        "venue": "Agricultural College Auditorium",
-        "address": "Tamil Nadu Agricultural University Campus, Coimbatore, Tamil Nadu 641003",
-        "city": "Coimbatore",
-        "state": "Tamil Nadu",
-        "coordinates": {
-          "lat": 11.0157,
-          "lng": 76.9316
-        }
-      },
-      "audience": ["farmers"],
-      "targetAudience": "Farmers interested in transitioning to organic farming practices",
-      "capacity": {
-        "total": 150,
-        "registered": 89,
-        "available": 61
-      },
-      "description": {
-        "brief": "Comprehensive seminar on organic farming techniques, sustainable practices, and government support schemes for farmers.",
-        "full": "This seminar brings together organic farming experts, successful organic farmers, and government officials to discuss the benefits, challenges, and practical steps for transitioning to organic agriculture. Attendees will learn about soil health management, natural pest control, certification processes, and market opportunities for organic produce.",
-        "objectives": [
-          "Understand principles and benefits of organic farming",
-          "Learn practical techniques for organic cultivation",
-          "Explore government schemes and subsidies for organic farmers",
-          "Network with successful organic farmers and experts"
-        ],
-        "activities": [
-          "Keynote address by renowned organic farming expert",
-          "Panel discussion with successful organic farmers",
-          "Government schemes presentation by Agriculture Department",
-          "Interactive Q&A and networking session",
-          "Resource material distribution"
-        ]
-      },
-      "facilitators": [
-        {
-          "name": "Dr. Priya Devi",
-          "title": "Soil Scientist & Organic Farming Consultant",
-          "bio": "PhD in Soil Science with 15 years of organic farming research and consultancy",
-          "photo": "/images/facilitators/priya-devi.jpg"
-        },
-        {
-          "name": "Mr. Murugan Natarajan",
-          "title": "Award-winning Organic Farmer",
-          "bio": "25 years of organic farming experience, recipient of State Agriculture Award 2023",
-          "photo": "/images/facilitators/murugan-natarajan.jpg"
-        }
-      ],
-      "registration": {
-        "required": true,
-        "url": "/events/evt-003/register",
-        "deadline": "2026-02-18T23:59:59+05:30",
-        "fee": {
-          "amount": 200,
-          "currency": "INR",
-          "type": "paid"
-        }
-      },
-      "requirements": {
-        "age": {
-          "min": 18,
-          "max": null
-        },
-        "prerequisites": "Current or aspiring farmers with basic farming knowledge",
-        "whatToBring": ["Notebook and pen", "Farming-related questions for Q&A"],
-        "dressCode": "Casual/Formal - No specific requirement"
-      },
-      "logistics": {
-        "meals": ["Lunch", "Tea/Coffee breaks"],
-        "parking": true,
-        "accessibility": "Fully wheelchair accessible",
-        "transportation": "College is well-connected by public transport"
-      },
-      "media": {
-        "featuredImage": "/images/events/evt-003-featured.jpg",
-        "gallery": [],
-        "video": null
-      },
-      "tags": ["organic-farming", "seminar", "farmers", "sustainability"],
-      "relatedPrograms": ["prog-002"],
-      "cancellationPolicy": "50% refund if cancelled 3+ days before event, no refund for cancellations within 3 days",
-      "metadata": {
-        "createdAt": "2025-12-10T11:30:00+05:30",
-        "updatedAt": "2025-12-23T14:00:00+05:30",
-        "createdBy": "admin",
-        "publishedAt": "2025-12-12T09:00:00+05:30"
-      }
-    },
-    {
-      "id": "evt-004",
-      "title": "Nature Photography Competition & Exhibition",
-      "slug": "nature-photography-competition-2026",
-      "type": "competition",
-      "status": "upcoming",
-      "featured": true,
-      "date": {
-        "start": "2026-03-15T10:00:00+05:30",
-        "end": "2026-03-15T18:00:00+05:30",
-        "timezone": "Asia/Kolkata"
-      },
-      "duration": {
-        "value": 8,
-        "unit": "hours"
-      },
-      "location": {
-        "type": "in-person",
-        "venue": "City Art Gallery",
-        "address": "Race Course Road, Coimbatore, Tamil Nadu 641018",
-        "city": "Coimbatore",
-        "state": "Tamil Nadu",
-        "coordinates": {
-          "lat": 11.0019,
-          "lng": 76.9683
-        }
-      },
-      "audience": ["students", "general-public"],
-      "targetAudience": "Amateur and professional photographers passionate about nature",
-      "capacity": {
-        "total": 200,
-        "registered": 145,
-        "available": 55
-      },
-      "description": {
-        "brief": "Annual nature photography competition showcasing biodiversity, indigenous flora/fauna with cash prizes and exhibition.",
-        "full": "VEFS presents its 3rd Annual Nature Photography Competition celebrating the beauty and diversity of Tamil Nadu's natural heritage. Photographers can submit entries across multiple categories including Indigenous Trees, Wildlife, Landscapes, and Macro Nature. Winning entries will be exhibited and winners receive cash prizes and certificates.",
-        "objectives": [
-          "Promote nature photography as a conservation tool",
-          "Showcase Tamil Nadu's biodiversity through visual storytelling",
-          "Recognize and reward talented photographers",
-          "Create public awareness through photo exhibition"
-        ],
-        "activities": [
-          "Entry submission and registration (morning)",
-          "Judging by panel of photography experts",
-          "Photo exhibition opening ceremony",
-          "Prize distribution and awards ceremony",
-          "Networking session for photographers",
-          "Public viewing of winning photographs"
-        ]
-      },
-      "facilitators": [
-        {
-          "name": "Mr. Arun Krishnan",
-          "title": "Wildlife Photographer & Jury Member",
-          "bio": "International award-winning wildlife photographer with 20+ years experience",
-          "photo": "/images/facilitators/arun-krishnan.jpg"
-        }
-      ],
-      "registration": {
-        "required": true,
-        "url": "/events/evt-004/register",
-        "deadline": "2026-03-10T23:59:59+05:30",
-        "fee": {
-          "amount": 100,
-          "currency": "INR",
-          "type": "paid"
-        }
-      },
-      "requirements": {
-        "age": {
-          "min": 15,
-          "max": null
-        },
-        "prerequisites": "Own camera or smartphone, passion for nature photography",
-        "whatToBring": ["Photo prints (if submitting physical)", "Digital submissions via email/portal"],
-        "dressCode": "Smart casual for awards ceremony"
-      },
-      "logistics": {
-        "meals": ["Tea/Coffee", "Evening snacks"],
-        "parking": true,
-        "accessibility": "Wheelchair accessible",
-        "transportation": "Central location, well-connected by public transport"
-      },
-      "media": {
-        "featuredImage": "/images/events/evt-004-featured.jpg",
-        "gallery": [],
-        "video": null
-      },
-      "tags": ["photography", "competition", "nature", "art"],
-      "relatedPrograms": [],
-      "cancellationPolicy": "Entry fee non-refundable after submission deadline",
-      "metadata": {
-        "createdAt": "2025-11-25T09:00:00+05:30",
-        "updatedAt": "2025-12-20T16:00:00+05:30",
-        "createdBy": "admin",
-        "publishedAt": "2025-12-01T10:00:00+05:30"
-      }
-    },
-    {
-      "id": "evt-005",
-      "title": "Seed Preservation Workshop for Women",
-      "slug": "seed-preservation-women-workshop-2026",
-      "type": "workshop",
-      "status": "upcoming",
-      "featured": false,
-      "date": {
-        "start": "2026-02-08T10:00:00+05:30",
-        "end": "2026-02-08T15:00:00+05:30",
-        "timezone": "Asia/Kolkata"
-      },
-      "duration": {
-        "value": 5,
-        "unit": "hours"
-      },
-      "location": {
-        "type": "in-person",
-        "venue": "Women's Self-Help Group Center",
-        "address": "Ganapathy, Coimbatore, Tamil Nadu 641006",
-        "city": "Coimbatore",
-        "state": "Tamil Nadu",
-        "coordinates": {
-          "lat": 11.0357,
-          "lng": 77.0171
-        }
-      },
-      "audience": ["women"],
-      "targetAudience": "Women farmers and homemakers interested in seed preservation",
-      "capacity": {
-        "total": 40,
-        "registered": 28,
-        "available": 12
-      },
-      "description": {
-        "brief": "Learn traditional and modern seed preservation techniques to maintain indigenous crop varieties.",
-        "full": "This hands-on workshop empowers women with knowledge and skills for preserving indigenous seeds. Participants will learn traditional storage methods, seed viability testing, and the importance of maintaining genetic diversity in crops. The workshop includes practical demonstrations and each participant receives a seed preservation starter kit.",
-        "objectives": [
-          "Understand importance of seed preservation for food security",
-          "Master traditional seed storage techniques",
-          "Learn to identify and collect high-quality seeds",
-          "Build a home seed bank for kitchen garden use"
-        ],
-        "activities": [
-          "Introduction to seed preservation and biodiversity",
-          "Demonstration of seed cleaning and drying methods",
-          "Hands-on practice with various seed types",
-          "Seed bank setup guidance",
-          "Distribution of seed preservation starter kits"
-        ]
-      },
-      "facilitators": [
-        {
-          "name": "Mrs. Lakshmi Raman",
-          "title": "Traditional Seed Keeper & Trainer",
-          "bio": "30+ years maintaining indigenous seed varieties, women's empowerment advocate",
-          "photo": "/images/facilitators/lakshmi-raman.jpg"
-        }
-      ],
-      "registration": {
-        "required": true,
-        "url": "/events/evt-005/register",
-        "deadline": "2026-02-05T23:59:59+05:30",
-        "fee": {
-          "amount": 0,
-          "currency": "INR",
-          "type": "free"
-        }
-      },
-      "requirements": {
-        "age": {
-          "min": 18,
-          "max": null
-        },
-        "prerequisites": "Interest in gardening and seed preservation",
-        "whatToBring": ["Notebook", "Any seeds from home garden (optional)", "Reusable cloth bags"],
-        "dressCode": "Comfortable clothing"
-      },
-      "logistics": {
-        "meals": ["Lunch", "Tea/Snacks"],
-        "parking": false,
-        "accessibility": "Ground floor, accessible",
-        "transportation": "Public transport available, auto-rickshaw friendly"
-      },
-      "media": {
-        "featuredImage": "/images/events/evt-005-featured.jpg",
-        "gallery": [],
-        "video": null
-      },
-      "tags": ["seeds", "women", "workshop", "preservation", "agriculture"],
-      "relatedPrograms": ["prog-003"],
-      "cancellationPolicy": "Free cancellation up to 1 day before event",
-      "metadata": {
-        "createdAt": "2025-12-05T13:00:00+05:30",
-        "updatedAt": "2025-12-24T11:00:00+05:30",
-        "createdBy": "admin",
-        "publishedAt": "2025-12-08T09:00:00+05:30"
       }
     },
     {
@@ -618,608 +315,6 @@
         "updatedAt": "2025-06-10T14:00:00+05:30",
         "createdBy": "admin",
         "publishedAt": "2025-04-20T09:00:00+05:30"
-      }
-    },
-    {
-      "id": "evt-007",
-      "title": "Eco-trekking: Western Ghats Biodiversity Exploration",
-      "slug": "eco-trekking-western-ghats-2026",
-      "type": "trekking",
-      "status": "upcoming",
-      "featured": false,
-      "date": {
-        "start": "2026-03-28T06:00:00+05:30",
-        "end": "2026-03-28T18:00:00+05:30",
-        "timezone": "Asia/Kolkata"
-      },
-      "duration": {
-        "value": 12,
-        "unit": "hours"
-      },
-      "location": {
-        "type": "in-person",
-        "venue": "Valparai Forest Region",
-        "address": "Valparai, Coimbatore District, Tamil Nadu 642127",
-        "city": "Valparai",
-        "state": "Tamil Nadu",
-        "coordinates": {
-          "lat": 10.3270,
-          "lng": 76.9550
-        }
-      },
-      "audience": ["general-public", "students"],
-      "targetAudience": "Nature enthusiasts and adventure seekers aged 16+",
-      "capacity": {
-        "total": 30,
-        "registered": 18,
-        "available": 12
-      },
-      "description": {
-        "brief": "Guided eco-trek through Western Ghats exploring biodiversity hotspots, endemic species, and conservation zones.",
-        "full": "Experience the rich biodiversity of the Western Ghats UNESCO World Heritage Site through this guided eco-trek. Led by experienced naturalists, participants will explore montane forests, identify endemic flora and fauna, learn about conservation efforts, and witness breathtaking landscapes. This moderate-difficulty trek includes bird watching, plant identification, and environmental education.",
-        "objectives": [
-          "Experience Western Ghats biodiversity firsthand",
-          "Learn to identify endemic plant and animal species",
-          "Understand conservation challenges in the region",
-          "Practice responsible eco-tourism principles"
-        ],
-        "activities": [
-          "Early morning departure from Coimbatore",
-          "Guided trek through forest trails",
-          "Bird watching and wildlife spotting",
-          "Lunch break at scenic viewpoint",
-          "Plant identification session",
-          "Return journey with conservation discussion"
-        ]
-      },
-      "facilitators": [
-        {
-          "name": "Mr. Karthik Sundar",
-          "title": "Wildlife Biologist & Trek Leader",
-          "bio": "Certified naturalist with 12 years experience leading eco-treks in Western Ghats",
-          "photo": "/images/facilitators/karthik-sundar.jpg"
-        }
-      ],
-      "registration": {
-        "required": true,
-        "url": "/events/evt-007/register",
-        "deadline": "2026-03-24T23:59:59+05:30",
-        "fee": {
-          "amount": 800,
-          "currency": "INR",
-          "type": "paid"
-        }
-      },
-      "requirements": {
-        "age": {
-          "min": 16,
-          "max": 60
-        },
-        "prerequisites": "Moderate fitness level, prior trekking experience helpful but not required",
-        "whatToBring": ["Trekking shoes", "Small backpack", "2L water", "Snacks", "Sunscreen", "Hat", "Binoculars (optional)", "Camera"],
-        "dressCode": "Comfortable trekking clothes in earth tones, full pants and full sleeves recommended"
-      },
-      "logistics": {
-        "meals": ["Packed breakfast", "Lunch", "Evening tea"],
-        "parking": true,
-        "accessibility": "Not wheelchair accessible - moderate trek",
-        "transportation": "Bus transport from VEFS office at 5:30 AM, return by 7 PM"
-      },
-      "media": {
-        "featuredImage": "/images/events/evt-007-featured.jpg",
-        "gallery": [],
-        "video": null
-      },
-      "tags": ["trekking", "western-ghats", "biodiversity", "adventure"],
-      "relatedPrograms": ["prog-004"],
-      "cancellationPolicy": "50% refund if cancelled 5+ days before trek, no refund within 5 days",
-      "metadata": {
-        "createdAt": "2025-12-12T15:00:00+05:30",
-        "updatedAt": "2025-12-24T09:30:00+05:30",
-        "createdBy": "admin",
-        "publishedAt": "2025-12-15T10:00:00+05:30"
-      }
-    },
-    {
-      "id": "evt-008",
-      "title": "Online Webinar: Climate Change & Agriculture",
-      "slug": "climate-change-agriculture-webinar-2026",
-      "type": "seminar",
-      "status": "upcoming",
-      "featured": false,
-      "date": {
-        "start": "2026-02-18T19:00:00+05:30",
-        "end": "2026-02-18T21:00:00+05:30",
-        "timezone": "Asia/Kolkata"
-      },
-      "duration": {
-        "value": 2,
-        "unit": "hours"
-      },
-      "location": {
-        "type": "online",
-        "venue": "Zoom Virtual Conference",
-        "address": "Online - Zoom link will be shared via email",
-        "city": "Online",
-        "state": "Online",
-        "coordinates": null
-      },
-      "audience": ["farmers", "students", "general-public"],
-      "targetAudience": "Farmers, students, and anyone interested in climate-resilient agriculture",
-      "capacity": {
-        "total": 500,
-        "registered": 234,
-        "available": 266
-      },
-      "description": {
-        "brief": "Expert discussion on climate change impacts on agriculture and adaptive farming strategies for Tamil Nadu.",
-        "full": "Join this free online webinar featuring agricultural scientists, climate experts, and farmers discussing the real-world impacts of climate change on farming in Tamil Nadu. Learn about climate-resilient crop varieties, water management strategies, and government support programs. Interactive Q&A session included.",
-        "objectives": [
-          "Understand climate change impacts on Tamil Nadu agriculture",
-          "Learn climate-resilient farming techniques",
-          "Discover government schemes for climate adaptation",
-          "Hear success stories from adaptive farmers"
-        ],
-        "activities": [
-          "Expert presentations on climate science",
-          "Case studies from Tamil Nadu farmers",
-          "Panel discussion on adaptation strategies",
-          "Q&A session with experts",
-          "Resource sharing (PDFs, websites, schemes)"
-        ]
-      },
-      "facilitators": [
-        {
-          "name": "Dr. Anitha Ravi",
-          "title": "Climate Scientist, Agricultural University",
-          "bio": "Research focus on climate-resilient agriculture for tropical regions",
-          "photo": "/images/facilitators/anitha-ravi.jpg"
-        }
-      ],
-      "registration": {
-        "required": true,
-        "url": "/events/evt-008/register",
-        "deadline": "2026-02-18T17:00:00+05:30",
-        "fee": {
-          "amount": 0,
-          "currency": "INR",
-          "type": "free"
-        }
-      },
-      "requirements": {
-        "age": {
-          "min": null,
-          "max": null
-        },
-        "prerequisites": "None - Open to all interested participants",
-        "whatToBring": ["Stable internet connection", "Zoom app (optional)", "Notepad for notes"],
-        "dressCode": "No requirement - Online event"
-      },
-      "logistics": {
-        "meals": [],
-        "parking": false,
-        "accessibility": "Fully accessible - Online event",
-        "transportation": "Not applicable - Online event"
-      },
-      "media": {
-        "featuredImage": "/images/events/evt-008-featured.jpg",
-        "gallery": [],
-        "video": null
-      },
-      "tags": ["webinar", "climate-change", "agriculture", "online"],
-      "relatedPrograms": ["prog-002"],
-      "cancellationPolicy": "Free event - No cancellation policy",
-      "metadata": {
-        "createdAt": "2025-12-18T10:00:00+05:30",
-        "updatedAt": "2025-12-24T16:00:00+05:30",
-        "createdBy": "admin",
-        "publishedAt": "2025-12-20T09:00:00+05:30"
-      }
-    },
-    {
-      "id": "evt-009",
-      "title": "School Tree Planting Competition - District Level",
-      "slug": "school-tree-planting-competition-2025",
-      "type": "competition",
-      "status": "completed",
-      "featured": false,
-      "date": {
-        "start": "2025-11-15T09:00:00+05:30",
-        "end": "2025-11-15T15:00:00+05:30",
-        "timezone": "Asia/Kolkata"
-      },
-      "duration": {
-        "value": 6,
-        "unit": "hours"
-      },
-      "location": {
-        "type": "in-person",
-        "venue": "District Sports Ground",
-        "address": "Gandhipuram, Coimbatore, Tamil Nadu 641012",
-        "city": "Coimbatore",
-        "state": "Tamil Nadu",
-        "coordinates": {
-          "lat": 11.0181,
-          "lng": 76.9674
-        }
-      },
-      "audience": ["students"],
-      "targetAudience": "School students (Classes 6-12) from Coimbatore District",
-      "capacity": {
-        "total": 300,
-        "registered": 285,
-        "available": 0
-      },
-      "description": {
-        "brief": "Inter-school competition where student teams plant trees, create awareness campaigns, and compete for prizes.",
-        "full": "District-level tree planting competition brought together 60 schools with 285 students participating in team-based challenges. Schools competed in categories including: Most trees planted, Best awareness campaign, Creative eco-posters, and Environmental quiz. The event successfully planted 1,200+ saplings across designated zones.",
-        "objectives": [
-          "Engage schools in environmental action",
-          "Plant 1000+ trees across competition zones",
-          "Create student-led awareness campaigns",
-          "Foster environmental leadership among youth"
-        ],
-        "activities": [
-          "Team registration and zone allocation",
-          "Tree planting competition (timed rounds)",
-          "Awareness campaign presentations",
-          "Eco-poster exhibition and judging",
-          "Environmental quiz competition",
-          "Prize distribution ceremony"
-        ]
-      },
-      "facilitators": [
-        {
-          "name": "Ms. Divya Shankar",
-          "title": "School Program Coordinator, VEFS",
-          "bio": "5 years coordinating environmental programs for schools",
-          "photo": "/images/facilitators/divya-shankar.jpg"
-        }
-      ],
-      "registration": {
-        "required": true,
-        "url": "/events/evt-009/register",
-        "deadline": "2025-11-10T23:59:59+05:30",
-        "fee": {
-          "amount": 0,
-          "currency": "INR",
-          "type": "free"
-        }
-      },
-      "requirements": {
-        "age": {
-          "min": 11,
-          "max": 18
-        },
-        "prerequisites": "Must be registered school student, parental consent required",
-        "whatToBring": ["School ID card", "Water bottle", "Gloves (if available)"],
-        "dressCode": "School uniform or sports uniform"
-      },
-      "logistics": {
-        "meals": ["Lunch packets", "Snacks"],
-        "parking": true,
-        "accessibility": "Ground level, accessible",
-        "transportation": "Schools arranged own transport"
-      },
-      "media": {
-        "featuredImage": "/images/events/evt-009-featured.jpg",
-        "gallery": [
-          "/images/events/evt-009-1.jpg",
-          "/images/events/evt-009-2.jpg",
-          "/images/events/evt-009-3.jpg"
-        ],
-        "video": "/videos/events/evt-009-highlights.mp4"
-      },
-      "tags": ["schools", "competition", "tree-planting", "students", "completed"],
-      "relatedPrograms": ["prog-001"],
-      "cancellationPolicy": "School-based registration - Contact organizers for changes",
-      "metadata": {
-        "createdAt": "2025-09-20T10:00:00+05:30",
-        "updatedAt": "2025-11-20T14:00:00+05:30",
-        "createdBy": "admin",
-        "publishedAt": "2025-09-25T09:00:00+05:30"
-      }
-    },
-    {
-      "id": "evt-010",
-      "title": "Composting & Waste Management for Homes",
-      "slug": "home-composting-workshop-2026",
-      "type": "workshop",
-      "status": "upcoming",
-      "featured": false,
-      "date": {
-        "start": "2026-03-05T15:00:00+05:30",
-        "end": "2026-03-05T18:00:00+05:30",
-        "timezone": "Asia/Kolkata"
-      },
-      "duration": {
-        "value": 3,
-        "unit": "hours"
-      },
-      "location": {
-        "type": "in-person",
-        "venue": "Resident Welfare Association Hall",
-        "address": "Saravanampatti, Coimbatore, Tamil Nadu 641035",
-        "city": "Coimbatore",
-        "state": "Tamil Nadu",
-        "coordinates": {
-          "lat": 11.0775,
-          "lng": 77.0045
-        }
-      },
-      "audience": ["general-public", "families"],
-      "targetAudience": "Homeowners and apartment residents interested in waste management",
-      "capacity": {
-        "total": 50,
-        "registered": 31,
-        "available": 19
-      },
-      "description": {
-        "brief": "Practical workshop on setting up home composting systems and reducing household waste through sustainable practices.",
-        "full": "Learn to convert kitchen waste into valuable compost for your garden through this hands-on workshop. Participants will understand different composting methods suitable for apartments and independent houses, learn to troubleshoot common issues, and receive guidance on setting up their own composting system. Each participant receives a composting starter kit.",
-        "objectives": [
-          "Understand benefits of home composting",
-          "Learn various composting methods (aerobic, vermicompost, bokashi)",
-          "Master waste segregation techniques",
-          "Set up functional home composting system"
-        ],
-        "activities": [
-          "Introduction to composting science",
-          "Demonstration of different composting methods",
-          "Hands-on practice with compost bins",
-          "Troubleshooting common issues",
-          "Starter kit distribution and setup guidance"
-        ]
-      },
-      "facilitators": [
-        {
-          "name": "Mr. Vijay Prakash",
-          "title": "Zero Waste Consultant",
-          "bio": "10 years promoting household waste management and urban composting",
-          "photo": "/images/facilitators/vijay-prakash.jpg"
-        }
-      ],
-      "registration": {
-        "required": true,
-        "url": "/events/evt-010/register",
-        "deadline": "2026-03-03T23:59:59+05:30",
-        "fee": {
-          "amount": 150,
-          "currency": "INR",
-          "type": "paid"
-        }
-      },
-      "requirements": {
-        "age": {
-          "min": 18,
-          "max": null
-        },
-        "prerequisites": "Interest in waste management and composting",
-        "whatToBring": ["Notebook", "Kitchen waste samples (optional)", "Reusable bag for kit"],
-        "dressCode": "Casual comfortable clothing"
-      },
-      "logistics": {
-        "meals": ["Tea/Snacks"],
-        "parking": true,
-        "accessibility": "Elevator available - Wheelchair accessible",
-        "transportation": "RWA hall in residential area, easily accessible"
-      },
-      "media": {
-        "featuredImage": "/images/events/evt-010-featured.jpg",
-        "gallery": [],
-        "video": null
-      },
-      "tags": ["composting", "waste-management", "workshop", "sustainability"],
-      "relatedPrograms": ["prog-006"],
-      "cancellationPolicy": "Full refund if cancelled 2+ days before event",
-      "metadata": {
-        "createdAt": "2025-12-15T11:00:00+05:30",
-        "updatedAt": "2025-12-24T13:00:00+05:30",
-        "createdBy": "admin",
-        "publishedAt": "2025-12-18T09:00:00+05:30"
-      }
-    },
-    {
-      "id": "evt-011",
-      "title": "Medicinal Plants Identification & Cultivation",
-      "slug": "medicinal-plants-workshop-2026",
-      "type": "workshop",
-      "status": "upcoming",
-      "featured": true,
-      "date": {
-        "start": "2026-04-10T09:00:00+05:30",
-        "end": "2026-04-10T17:00:00+05:30",
-        "timezone": "Asia/Kolkata"
-      },
-      "duration": {
-        "value": 8,
-        "unit": "hours"
-      },
-      "location": {
-        "type": "in-person",
-        "venue": "VEFS Botanical Garden & Herbal Center",
-        "address": "Mettupalayam Road, Coimbatore, Tamil Nadu 641029",
-        "city": "Coimbatore",
-        "state": "Tamil Nadu",
-        "coordinates": {
-          "lat": 11.0505,
-          "lng": 76.9098
-        }
-      },
-      "audience": ["general-public", "students"],
-      "targetAudience": "Nature enthusiasts, students, and people interested in traditional medicine",
-      "capacity": {
-        "total": 40,
-        "registered": 12,
-        "available": 28
-      },
-      "description": {
-        "brief": "Comprehensive workshop on identifying, cultivating, and using common medicinal plants from Ayurvedic and Siddha traditions.",
-        "full": "Discover the world of traditional Indian medicinal plants through this immersive workshop. Learn to identify 25+ medicinal plants, understand their therapeutic properties, cultivation requirements, and sustainable harvesting practices. Participants will receive seeds/cuttings of medicinal plants and a detailed identification guide.",
-        "objectives": [
-          "Identify common medicinal plants used in Ayurveda and Siddha",
-          "Understand cultivation and care requirements",
-          "Learn sustainable harvesting and processing methods",
-          "Create a home medicinal garden plan"
-        ],
-        "activities": [
-          "Guided tour of VEFS medicinal plant garden",
-          "Plant identification and naming session",
-          "Cultivation techniques demonstration",
-          "Processing and preservation methods",
-          "Seed/cutting distribution",
-          "Q&A with Siddha medicine practitioner"
-        ]
-      },
-      "facilitators": [
-        {
-          "name": "Dr. Meenakshi Sundaram",
-          "title": "Siddha Medicine Practitioner & Botanist",
-          "bio": "25 years experience in traditional medicine and medicinal plant cultivation",
-          "photo": "/images/facilitators/meenakshi-sundaram.jpg"
-        }
-      ],
-      "registration": {
-        "required": true,
-        "url": "/events/evt-011/register",
-        "deadline": "2026-04-05T23:59:59+05:30",
-        "fee": {
-          "amount": 300,
-          "currency": "INR",
-          "type": "paid"
-        }
-      },
-      "requirements": {
-        "age": {
-          "min": 16,
-          "max": null
-        },
-        "prerequisites": "Interest in medicinal plants and traditional medicine",
-        "whatToBring": ["Notebook", "Camera/phone for photos", "Water bottle", "Sun protection"],
-        "dressCode": "Comfortable outdoor clothing, closed shoes"
-      },
-      "logistics": {
-        "meals": ["Lunch", "Tea/Snacks"],
-        "parking": true,
-        "accessibility": "Garden paths may be uneven - wheelchair access limited",
-        "transportation": "On main road, public transport available"
-      },
-      "media": {
-        "featuredImage": "/images/events/evt-011-featured.jpg",
-        "gallery": [],
-        "video": null
-      },
-      "tags": ["medicinal-plants", "ayurveda", "siddha", "workshop", "herbs"],
-      "relatedPrograms": ["prog-004"],
-      "cancellationPolicy": "Full refund if cancelled 3+ days before event",
-      "metadata": {
-        "createdAt": "2025-12-20T14:00:00+05:30",
-        "updatedAt": "2025-12-25T10:00:00+05:30",
-        "createdBy": "admin",
-        "publishedAt": "2025-12-22T09:00:00+05:30"
-      }
-    },
-    {
-      "id": "evt-012",
-      "title": "Farmer-Scientist Interaction: Sustainable Practices",
-      "slug": "farmer-scientist-interaction-2025",
-      "type": "gathering",
-      "status": "completed",
-      "featured": false,
-      "date": {
-        "start": "2025-10-20T10:00:00+05:30",
-        "end": "2025-10-20T16:00:00+05:30",
-        "timezone": "Asia/Kolkata"
-      },
-      "duration": {
-        "value": 6,
-        "unit": "hours"
-      },
-      "location": {
-        "type": "in-person",
-        "venue": "Krishi Vigyan Kendra",
-        "address": "Thondamuthur, Coimbatore, Tamil Nadu 641109",
-        "city": "Coimbatore",
-        "state": "Tamil Nadu",
-        "coordinates": {
-          "lat": 10.9862,
-          "lng": 76.8365
-        }
-      },
-      "audience": ["farmers"],
-      "targetAudience": "Small and marginal farmers from Coimbatore district",
-      "capacity": {
-        "total": 80,
-        "registered": 76,
-        "available": 0
-      },
-      "description": {
-        "brief": "Bridging the gap between farmers and agricultural scientists through dialogue, knowledge sharing, and practical demonstrations.",
-        "full": "This successful event brought together 76 farmers and agricultural scientists for meaningful exchange of knowledge and experiences. Scientists presented latest research findings while farmers shared ground realities and challenges. The interactive format allowed for practical problem-solving and built lasting connections between farming community and research institutions.",
-        "objectives": [
-          "Facilitate knowledge exchange between farmers and scientists",
-          "Address farmer challenges through scientific solutions",
-          "Build trust and collaboration channels",
-          "Demonstrate latest agricultural technologies"
-        ],
-        "activities": [
-          "Welcome and farmer introductions",
-          "Scientists' presentations on current research",
-          "Farmers sharing experiences and challenges",
-          "Group discussions on specific topics",
-          "Field demonstrations of new techniques",
-          "Networking lunch and informal interactions"
-        ]
-      },
-      "facilitators": [
-        {
-          "name": "Dr. Ramakrishnan P.",
-          "title": "Senior Scientist, Krishi Vigyan Kendra",
-          "bio": "30 years in agricultural research and farmer extension services",
-          "photo": "/images/facilitators/ramakrishnan.jpg"
-        }
-      ],
-      "registration": {
-        "required": true,
-        "url": "/events/evt-012/register",
-        "deadline": "2025-10-15T23:59:59+05:30",
-        "fee": {
-          "amount": 0,
-          "currency": "INR",
-          "type": "free"
-        }
-      },
-      "requirements": {
-        "age": {
-          "min": 18,
-          "max": null
-        },
-        "prerequisites": "Active farmers or those interested in farming",
-        "whatToBring": ["Farming-related questions/problems", "Notebook"],
-        "dressCode": "Casual/Traditional"
-      },
-      "logistics": {
-        "meals": ["Lunch", "Tea/Snacks"],
-        "parking": true,
-        "accessibility": "Ground floor, accessible",
-        "transportation": "Located on main road, bus facility available"
-      },
-      "media": {
-        "featuredImage": "/images/events/evt-012-featured.jpg",
-        "gallery": [
-          "/images/events/evt-012-1.jpg",
-          "/images/events/evt-012-2.jpg"
-        ],
-        "video": null
-      },
-      "tags": ["farmers", "scientists", "agriculture", "knowledge-sharing", "completed"],
-      "relatedPrograms": ["prog-002"],
-      "cancellationPolicy": "Free event - contact organizers for changes",
-      "metadata": {
-        "createdAt": "2025-08-25T10:00:00+05:30",
-        "updatedAt": "2025-10-25T14:00:00+05:30",
-        "createdBy": "admin",
-        "publishedAt": "2025-09-01T09:00:00+05:30"
       }
     }
   ]

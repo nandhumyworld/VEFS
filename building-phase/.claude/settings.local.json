@@ -1,40 +1,21 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mkdir:*)",
-      "Bash(touch:*)",
-      "Bash(dir:*)",
-      "Bash(wc:*)",
-      "Bash(ls:*)",
-      "Bash(for file in trainings.html events.html gallery.html future-plans.html privacy.html terms.html)",
-      "Bash(do sed:*)",
-      "Bash(done)",
-      "Bash(for file in programs.html trainings.html events.html gallery.html contact.html donate.html future-plans.html privacy.html terms.html)",
-      "Bash(grep:*)",
-      "Bash(for file in *.html)",
-      "Bash(python:*)",
-      "Bash(powershell:*)",
+      "Bash(find:*)",
+      "mcp__playwright__playwright_console_logs",
       "mcp__playwright__playwright_navigate",
-      "Bash(npm install:*)",
-      "Bash(npx playwright install chromium)",
-      "Bash(npx:*)",
-      "Bash(set PLAYWRIGHT_BROWSERS_PATH=%USERPROFILE%.playwright)",
-      "Bash(node cli.js:*)",
-      "Bash(playwright install:*)",
-      "Bash(echo:*)",
+      "Bash(python -m http.server:*)",
       "mcp__playwright__playwright_screenshot",
       "mcp__playwright__playwright_evaluate",
-      "mcp__playwright__playwright_close",
-      "Bash(for file in about.html trainings.html events.html volunteer.html gallery.html contact.html future-plans.html)",
-      "Bash(do echo \"Processing $file...\")"
+      "mcp__playwright__playwright_click",
+      "mcp__playwright__playwright_fill",
+      "Bash(ping:*)",
+      "mcp__playwright__playwright_close"
     ]
   },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "playwright"
   ],
-  "enabledPlugins": {
-    "frontend-design@claude-code-plugins": true
-  },
-  "outputStyle": "Explanatory"
+  "outputStyle": "default"
 }

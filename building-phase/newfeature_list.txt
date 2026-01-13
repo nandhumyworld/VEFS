@@ -1,0 +1,23 @@
+All the subscription email should also follow the same and recorded, in file internal and in google sheet as well. You might need to implement this feature.
+
+  🔶  Local Registration Backup (P2) - Complex Architecture Change
+
+  Issue: All registrations should save to local JSON/text file before Google Sheets
+  Complexity: Complex - requires PHP endpoint and file system operations
+  Action Required:
+  1. Create PHP script to save registration data to local JSON files
+  2. Update all registration JS files to call local save endpoint first
+  3. Implement error handling and retry logic
+  4. Test file permissions and storage
+
+  🔶 Donation Form Implementation (P2) - Feature Enhancement
+
+  Issue: Donation form should match paid event/training workflow
+  Action Required:
+  1. Update js/donate.js to follow same pattern as events/trainings
+  2. Add payment modal workflow with UPI/Bank transfer details
+  3. Add WhatsApp confirmation workflow
+  4. Test donation amount entry and validation
+
+
+  Send payment information along with the mail template for any paid events, trainings and donation
