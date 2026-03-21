@@ -59,6 +59,11 @@ class Modal {
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
 
+    // Scroll modal back to top
+    modal.scrollTop = 0;
+    const modalBody = modal.querySelector('.modal-body');
+    if (modalBody) modalBody.scrollTop = 0;
+
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
 

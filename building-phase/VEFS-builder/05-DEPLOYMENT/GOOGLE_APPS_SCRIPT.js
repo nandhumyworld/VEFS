@@ -30,7 +30,8 @@ const CONFIG = {
     EVENTS: 'Event Registrations',
     TRAININGS: 'Training Registrations',
     VOLUNTEER: 'Volunteer Applications',
-    DONATION: 'Donation Records'
+    DONATION: 'Donation Records',
+    NEWSLETTER: 'Newsletter Subscribers'
   },
 
   // Email subject templates
@@ -44,7 +45,8 @@ const CONFIG = {
     ADMIN_VOLUNTEER: '🤝 New Volunteer Application - VEFS Foundation',
     USER_VOLUNTEER: 'Thank you for volunteering - VEFS Foundation',
     ADMIN_DONATION: '💚 New Donation Received - VEFS Foundation',
-    USER_DONATION: 'Thank you for your donation - VEFS Foundation'
+    USER_DONATION: 'Thank you for your donation - VEFS Foundation',
+    ADMIN_NEWSLETTER: '📧 New Newsletter Subscriber - VEFS Foundation'
   }
 };
 
@@ -63,11 +65,16 @@ function doPost(e) {
     // Determine which form type and process accordingly
     const formType = data.formType || 'contact'; // Default to contact form
 
-    // Basic validation - all forms need at least name and email
+    // Basic validation - newsletter only needs email; other forms need name too
     // Note: Donation form uses firstName/lastName instead of name
-    const hasName = data.name || (data.firstName && data.lastName);
-    if (!hasName || !data.email) {
-      return createResponseWithCORS(false, 'Missing required fields (name and email)');
+    if (!data.email) {
+      return createResponseWithCORS(false, 'Missing required field: email');
+    }
+    if (formType !== 'newsletter') {
+      const hasName = data.name || (data.firstName && data.lastName);
+      if (!hasName) {
+        return createResponseWithCORS(false, 'Missing required field: name');
+      }
     }
 
     // Validate email format
@@ -101,6 +108,8 @@ function doPost(e) {
         return handleVolunteerApplication(data);
       case 'donation':
         return handleDonation(data);
+      case 'newsletter':
+        return handleNewsletterSubscription(data);
       default:
         return createResponseWithCORS(false, 'Invalid form type');
     }
@@ -1196,4 +1205,55 @@ function isValidAmount(amount) {
   if (!amount) return true;
   const amountNum = parseFloat(amount);
   return !isNaN(amountNum) && amountNum > 0 && amountNum <= 100000;
+}
+
+// ===========================
+// NEWSLETTER HANDLER
+// ===========================
+
+/**
+ * Handle newsletter subscription notifications
+ * (Subscriber is already saved to JSON by PHP; this logs to sheet + notifies admin)
+ */
+function handleNewsletterSubscription(data) {
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+    let sheet = ss.getSheetByName(CONFIG.SHEETS.NEWSLETTER);
+    if (!sheet) {
+      sheet = ss.insertSheet(CONFIG.SHEETS.NEWSLETTER);
+      sheet.appendRow(['Timestamp', 'Email', 'Source', 'Total Subscribers']);
+      sheet.getRange('A1:D1').setFontWeight('bold').setBackground('#6B8E23').setFontColor('#ffffff');
+    }
+
+    const timestamp = new Date();
+    sheet.appendRow([
+      timestamp,
+      data.email,
+      data.source || 'website',
+      data.totalSubscribers || ''
+    ]);
+
+    // Notify admin
+    const adminBody = `
+      <h2 style="color:#6B8E23;">New Newsletter Subscriber</h2>
+      <p><strong>Email:</strong> ${data.email}</p>
+      <p><strong>Source:</strong> ${data.source || 'website'}</p>
+      <p><strong>Subscribed At:</strong> ${data.subscribedAt || timestamp.toISOString()}</p>
+      <p><strong>Total Subscribers:</strong> ${data.totalSubscribers || 'N/A'}</p>
+    `;
+
+    GmailApp.sendEmail(
+      CONFIG.ADMIN_EMAIL,
+      CONFIG.EMAIL_SUBJECTS.ADMIN_NEWSLETTER,
+      '',
+      { htmlBody: adminBody, name: 'VEFS Foundation Website' }
+    );
+
+    return createResponseWithCORS(true, 'Newsletter notification sent');
+
+  } catch (error) {
+    console.error('Error in handleNewsletterSubscription:', error);
+    return createResponseWithCORS(false, 'Error: ' + error.message);
+  }
 }

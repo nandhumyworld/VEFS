@@ -183,8 +183,13 @@
               <div style="font-size: 2rem; margin-bottom: var(--space-md);">📞</div>
               <h3 style="font-size: var(--font-size-lg); margin-bottom: var(--space-sm); color: var(--color-primary);">Call Us</h3>
               <p style="color: var(--color-gray-700);">
-                <strong>Phone:</strong> <a href="tel:+918610457700" style="color: var(--color-primary);">+91 8610457700</a><br>
-                <strong>Office Hours:</strong> Monday - Saturday, 9:00 AM - 6:00 PM
+                <strong>Office/Enquiry (Events, Programs, Volunteers):</strong><br>
+                <a href="tel:+919342211488" style="color: var(--color-primary);">+91 9342211488</a><br><br>
+                <strong>Admin:</strong><br>
+                <a href="tel:+918610457700" style="color: var(--color-primary);">+91 8610457700</a> <span style="font-size: var(--font-size-sm); color: var(--color-gray-600);">(morning to 8pm)</span><br><br>
+                <strong>Vetrimaran (Personal Appointment):</strong><br>
+                <a href="tel:+919566667708" style="color: var(--color-primary);">+91 9566667708</a><br><br>
+                <strong>Office Hours:</strong> Monday - Saturday, 9:00 AM - 8:00 PM
               </p>
               <div style="margin-top: var(--space-md);">
                 <a href="https://wa.me/919342211488" target="_blank" rel="noopener" aria-label="WhatsApp" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background-color: #25D366; color: white; border-radius: 8px; text-decoration: none; transition: background-color 0.3s ease;">
@@ -314,8 +319,39 @@
 
     <!-- Map Section -->
     <section class="section" style="padding: 0;">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3927.003101961746!2d77.8250898!3d10.180402499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b074e6c40000001%3A0xd9348ab1ebc30b6f!2sValluvam%20Ecological%20Organic%20Farm!5e0!3m2!1sen!2sin!4v1767164074884!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div id="map-container" style="width:100%;height:450px;background:#e8efe0;display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="loadMap()" aria-label="Click to load map">
+        <div style="text-align:center;color:#6B8E23;">
+          <div style="font-size:3rem;margin-bottom:12px;">📍</div>
+          <p style="font-size:1rem;font-weight:500;margin:0;">Valluvam Ecological Organic Farm</p>
+          <p style="font-size:0.875rem;margin:6px 0 16px;color:#8B7355;">Click to load map</p>
+          <button onclick="loadMap()" style="background:#6B8E23;color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:0.9rem;cursor:pointer;font-weight:500;">Show Map</button>
+        </div>
+      </div>
     </section>
+    <script>
+      function loadMap() {
+        const container = document.getElementById('map-container');
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3927.003101961746!2d77.8250898!3d10.180402499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b074e6c40000001%3A0xd9348ab1ebc30b6f!2sValluvam%20Ecological%20Organic%20Farm!5e0!3m2!1sen!2sin!4v1767164074884!5m2!1sen!2sin';
+        iframe.width = '100%';
+        iframe.height = '450';
+        iframe.style.border = '0';
+        iframe.allowFullscreen = true;
+        iframe.referrerPolicy = 'no-referrer-when-downgrade';
+        container.replaceWith(iframe);
+      }
+      // Auto-load map when section scrolls into view
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            loadMap();
+            observer.disconnect();
+          }
+        }, { threshold: 0.1 });
+        const el = document.getElementById('map-container');
+        if (el) observer.observe(el);
+      }
+    </script>
 
     <!-- CTA Section -->
     <section class="section section-py" style="background-color: var(--color-primary-light); text-align: center;">
@@ -380,7 +416,11 @@
             </li>
             <li>
               <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-              <a href="tel:+918610457700">+91 8610457700</a>
+              <a href="tel:+919342211488">+91 9342211488</a> (Office/Enquiry)
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              <a href="tel:+918610457700">+91 8610457700</a> (Admin, morning to 8pm)
             </li>
           </ul>
 
@@ -411,5 +451,6 @@
   <script src="js/components/navigation.js"></script>
   <script src="js/components/form-validation.js"></script>
   <script src="js/contact.js?v=2.0"></script>
+  <script src="js/newsletter.js"></script>
 </body>
 </html>

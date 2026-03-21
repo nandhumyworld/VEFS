@@ -34,11 +34,14 @@ class TrainingsPage {
       const data = await response.json();
       this.trainings = data.trainings || [];
 
-      // Sort by start date (ascending - earliest first)
+      // Sort by start date (ascending - earliest first; no-date trainings go last)
       this.trainings.sort((a, b) => {
-        const dateA = new Date(a.schedule.sessions[0].date);
-        const dateB = new Date(b.schedule.sessions[0].date);
-        return dateA - dateB;
+        const aHasDate = a.schedule.sessions && a.schedule.sessions.length > 0;
+        const bHasDate = b.schedule.sessions && b.schedule.sessions.length > 0;
+        if (!aHasDate && !bHasDate) return 0;
+        if (!aHasDate) return 1;
+        if (!bHasDate) return -1;
+        return new Date(a.schedule.sessions[0].date) - new Date(b.schedule.sessions[0].date);
       });
 
       this.filteredTrainings = [...this.trainings];
@@ -118,6 +121,10 @@ class TrainingsPage {
    * Check if training matches date filter
    */
   matchesDateFilter(training, dateFilter) {
+    const hasSessions = training.schedule.sessions && training.schedule.sessions.length > 0;
+    // Trainings without dates are shown only under 'all'
+    if (!hasSessions) return dateFilter === 'all';
+
     const now = new Date();
     const startDate = new Date(training.schedule.sessions[0].date);
     const lastSession = training.schedule.sessions[training.schedule.sessions.length - 1];
@@ -167,15 +174,21 @@ class TrainingsPage {
 
     // Render timeline
     timelineContent.innerHTML = Object.entries(grouped).map(([yearMonth, trainings]) => {
-      const [year, month] = yearMonth.split('-');
-      const monthName = new Date(year, month - 1).toLocaleString('default', { month: 'long' });
+      let headerLabel;
+      if (yearMonth === 'tbd') {
+        headerLabel = 'Date To Be Announced';
+      } else {
+        const [year, month] = yearMonth.split('-');
+        const monthName = new Date(year, month - 1).toLocaleString('default', { month: 'long' });
+        headerLabel = `${monthName} ${year}`;
+      }
 
       return `
         <div class="timeline-section" style="margin-bottom: var(--space-3xl);">
           <!-- Year/Month Header -->
           <div style="display: flex; align-items: center; margin-bottom: var(--space-xl);">
             <div style="background-color: var(--color-primary); color: white; padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-weight: 600;">
-              ${monthName} ${year}
+              ${headerLabel}
             </div>
             <div style="flex: 1; height: 3px; background-color: var(--color-primary-light); margin-left: var(--space-md);"></div>
           </div>
@@ -194,14 +207,13 @@ class TrainingsPage {
    */
   groupByYearMonth(trainings) {
     return trainings.reduce((groups, training) => {
-      const date = new Date(training.schedule.sessions[0].date);
-      const yearMonth = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      const hasSessions = training.schedule.sessions && training.schedule.sessions.length > 0;
+      const yearMonth = hasSessions
+        ? (() => { const d = new Date(training.schedule.sessions[0].date); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`; })()
+        : 'tbd';
 
-      if (!groups[yearMonth]) {
-        groups[yearMonth] = [];
-      }
+      if (!groups[yearMonth]) groups[yearMonth] = [];
       groups[yearMonth].push(training);
-
       return groups;
     }, {});
   }
@@ -210,11 +222,12 @@ class TrainingsPage {
    * Render individual training card
    */
   renderTrainingCard(training) {
-    const startDate = new Date(training.schedule.sessions[0].date);
-    const lastSession = training.schedule.sessions[training.schedule.sessions.length - 1];
-    const endDate = new Date(lastSession.date);
-    const isUpcoming = startDate > new Date();
-    const isPast = endDate < new Date();
+    const hasSessions = training.schedule.sessions && training.schedule.sessions.length > 0;
+    const startDate = hasSessions ? new Date(training.schedule.sessions[0].date) : null;
+    const lastSession = hasSessions ? training.schedule.sessions[training.schedule.sessions.length - 1] : null;
+    const endDate = lastSession ? new Date(lastSession.date) : null;
+    const isUpcoming = startDate ? startDate > new Date() : false;
+    const isPast = endDate ? endDate < new Date() : false;
     const isFull = training.status === 'full';
     const isOpen = training.status === 'open';
     const isFree = training.registration.fee.amount === 0;
@@ -244,12 +257,12 @@ class TrainingsPage {
     // Format duration
     const duration = `${training.totalDuration.value} ${training.totalDuration.unit}`;
 
-    // Extract time from first session (format: HH:MM from ISO datetime)
-    const sessionTime = new Date(training.schedule.sessions[0].date).toLocaleTimeString('en-US', {
+    // Extract time from first session if available
+    const sessionTime = hasSessions ? new Date(training.schedule.sessions[0].date).toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',
       hour12: true
-    });
+    }) : null;
 
     return `
       <div class="card animate-fade-in" style="position: relative; margin-left: var(--space-lg); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;"
@@ -279,8 +292,8 @@ class TrainingsPage {
             </div>
 
             <div style="display: flex; flex-wrap: wrap; gap: var(--space-md); margin-bottom: var(--space-sm); color: var(--color-gray-600); font-size: var(--font-size-sm);">
-              <span>📅 ${window.VEFSUtils.formatDate(startDate)}</span>
-              <span>⏰ ${sessionTime}</span>
+              ${startDate ? `<span>📅 ${window.VEFSUtils.formatDate(startDate)}</span>` : ''}
+              ${sessionTime ? `<span>⏰ ${sessionTime}</span>` : ''}
               <span>📍 ${training.location.type === 'online' ? 'Online' : training.location.city}</span>
               <span>⏳ ${duration}</span>
             </div>
@@ -325,10 +338,11 @@ class TrainingsPage {
     // Update URL hash
     window.location.hash = training.slug || trainingId;
 
-    const startDate = new Date(training.schedule.sessions[0].date);
-    const lastSession = training.schedule.sessions[training.schedule.sessions.length - 1];
-    const endDate = new Date(lastSession.date);
-    const isPast = endDate < new Date();
+    const hasSessions = training.schedule.sessions && training.schedule.sessions.length > 0;
+    const startDate = hasSessions ? new Date(training.schedule.sessions[0].date) : null;
+    const lastSession = hasSessions ? training.schedule.sessions[training.schedule.sessions.length - 1] : null;
+    const endDate = lastSession ? new Date(lastSession.date) : null;
+    const isPast = endDate ? endDate < new Date() : false;
     const isFull = training.status === 'full';
     const isFree = training.registration.fee.amount === 0;
 
@@ -336,18 +350,18 @@ class TrainingsPage {
 
     // Format duration and time
     const duration = `${training.totalDuration.value} ${training.totalDuration.unit}`;
-    const sessionTime = new Date(training.schedule.sessions[0].date).toLocaleTimeString('en-US', {
+    const sessionTime = hasSessions ? new Date(training.schedule.sessions[0].date).toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',
       hour12: true
-    });
+    }) : null;
 
     modalBody.innerHTML = `
       <div>
         <!-- Header Image -->
         ${training.media?.featuredImage ? `
           <img src="${training.media.featuredImage}" alt="${training.title}"
-               style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: var(--space-lg);">
+               style="width: 100%; height: auto; display: block; border-radius: var(--radius-md); margin-bottom: var(--space-lg);">
         ` : ''}
 
         <!-- Title and Status -->
@@ -362,14 +376,23 @@ class TrainingsPage {
 
         <!-- Key Details Grid -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl); padding: var(--space-lg); background-color: var(--color-gray-50); border-radius: var(--radius-md);">
+          ${startDate ? `
           <div>
             <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">📅 Date</div>
-            <div style="font-weight: 600;">${window.VEFSUtils.formatDate(startDate)}${startDate.getTime() !== endDate.getTime() ? ' - ' + window.VEFSUtils.formatDate(endDate) : ''}</div>
+            <div style="font-weight: 600;">${window.VEFSUtils.formatDate(startDate)}${endDate && startDate.getTime() !== endDate.getTime() ? ' - ' + window.VEFSUtils.formatDate(endDate) : ''}</div>
           </div>
+          ` : `
+          <div>
+            <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">📅 Date</div>
+            <div style="font-weight: 600; color: var(--color-gray-500);">To Be Announced</div>
+          </div>
+          `}
+          ${sessionTime ? `
           <div>
             <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">⏰ Time</div>
             <div style="font-weight: 600;">${sessionTime}</div>
           </div>
+          ` : ''}
           <div>
             <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">⏳ Duration</div>
             <div style="font-weight: 600;">${duration}</div>

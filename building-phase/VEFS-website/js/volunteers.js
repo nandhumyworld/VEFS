@@ -65,7 +65,6 @@ class VolunteersPage {
     try {
       container.innerHTML = this.filteredVolunteers.map(volunteer => {
         const startDate = new Date(volunteer.dates.start);
-        const hasStipend = volunteer.benefits.stipend.provided;
         const spotsRemaining = volunteer.spots.available;
 
         return `
@@ -93,11 +92,6 @@ class VolunteersPage {
                 <div style="margin-bottom: var(--space-xs);">
                   <strong>⏰ Commitment:</strong> ${volunteer.commitment}
                 </div>
-                ${hasStipend ? `
-                  <div style="color: var(--color-success); margin-top: var(--space-xs);">
-                    💰 Stipend: ₹${volunteer.benefits.stipend.amount}/month
-                  </div>
-                ` : ''}
               </div>
 
               <div class="card-footer" style="margin-top: var(--space-md); display: flex; justify-content: space-between; align-items: center;">
@@ -150,8 +144,6 @@ class VolunteersPage {
 
     const startDate = new Date(volunteer.dates.start);
     const endDate = new Date(volunteer.dates.end);
-    const hasStipend = volunteer.benefits.stipend.provided;
-
     modalBody.innerHTML = `
       <!-- Featured Image -->
       ${volunteer.media?.featuredImage ? `
@@ -236,7 +228,6 @@ class VolunteersPage {
             ${volunteer.benefits.certificate ? '<span style="color: var(--color-success);">✓ Certificate provided</span>' : ''}
             ${volunteer.benefits.meals ? '<span style="color: var(--color-success);">✓ Meals included</span>' : ''}
             ${volunteer.benefits.accommodation ? '<span style="color: var(--color-success);">✓ Accommodation provided</span>' : ''}
-            ${hasStipend ? `<span style="color: var(--color-success);">✓ Stipend: ₹${volunteer.benefits.stipend.amount}/month</span>` : ''}
           </div>
         </div>
       </div>
@@ -505,58 +496,21 @@ class VolunteersPage {
       </div>
     `;
 
+
     document.body.appendChild(modal);
 
-    // Track whether modal can be closed
-    let canClose = false;
-
-    // Function to close modal and navigate back to volunteer page
-    const closeModalAndNavigate = () => {
-      if (!canClose) return;
-
-      // Remove success modal
-      document.getElementById('volunteer-success-modal').remove();
-
-      // Clear the hash to go back to main volunteer page
-      window.location.hash = '';
-
-      // Scroll to top of page
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    // Enable closing after 3 seconds
-    setTimeout(() => {
-      canClose = true;
-      const button = document.getElementById('success-modal-btn');
-      if (button) {
-        button.disabled = false;
-        button.style.cursor = 'pointer';
-        button.style.opacity = '1';
-      }
-    }, 3000);
-
-    // Add event listener to OK button
+    // Add event listener instead of inline onclick
     const button = document.getElementById('success-modal-btn');
     if (button) {
-      button.addEventListener('click', closeModalAndNavigate);
-    }
-
-    // Add event listener to backdrop (click anywhere outside)
-    const backdrop = document.getElementById('success-modal-backdrop');
-    if (backdrop) {
-      backdrop.addEventListener('click', (e) => {
-        // Only close if clicking the backdrop itself, not the modal content
-        if (e.target === backdrop) {
-          closeModalAndNavigate();
+      button.addEventListener('click', () => {
+        document.getElementById('volunteer-success-modal').remove();
+        if (hasFee) {
+          this.showPaymentModal(volunteer);
+        } else {
+          if (window.modalInstance) {
+            window.modalInstance.close();
+          }
         }
-      });
-    }
-
-    // Prevent clicks on modal content from bubbling to backdrop
-    const content = document.getElementById('success-modal-content');
-    if (content) {
-      content.addEventListener('click', (e) => {
-        e.stopPropagation();
       });
     }
 

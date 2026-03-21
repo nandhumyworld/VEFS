@@ -1,6 +1,7 @@
 /**
  * Gallery Page JavaScript
- * Handles photo display, filtering, search, and lightbox functionality
+ * Loads images dynamically from get-gallery-images.php
+ * Any image uploaded to images/gallery-optimized/ appears here automatically.
  */
 
 class GalleryPage {
@@ -18,123 +19,169 @@ class GalleryPage {
 
   async init() {
     await this.loadPhotos();
+    this.buildYearFilters();
     this.setupFilters();
     this.setupSearch();
     this.setupLightbox();
     this.renderGallery();
   }
 
-  /**
-   * Load photos data (placeholder - will use JSON in production)
-   */
-  async loadPhotos() {
-    // TODO: Replace with actual JSON file in production
-    // const response = await fetch('data/gallery.json');
-    // this.photos = await response.json();
+  // ─── Load photos from PHP scanner ──────────────────────────────────────────
 
-    // For now, create sample data
-    this.photos = this.generateSamplePhotos();
+  async loadPhotos() {
+    try {
+      // Try PHP first (Hostinger live server — auto-discovers new images)
+      let files = await this.fetchJSON('get-gallery-images.php');
+
+      // Fallback: static JSON (works on local Python server)
+      if (!files) {
+        files = await this.fetchJSON('data/gallery.json');
+      }
+
+      this.photos = (files || []).map((file, index) => this.buildPhotoObject(file, index));
+    } catch (err) {
+      console.warn('Could not load gallery images:', err);
+      this.photos = [];
+    }
     this.filteredPhotos = [...this.photos];
     this.updateResultsCount();
   }
 
-  /**
-   * Generate sample photos for demonstration
-   */
-  generateSamplePhotos() {
-    const categories = ['programs', 'trainings', 'events', 'nature'];
-    const years = [2023, 2024, 2025];
-    const photos = [];
+  async fetchJSON(url) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) return null;
+      const text = await res.text();
+      if (text.trim().startsWith('<?')) return null; // PHP not executed
+      return JSON.parse(text);
+    } catch {
+      return null;
+    }
+  }
 
-    for (let i = 1; i <= 24; i++) {
-      const category = categories[Math.floor(Math.random() * categories.length)];
-      const year = years[Math.floor(Math.random() * years.length)];
+  // ─── Build a photo metadata object from a filename ─────────────────────────
 
-      photos.push({
-        id: `photo-${i}`,
-        title: `${this.capitalize(category)} Photo ${i}`,
-        description: `A memorable moment from our ${category} activities. Capturing the essence of community engagement and environmental conservation.`,
-        category: category,
-        year: year,
-        date: `${year}-${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}-15`,
-        location: i % 3 === 0 ? 'Coimbatore' : i % 3 === 1 ? 'Salem' : 'Madurai',
-        image: `/images/gallery/${year}/${category}/photo-${i}.jpg`  // Placeholder path
-      });
+  buildPhotoObject(file, index) {
+    const filename = file.filename;
+    const year     = this.extractYear(filename);
+    const title    = this.buildTitle(filename, index);
+    const category = this.detectCategory(filename);
+
+    return {
+      id:          `photo-${index}`,
+      filename,
+      title,
+      description: '',
+      category,
+      year,
+      date:        `${year}-01-01`,
+      url:         file.url,
+    };
+  }
+
+  // Extract a 4-digit year (2010–2029) from a filename
+  extractYear(filename) {
+    const match = filename.match(/20[1-2]\d/);
+    if (match) return parseInt(match[0]);
+
+    // FB_IMG timestamps: 13-digit millisecond epoch
+    const tsMatch = filename.match(/(\d{13})/);
+    if (tsMatch) {
+      const yr = new Date(parseInt(tsMatch[1])).getFullYear();
+      if (yr >= 2010 && yr <= 2099) return yr;
     }
 
-    return photos;
+    return new Date().getFullYear();
   }
 
-  /**
-   * Setup filter button handlers
-   */
+  // Turn a raw filename into a readable title
+  buildTitle(filename, index) {
+    let name = filename.replace(/\.[^/.]+$/, '');   // remove extension
+    // Remove common camera/app prefixes
+    name = name.replace(/^(IMG[-_]?|FB_IMG_|VideoCapture_|Screenshot_)/i, '');
+    // Replace separators with spaces
+    name = name.replace(/[-_]/g, ' ').trim();
+    // Remove long numeric-only segments (timestamps)
+    name = name.replace(/\b\d{7,}\b/g, '').trim();
+    // Collapse multiple spaces
+    name = name.replace(/\s{2,}/g, ' ').trim();
+
+    return name || `Photo ${index + 1}`;
+  }
+
+  // Detect category from filename keywords (optional — defaults to 'general')
+  detectCategory(filename) {
+    const f = filename.toLowerCase();
+    if (/train|workshop|learn|class/i.test(f))   return 'trainings';
+    if (/event|fest|camp|rally/i.test(f))         return 'events';
+    if (/tree|plant|nature|forest|seed/i.test(f)) return 'nature';
+    if (/program|program|volunt/i.test(f))        return 'programs';
+    return 'general';
+  }
+
+  // ─── Build year filter buttons dynamically ─────────────────────────────────
+
+  buildYearFilters() {
+    const years = [...new Set(this.photos.map(p => p.year))].sort((a, b) => b - a);
+    const container = document.getElementById('gallery-filters');
+    const separator = container.querySelector('span[style*="border"]') ||
+                      [...container.querySelectorAll('span')].find(s => s.textContent.trim() === '|');
+
+    // Remove existing hard-coded year buttons
+    container.querySelectorAll('[data-filter-type="year"]').forEach(btn => btn.remove());
+
+    if (!separator) return;
+
+    years.forEach(year => {
+      const btn = document.createElement('button');
+      btn.className = 'btn btn-outline btn-sm';
+      btn.dataset.filterType  = 'year';
+      btn.dataset.filterValue = String(year);
+      btn.textContent = String(year);
+      separator.insertAdjacentElement('afterend', btn);
+    });
+  }
+
+  // ─── Filters ───────────────────────────────────────────────────────────────
+
   setupFilters() {
-    const filterButtons = document.querySelectorAll('[data-filter-type]');
+    document.getElementById('gallery-filters').addEventListener('click', (e) => {
+      const button = e.target.closest('[data-filter-type]');
+      if (!button) return;
 
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const filterType = button.dataset.filterType;
-        const filterValue = button.dataset.filterValue;
+      const filterType  = button.dataset.filterType;
+      const filterValue = button.dataset.filterValue;
 
-        // Remove active class from siblings
-        const siblings = document.querySelectorAll(`[data-filter-type="${filterType}"]`);
-        siblings.forEach(btn => btn.classList.remove('active'));
+      // Update active state within this filter group
+      document.querySelectorAll(`[data-filter-type="${filterType}"]`).forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
 
-        // Add active class to clicked button
-        button.classList.add('active');
-
-        // Update filter
-        this.filters[filterType] = filterValue === 'all' ? (filterType === 'category' ? 'all' : null) : filterValue;
-
-        this.applyFilters();
-      });
+      this.filters[filterType] = filterValue === 'all' ? (filterType === 'category' ? 'all' : null) : filterValue;
+      this.applyFilters();
     });
 
-    // Reset button
-    document.getElementById('reset-filters').addEventListener('click', () => {
-      this.resetFilters();
-    });
+    document.getElementById('reset-filters').addEventListener('click', () => this.resetFilters());
   }
 
-  /**
-   * Setup search input handler
-   */
   setupSearch() {
-    const searchInput = document.getElementById('gallery-search');
-
-    searchInput.addEventListener('input', (e) => {
+    document.getElementById('gallery-search').addEventListener('input', (e) => {
       this.filters.search = e.target.value.toLowerCase();
       this.applyFilters();
     });
   }
 
-  /**
-   * Apply all active filters
-   */
   applyFilters() {
     this.filteredPhotos = this.photos.filter(photo => {
-      // Category filter
       if (this.filters.category && this.filters.category !== 'all') {
-        if (photo.category !== this.filters.category) {
-          return false;
-        }
+        if (photo.category !== this.filters.category) return false;
       }
-
-      // Year filter
       if (this.filters.year) {
-        if (photo.year.toString() !== this.filters.year) {
-          return false;
-        }
+        if (photo.year.toString() !== this.filters.year) return false;
       }
-
-      // Search filter
       if (this.filters.search) {
-        const searchableText = `${photo.title} ${photo.description} ${photo.category}`.toLowerCase();
-        if (!searchableText.includes(this.filters.search)) {
-          return false;
-        }
+        const text = `${photo.title} ${photo.category} ${photo.year}`.toLowerCase();
+        if (!text.includes(this.filters.search)) return false;
       }
-
       return true;
     });
 
@@ -142,189 +189,117 @@ class GalleryPage {
     this.renderGallery();
   }
 
-  /**
-   * Reset all filters
-   */
   resetFilters() {
-    this.filters = {
-      category: 'all',
-      year: null,
-      search: ''
-    };
-
-    // Reset UI
-    document.querySelectorAll('[data-filter-type]').forEach(btn => {
-      btn.classList.remove('active');
-    });
+    this.filters = { category: 'all', year: null, search: '' };
+    document.querySelectorAll('[data-filter-type]').forEach(btn => btn.classList.remove('active'));
     document.querySelector('[data-filter-value="all"]').classList.add('active');
     document.getElementById('gallery-search').value = '';
-
     this.applyFilters();
   }
 
-  /**
-   * Update results count display
-   */
   updateResultsCount() {
     document.getElementById('count-current').textContent = this.filteredPhotos.length;
-    document.getElementById('count-total').textContent = this.photos.length;
+    document.getElementById('count-total').textContent   = this.photos.length;
   }
 
-  /**
-   * Render gallery grid
-   */
+  // ─── Render ────────────────────────────────────────────────────────────────
+
   renderGallery() {
     const loadingSpinner = document.getElementById('loading-spinner');
-    const photosGrid = document.getElementById('photos-grid');
-    const noResults = document.getElementById('no-results');
+    const photosGrid     = document.getElementById('photos-grid');
+    const noResults      = document.getElementById('no-results');
 
-    // Hide loading
     loadingSpinner.style.display = 'none';
 
-    // Check if no results
     if (this.filteredPhotos.length === 0) {
       photosGrid.style.display = 'none';
-      noResults.style.display = 'block';
+      noResults.style.display  = 'block';
       return;
     }
 
-    // Show grid
-    noResults.style.display = 'none';
+    noResults.style.display  = 'none';
     photosGrid.style.display = 'block';
 
-    // Render photos
     photosGrid.innerHTML = this.filteredPhotos.map((photo, index) => `
-      <div class="photo-item animate-fade-in" onclick="galleryPageInstance.openLightbox(${index})">
+      <div class="photo-item animate-fade-in" onclick="galleryPageInstance.openLightbox(${index})" role="button" tabindex="0" aria-label="View photo ${photo.year}">
         <img
-          src="${photo.image}"
-          alt="${photo.title}"
+          src="${photo.url}?v=${photo.modified}"
+          alt="VEFS photo ${photo.year}"
           loading="lazy"
-          onerror="this.src='/images/placeholder.jpg'"
+          onerror="this.parentElement.style.display='none'"
         >
         <div class="photo-overlay">
-          <div>
-            <div style="font-weight: 600; margin-bottom: 4px;">${photo.title}</div>
-            <div style="font-size: var(--font-size-sm); opacity: 0.9;">${photo.date.split('-')[0]}</div>
-          </div>
+          <div style="font-size:var(--font-size-sm);opacity:0.9;">${photo.year}</div>
         </div>
       </div>
     `).join('');
+
+    // Keyboard support
+    photosGrid.querySelectorAll('.photo-item').forEach((item, i) => {
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') this.openLightbox(i);
+      });
+    });
   }
 
-  /**
-   * Setup lightbox functionality
-   */
+  // ─── Lightbox ──────────────────────────────────────────────────────────────
+
   setupLightbox() {
     const lightbox = document.getElementById('gallery-lightbox');
-    const closeBtn = lightbox.querySelector('.modal-close');
-    const prevBtn = document.getElementById('lightbox-prev');
-    const nextBtn = document.getElementById('lightbox-next');
+    lightbox.querySelector('.modal-close').addEventListener('click', () => this.closeLightbox());
+    document.getElementById('lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); this.navigateLightbox(-1); });
+    document.getElementById('lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); this.navigateLightbox(1); });
 
-    // Close button
-    closeBtn.addEventListener('click', () => {
-      this.closeLightbox();
-    });
-
-    // Navigation buttons
-    prevBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.navigateLightbox(-1);
-    });
-
-    nextBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.navigateLightbox(1);
-    });
-
-    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
-      if (lightbox.classList.contains('active')) {
-        if (e.key === 'Escape') {
-          this.closeLightbox();
-        } else if (e.key === 'ArrowLeft') {
-          this.navigateLightbox(-1);
-        } else if (e.key === 'ArrowRight') {
-          this.navigateLightbox(1);
-        }
-      }
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape')     this.closeLightbox();
+      if (e.key === 'ArrowLeft')  this.navigateLightbox(-1);
+      if (e.key === 'ArrowRight') this.navigateLightbox(1);
     });
 
-    // Close on overlay click
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
-        this.closeLightbox();
-      }
-    });
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) this.closeLightbox(); });
   }
 
-  /**
-   * Open lightbox with photo at index
-   */
   openLightbox(index) {
     this.currentPhotoIndex = index;
     const photo = this.filteredPhotos[index];
 
-    // Update lightbox content
-    document.getElementById('lightbox-image').src = photo.image;
-    document.getElementById('lightbox-image').alt = photo.title;
-    document.getElementById('lightbox-title').textContent = photo.title;
-    document.getElementById('lightbox-date').textContent = `📅 ${new Date(photo.date).toLocaleDateString('en-IN', { year: 'numeric', month: 'long' })}`;
+    document.getElementById('lightbox-image').src           = photo.url;
+    document.getElementById('lightbox-image').alt           = photo.title;
+    document.getElementById('lightbox-title').textContent   = photo.title;
+    document.getElementById('lightbox-date').textContent    = `📅 ${photo.year}`;
     document.getElementById('lightbox-category').textContent = `📂 ${this.capitalize(photo.category)}`;
-    document.getElementById('lightbox-location').textContent = `📍 ${photo.location}`;
-    document.getElementById('lightbox-description').textContent = photo.description;
+    document.getElementById('lightbox-location').textContent = '';
+    document.getElementById('lightbox-description').textContent = '';
     document.getElementById('lightbox-counter').textContent = `Photo ${index + 1} of ${this.filteredPhotos.length}`;
 
-    // Show lightbox
     const lightbox = document.getElementById('gallery-lightbox');
     lightbox.classList.add('active');
     lightbox.setAttribute('aria-hidden', 'false');
-
-    // Prevent body scroll
     document.body.style.overflow = 'hidden';
   }
 
-  /**
-   * Close lightbox
-   */
   closeLightbox() {
     const lightbox = document.getElementById('gallery-lightbox');
     lightbox.classList.remove('active');
     lightbox.setAttribute('aria-hidden', 'true');
-
-    // Restore body scroll
     document.body.style.overflow = '';
   }
 
-  /**
-   * Navigate lightbox (prev/next)
-   */
   navigateLightbox(direction) {
-    this.currentPhotoIndex += direction;
-
-    // Wrap around
-    if (this.currentPhotoIndex < 0) {
-      this.currentPhotoIndex = this.filteredPhotos.length - 1;
-    } else if (this.currentPhotoIndex >= this.filteredPhotos.length) {
-      this.currentPhotoIndex = 0;
-    }
-
+    this.currentPhotoIndex = (this.currentPhotoIndex + direction + this.filteredPhotos.length) % this.filteredPhotos.length;
     this.openLightbox(this.currentPhotoIndex);
   }
 
-  /**
-   * Capitalize string
-   */
   capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }
 
-// Initialize when DOM is ready
+// Initialize
 let galleryPageInstance;
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    galleryPageInstance = new GalleryPage();
-  });
+  document.addEventListener('DOMContentLoaded', () => { galleryPageInstance = new GalleryPage(); });
 } else {
   galleryPageInstance = new GalleryPage();
 }

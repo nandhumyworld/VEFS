@@ -185,8 +185,7 @@
 /* Modal image (for event/training detail modals) */
 .modal-image {
   width: 100%;
-  max-height: 300px;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
 

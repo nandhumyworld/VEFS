@@ -82,7 +82,10 @@ class EventsPage {
           ` : ''}
           <div class="card-body">
             <div class="card-meta" style="margin-bottom: var(--space-sm);">
-              <span>📅 ${window.VEFSUtils.formatDate(startDate)}</span>
+              ${event.recurring?.isRecurring
+                ? `<span style="background-color: var(--color-primary); color: white; padding: 2px 10px; border-radius: var(--radius-full); font-size: var(--font-size-xs); font-weight: 600;">🔁 ${event.recurring.label}</span>`
+                : `<span>📅 ${window.VEFSUtils.formatDate(startDate)}</span>`
+              }
               <span>📍 ${event.location.city}</span>
             </div>
             <h3 class="card-title">${event.title}</h3>
@@ -90,8 +93,8 @@ class EventsPage {
 
             <div class="card-footer" style="margin-top: var(--space-md); display: flex; justify-content: space-between; align-items: center;">
               <span style="font-weight: 600; color: var(--color-primary);">${isFree ? 'FREE' : '₹' + feeAmount}</span>
-              <button class="btn btn-sm ${isFull || isPast ? 'btn-outline' : 'btn-primary'}" onclick="eventsPageInstance.showDetails('${event.id}')">
-                ${isPast ? 'View Details' : isFull ? 'View Details' : 'Register'}
+              <button class="btn btn-sm btn-primary" onclick="eventsPageInstance.showDetails('${event.id}')">
+                View Details
               </button>
             </div>
           </div>
@@ -121,7 +124,7 @@ class EventsPage {
     modalBody.innerHTML = `
       <!-- Header Image -->
       ${event.images?.hero ? `
-        <img src="${event.images.hero}" alt="${event.title}" style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: var(--space-lg);">
+        <img src="${event.images.hero}" alt="${event.title}" style="width: 100%; height: auto; display: block; border-radius: var(--radius-md); margin-bottom: var(--space-lg);">
       ` : ''}
 
       <!-- Title and Description -->
@@ -146,7 +149,8 @@ class EventsPage {
         </div>
         <div>
           <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">📍 Location</div>
-          <div style="font-weight: 600;">${event.location.venue || event.location.city}</div>
+          <div style="font-weight: 600;">${event.location.venue}</div>
+          <div style="font-size: var(--font-size-sm); color: var(--color-gray-600);">${[event.location.address, event.location.city, event.location.state].filter(Boolean).join(', ')}</div>
         </div>
         <div>
           <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">💰 Donation</div>
@@ -217,38 +221,49 @@ class EventsPage {
         </div>
       ` : ''}
 
-      <!-- Call to Action / Registration Form -->
-      ${isPast ? `
-        <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200);">
-          <p style="text-align: center; color: var(--color-gray-600); margin-bottom: var(--space-md);">
-            This event has been completed. Check back for future events!
-          </p>
-          <a href="/events.html" class="btn btn-outline" style="width: 100%;">View All Events</a>
+      <!-- Recurring Info -->
+      ${event.recurring?.isRecurring ? `
+        <div style="padding: var(--space-md) var(--space-lg); background-color: var(--color-primary); color: white; border-radius: var(--radius-md); margin-bottom: var(--space-xl); display: flex; align-items: center; gap: var(--space-sm);">
+          <span style="font-size: var(--font-size-xl);">🔁</span>
+          <div>
+            <div style="font-weight: 600;">${event.recurring.label}</div>
+            <div style="font-size: var(--font-size-sm); opacity: 0.9;">Timing: 9:00 AM – 6:00 PM</div>
+          </div>
         </div>
-      ` : isFull ? `
-        <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200);">
-          <p style="text-align: center; color: var(--color-gray-600); margin-bottom: var(--space-md);">
-            This event is currently full. Contact us to join the waitlist.
-          </p>
-          <a href="/contact.html?inquiry=event&event=${event.id}" class="btn btn-primary" style="width: 100%;">Join Waitlist</a>
-        </div>
-      ` : `
-        <div style="background: var(--color-gray-50); padding: var(--space-xl); border-radius: var(--radius-md); margin-top: var(--space-2xl);">
-          <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: var(--color-primary);">Register for This Event</h3>
-          <form id="event-registration-form" class="form" data-event-id="${event.id}">
-            ${this.generateEventFormFields(event)}
-            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
-              ${isFree ? 'Register Now' : 'Register & View Payment Details'}
-            </button>
-          </form>
-        </div>
-      `}
-    `;
+      ` : ''}
 
-    // Setup form validation and submission if form is present
-    if (!isPast && !isFull) {
-      setTimeout(() => this.setupEventRegistrationForm(event), 100);
-    }
+      <!-- Links: Map, WhatsApp, YouTube -->
+      ${(event.links?.map || event.links?.whatsapp || event.links?.youtube) ? `
+        <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-xl);">
+          ${event.links?.map ? `
+            <a href="${event.links.map}" target="_blank" rel="noopener"
+               style="display: inline-flex; align-items: center; gap: 6px; background-color: var(--color-gray-100); color: var(--color-gray-800); padding: 10px 16px; border-radius: var(--radius-md); text-decoration: none; font-size: var(--font-size-sm); font-weight: 500; border: 1px solid var(--color-gray-300);">
+              📍 View on Map
+            </a>
+          ` : ''}
+          ${event.links?.whatsapp ? `
+            <a href="${event.links.whatsapp}" target="_blank" rel="noopener"
+               style="display: inline-flex; align-items: center; gap: 6px; background-color: #25D366; color: white; padding: 10px 16px; border-radius: var(--radius-md); text-decoration: none; font-size: var(--font-size-sm); font-weight: 500;">
+              📱 Follow on WhatsApp
+            </a>
+          ` : ''}
+          ${event.links?.youtube ? `
+            <a href="${event.links.youtube}" target="_blank" rel="noopener"
+               style="display: inline-flex; align-items: center; gap: 6px; background-color: #FF0000; color: white; padding: 10px 16px; border-radius: var(--radius-md); text-decoration: none; font-size: var(--font-size-sm); font-weight: 500;">
+              ▶ Watch on YouTube
+            </a>
+          ` : ''}
+        </div>
+      ` : ''}
+
+      <!-- Footer CTA -->
+      <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200); text-align: center;">
+        <p style="color: var(--color-gray-600); margin-bottom: var(--space-md);">
+          For more updates, follow our WhatsApp channel or contact the coordinators above.
+        </p>
+        <button class="btn btn-outline" onclick="if(window.modalInstance) window.modalInstance.close();">Close</button>
+      </div>
+    `;
 
     if (window.modalInstance) {
       window.modalInstance.open('event-modal');
