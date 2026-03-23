@@ -254,7 +254,7 @@
       <div class="container" style="max-width: 700px;">
         <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-xl); text-align: center; color: var(--color-primary);">Complete Your Donation</h2>
 
-        <form id="donation-form" class="form" data-validate style="background-color: var(--color-white); padding: var(--space-2xl); border-radius: var(--radius-lg); box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+        <form id="donation-form" class="form" style="background-color: var(--color-white); padding: var(--space-2xl); border-radius: var(--radius-lg); box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
 
           <!-- Step 1: Amount Selection -->
           <div class="form-step" id="step-amount">
@@ -289,23 +289,6 @@
               </div>
             </div>
 
-            <!-- Donation Type -->
-            <div class="form-group">
-              <label class="form-label">Donation Type</label>
-              <div style="display: flex; gap: var(--space-md);">
-                <label style="flex: 1; padding: var(--space-md); border: 2px solid var(--color-gray-300); border-radius: var(--radius-md); cursor: pointer;">
-                  <input type="radio" name="donationType" value="one-time" checked style="margin-right: var(--space-xs);">
-                  <span>One-Time</span>
-                </label>
-                <label style="flex: 1; padding: var(--space-md); border: 2px solid var(--color-gray-300); border-radius: var(--radius-md); cursor: pointer;">
-                  <input type="radio" name="donationType" value="monthly" style="margin-right: var(--space-xs);">
-                  <span>Monthly Recurring</span>
-                </label>
-              </div>
-              <p style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-top: var(--space-xs);">
-                💚 Recurring donations help us plan long-term initiatives
-              </p>
-            </div>
           </div>
 
           <!-- Step 2: Donor Information -->
@@ -394,13 +377,6 @@
             <!-- Additional Options -->
             <div class="form-group">
               <label style="display: flex; align-items: center; cursor: pointer;">
-                <input type="checkbox" name="anonymous" style="margin-right: var(--space-sm);">
-                <span>Make this donation anonymous</span>
-              </label>
-            </div>
-
-            <div class="form-group">
-              <label style="display: flex; align-items: center; cursor: pointer;">
                 <input type="checkbox" name="newsletter" style="margin-right: var(--space-sm);">
                 <span>Send me updates about VEFS programs</span>
               </label>
@@ -423,14 +399,14 @@
 
           <!-- Submit Button -->
           <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: var(--space-xl);">
-            🔒 Proceed to Secure Payment
+            💚 Submit Donation Request
           </button>
 
-          <!-- Security Badge -->
+          <!-- Info Note -->
           <div style="text-align: center; margin-top: var(--space-md); color: var(--color-gray-600); font-size: var(--font-size-sm);">
             <div style="display: inline-flex; align-items: center; gap: var(--space-xs);">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-              <span>Secure payment powered by industry-standard encryption</span>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <span>After submitting, you'll receive an email with payment details to complete your donation.</span>
             </div>
           </div>
         </form>
@@ -582,7 +558,7 @@
 
           <details class="card" style="padding: var(--space-lg); cursor: pointer;">
             <summary style="font-size: var(--font-size-lg); font-weight: 600; color: var(--color-primary); margin-bottom: var(--space-sm);">Can I set up a monthly recurring donation?</summary>
-            <p style="color: var(--color-gray-700); margin-top: var(--space-sm);">Yes! Select "Monthly Recurring" when choosing your donation type. You can cancel or modify your recurring donation anytime by contacting us at <a href="mailto:donations@vefs.org" style="color: var(--color-primary);">donations@vefs.org</a>.</p>
+            <p style="color: var(--color-gray-700); margin-top: var(--space-sm);">Yes! Select "Monthly Recurring" when choosing your donation type. You can cancel or modify your recurring donation anytime by contacting us at <a href="mailto:vefsfoundation@gmail.com" style="color: var(--color-primary);">vefsfoundation@gmail.com</a>.</p>
           </details>
 
           <details class="card" style="padding: var(--space-lg); cursor: pointer;">
@@ -611,7 +587,7 @@
           Have questions about donating? Our team is here to assist you.
         </p>
         <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; margin-bottom: var(--space-lg);">
-          <a href="mailto:donations@vefs.org" class="btn btn-outline">📧 donations@vefs.org</a>
+          <a href="mailto:vefsfoundation@gmail.com" class="btn btn-outline">📧 vefsfoundation@gmail.com</a>
           <a href="tel:+919342211488" class="btn btn-outline">📞 +91 9342211488</a>
         </div>
         <a href="/contact.html?inquiry=donation" class="btn btn-primary">Contact Donations Team</a>

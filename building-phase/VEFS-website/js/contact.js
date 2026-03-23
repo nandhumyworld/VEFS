@@ -4,7 +4,7 @@
  */
 
 // CONFIGURATION: Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw2vis0PY7STZ9yYqgHGyI0vxEkxH64c6-Ll31cj6qCU5_07QMQDHzwZc6H4NwMZJh/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhgGlN-u8kPRPKf1MG7NTguN_FCfdGUNipG9OH2CWv8cAtRTEcEnUAHcfTaiGX6FHKYw/exec';
 
 class ContactPage {
   constructor() {

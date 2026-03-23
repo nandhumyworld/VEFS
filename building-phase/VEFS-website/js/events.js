@@ -4,7 +4,7 @@
  */
 
 // CONFIGURATION: Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw2vis0PY7STZ9yYqgHGyI0vxEkxH64c6-Ll31cj6qCU5_07QMQDHzwZc6H4NwMZJh/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhgGlN-u8kPRPKf1MG7NTguN_FCfdGUNipG9OH2CWv8cAtRTEcEnUAHcfTaiGX6FHKYw/exec';
 
 class EventsPage {
   constructor() {
@@ -256,6 +256,19 @@ class EventsPage {
         </div>
       ` : ''}
 
+      ${event.registration?.isOpen && !isPast && !isFull ? `
+      <!-- Registration Form -->
+      <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200);">
+        <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--space-lg);">Register for this Event</h3>
+        <form id="event-registration-form" class="form" data-event-id="${event.id}">
+          ${this.generateEventFormFields(event)}
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: var(--space-lg);">
+            ${isFree ? 'Register Now' : 'Register & View Payment Details'}
+          </button>
+        </form>
+      </div>
+      ` : ''}
+
       <!-- Footer CTA -->
       <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200); text-align: center;">
         <p style="color: var(--color-gray-600); margin-bottom: var(--space-md);">
@@ -267,6 +280,10 @@ class EventsPage {
 
     if (window.modalInstance) {
       window.modalInstance.open('event-modal');
+    }
+
+    if (event.registration?.isOpen && !isPast && !isFull) {
+      setTimeout(() => this.setupEventRegistrationForm(event), 100);
     }
   }
 
@@ -334,18 +351,11 @@ class EventsPage {
     // Get submit button reference
     const submitButton = form.querySelector('button[type="submit"]');
 
-    // Initialize form validation
+    // Initialize form validation for real-time field feedback.
+    // Override onSuccess to prevent form.submit() from reloading the page.
     if (window.FormValidation) {
-      const minAge = event.requirements?.age?.min || 0;
-      const maxAge = event.requirements?.age?.max || 100;
-
-      new window.FormValidation(form, {
-        name: { required: true, minLength: 2 },
-        email: { required: true, email: true },
-        phone: { required: true, phone: true },
-        age: { required: true, min: minAge, max: maxAge },
-        attendees: { required: true, min: 1, max: 10 }
-      });
+      const fv = new window.FormValidation(form);
+      fv.onSuccess = () => {};
     }
 
     // Handle form submission

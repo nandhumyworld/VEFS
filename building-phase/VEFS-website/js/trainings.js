@@ -4,7 +4,7 @@
  */
 
 // CONFIGURATION: Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw2vis0PY7STZ9yYqgHGyI0vxEkxH64c6-Ll31cj6qCU5_07QMQDHzwZc6H4NwMZJh/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhgGlN-u8kPRPKf1MG7NTguN_FCfdGUNipG9OH2CWv8cAtRTEcEnUAHcfTaiGX6FHKYw/exec';
 
 class TrainingsPage {
   constructor() {
@@ -230,7 +230,7 @@ class TrainingsPage {
     const isPast = endDate ? endDate < new Date() : false;
     const isFull = training.status === 'full';
     const isOpen = training.status === 'open';
-    const isFree = training.registration.fee.amount === 0;
+    const isFree = (training.registration?.fee?.amount ?? 0) === 0;
 
     // Status badge
     let statusBadge = '';
@@ -315,7 +315,7 @@ class TrainingsPage {
 
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span style="font-weight: 600; color: ${isFree ? 'var(--color-success)' : 'var(--color-gray-900)'}; font-size: var(--font-size-lg);">
-                ${isFree ? 'FREE' : '₹' + training.registration.fee.amount}
+                ${isFree ? 'FREE' : '₹' + (training.registration?.fee?.amount || '')}
               </span>
               <button class="btn btn-sm ${isPast || isFull ? 'btn-outline' : 'btn-primary'}"
                       onclick="event.stopPropagation(); trainingsPageInstance.showDetails('${training.id}')">
@@ -344,7 +344,7 @@ class TrainingsPage {
     const endDate = lastSession ? new Date(lastSession.date) : null;
     const isPast = endDate ? endDate < new Date() : false;
     const isFull = training.status === 'full';
-    const isFree = training.registration.fee.amount === 0;
+    const isFree = (training.registration?.fee?.amount ?? 0) === 0;
 
     const modalBody = document.getElementById('training-modal-body');
 
@@ -404,7 +404,7 @@ class TrainingsPage {
           <div>
             <div style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-bottom: var(--space-xs);">💰 Donation</div>
             <div style="font-weight: 600; color: ${isFree ? 'var(--color-success)' : 'var(--color-gray-900)'};">
-              ${isFree ? 'FREE' : '₹' + training.registration.fee.amount}
+              ${isFree ? 'FREE' : '₹' + (training.registration?.fee?.amount || '')}
             </div>
           </div>
           <div>
@@ -601,20 +601,11 @@ class TrainingsPage {
     // Get submit button reference
     const submitButton = form.querySelector('button[type="submit"]');
 
-    // Initialize form validation
+    // Initialize form validation for real-time field feedback.
+    // Override onSuccess to prevent form.submit() from reloading the page.
     if (window.FormValidation) {
-      const minAge = training.requirements?.age?.min || 18;
-      const maxAge = training.requirements?.age?.max || 65;
-
-      new window.FormValidation(form, {
-        name: { required: true, minLength: 2 },
-        email: { required: true, email: true },
-        phone: { required: true, phone: true },
-        age: { required: true, min: minAge, max: maxAge },
-        education: { required: true },
-        occupation: { required: true, minLength: 2 },
-        background: { required: true, minLength: 20 }
-      });
+      const fv = new window.FormValidation(form);
+      fv.onSuccess = () => {};
     }
 
     // Handle form submission
@@ -626,8 +617,8 @@ class TrainingsPage {
         type: 'training',
         trainingId: training.id,
         trainingTitle: training.title,
-        trainingDate: training.schedule.sessions[0].date,
-        trainingFee: training.registration.fee.amount || 0,
+        trainingDate: training.schedule?.sessions?.[0]?.date || training.schedule?.startDate || 'Flexible',
+        trainingFee: training.registration?.fee?.amount || 0,
         name: formData.get('name'),
         email: formData.get('email'),
         phone: formData.get('phone'),
@@ -763,7 +754,7 @@ class TrainingsPage {
    * Show success modal after registration
    */
   showSuccessModal(training) {
-    const hasFee = training.registration.fee.amount && training.registration.fee.amount > 0;
+    const hasFee = training.registration?.fee?.amount && training.registration?.fee?.amount > 0;
 
     const modal = document.createElement('div');
     modal.id = 'registration-success-modal';
@@ -838,7 +829,7 @@ class TrainingsPage {
           </div>
 
           <div style="background: #FFF9E6; padding: 20px; border-radius: 8px; margin-bottom: 24px; border: 2px solid #D4A574;">
-            <p style="font-size: 20px; margin: 0 0 8px 0; font-weight: 600; color: #333;">Donation Amount: ₹${training.registration.fee.amount}</p>
+            <p style="font-size: 20px; margin: 0 0 8px 0; font-weight: 600; color: #333;">Donation Amount: ₹${training.registration?.fee?.amount || ''}</p>
             <p style="font-size: 14px; margin: 0; color: #666;">This amount is treated as a donation to support our environmental conservation efforts.</p>
           </div>
 

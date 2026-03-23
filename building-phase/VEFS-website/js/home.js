@@ -139,7 +139,7 @@ class HomePage {
     try {
 
     container.innerHTML = featured.map(training => {
-      const isFree = training.registration.fee.amount === 0;
+      const isFree = (training.registration?.fee?.amount ?? 0) === 0;
       const statusClass = training.status === 'full' ? 'card-badge-danger' :
                          training.status === 'upcoming' ? 'card-badge-warning' :
                          'card-badge-success';
@@ -171,7 +171,7 @@ class HomePage {
             </div>
 
             <div class="card-footer" style="margin-top: var(--space-md); display: flex; justify-content: space-between; align-items: center;">
-              <span class="card-price">${isFree ? 'FREE' : '₹' + training.registration.fee.amount}</span>
+              <span class="card-price">${isFree ? 'FREE' : '₹' + (training.registration?.fee?.amount || '')}</span>
               <a href="/trainings.html#${training.id}" class="btn btn-sm ${training.status === 'full' ? 'btn-outline' : 'btn-primary'}">
                 ${training.status === 'full' ? 'View Details' : 'Register Now'}
               </a>
