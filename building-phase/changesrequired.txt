@@ -1,3 +1,3 @@
-❯ error in training submission in console check this \                        \
-  trainings.js:620 Uncaught (in promise) TypeError: Cannot read properties    of undefined (reading 'date')                                             
-      at HTMLFormElement.<anonymous> (trainings.js:620:53)   
+--color-1: #B0171F;
+--color-2: #B05C17;
+--color-3: #B0A817;
