@@ -1,21 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find:*)",
-      "mcp__playwright__playwright_console_logs",
-      "mcp__playwright__playwright_navigate",
-      "Bash(python -m http.server:*)",
-      "mcp__playwright__playwright_screenshot",
-      "mcp__playwright__playwright_evaluate",
-      "mcp__playwright__playwright_click",
-      "mcp__playwright__playwright_fill",
-      "Bash(ping:*)",
-      "mcp__playwright__playwright_close"
+      "Bash(grep:*)",
+      "Bash(pip show:*)",
+      "Bash(python:*)"
     ]
   },
-  "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [
+  "disabledMcpjsonServers": [
     "playwright"
-  ],
-  "outputStyle": "default"
+  ]
 }

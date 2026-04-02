@@ -493,7 +493,15 @@ class TrainingsPage {
             <a href="/contact.html?inquiry=training&training=${training.id}" class="btn btn-primary" style="width: 100%;">Join Waitlist</a>
           </div>
         ` : `
-          <div style="background: var(--color-gray-50); padding: var(--space-xl); border-radius: var(--radius-md); margin-top: var(--space-2xl);">
+          <!-- Register CTA Button (shown on open) -->
+          <div id="training-register-cta" style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200); text-align: center;">
+            <p style="color: var(--color-gray-600); margin-bottom: var(--space-md);">Ready to join? Click below to register.</p>
+            <button class="btn btn-primary btn-lg" onclick="document.getElementById('training-form-container').style.display='block'; document.getElementById('training-register-cta').style.display='none'; document.getElementById('training-form-container').scrollIntoView({behavior:'smooth'});">
+              ${isFree ? 'Register for this Training' : 'Register & View Payment Details'}
+            </button>
+          </div>
+          <!-- Registration Form (hidden on modal open) -->
+          <div id="training-form-container" style="display: none; background: var(--color-gray-50); padding: var(--space-xl); border-radius: var(--radius-md); margin-top: var(--space-2xl);">
             <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: var(--color-primary);">Register for This Training</h3>
             <form id="training-registration-form" class="form" data-training-id="${training.id}">
               ${this.generateTrainingFormFields(training)}

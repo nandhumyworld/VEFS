@@ -257,8 +257,15 @@ class EventsPage {
       ` : ''}
 
       ${event.registration?.isOpen && !isPast && !isFull ? `
-      <!-- Registration Form -->
-      <div style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200);">
+      <!-- Register CTA Button (shown on open) -->
+      <div id="event-register-cta" style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200); text-align: center;">
+        <p style="color: var(--color-gray-600); margin-bottom: var(--space-md);">Ready to join? Click below to register.</p>
+        <button class="btn btn-primary btn-lg" onclick="document.getElementById('event-form-container').style.display='block'; document.getElementById('event-register-cta').style.display='none'; document.getElementById('event-form-container').scrollIntoView({behavior:'smooth'});">
+          ${isFree ? 'Register for this Event' : 'Register & View Payment Details'}
+        </button>
+      </div>
+      <!-- Registration Form (hidden on modal open) -->
+      <div id="event-form-container" style="display: none; margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200);">
         <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--space-lg);">Register for this Event</h3>
         <form id="event-registration-form" class="form" data-event-id="${event.id}">
           ${this.generateEventFormFields(event)}

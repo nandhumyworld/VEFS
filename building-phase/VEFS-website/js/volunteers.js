@@ -232,8 +232,15 @@ class VolunteersPage {
         </div>
       </div>
 
-      <!-- Registration Form -->
-      <div style="background: var(--color-gray-50); padding: var(--space-lg); border-radius: 8px;">
+      <!-- Apply CTA Button (shown on modal open) -->
+      <div id="volunteer-register-cta" style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200); text-align: center;">
+        <p style="color: var(--color-gray-600); margin-bottom: var(--space-md);">Interested in volunteering? Click below to apply.</p>
+        <button class="btn btn-primary btn-lg" onclick="document.getElementById('volunteer-form-container').style.display='block'; document.getElementById('volunteer-register-cta').style.display='none'; document.getElementById('volunteer-form-container').scrollIntoView({behavior:'smooth'});">
+          Apply for this Opportunity
+        </button>
+      </div>
+      <!-- Registration Form (hidden on modal open) -->
+      <div id="volunteer-form-container" style="display: none; background: var(--color-gray-50); padding: var(--space-lg); border-radius: 8px;">
         <h3 style="margin-bottom: var(--space-md); color: var(--color-primary);">Apply for This Opportunity</h3>
         <form id="volunteer-registration-form" class="form" data-volunteer-id="${volunteer.id}">
           ${this.generateVolunteerFormFields(volunteer)}
