@@ -5,14 +5,26 @@
 /* Header — dark clay glassmorphism bar */
 .header {
   background-color: rgba(40, 20, 5, 0.92);
-  backdrop-filter: blur(12px) saturate(1.3);
-  -webkit-backdrop-filter: blur(12px) saturate(1.3);
   border-bottom: 1px solid rgba(176, 92, 23, 0.4);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
   position: sticky;
   top: 0;
-  z-index: var(--z-index-sticky);
+  z-index: var(--z-index-fixed); /* must be above the fixed .nav panel on mobile */
   transition: box-shadow var(--transition-base), background-color var(--transition-base);
+}
+
+/* Glassmorphism blur on a pseudo-element so backdrop-filter does NOT
+   create a containing block for position:fixed children (the mobile nav panel).
+   Without this, the mobile nav positions itself relative to the header
+   instead of the viewport, causing the open/render bug. */
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .header.scrolled {
@@ -315,7 +327,7 @@
   .nav-toggle {
     display: block;
     position: relative;
-    z-index: var(--z-index-fixed);
+    z-index: var(--z-index-modal-backdrop); /* must be above .nav panel (z-index-fixed) */
   }
 
   .nav {
@@ -330,7 +342,7 @@
     transition: transform var(--transition-base);
     overflow-y: auto;
     padding-top: 80px; /* Space for close button */
-    z-index: var(--z-index-fixed);
+    z-index: var(--z-index-sticky); /* below header (fixed) so toggle stays clickable */
     pointer-events: auto;
   }
 
@@ -399,7 +411,7 @@
   right: 280px; /* Don't cover the menu - stop before menu area */
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
-  z-index: var(--z-index-sticky);
+  z-index: var(--z-index-dropdown); /* below .nav panel (sticky) and header (fixed) */
   opacity: 0;
   transition: opacity var(--transition-base);
   pointer-events: auto; /* Make overlay clickable to close menu */

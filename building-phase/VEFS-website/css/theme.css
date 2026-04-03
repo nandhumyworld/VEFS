@@ -77,10 +77,10 @@
   /* ===== Typography ===== */
 
   /* Font Families — Nature Poetic Pairing */
-  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;  /* Headings: naturalist journal elegance */
-  --font-sans: 'Crimson Pro', Georgia, serif;                            /* Body: warm humanist serif, poetic feel */
-  --font-poetic: 'IM Fell English', Georgia, serif;                      /* Pull-quotes, blockquotes: old-style organic */
-  --font-mono: 'Courier New', Courier, monospace;
+--font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;  /* Headings: naturalist journal elegance */
+--font-sans: 'Karla', system-ui, -apple-system, sans-serif;  /* Body: clean readable */
+--font-poetic: 'Annie Use Your Telescope', 'Cherry Cream Soda', cursive;  /* decorative headings */
+--font-mono: 'Courier New', Courier, monospace;
 
   /* Font Sizes (13-point scale) */
   --font-size-xs: 0.694rem;     /* 11.1px */
