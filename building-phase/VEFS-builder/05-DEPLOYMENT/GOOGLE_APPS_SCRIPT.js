@@ -333,7 +333,7 @@ function handleDonation(data) {
 
     if (!sheet) {
       sheet = ss.insertSheet(CONFIG.SHEETS.DONATION);
-      sheet.appendRow(['Timestamp', 'First Name', 'Last Name', 'Email', 'Phone', 'Organization', 'Amount', 'Type', 'Category', 'Anonymous', 'Newsletter', 'Tax Benefit', 'Status', 'Payment Method', 'Notes']);
+      sheet.appendRow(['Timestamp', 'First Name', 'Last Name', 'Email', 'Phone', 'Organization', 'Amount', 'Type', 'Category', 'Newsletter', 'Tax Benefit (80G)', 'Message', 'Status', 'Payment Method', 'Notes']);
       sheet.getRange('A1:O1').setFontWeight('bold').setBackground('#6B8E23').setFontColor('#ffffff');
     }
 
@@ -348,9 +348,9 @@ function handleDonation(data) {
       data.amount || 0,
       data.donationType || 'one-time',
       data.category || 'General Fund',
-      data.anonymous ? 'Yes' : 'No',
       data.newsletter ? 'Yes' : 'No',
       data.taxBenefit ? 'Yes' : 'No',
+      data.message || '',
       'Pending',
       'Manual',
       ''
@@ -1017,9 +1017,14 @@ function createAdminDonationEmail(data) {
             <div class="value">${data.taxBenefit ? 'Yes (Send 80G certificate)' : 'No'}</div>
           </div>
           <div class="field">
-            <div class="label">Newsletter:</div>
-            <div class="value">${data.newsletter ? 'Yes' : 'No'}</div>
+            <div class="label">Newsletter Subscription:</div>
+            <div class="value">${data.newsletter ? 'Yes — add to mailing list' : 'No'}</div>
           </div>
+          ${data.message ? `
+          <div class="field">
+            <div class="label">Message / Question:</div>
+            <div class="value">${escapeHtml(data.message)}</div>
+          </div>` : ''}
           <div class="field">
             <div class="label">Submitted:</div>
             <div class="value">${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</div>
@@ -1222,8 +1227,18 @@ function handleNewsletterSubscription(data) {
     let sheet = ss.getSheetByName(CONFIG.SHEETS.NEWSLETTER);
     if (!sheet) {
       sheet = ss.insertSheet(CONFIG.SHEETS.NEWSLETTER);
-      sheet.appendRow(['Timestamp', 'Email', 'Source', 'Total Subscribers']);
+      sheet.appendRow(['Timestamp', 'Email', 'Source', 'Status']);
       sheet.getRange('A1:D1').setFontWeight('bold').setBackground('#6B8E23').setFontColor('#ffffff');
+    }
+
+    // Duplicate check — scan existing emails in column B
+    const lastRow = sheet.getLastRow();
+    if (lastRow > 1) {
+      const existingEmails = sheet.getRange(2, 2, lastRow - 1, 1).getValues().flat();
+      const emailLower = data.email.toLowerCase();
+      if (existingEmails.some(e => String(e).toLowerCase() === emailLower)) {
+        return createResponseWithCORS(true, 'Already subscribed');
+      }
     }
 
     const timestamp = new Date();
@@ -1231,7 +1246,7 @@ function handleNewsletterSubscription(data) {
       timestamp,
       data.email,
       data.source || 'website',
-      data.totalSubscribers || ''
+      'Active'
     ]);
 
     // Notify admin

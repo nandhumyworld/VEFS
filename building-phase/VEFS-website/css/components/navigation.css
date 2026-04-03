@@ -2,18 +2,22 @@
    NAVIGATION COMPONENT
    ============================================ */
 
-/* Header */
+/* Header — dark clay glassmorphism bar */
 .header {
-  background-color: var(--color-white);
-  box-shadow: var(--shadow-sm);
+  background-color: rgba(40, 20, 5, 0.92);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  border-bottom: 1px solid rgba(176, 92, 23, 0.4);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
   position: sticky;
   top: 0;
   z-index: var(--z-index-sticky);
-  transition: box-shadow var(--transition-base);
+  transition: box-shadow var(--transition-base), background-color var(--transition-base);
 }
 
 .header.scrolled {
-  box-shadow: var(--shadow-md);
+  background-color: rgba(30, 15, 3, 0.97);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .header-content {
@@ -60,11 +64,11 @@
 .header-logo {
   display: flex;
   align-items: center;
-  gap: var(--space-sm); /* Increased from xs to sm for better spacing */
+  gap: var(--space-sm);
   text-decoration: none;
-  color: var(--color-gray-800);
-  cursor: default; /* Remove pointer cursor */
-  pointer-events: none; /* Disable clicking - logo is not a link */
+  color: var(--color-off-white);
+  cursor: default;
+  pointer-events: none;
 }
 
 /* Hover effect removed as requested */
@@ -93,28 +97,26 @@
 .header-logo .logo-text {
   font-family: var(--font-serif);
   font-weight: var(--font-weight-bold);
-  font-size: 20pt; /* 20px - explicit size instead of variable */
-  color: var(--color-gray-800) !important;
+  font-size: 20pt;
+  color: var(--color-off-white) !important; /* milky white */
   line-height: 1.2;
-  letter-spacing: 0.3px; /* Improve readability */
+  letter-spacing: 0.3px;
   text-decoration: solid;
 }
 
 /* Full organization name */
 .header-logo .logo-text-full {
   font-family: 'Cherry Cream Soda', cursive;
-  font-size: 10pt; /* 12 point size as requested */
-  color: #5A5A5A !important; /* Explicit gray color - prevents link color override */
+  font-size: 10pt;
+  color: rgba(247, 247, 228, 0.7) !important; /* softer milky */
   line-height: 1.3;
-  letter-spacing: 0.3px; /* Improve readability */
+  letter-spacing: 0.3px;
   text-decoration: none;
-  font-weight: 400; /* Normal weight for display font */
-
-  /* Prevent wrapping - force single line */
+  font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%; /* Allow full width, don't constrain */
+  max-width: 100%;
 }
 
 /* Mobile social icons - hidden on desktop, shown only in hamburger menu on mobile */
@@ -180,7 +182,7 @@
   display: block;
   width: 24px;
   height: 2px;
-  background-color: var(--color-gray-800);
+  background-color: var(--color-off-white); /* milky white hamburger bars */
   position: relative;
   transition: background-color var(--transition-fast);
 }
@@ -191,7 +193,7 @@
   display: block;
   width: 24px;
   height: 2px;
-  background-color: var(--color-gray-800);
+  background-color: var(--color-off-white);
   position: absolute;
   transition: transform var(--transition-base);
 }
@@ -230,29 +232,29 @@
 .nav-link {
   display: block;
   padding: var(--space-xs) var(--space-sm);
-  color: var(--color-gray-700);
+  color: rgba(247, 247, 228, 0.85); /* slightly soft milky */
   text-decoration: none;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
   border-radius: var(--radius-md);
   transition: color var(--transition-fast), background-color var(--transition-fast);
   position: relative;
-  white-space: nowrap; /* Prevent navigation links from wrapping to multiple lines */
+  white-space: nowrap;
 }
 
 .nav-link:hover {
-  color: var(--color-primary);
-  background-color: var(--color-gray-100);
+  color: var(--color-off-white);
+  background-color: rgba(176, 92, 23, 0.2); /* warm clay tint */
 }
 
 .nav-link:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-secondary); /* mustard focus */
   outline-offset: 2px;
 }
 
 .nav-link.active {
-  color: var(--color-white); /* White text for better contrast */
-  background-color: var(--color-primary); /* Sage green background */
+  color: var(--color-off-white);
+  background-color: var(--color-primary); /* clay orange active */
   font-weight: var(--font-weight-semibold);
 }
 
@@ -322,7 +324,7 @@
     right: 0;
     bottom: 0;
     width: 280px;
-    background-color: var(--color-white);
+    background-color: rgba(30, 15, 3, 0.98); /* near-black mud */
     box-shadow: var(--shadow-xl);
     transform: translateX(100%);
     transition: transform var(--transition-base);
@@ -350,7 +352,7 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-lg) var(--space-md);
-    border-bottom: 2px solid var(--color-gray-300);
+    border-bottom: 2px solid rgba(247, 247, 228, 0.15);
     margin-bottom: var(--space-sm);
   }
 
@@ -369,7 +371,7 @@
 
   .nav-link {
     padding: var(--space-md);
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid rgba(247, 247, 228, 0.08);
   }
 
   /* Mobile: active link maintains background color styling (no ::after needed) */

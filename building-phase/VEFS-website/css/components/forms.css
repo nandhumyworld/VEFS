@@ -12,7 +12,7 @@
   display: block;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-gray-800);
+  color: var(--color-off-white); /* milky white labels */
   margin-bottom: var(--space-xs);
 }
 
@@ -20,7 +20,7 @@
   color: var(--color-error);
 }
 
-/* Base input styles */
+/* Base input styles — dark mud panels */
 .form-input,
 .form-select,
 .form-textarea {
@@ -28,9 +28,9 @@
   padding: var(--space-sm) var(--space-md);
   font-family: var(--font-sans);
   font-size: var(--font-size-base);
-  color: var(--color-gray-800);
-  background-color: var(--color-white);
-  border: 2px solid var(--color-gray-300);
+  color: var(--color-off-white);
+  background-color: rgba(63, 32, 8, 0.7);
+  border: 2px solid rgba(247, 247, 228, 0.25);
   border-radius: var(--radius-md);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
@@ -38,20 +38,20 @@
 .form-input:hover,
 .form-select:hover,
 .form-textarea:hover {
-  border-color: var(--color-gray-400);
+  border-color: rgba(247, 247, 228, 0.4);
 }
 
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-pale);
+  border-color: var(--color-secondary); /* mustard focus */
+  box-shadow: 0 0 0 3px rgba(176, 168, 23, 0.25);
 }
 
 .form-input::placeholder,
 .form-textarea::placeholder {
-  color: var(--color-gray-400);
+  color: rgba(247, 247, 228, 0.4);
 }
 
 /* Select dropdown - Custom arrow */
@@ -97,7 +97,7 @@
 
 .form-check-label {
   font-size: var(--font-size-base);
-  color: var(--color-gray-700);
+  color: var(--color-gray-700); /* pale sand */
   cursor: pointer;
   user-select: none;
   line-height: var(--line-height-normal);
@@ -118,11 +118,11 @@
   gap: var(--space-xs);
 }
 
-/* Help text - Gray text below input */
+/* Help text - muted milky text below input */
 .form-help {
   display: block;
   font-size: var(--font-size-sm);
-  color: var(--color-gray-600);
+  color: rgba(247, 247, 228, 0.55);
   margin-top: var(--space-xs);
 }
 
@@ -177,8 +177,8 @@
 .form-textarea:disabled,
 .form-checkbox:disabled,
 .form-radio:disabled {
-  background-color: var(--color-gray-100);
-  color: var(--color-gray-500);
+  background-color: rgba(58, 32, 16, 0.5);
+  color: rgba(247, 247, 228, 0.4);
   cursor: not-allowed;
   opacity: 0.6;
 }

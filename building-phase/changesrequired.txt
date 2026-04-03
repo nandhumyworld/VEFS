@@ -1,3 +1,4 @@
---color-1: #B0171F;
---color-2: #B05C17;
---color-3: #B0A817;
+1. in events modal remove event organizer section since we have event coordinator, disable that section
+2. While applying fo vollunterring after entering the form the confirmation is not showing like other forms and also the email is send twice, it has to sent only one email with confirmation message appearring
+3. Donation form is not working after submit button i want eveything to be captured inthe forms inthe mail all checkbox user is checking in the form for 80g receipt and for subscribtion.
+4. want o know how the news letter subscription emails are tracked where these mail ids are stored ?

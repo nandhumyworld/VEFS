@@ -4,7 +4,7 @@
  */
 
 // CONFIGURATION: Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhgGlN-u8kPRPKf1MG7NTguN_FCfdGUNipG9OH2CWv8cAtRTEcEnUAHcfTaiGX6FHKYw/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw24TWvT6pK-DAD1KMNqfeAKBSpa4fRbs8vJQP3Pv63eoD7V5BEz89CTEX_O30PYshZ/exec';
 
 class TrainingsPage {
   constructor() {

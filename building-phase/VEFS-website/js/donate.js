@@ -4,7 +4,7 @@
  */
 
 // Google Apps Script Web App URL for form submissions
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhgGlN-u8kPRPKf1MG7NTguN_FCfdGUNipG9OH2CWv8cAtRTEcEnUAHcfTaiGX6FHKYw/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw24TWvT6pK-DAD1KMNqfeAKBSpa4fRbs8vJQP3Pv63eoD7V5BEz89CTEX_O30PYshZ/exec';
 
 class DonatePage {
   constructor() {
@@ -56,6 +56,7 @@ class DonatePage {
    */
   setupCustomAmount() {
     const customAmountInput = document.getElementById('custom-amount');
+    if (!customAmountInput) return;
 
     customAmountInput.addEventListener('input', (e) => {
       const value = parseInt(e.target.value) || 0;
@@ -78,6 +79,7 @@ class DonatePage {
    */
   updateTotalDisplay() {
     const totalDisplay = document.getElementById('total-amount-display');
+    if (!totalDisplay) return;
     const formattedAmount = this.selectedAmount.toLocaleString('en-IN');
     totalDisplay.textContent = this.selectedAmount > 0 ? `₹${formattedAmount}` : '₹0';
   }
@@ -91,12 +93,6 @@ class DonatePage {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Validate amount
-      if (this.selectedAmount < 100) {
-        alert('Please select or enter a donation amount of at least ₹100');
-        return;
-      }
-
       await this.processDonation();
     });
   }
@@ -109,10 +105,12 @@ class DonatePage {
     const formData = new FormData(form);
 
     // Collect donation data
+    const donationAmount = parseInt(formData.get('donationAmount')) || 0;
     const donationData = {
-      amount: this.selectedAmount,
+      amount: donationAmount,
       type: 'one-time',
       category: formData.get('category'),
+      message: formData.get('message') || '',
       donor: {
         firstName: formData.get('firstName'),
         lastName: formData.get('lastName'),
@@ -195,6 +193,7 @@ class DonatePage {
       amount: donationData.amount,
       donationType: donationData.type,
       category: donationData.category || 'General Fund',
+      message: donationData.message || '',
       newsletter: donationData.options.newsletter || false,
       taxBenefit: donationData.options.taxBenefit || false,
       timestamp: donationData.timestamp

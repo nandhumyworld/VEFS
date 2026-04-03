@@ -74,11 +74,11 @@
   border-radius: var(--radius-sm);
 }
 
-/* Alert variants */
+/* Alert variants — dark tinted on clay background */
 .alert-success {
-  background-color: #E8F5E9;
+  background-color: rgba(16, 185, 129, 0.15);
   border-color: var(--color-success);
-  color: #1B5E20;
+  color: #6EE7B7;
 }
 
 .alert-success .alert-icon {
@@ -86,9 +86,9 @@
 }
 
 .alert-error {
-  background-color: #FFEBEE;
+  background-color: rgba(239, 68, 68, 0.15);
   border-color: var(--color-error);
-  color: #B71C1C;
+  color: #FCA5A5;
 }
 
 .alert-error .alert-icon {
@@ -96,9 +96,9 @@
 }
 
 .alert-warning {
-  background-color: #FFF3E0;
+  background-color: rgba(249, 115, 22, 0.15);
   border-color: var(--color-warning);
-  color: #E65100;
+  color: #FDBA74;
 }
 
 .alert-warning .alert-icon {
@@ -106,9 +106,9 @@
 }
 
 .alert-info {
-  background-color: #E1F5FE;
+  background-color: rgba(59, 130, 246, 0.15);
   border-color: var(--color-info);
-  color: #01579B;
+  color: #93C5FD;
 }
 
 .alert-info .alert-icon {

@@ -4,7 +4,7 @@
  */
 
 // CONFIGURATION: Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhgGlN-u8kPRPKf1MG7NTguN_FCfdGUNipG9OH2CWv8cAtRTEcEnUAHcfTaiGX6FHKYw/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw24TWvT6pK-DAD1KMNqfeAKBSpa4fRbs8vJQP3Pv63eoD7V5BEz89CTEX_O30PYshZ/exec';
 
 class EventsPage {
   constructor() {
@@ -206,18 +206,6 @@ class EventsPage {
               </div>
             </div>
           `).join('')}
-        </div>
-      ` : ''}
-
-      <!-- Organizer Info -->
-      ${event.organizer ? `
-        <div style="padding: var(--space-lg); background-color: var(--color-primary-light); border-radius: var(--radius-md); margin-bottom: var(--space-xl);">
-          <h4 style="color: var(--color-primary); margin-bottom: var(--space-sm);">Event Organizer</h4>
-          <div style="color: var(--color-gray-700);">
-            <strong>${event.organizer.name}</strong><br>
-            ${event.organizer.email ? `<a href="mailto:${event.organizer.email}" style="color: var(--color-primary);">${event.organizer.email}</a>` : ''}
-            ${event.organizer.phone ? ` | <a href="tel:${event.organizer.phone}" style="color: var(--color-primary);">${event.organizer.phone}</a>` : ''}
-          </div>
         </div>
       ` : ''}
 

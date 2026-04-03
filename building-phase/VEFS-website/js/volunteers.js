@@ -4,7 +4,7 @@
  */
 
 // CONFIGURATION: Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhgGlN-u8kPRPKf1MG7NTguN_FCfdGUNipG9OH2CWv8cAtRTEcEnUAHcfTaiGX6FHKYw/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw24TWvT6pK-DAD1KMNqfeAKBSpa4fRbs8vJQP3Pv63eoD7V5BEz89CTEX_O30PYshZ/exec';
 
 class VolunteersPage {
   constructor() {
@@ -139,8 +139,8 @@ class VolunteersPage {
       return;
     }
 
-    // Update URL hash
-    window.location.hash = volunteer.slug || volunteer.id;
+    // Update URL without triggering hashchange (which would re-call showDetails)
+    history.replaceState(null, '', '#' + (volunteer.slug || volunteer.id));
 
     const startDate = new Date(volunteer.dates.start);
     const endDate = new Date(volunteer.dates.end);
@@ -342,13 +342,14 @@ class VolunteersPage {
       const minAge = volunteer.requirements.age.min;
       const maxAge = volunteer.requirements.age.max;
 
-      new window.FormValidation(form, {
+      const fv = new window.FormValidation(form, {
         name: { required: true, minLength: 2 },
         email: { required: true, email: true },
         phone: { required: true, phone: true },
         age: { required: true, min: minAge, max: maxAge },
         motivation: { required: true, minLength: 20 }
       });
+      fv.onSuccess = () => {}; // prevent default form.submit() page reload
     }
 
     // Handle form submission
@@ -496,7 +497,7 @@ class VolunteersPage {
             Please check your email for confirmation.<br>
             We'll review your application and contact you soon.
           </p>
-          <button id="success-modal-btn" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: not-allowed; min-width: 120px; opacity: 0.6;" disabled>
+          <button id="success-modal-btn" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; min-width: 120px;">
             OK
           </button>
         </div>
@@ -506,23 +507,34 @@ class VolunteersPage {
 
     document.body.appendChild(modal);
 
-    // Add event listener instead of inline onclick
-    const button = document.getElementById('success-modal-btn');
+    // Shared close function
+    const closeSuccessModal = () => {
+      const el = document.getElementById('volunteer-success-modal');
+      if (el) el.remove();
+      document.removeEventListener('keydown', escHandler);
+    };
+
+    // ESC key support (modal.js ESC handler won't fire — activeModal is null after volunteer modal closes)
+    const escHandler = (e) => {
+      if (e.key === 'Escape') closeSuccessModal();
+    };
+    document.addEventListener('keydown', escHandler);
+
+    // OK button click
+    const button = modal.querySelector('#success-modal-btn');
     if (button) {
-      button.addEventListener('click', () => {
-        document.getElementById('volunteer-success-modal').remove();
-        if (hasFee) {
-          this.showPaymentModal(volunteer);
-        } else {
-          if (window.modalInstance) {
-            window.modalInstance.close();
-          }
-        }
+      button.addEventListener('click', closeSuccessModal);
+    }
+
+    // Backdrop click (clicking dark area outside card)
+    const backdrop = modal.querySelector('#success-modal-backdrop');
+    if (backdrop) {
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) closeSuccessModal();
       });
     }
 
-    // Close the volunteer details modal immediately (matching events.js pattern)
-    // This ensures when success modal closes, user sees the main volunteer page
+    // Close the volunteer details modal immediately
     if (window.modalInstance) {
       window.modalInstance.close();
     }

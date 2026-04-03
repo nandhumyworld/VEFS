@@ -346,3 +346,26 @@
 .overflow-auto { overflow: auto; }
 .overflow-x-auto { overflow-x: auto; }
 .overflow-y-auto { overflow-y: auto; }
+
+/* ===== Nature / Organic Decorative Elements ===== */
+
+/* Wavy organic section divider */
+.section-divider {
+  width: 100%;
+  height: 60px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='rgba(63,32,8,0.4)' d='M0,30 C360,60 720,0 1080,30 C1260,45 1350,20 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+/* Botanical leaf silhouette pattern for hero sections */
+[class*="-hero"],
+.hero-section {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cellipse cx='40' cy='40' rx='8' ry='20' fill='none' stroke='rgba(247,247,228,0.06)' stroke-width='1' transform='rotate(30 40 40)'/%3E%3Cellipse cx='40' cy='40' rx='8' ry='20' fill='none' stroke='rgba(247,247,228,0.04)' stroke-width='1' transform='rotate(75 40 40)'/%3E%3C/svg%3E"),
+    linear-gradient(135deg, rgba(176, 23, 31, 0.85), rgba(176, 92, 23, 0.9));
+  background-size: 80px 80px, cover;
+}

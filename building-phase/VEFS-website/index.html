@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="VEFS Foundation empowers farmers through organic agriculture education, bridges producers and consumers, and preserves Tamil Nadu's indigenous ecological heritage for sustainable livelihoods and a healthier planet.">
+  <meta name="description" content="VEFS Foundation - Organic Farming, Biodiversity Conservation & Social Welfare">
   <meta name="keywords" content="VEFS, indigenous trees, Tamil Nadu ecology, environmental education, organic farming, tree conservation, social welfare, Sangam literature">
   <meta name="author" content="VEFS Foundation">
   
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="VEFS Foundation - வள்ளுவம் சூழலியல் உழவாண்மை, சமூக நலன் அறக்கட்டளை">
-  <meta property="og:description" content="Empowering farmers through organic agriculture, bridging producers and consumers, and preserving Tamil Nadu's indigenous ecological heritage for sustainable livelihoods.">
+  <meta property="og:description" content="Organic Farming, Biodiversity Conservation & Social Welfare">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.vefsfoundation.com">
   <meta property="og:image" content="/images/logos/vefs-og-image.jpg">
 
-  <title>VEFS Foundation - Indigenous Tree Conservation & Environmental Education | Tamil Nadu</title>
+  <title>VEFS Foundation - Organic Farming, Biodiversity Conservation & Social Welfare</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="images/icons/vefs-favicon.ico">
@@ -22,11 +22,274 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cherry+Cream+Soda&family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&family=Cherry+Cream+Soda&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/responsive-mobile.css">
+
+  <!-- Bilingual Banner Styles -->
+  <style>
+    /* ===== Bilingual Cycling Banner ===== */
+    .bilingual-banner {
+      position: relative;
+      background: rgba(28, 14, 4, 0.97);
+      border-top: 2px solid rgba(176, 23, 31, 0.6);
+      border-bottom: 2px solid rgba(176, 92, 23, 0.5);
+      padding: 1.6rem 1.5rem 1rem;
+      text-align: center;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* Subtle clay texture echo behind banner */
+    .bilingual-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 100% at 50% 50%,
+        rgba(176, 92, 23, 0.08) 0%,
+        transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Slide track — fixed height prevents layout jump */
+    .bilingual-banner__track {
+      position: relative;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Each slide stacked via absolute positioning */
+    .bilingual-banner__slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+      pointer-events: none;
+    }
+
+    .bilingual-banner__slide.active {
+      opacity: 1;
+      transform: translateY(0);
+      position: relative;   /* takes space only when active */
+      pointer-events: auto;
+    }
+
+    /* Title */
+    .bilingual-banner__title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.1rem, 2.8vw, 1.8rem);
+      font-weight: 700;
+      color: #f7f7e4;
+      margin: 0 0 0.4rem;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Tamil title gets slightly larger for script legibility */
+    [data-lang="ta"] .bilingual-banner__title {
+      font-size: clamp(1rem, 2.6vw, 1.65rem);
+      line-height: 1.55;
+    }
+
+    /* Subtitle — bullet points */
+    .bilingual-banner__subtitle {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem 1.4rem;
+      margin: 0;
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: clamp(0.85rem, 1.8vw, 1.05rem);
+      color: #B0A817;           /* mustard */
+      letter-spacing: 0.03em;
+    }
+
+    .bilingual-banner__subtitle span {
+      white-space: nowrap;
+    }
+
+    /* Decorative leaf divider below text */
+    .bilingual-banner__divider {
+      margin-top: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+
+    .bilingual-banner__divider::before,
+    .bilingual-banner__divider::after {
+      content: '';
+      display: block;
+      width: clamp(40px, 12vw, 120px);
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(176, 168, 23, 0.5), transparent);
+    }
+
+    .bilingual-banner__leaf {
+      font-size: 1.1rem;
+      color: #6B8E23;       /* sage leaf green */
+      opacity: 0.85;
+      font-family: 'IM Fell English', Georgia, serif;
+      animation: leafPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes leafPulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.15); }
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 640px) {
+      .bilingual-banner__track {
+        min-height: 88px;
+      }
+      .bilingual-banner__subtitle {
+        gap: 0.2rem 0.8rem;
+      }
+    }
+  </style>
+
+  <style>
+    /* ===== Why VEFS Foundation — Pillar List Layout ===== */
+    .vefs-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 2.5rem;
+      border-top: 1px solid rgba(107, 142, 35, 0.18);
+    }
+
+    .vefs-pillar {
+      padding: 2rem 1.75rem;
+      border-bottom: 1px solid rgba(107, 142, 35, 0.18);
+      border-right: 1px solid rgba(107, 142, 35, 0.18);
+      position: relative;
+      cursor: default;
+      transition: background-color 0.35s ease;
+      overflow: hidden;
+    }
+
+    /* Right column: remove right border */
+    .vefs-pillar:nth-child(2n) {
+      border-right: none;
+    }
+
+    /* Animated left accent bar */
+    .vefs-pillar::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 0;
+      background: linear-gradient(180deg, #3d6b00 0%, #D4A574 100%);
+      border-radius: 0 2px 2px 0;
+      transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .vefs-pillar:hover::before { height: 100%; }
+    .vefs-pillar:hover { background-color: rgba(107, 142, 35, 0.04); }
+
+    /* Header row: icon LEFT, heading RIGHT (above bullets) */
+    .vefs-pillar-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1.1rem;
+    }
+
+    /* SVG icon — inherits dark green via CSS color */
+    .vefs-pillar-icon {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      color: #2d5a0e;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  color 0.3s ease;
+    }
+
+    .vefs-pillar:hover .vefs-pillar-icon {
+      transform: scale(1.15);
+      color: #4a8a18;
+    }
+
+    .vefs-pillar-title {
+      font-family: var(--font-serif);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-off-white);
+      line-height: var(--line-height-tight);
+      transition: color 0.3s ease;
+    }
+
+    .vefs-pillar:hover .vefs-pillar-title { color:  #599d2c; }
+
+    /* Bullet list — consistent color, no hover shift on text */
+    .vefs-pillar-list {
+      list-style: circle;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .vefs-pillar-list li {
+      padding-left: 1.1rem;
+      position: relative;
+      color: rgba(247, 247, 228, 0.75);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-normal);
+    }
+
+    .vefs-pillar-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.63em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #3d6b00;
+      opacity: 0.55;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .vefs-pillar:hover .vefs-pillar-list li::before {
+      opacity: 1;
+      transform: scale(1.35);
+    }
+
+    /* Mobile: single column */
+    @media (max-width: 768px) {
+      .vefs-pillars {
+        grid-template-columns: 1fr;
+      }
+
+      .vefs-pillar {
+        border-right: none;
+        padding: 1.5rem 0.75rem 1.5rem 1rem;
+      }
+
+      .vefs-pillar-icon {
+        width: 28px;
+        height: 28px;
+      }
+
+      .vefs-pillar-title {
+        font-size: 0.97rem;
+      }
+    }
+  </style>
 
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
@@ -37,7 +300,7 @@
     "alternateName": "VEFS Foundation",
     "url": "https://www.vefsfoundation.com",
     "logo": "https://www.vefsfoundation.com/images/logos/vefs-logo.png",
-    "description": "Empowering farmers through organic agriculture education, bridging producers and consumers, and preserving Tamil Nadu's indigenous ecological heritage",
+    "description": "Organic Farming, Biodiversity Conservation & Social Welfare",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "IN",
@@ -117,6 +380,12 @@
                target="_blank" rel="noopener">
               <img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="24" height="24">
             </a>
+
+            <a href="mailto:vefsfoundation@gmail.com"
+               class="header-social-link"
+               aria-label="Email">
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
           </div>
 
           <ul class="nav-list">
@@ -162,6 +431,12 @@
            target="_blank" rel="noopener">
           <img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="20" height="20">
         </a>
+
+        <a href="mailto:vefsfoundation@gmail.com"
+           class="header-social-link"
+           aria-label="Email">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
       </div>
 
     </div>
@@ -186,21 +461,46 @@
       <!-- Dark Overlay for Better Text Readability -->
       <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)); z-index: 1;"></div>
 
-      <!-- Overlay Text Content -->
-      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; z-index: 2;">
-        <div class="container" style="text-align: center; padding: 0 var(--space-lg);">
-          <h1 style="font-size: clamp(1rem, 3vw, 2rem); font-weight: 700; color: var(--color-white); margin: 0; font-family: 'Lora', serif; line-height: 1.3; text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.7);">
-            வள்ளுவம் சூழலியல் உழவாண்மை, சமூக நலன் அறக்கட்டளை
-          </h1>
-          <p style="font-size: clamp(1rem, 2.5vw, 1.5rem); color: var(--color-white); margin-top: var(--space-md); font-family: 'Inter', sans-serif; text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);">
-            •Organic farming      • Biodiversity conservation     •Social welfare
-          </p>
-        </div>
-      </div>
     </section>
 
+    <!-- Bilingual Cycling Text Banner -->
+    <div class="bilingual-banner" id="bilingual-banner" role="banner" aria-label="Foundation identity banner">
+      <div class="bilingual-banner__track">
+
+        <!-- Slide 1: Tamil -->
+        <div class="bilingual-banner__slide active" data-lang="ta" lang="ta">
+          <h2 class="bilingual-banner__title">
+            வள்ளுவம் சூழலியல் உழவாண்மை, சமூக நலன் அறக்கட்டளை
+          </h2>
+          <p class="bilingual-banner__subtitle">
+            <span>• இயற்கை வேளாண்மை</span>
+            <span>• பல்லுயிர் பாதுகாப்பு</span>
+            <span>• சமூக நலன்</span>
+          </p>
+        </div>
+
+        <!-- Slide 2: English -->
+        <div class="bilingual-banner__slide" data-lang="en" lang="en">
+          <h2 class="bilingual-banner__title">
+            Valluvam Ecological Farming &amp; Social Welfare Foundation
+          </h2>
+          <p class="bilingual-banner__subtitle">
+            <span>• Organic Farming</span>
+            <span>• Biodiversity Conservation</span>
+            <span>• Social Welfare</span>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Decorative leaf divider line -->
+      <div class="bilingual-banner__divider" aria-hidden="true">
+        <span class="bilingual-banner__leaf">❧</span>
+      </div>
+    </div>
+
     <!-- Hero Carousel -->
-    <section class="carousel" id="hero-carousel" data-autoplay="true" data-interval="5000">
+    <section class="carousel" id="hero-carousel" data-autoplay="true" data-interval="3000">
       <div class="carousel-inner">
         <div class="carousel-slides">
         <!-- Slide 1: Trainings -->
@@ -229,6 +529,19 @@
           </div>
         </div>
 
+        <!-- Slide 4: Hero - Replace hero-slide-main.jpg with your image -->
+        <div class="carousel-slide">
+          <img src="images/hero/hero-slide-5.png" alt="VEFS Foundation - Ecological Conservation and Community Welfare" class="carousel-image">
+          <div class="carousel-overlay"></div>
+          <div class="carousel-content">
+            <div class="container">
+              <h1 class="carousel-title">Valluvam Ecological Farming</h1>
+              <p class="carousel-subtitle">Restoring biodiversity and empowering communities through ecological conservation</p>
+              <a href="about.html" class="btn btn-primary btn-lg">Learn About Us</a>
+            </div>
+          </div>
+        </div>
+
         <!-- Slide 3: Donation -->
         <div class="carousel-slide">
           <img src="images/hero/hero-slide-4.jpg" alt="Support VEFS - Help Restore Ecological Balance" class="carousel-image">
@@ -237,10 +550,13 @@
             <div class="container">
               <h1 class="carousel-title"></h1>
               <p class="carousel-subtitle"></p>
+              <p class="carousel-subtitle"></p>
               <a href="donate.html" class="btn btn-secondary btn-lg">Support Our Mission</a>
             </div>
           </div>
         </div>
+
+        
         </div>
       </div>
 
@@ -257,55 +573,129 @@
         <button class="carousel-indicator active" data-slide-to="0" aria-label="Slide 1"></button>
         <button class="carousel-indicator" data-slide-to="1" aria-label="Slide 2"></button>
         <button class="carousel-indicator" data-slide-to="2" aria-label="Slide 3"></button>
+        <button class="carousel-indicator" data-slide-to="3" aria-label="Slide 4"></button>
       </div>
     </section>
 
     <!-- Why VEFS Section -->
     <section class="section section-py">
       <div class="container">
-        <h2 class="section-title text-center">Why VEFS?</h2>
-        <p class="section-subtitle text-center">Turning awareness into action for a sustainable and compassionate future</p>
+        <h2 class="section-title text-center">Why VEFS Foundation?</h2>
 
-        <div class="card-grid card-grid-3">
-          <div class="card">
-            <div class="card-icon" style="font-size: 3rem; color: var(--color-primary); margin-bottom: var(--space-md); text-align: center;">🌾</div>
-            <div class="card-body">
-              <h3 class="card-title" style="text-align: center;">Ecological Farming & Food Awareness</h3>
-              <p class="card-description" style="text-align: center;">Through initiatives like terrace gardening and the Know Your Food program, we empower families to grow safe, healthy food. We aim to bring this practice to 50+ families by 2027, building self-reliant and conscious communities.</p>
+        <div class="vefs-pillars">
+
+          <div class="vefs-pillar">
+            <div class="vefs-pillar-header">
+              <svg class="vefs-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22V12"/>
+                <path d="M12 12C12 12 8 10 7 6c3-1 6 1 5 6"/>
+                <path d="M12 12C12 12 16 10 17 6c-3-1-6 1-5 6"/>
+              </svg>
+              <h3 class="vefs-pillar-title">Organic Farming & Skill Training Program</h3>
             </div>
+            <ul class="vefs-pillar-list">
+              <li>Promoting organic and natural farming practices rooted in traditional wisdom</li>
+              <li>Seed saving initiatives focused on native and indigenous varieties</li>
+              <li>Skill development training for farmers on sustainable cultivation techniques</li>
+              <li>Workshops on natural fertilizers and soil regeneration methods</li>
+              <li>Hands-on learning for eco-friendly pest management solutions</li>
+              <li>Capacity building to empower farmers towards self-reliant agriculture</li>
+            </ul>
           </div>
 
-          <div class="card">
-            <div class="card-icon" style="font-size: 3rem; color: var(--color-primary); margin-bottom: var(--space-md); text-align: center;">🌱</div>
-            <div class="card-body">
-              <h3 class="card-title" style="text-align: center;">Farmer Empowerment & Skill Development</h3>
-              <p class="card-description" style="text-align: center;">Every year, we train 300+ farmers in natural farming, native seed preservation, and organic input preparation—reviving traditional agricultural wisdom while enabling sustainable livelihoods.</p>
+          <div class="vefs-pillar">
+            <div class="vefs-pillar-header">
+              <svg class="vefs-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              <h3 class="vefs-pillar-title">Biodiversity Activities</h3>
             </div>
+            <ul class="vefs-pillar-list">
+              <li>Lake restoration initiatives to revive natural water ecosystems</li>
+              <li>Afforestation drives using native and indigenous tree species</li>
+              <li>Habitat restoration to support birds, insects, and wildlife</li>
+              <li>Community participation in ecological conservation programs</li>
+              <li>Awareness activities to protect local biodiversity</li>
+              <li>Long-term environmental regeneration efforts</li>
+            </ul>
           </div>
 
-          <div class="card">
-            <div class="card-icon" style="font-size: 3rem; color: var(--color-primary); margin-bottom: var(--space-md); text-align: center;">🌳</div>
-            <div class="card-body">
-              <h3 class="card-title" style="text-align: center;">Biodiversity & Land Restoration</h3>
-              <p class="card-description" style="text-align: center;">With 250+ indigenous trees planted and conserved and a long-term vision of restoring 160 acres of land, our work focuses on rebuilding ecosystems and protecting native biodiversity.</p>
+          <div class="vefs-pillar">
+            <div class="vefs-pillar-header">
+              <svg class="vefs-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 20l5-8 4 5 3-4 6 7H3z"/>
+                <circle cx="17" cy="5" r="2"/>
+              </svg>
+              <h3 class="vefs-pillar-title">Nature Agro Tourism</h3>
             </div>
+            <ul class="vefs-pillar-list">
+              <li>Curated visits to natural and organic farms</li>
+              <li>Learn directly from farmers implementing sustainable techniques</li>
+              <li>Guided forest walks to explore native and indigenous trees</li>
+              <li>Immersive experiences to reconnect with nature</li>
+              <li>Educational eco-tours blending learning and celebration</li>
+              <li>Experience farming, food, and forest in their natural environment</li>
+            </ul>
           </div>
 
-          <div class="card">
-            <div class="card-icon" style="font-size: 3rem; color: var(--color-primary); margin-bottom: var(--space-md); text-align: center;">📚</div>
-            <div class="card-body">
-              <h3 class="card-title" style="text-align: center;">Community Awareness & Growth</h3>
-              <p class="card-description" style="text-align: center;">We have built a growing community of 26,000+ individuals, spreading awareness and inspiring action through education, social engagement, and environmental initiatives.</p>
+          <div class="vefs-pillar">
+            <div class="vefs-pillar-header">
+              <svg class="vefs-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+              <h3 class="vefs-pillar-title">Social Welfare Activities</h3>
             </div>
+            <ul class="vefs-pillar-list">
+              <li>Awareness programs on healthy and sustainable food choices</li>
+              <li>Good Food movement promoting chemical-free agriculture</li>
+              <li>Educating communities about harmful pesticide usage</li>
+              <li>Encouraging self-sustainable and mindful living practices</li>
+              <li>Supporting healthier lifestyles through natural food awareness</li>
+              <li>Building conscious communities for a sustainable future</li>
+            </ul>
           </div>
 
-          <div class="card">
-            <div class="card-icon" style="font-size: 3rem; color: var(--color-primary); margin-bottom: var(--space-md); text-align: center;">🤝</div>
-            <div class="card-body">
-              <h3 class="card-title" style="text-align: center;">Social Welfare & Farmer Livelihoods</h3>
-              <p class="card-description" style="text-align: center;">We support farmers beyond cultivation by creating platforms to market and sell organic produce and value-added products, both online and offline—ensuring fair opportunities and sustainable income.</p>
+          <div class="vefs-pillar">
+            <div class="vefs-pillar-header">
+              <svg class="vefs-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              <h3 class="vefs-pillar-title">Kids Activities</h3>
             </div>
+            <ul class="vefs-pillar-list">
+              <li>Fun-filled workshops introducing farming and ecology</li>
+              <li>Hands-on learning with eco-friendly products</li>
+              <li>Creative sessions using recycled and natural materials</li>
+              <li>Natural color preparation for artistic exploration</li>
+              <li>Handmade craft activities inspired by nature</li>
+              <li>Encouraging environmental awareness through play and creativity</li>
+            </ul>
           </div>
+
+          <div class="vefs-pillar">
+            <div class="vefs-pillar-header">
+              <svg class="vefs-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+                <path d="M3.3 7 12 12l8.7-5"/>
+                <path d="M12 22V12"/>
+              </svg>
+              <h3 class="vefs-pillar-title">Seed Banks</h3>
+            </div>
+            <ul class="vefs-pillar-list">
+              <li>Preservation of native and indigenous seed varieties</li>
+              <li>Community seed sharing for farmers and home growers</li>
+              <li>Promoting seed sovereignty and biodiversity conservation</li>
+              <li>Encouraging multiplication of traditional seed varieties</li>
+              <li>Supporting self-sustainable farming communities</li>
+              <li>Protecting agricultural heritage for future generations</li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </section>
@@ -317,7 +707,7 @@
         <div class="grid grid-cols-2" style="gap: var(--space-2xl);">
           <div class="card" style="text-align: center; padding: var(--space-2xl);">
             <div style="font-size: 3rem; margin-bottom: var(--space-lg);">🎯</div>
-            <h2 style="color: var(--color-white); background: linear-gradient(135deg, #2C5F2D 0%, #4A90E2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: var(--font-size-2xl); margin-bottom: var(--space-md); font-weight: 700;">Our Mission</h2>
+            <h2 style="color: var(--color-white); background: linear-gradient(135deg, #B0171F 0%, #B0A817 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: var(--font-size-2xl); margin-bottom: var(--space-md); font-weight: 700;">Our Mission</h2>
             <p style="font-size: var(--font-size-lg); line-height: 1.8; color: var(--color-gray-700);">
               To drive sustainable change through ecological farming, biodiversity conservation, and social welfare, fostering harmony between nature and society.
             </p>
@@ -325,7 +715,7 @@
 
           <div class="card" style="text-align: center; padding: var(--space-2xl);">
             <div style="font-size: 3rem; margin-bottom: var(--space-lg);">🌟</div>
-            <h2 style="color: var(--color-white); background: linear-gradient(135deg, #2C5F2D 0%, #4A90E2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: var(--font-size-2xl); margin-bottom: var(--space-md); font-weight: 700;">Our Vision</h2>
+            <h2 style="color: var(--color-white); background: linear-gradient(135deg, #B0171F 0%, #B0A817 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: var(--font-size-2xl); margin-bottom: var(--space-md); font-weight: 700;">Our Vision</h2>
             <p style="font-size: var(--font-size-lg); line-height: 1.8; color: var(--color-gray-700);">
               To create a harmonious world where ecological farming thrives, biodiversity is protected, and communities live with dignity, care, and sustainability.
             </p>
@@ -377,13 +767,13 @@
     <!-- Future Plans Section -->
     <section class="section section-py" style="background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-secondary-light) 100%);">
       <div class="container">
-        <h2 class="section-title text-center" style="background: linear-gradient(135deg, #1a4d2e 0%, #2563a0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">Our Future Plans</h2>
+        <h2 class="section-title text-center" style="background: linear-gradient(135deg, #B0171F 0%, #8A1018 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">Our Future Plans</h2>
         <p class="section-subtitle text-center" style="color: var(--color-gray-800); font-weight: 500;">Building a greener tomorrow through strategic environmental action</p>
 
         <div class="grid grid-cols-3" style="gap: var(--space-xl); margin-top: var(--space-2xl);">
           <div class="card" style="text-align: center; padding: var(--space-xl);">
             <div style="font-size: 2.5rem; margin-bottom: var(--space-md);">📅</div>
-            <h3 style="background: linear-gradient(135deg, #2C5F2D 0%, #4A90E2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: var(--space-sm); font-weight: 700;">2026-2027</h3>
+            <h3 style="background: linear-gradient(135deg, #B0171F 0%, #B0A817 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: var(--space-sm); font-weight: 700;">2026-2027</h3>
             <h4 style="margin-bottom: var(--space-md); font-size: var(--font-size-lg); color: var(--color-gray-800); font-weight: 600;">Expansion Phase</h4>
             <ul style="text-align: left; color: var(--color-gray-700); line-height: 1.8;">
               <li>Reach 200+ schools across Tamil Nadu</li>
@@ -395,7 +785,7 @@
 
           <div class="card" style="text-align: center; padding: var(--space-xl);">
             <div style="font-size: 2.5rem; margin-bottom: var(--space-md);">🎯</div>
-            <h3 style="background: linear-gradient(135deg, #2C5F2D 0%, #4A90E2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: var(--space-sm); font-weight: 700;">2028-2030</h3>
+            <h3 style="background: linear-gradient(135deg, #B0171F 0%, #B0A817 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: var(--space-sm); font-weight: 700;">2028-2030</h3>
             <h4 style="margin-bottom: var(--space-md); font-size: var(--font-size-lg); color: var(--color-gray-800); font-weight: 600;">Scale & Impact</h4>
             <ul style="text-align: left; color: var(--color-gray-700); line-height: 1.8;">
               <li>Conservation of 100 sacred groves</li>
@@ -407,7 +797,7 @@
 
           <div class="card" style="text-align: center; padding: var(--space-xl);">
             <div style="font-size: 2.5rem; margin-bottom: var(--space-md);">🌍</div>
-            <h3 style="background: linear-gradient(135deg, #2C5F2D 0%, #4A90E2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: var(--space-sm); font-weight: 700;">2030+</h3>
+            <h3 style="background: linear-gradient(135deg, #B0171F 0%, #B0A817 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: var(--space-sm); font-weight: 700;">2030+</h3>
             <h4 style="margin-bottom: var(--space-md); font-size: var(--font-size-lg); color: var(--color-gray-800); font-weight: 600;">Legacy Vision</h4>
             <ul style="text-align: left; color: var(--color-gray-700); line-height: 1.8;">
               <li>Model for environmental education globally</li>
@@ -427,7 +817,7 @@
     <!-- Donation CTA Section -->
     <section class="section section-py" style="background-color: var(--color-primary); color: var(--color-white); text-align: center;">
       <div class="container" style="max-width: 800px;">
-        <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-md); background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none; font-weight: 700;">Support Our Mission</h2>
+        <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-md); background: linear-gradient(135deg, #f7f7e4 0%, #EDD5A8 50%, #C4904A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none; font-weight: 700;">Support Our Mission</h2>
         <p style="color: var(--color-gray-50); font-size: var(--font-size-xl); margin-bottom: var(--space-xl); opacity: 0.95; line-height: 1.7;">
           Your contribution helps us plant indigenous trees, educate communities, and restore ecological balance across Tamil Nadu. Every donation makes a tangible impact on our environment and future generations.
         </p>
@@ -502,6 +892,9 @@
             <a href="https://www.whatsapp.com/channel/0029Vat5xFr6RGJJI5rJcv3D" class="social-link" data-platform="whatsapp" aria-label="WhatsApp" target="_blank" rel="noopener">
               <img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="24" height="24">
             </a>
+            <a href="mailto:vefsfoundation@gmail.com" class="social-link" data-platform="email" aria-label="Email">
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
           </div>
         </div>
 
@@ -541,7 +934,7 @@
 
       <!-- Footer Bottom -->
       <div class="footer-bottom">
-        <p class="footer-copyright">&copy; 2025 VEFS Foundation. All rights reserved.</p>
+        <p class="footer-copyright">&copy; 2026 VEFS Foundation. All rights reserved.</p>
         <div class="footer-legal">
           <a href="privacy.html">Privacy Policy</a>
           <a href="terms.html">Terms of Service</a>
@@ -557,5 +950,36 @@
   <script src="js/components/form-validation.js"></script>
   <script src="js/home.js"></script>
   <script src="js/newsletter.js"></script>
+
+  <!-- Bilingual Banner Cycling Script -->
+  <script>
+    (function () {
+      var banner   = document.getElementById('bilingual-banner');
+      if (!banner) return;
+
+      var slides   = banner.querySelectorAll('.bilingual-banner__slide');
+      var total    = slides.length;
+      var current  = 0;
+      var INTERVAL = 3000;   // 3 seconds per language
+      var FADE_MS  = 700;    // must match CSS transition duration
+
+      function nextSlide() {
+        var outgoing = slides[current];
+        current = (current + 1) % total;
+        var incoming = slides[current];
+
+        // Fade out outgoing
+        outgoing.classList.remove('active');
+
+        // After fade completes, swap DOM position role and fade in incoming
+        setTimeout(function () {
+          incoming.classList.add('active');
+        }, FADE_MS);
+      }
+
+      // Start cycling
+      setInterval(nextSlide, INTERVAL);
+    })();
+  </script>
 </body>
 </html>

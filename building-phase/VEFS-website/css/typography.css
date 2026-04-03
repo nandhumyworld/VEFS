@@ -7,7 +7,13 @@
 
 /* ===== Google Fonts Import ===== */
 
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=IM+Fell+English:ital@0;1&display=swap');
+
+/* ===== Tamil Script Font ===== */
+
+:lang(ta) {
+  font-family: 'Karla', sans-serif;
+}
 
 /* ===== Base Typography ===== */
 
@@ -16,7 +22,7 @@ body {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
-  color: var(--color-gray-800);
+  color: var(--color-off-white); /* milky white */
 }
 
 /* ===== Headings ===== */
@@ -25,8 +31,25 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
-  color: var(--color-primary);
+  color: var(--color-off-white); /* milky white headings */
   margin-bottom: var(--space-lg);
+}
+
+/* Section title — decorative leaf ornament beneath */
+h2.section-title {
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+h2.section-title::after {
+  content: '❧';
+  display: block;
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--color-leaf);
+  margin-top: 0.5rem;
+  opacity: 0.75;
+  font-family: var(--font-poetic);
 }
 
 h1 {
@@ -82,7 +105,7 @@ h6 {
 p {
   margin-bottom: var(--space-md);   /* 16px */
   line-height: var(--line-height-relaxed);
-  color: var(--color-gray-600);
+  color: var(--color-gray-600); /* warm sand — readable on clay */
 }
 
 p:last-child {
@@ -257,11 +280,12 @@ a:focus-visible {
 /* ===== Blockquote ===== */
 
 blockquote {
-  border-left: 4px solid var(--color-primary);
+  border-left: 4px solid var(--color-leaf);
   padding-left: var(--space-lg);
   margin: var(--space-xl) 0;
   font-size: var(--font-size-md);
   font-style: italic;
+  font-family: var(--font-poetic);
   color: var(--color-gray-700);
   line-height: var(--line-height-relaxed);
 }
@@ -271,11 +295,39 @@ blockquote cite {
   margin-top: var(--space-sm);
   font-size: var(--font-size-sm);
   font-style: normal;
-  color: var(--color-gray-500);
+  color: var(--color-gray-600);
 }
 
 blockquote cite::before {
   content: '— ';
+}
+
+/* Poetic pull-quote — for featured statements */
+.quote-poetic {
+  font-family: var(--font-poetic);
+  font-style: italic;
+  font-size: var(--font-size-xl);
+  color: var(--color-off-white);
+  text-align: center;
+  padding: var(--space-2xl) var(--space-xl);
+  border-left: 3px solid var(--color-leaf);
+  border-right: 3px solid var(--color-accent);
+  background: rgba(63, 32, 8, 0.5);
+  border-radius: var(--radius-md);
+  position: relative;
+  line-height: var(--line-height-relaxed);
+}
+
+.quote-poetic::before {
+  content: '\201C';
+  font-size: 6rem;
+  color: var(--color-leaf);
+  opacity: 0.3;
+  position: absolute;
+  top: -1rem;
+  left: 1rem;
+  font-family: var(--font-serif);
+  line-height: 1;
 }
 
 /* ===== Code & Pre ===== */

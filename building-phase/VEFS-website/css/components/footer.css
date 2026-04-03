@@ -3,8 +3,9 @@
    ============================================ */
 
 .footer {
-  background-color: var(--color-gray-800);
-  color: var(--color-gray-200);
+  background-color: #0F0805; /* deep root-black mud — darker than body */
+  border-top: 2px solid rgba(176, 92, 23, 0.4);
+  color: var(--color-off-white);
   padding: var(--space-2xl) 0 var(--space-md);
 }
 
@@ -56,7 +57,7 @@
 .footer-description {
   font-size: var(--font-size-sm);
   line-height: var(--line-height-normal);
-  color: var(--color-gray-300);
+  color: rgba(247, 247, 228, 0.7);
   margin-bottom: var(--space-md);
 }
 
@@ -72,7 +73,7 @@
 }
 
 .footer-link {
-  color: var(--color-gray-300);
+  color: rgba(247, 247, 228, 0.7);
   text-decoration: none;
   font-size: var(--font-size-base);
   transition: color var(--transition-fast);
@@ -80,7 +81,7 @@
 }
 
 .footer-link:hover {
-  color: var(--color-primary-light);
+  color: var(--color-off-white);
 }
 
 .footer-link:focus-visible {
@@ -102,19 +103,19 @@
   gap: var(--space-xs);
   margin-bottom: var(--space-sm);
   font-size: var(--font-size-sm);
-  color: var(--color-gray-300);
+  color: rgba(247, 247, 228, 0.7);
 }
 
 .footer-contact svg {
   width: 18px;
   height: 18px;
-  fill: var(--color-primary-light);
+  fill: var(--color-secondary); /* mustard icons */
   flex-shrink: 0;
   margin-top: 2px;
 }
 
 .footer-contact a {
-  color: var(--color-gray-300);
+  color: rgba(247, 247, 228, 0.7);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
@@ -137,9 +138,10 @@
   width: 40px;
   height: 40px;
   border-radius: var(--radius-md);
-  background-color: var(--color-gray-700); /* Keep dark background for footer */
+  background-color: rgba(176, 92, 23, 0.3); /* clay tint */
+  border: 1px solid rgba(247, 247, 228, 0.1);
   text-decoration: none;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
 }
 
 /* Footer icon sizing for PNG images */
@@ -179,27 +181,27 @@
 .newsletter-input {
   flex: 1;
   padding: var(--space-sm);
-  border: 1px solid var(--color-gray-600);
+  border: 1px solid rgba(247, 247, 228, 0.2);
   border-radius: var(--radius-md);
-  background-color: var(--color-gray-700);
-  color: var(--color-white);
+  background-color: rgba(63, 32, 8, 0.8);
+  color: var(--color-off-white);
   font-size: var(--font-size-sm);
 }
 
 .newsletter-input::placeholder {
-  color: var(--color-gray-400);
+  color: rgba(247, 247, 228, 0.4);
 }
 
 .newsletter-input:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(107, 142, 35, 0.2);
+  border-color: var(--color-secondary); /* mustard focus */
+  box-shadow: 0 0 0 2px rgba(176, 168, 23, 0.2);
 }
 
 .newsletter-button {
   padding: var(--space-sm) var(--space-md);
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: var(--color-accent); /* crimson button */
+  color: var(--color-off-white);
   border: none;
   border-radius: var(--radius-md);
   font-size: var(--font-size-sm);
@@ -210,12 +212,12 @@
 }
 
 .newsletter-button:hover {
-  background-color: var(--color-primary-dark);
+  background-color: var(--color-accent-dark);
 }
 
 /* Footer bottom */
 .footer-bottom {
-  border-top: 1px solid var(--color-gray-700);
+  border-top: 1px solid rgba(247, 247, 228, 0.12);
   padding-top: var(--space-md);
   display: flex;
   justify-content: space-between;
@@ -226,7 +228,7 @@
 
 .footer-copyright {
   font-size: var(--font-size-sm);
-  color: var(--color-gray-400);
+  color: rgba(247, 247, 228, 0.5);
 }
 
 .footer-legal {
@@ -239,13 +241,13 @@
 
 .footer-legal a {
   font-size: var(--font-size-sm);
-  color: var(--color-gray-400);
+  color: rgba(247, 247, 228, 0.5);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 .footer-legal a:hover {
-  color: var(--color-white);
+  color: var(--color-off-white);
 }
 
 /* Responsive behavior */

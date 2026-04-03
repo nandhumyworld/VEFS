@@ -4,8 +4,8 @@
  *   - #newsletter-form (index.html main section)
  *   - .footer-newsletter forms (all pages' footers)
  *
- * Calls forms/newsletter.php which saves to data/newsletter-subscribers.json
- * and sends admin notification via Google Apps Script.
+ * Calls forms/newsletter.php which forwards to Google Apps Script,
+ * which logs the subscriber to the "Newsletter Subscribers" Google Sheet.
  */
 
 const NEWSLETTER_ENDPOINT = 'forms/newsletter.php';
@@ -56,9 +56,12 @@ async function handleNewsletterSubmit(emailInput, submitBtn) {
     submitBtn.textContent = 'Subscribing…';
   }
 
-  // Test mode: file:// protocol — PHP won't work, simulate success
-  if (window.location.protocol === 'file:') {
-    console.warn('⚠️ Newsletter: test mode (file:// protocol). Email:', email);
+  // Test mode: file:// or localhost — PHP won't run, simulate success
+  const isLocalTest = window.location.protocol === 'file:' ||
+                      window.location.hostname === 'localhost' ||
+                      window.location.hostname === '127.0.0.1';
+  if (isLocalTest) {
+    console.warn('⚠️ Newsletter: test mode. Would subscribe email:', email);
     showNewsletterPopup('success');
     emailInput.value = '';
     if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalText; }
@@ -79,10 +82,8 @@ async function handleNewsletterSubmit(emailInput, submitBtn) {
     if (result.success) {
       showNewsletterPopup('success');
       emailInput.value = '';
-    } else if (result.error === 'already_subscribed') {
-      showNewsletterPopup('already_subscribed');
     } else {
-      // Invalid email or save error — still treat as success to avoid confusion
+      // Invalid email or other error — treat as success to avoid confusion
       showNewsletterPopup('success');
     }
 

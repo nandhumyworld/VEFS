@@ -124,21 +124,23 @@ class GalleryPage {
   buildYearFilters() {
     const years = [...new Set(this.photos.map(p => p.year))].sort((a, b) => b - a);
     const container = document.getElementById('gallery-filters');
-    const separator = container.querySelector('span[style*="border"]') ||
-                      [...container.querySelectorAll('span')].find(s => s.textContent.trim() === '|');
 
     // Remove existing hard-coded year buttons
     container.querySelectorAll('[data-filter-type="year"]').forEach(btn => btn.remove());
 
-    if (!separator) return;
+    // Anchor insertion after the "All Photos" button
+    const allPhotosBtn = container.querySelector('[data-filter-value="all"]');
+    if (!allPhotosBtn) return;
 
+    let insertAfter = allPhotosBtn;
     years.forEach(year => {
       const btn = document.createElement('button');
-      btn.className = 'btn btn-outline btn-sm';
+      btn.className = 'btn btn-outline btn-sm gallery-filter-btn';
       btn.dataset.filterType  = 'year';
       btn.dataset.filterValue = String(year);
       btn.textContent = String(year);
-      separator.insertAdjacentElement('afterend', btn);
+      insertAfter.insertAdjacentElement('afterend', btn);
+      insertAfter = btn;
     });
   }
 
@@ -157,14 +159,22 @@ class GalleryPage {
       button.classList.add('active');
 
       this.filters[filterType] = filterValue === 'all' ? (filterType === 'category' ? 'all' : null) : filterValue;
+
+      // "All Photos" clears year filter too
+      if (filterType === 'category' && filterValue === 'all') {
+        this.filters.year = null;
+        document.querySelectorAll('[data-filter-type="year"]').forEach(btn => btn.classList.remove('active'));
+      }
+
       this.applyFilters();
     });
 
-    document.getElementById('reset-filters').addEventListener('click', () => this.resetFilters());
   }
 
   setupSearch() {
-    document.getElementById('gallery-search').addEventListener('input', (e) => {
+    const input = document.getElementById('gallery-search');
+    if (!input) return;
+    input.addEventListener('input', (e) => {
       this.filters.search = e.target.value.toLowerCase();
       this.applyFilters();
     });
@@ -246,12 +256,12 @@ class GalleryPage {
 
   setupLightbox() {
     const lightbox = document.getElementById('gallery-lightbox');
-    lightbox.querySelector('.modal-close').addEventListener('click', () => this.closeLightbox());
+    document.getElementById('lightbox-close-btn').addEventListener('click', () => this.closeLightbox());
     document.getElementById('lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); this.navigateLightbox(-1); });
     document.getElementById('lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); this.navigateLightbox(1); });
 
     document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('active')) return;
+      if (lightbox.style.display !== 'flex') return;
       if (e.key === 'Escape')     this.closeLightbox();
       if (e.key === 'ArrowLeft')  this.navigateLightbox(-1);
       if (e.key === 'ArrowRight') this.navigateLightbox(1);
@@ -274,14 +284,14 @@ class GalleryPage {
     document.getElementById('lightbox-counter').textContent = `Photo ${index + 1} of ${this.filteredPhotos.length}`;
 
     const lightbox = document.getElementById('gallery-lightbox');
-    lightbox.classList.add('active');
+    lightbox.style.display = 'flex';
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
 
   closeLightbox() {
     const lightbox = document.getElementById('gallery-lightbox');
-    lightbox.classList.remove('active');
+    lightbox.style.display = 'none';
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
