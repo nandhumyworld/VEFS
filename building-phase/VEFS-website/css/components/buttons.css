@@ -85,6 +85,23 @@
   transform: translateY(0);
 }
 
+/* Outline button (Light variant) — For use on dark backgrounds */
+.btn-outline-light {
+  background-color: transparent;
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+.btn-outline-light:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+.btn-outline-light:active:not(:disabled) {
+  transform: translateY(0);
+}
+
 /* Text button — Minimal emphasis */
 .btn-text {
   background-color: transparent;
