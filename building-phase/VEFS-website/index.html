@@ -54,9 +54,9 @@
       top: 50%;
       left: 0;
       width: 100%;
-      transform: translateY(calc(-50% + 6px));
+      transform: translateY(-50%);
       opacity: 0;
-      transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+      transition: opacity 1s ease-in-out;
       pointer-events: none;
     }
 
@@ -119,7 +119,7 @@
       font-size: 1.1rem;
       color: var(--color-leaf);
       opacity: 0.85;
-      animation: leafPulse 3s ease-in-out infinite;
+      animation: leafPulse 3s linear infinite;
     }
 
     @keyframes leafPulse {
@@ -127,12 +127,38 @@
       50%       { opacity: 1;   transform: scale(1.15); }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
+      .bilingual-banner {
+        padding: 1rem 1rem 0.75rem;
+      }
       .bilingual-banner__track {
-        height: 96px;
+        height: 110px;
+      }
+      .bilingual-banner__slide {
+        transition: opacity 1s ease-in-out;
+      }
+      .bilingual-banner__title {
+        font-size: 1rem !important;
+        line-height: 1.4 !important;
       }
       .bilingual-banner__subtitle {
-        gap: 0.2rem 0.8rem;
+        gap: 0.2rem 0.6rem;
+        font-size: 0.8rem !important;
+      }
+      .bilingual-banner__divider {
+        margin-top: 0.5rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .bilingual-banner__track {
+        height: 120px;
+      }
+      .bilingual-banner__title {
+        font-size: 0.9rem !important;
+      }
+      .bilingual-banner__subtitle {
+        font-size: 0.75rem !important;
       }
     }
 
@@ -207,18 +233,38 @@
       .hero-split {
         flex-direction: column;
         min-height: auto;
-        padding: 1rem 0;
+        padding: 0;
       }
-      .hero-split__image,
-      .hero-split__content {
-        flex: 0 0 100%;
+      .hero-split__image {
+        flex: 0 0 auto;
         max-width: 100%;
-        padding: 1rem 1.5rem;
+        padding: 0.5rem 0.75rem;
       }
-      .hero-split__image { order: 1; }
-      .hero-split__content { order: 2; text-align: center; }
-      .hero-split__text { max-width: none; }
-      .hero-split__cta { display: inline-block; }
+      .hero-split__image img {
+        max-height: 220px !important;
+        border-radius: 8px !important;
+      }
+      .hero-split__content {
+        flex: 0 0 auto;
+        max-width: 100%;
+        padding: 0.5rem 1rem 0.75rem;
+        text-align: center;
+      }
+      .hero-split__title {
+        font-size: 1.35rem !important;
+        margin-bottom: 0.5rem !important;
+      }
+      .hero-split__text {
+        max-width: none;
+        font-size: 14px !important;
+        margin-bottom: 0.75rem !important;
+        line-height: 1.5 !important;
+      }
+      .hero-split__cta {
+        display: inline-block;
+        padding: 0.5rem 1.25rem !important;
+        font-size: 13px !important;
+      }
     }
 
     /* ===== Vision / Mission / Values Cards ===== */
@@ -1035,7 +1081,7 @@
         <div class="carousel-slide">
           <div class="hero-split">
             <div class="hero-split__image">
-              <img src="images/hero/hero-slide-3.jpg" alt="VEFS Events - Workshops, Field Visits, and Community Activities" loading="lazy">
+              <img src="images/hero/hero-slide-3.png" alt="VEFS Events - Workshops, Field Visits, and Community Activities" loading="lazy">
             </div>
             <div class="hero-split__content">
               <h2 class="hero-split__title">Join VEFS' <span class="accent">Vibrant Events</span></h2>
@@ -1049,7 +1095,7 @@
         <div class="carousel-slide">
           <div class="hero-split">
             <div class="hero-split__image">
-              <img src="images/hero/hero-slide-2.jpg" alt="VEFS Trainings - Ecological Education and Skill Development" loading="lazy">
+              <img src="images/hero/hero-slide-2.png" alt="VEFS Trainings - Ecological Education and Skill Development" loading="lazy">
             </div>
             <div class="hero-split__content">
               <h2 class="hero-split__title">Trainings & <span class="accent">Workshops</span></h2>
@@ -1174,7 +1220,7 @@
             <a href="events.html" class="btn-outline-green">Discover Our Events</a>
           </div>
           <div class="showcase-row__image">
-            <img src="images/hero/hero-slide-3.jpg" alt="VEFS environmental workshop and community event" loading="lazy">
+            <img src="images/home-sections/explore-events.png" alt="VEFS environmental workshop and community event" loading="lazy">
           </div>
         </div>
 
@@ -1187,7 +1233,7 @@
             <a href="trainings.html" class="btn-outline-green">Browse Trainings</a>
           </div>
           <div class="showcase-row__image">
-            <img src="images/hero/hero-slide-2.jpg" alt="VEFS organic farming training session" loading="lazy">
+            <img src="images/home-sections/explore-trainings.jpg" alt="VEFS organic farming training session" loading="lazy">
           </div>
         </div>
 
@@ -1200,7 +1246,7 @@
             <a href="gallery.html" class="btn-outline-green">Visit Our Gallery</a>
           </div>
           <div class="showcase-row__image">
-            <img src="images/hero/hero-slide-5.png" alt="VEFS conservation program in action" loading="lazy">
+            <img src="images/home-sections/explore-gallery.png" alt="VEFS conservation program in action" loading="lazy">
           </div>
         </div>
 
@@ -1213,7 +1259,7 @@
             <a href="volunteer.html" class="btn-outline-green">Get Involved</a>
           </div>
           <div class="showcase-row__image">
-            <img src="images/hero/hero-slide-4.jpg" alt="VEFS volunteers in community planting activity" loading="lazy">
+            <img src="images/home-sections/volunteer-1.png" alt="VEFS volunteers in community planting activity" loading="lazy">
           </div>
         </div>
       </div>
@@ -1230,7 +1276,7 @@
           <div class="superbox" tabindex="0" role="group" aria-label="Organic Farming & Skill Training">
             <div class="superbox-wrap">
               <div class="superbox-primary">
-                <img src="images/why-vefs/organic-farming.svg" alt="Organic farming training session" loading="lazy">
+                <img src="images/why-vefs/organic-farming.jpg" alt="Organic farming training session" loading="lazy">
                 <h3 class="superbox-title">Organic Farming & Skill Training</h3>
               </div>
               <div class="superbox-secondary">
@@ -1250,7 +1296,7 @@
           <div class="superbox" tabindex="0" role="group" aria-label="Biodiversity Activities">
             <div class="superbox-wrap">
               <div class="superbox-primary">
-                <img src="images/why-vefs/biodiversity.svg" alt="Biodiversity conservation activity" loading="lazy">
+                <img src="images/why-vefs/biodiversity.jpg" alt="Biodiversity conservation activity" loading="lazy">
                 <h3 class="superbox-title">Biodiversity Activities</h3>
               </div>
               <div class="superbox-secondary">
@@ -1270,7 +1316,7 @@
           <div class="superbox" tabindex="0" role="group" aria-label="Social Welfare Activities">
             <div class="superbox-wrap">
               <div class="superbox-primary">
-                <img src="images/why-vefs/social-welfare.svg" alt="Social welfare community event" loading="lazy">
+                <img src="images/why-vefs/social-welfare.jpg" alt="Social welfare community event" loading="lazy">
                 <h3 class="superbox-title">Social Welfare Activities</h3>
               </div>
               <div class="superbox-secondary">
@@ -1290,7 +1336,7 @@
           <div class="superbox" tabindex="0" role="group" aria-label="Kids Activities">
             <div class="superbox-wrap">
               <div class="superbox-primary">
-                <img src="images/why-vefs/kids-activities.svg" alt="Kids ecological learning activity" loading="lazy">
+                <img src="images/why-vefs/kids-activities.png" alt="Kids ecological learning activity" loading="lazy">
                 <h3 class="superbox-title">Kids Activities</h3>
               </div>
               <div class="superbox-secondary">
@@ -1310,7 +1356,7 @@
           <div class="superbox" tabindex="0" role="group" aria-label="Seed Banks">
             <div class="superbox-wrap">
               <div class="superbox-primary">
-                <img src="images/why-vefs/seed-banks.svg" alt="Native seed bank collection" loading="lazy">
+                <img src="images/why-vefs/seed-banks.png" alt="Native seed bank collection" loading="lazy">
                 <h3 class="superbox-title">Seed Banks</h3>
               </div>
               <div class="superbox-secondary">
@@ -1330,7 +1376,7 @@
           <div class="superbox" tabindex="0" role="group" aria-label="Nature Agro Tourism">
             <div class="superbox-wrap">
               <div class="superbox-primary">
-                <img src="images/why-vefs/agro-tourism.svg" alt="Nature agro tourism farm visit" loading="lazy">
+                <img src="images/why-vefs/agro-tourism.jpg" alt="Nature agro tourism farm visit" loading="lazy">
                 <h3 class="superbox-title">Nature Agro Tourism</h3>
               </div>
               <div class="superbox-secondary">
@@ -1459,7 +1505,7 @@
             </div>
           </div>
           <div class="donate-image">
-            <img src="images/hero/hero-slide-4.jpg" alt="VEFS volunteers planting indigenous trees" loading="lazy">
+            <img src="images/home-sections/volunteer-2.png" alt="VEFS volunteers planting indigenous trees" loading="lazy">
           </div>
         </div>
       </div>
@@ -1476,7 +1522,7 @@
             <a href="volunteer.html" class="btn btn-secondary btn-lg">Join Us Now</a>
           </div>
           <div class="volunteer-image">
-            <img src="images/hero/hero-slide-3.jpg" alt="VEFS volunteers in community environmental activity" loading="lazy">
+            <img src="images/home-sections/volunteer-3.png" alt="VEFS volunteers in community environmental activity" loading="lazy">
           </div>
         </div>
       </div>
