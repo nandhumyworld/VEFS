@@ -166,11 +166,11 @@
 
 @media (max-width: 640px) {
 
-  /* Mission/Vision cards - stack vertically on mobile */
-  .mission-vision-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 1.5rem !important;
+  /* VMV cards - stack vertically on mobile */
+  .vmv-cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
   }
 }
 
@@ -335,5 +335,50 @@
   [style*="max-width: 900px"],
   [style*="max-width: 800px"] {
     max-width: 100% !important;
+  }
+}
+
+/* ============================================
+   4-COLUMN FOOTER RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .footer-grid-4col {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid-4col {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ============================================
+   ANNOUNCEMENT BAR RESPONSIVE
+   ============================================ */
+
+@media (max-width: 640px) {
+  .announcement-bar {
+    padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* ============================================
+   QUICK LINK CARDS RESPONSIVE
+   ============================================ */
+
+@media (max-width: 640px) {
+  /* Superbox cards - single column on small mobile */
+  .superbox-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Showcase rows - stack */
+  .showcase-row,
+  .showcase-row--reversed {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
   }
 }

@@ -2,7 +2,7 @@
    BUTTON COMPONENT
    ============================================ */
 
-/* Base button styles — leaf shape */
+/* Base button styles — rounded */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -17,7 +17,7 @@
   text-decoration: none;
   white-space: nowrap;
   border: 2px solid transparent;
-  border-radius: 0 50% 0 50% / 0 25% 0 25%; /* organic leaf shape */
+  border-radius: 8px;
   cursor: pointer;
   transition: all var(--transition-base);
   user-select: none;
@@ -25,22 +25,21 @@
 }
 
 .btn:focus {
-  outline: 2px solid var(--color-secondary); /* mustard focus */
+  outline: 2px solid #2D6A4F;
   outline-offset: 2px;
 }
 
-/* Primary button — Mustard leaf (main actions: Donate, Register, Submit) */
+/* Primary button — Terracotta (main actions: Donate, Register, Submit) */
 .btn-primary {
-  background-color: var(--color-secondary);   /* mustard olive #B0A817 */
-  color: #2C1A05;                              /* dark mud text — passes contrast */
-  border-color: var(--color-secondary-dark);
+  background-color: #C26E53;
+  color: #FFFFFF;
+  border-color: #C26E53;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: var(--color-secondary-dark);
-  border-color: var(--color-secondary-dark);
-  color: #2C1A05;
-  border-radius: 50% 0 50% 0 / 25% 0 25% 0; /* flip leaf on hover — living feel */
+  background-color: #A85A42;
+  border-color: #A85A42;
+  color: #FFFFFF;
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -50,18 +49,17 @@
   box-shadow: var(--shadow-sm);
 }
 
-/* Secondary button — Crimson leaf (emphasis, support mission) */
+/* Secondary button — Forest green (emphasis, support mission) */
 .btn-secondary {
-  background-color: var(--color-accent);       /* crimson #B0171F */
-  color: var(--color-off-white);               /* milky white text */
-  border-color: var(--color-accent-dark);
+  background-color: #2D6A4F;
+  color: #FFFFFF;
+  border-color: #2D6A4F;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background-color: var(--color-accent-dark);
-  border-color: var(--color-accent-dark);
-  color: var(--color-off-white);
-  border-radius: 50% 0 50% 0 / 25% 0 25% 0;
+  background-color: #1B4332;
+  border-color: #1B4332;
+  color: #FFFFFF;
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -71,17 +69,16 @@
   box-shadow: var(--shadow-sm);
 }
 
-/* Outline button — Milky white border (tertiary actions) */
+/* Outline button — Forest green border (tertiary actions) */
 .btn-outline {
   background-color: transparent;
-  color: var(--color-off-white);
-  border-color: var(--color-off-white);
+  color: #2D6A4F;
+  border-color: #2D6A4F;
 }
 
 .btn-outline:hover:not(:disabled) {
-  background-color: rgba(247, 247, 228, 0.12);
-  color: var(--color-off-white);
-  border-radius: 50% 0 50% 0 / 25% 0 25% 0;
+  background-color: rgba(45, 106, 79, 0.08);
+  color: #2D6A4F;
 }
 
 .btn-outline:active:not(:disabled) {
@@ -91,14 +88,14 @@
 /* Text button — Minimal emphasis */
 .btn-text {
   background-color: transparent;
-  color: var(--color-off-white);
+  color: #2D6A4F;
   border-color: transparent;
   padding: var(--space-xs) var(--space-sm);
 }
 
 .btn-text:hover:not(:disabled) {
-  color: var(--color-secondary);
-  background-color: rgba(176, 168, 23, 0.1);
+  color: #1B4332;
+  background-color: rgba(45, 106, 79, 0.08);
 }
 
 /* Danger button - Destructive actions */
@@ -186,7 +183,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--color-white);
+  color: #FFFFFF;
 }
 
 /* Disabled state */
@@ -201,8 +198,9 @@
 
 /* Focus visible (keyboard navigation only) */
 .btn:focus-visible {
-  outline: 2px solid var(--color-secondary); /* mustard olive focus */
+  outline: 2px solid #2D6A4F;
   outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.25);
 }
 
 .btn:focus:not(:focus-visible) {

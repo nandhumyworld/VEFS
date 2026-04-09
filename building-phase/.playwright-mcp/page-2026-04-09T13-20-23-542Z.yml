@@ -1,0 +1,461 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - text: Join our next workshop!
+    - link "View upcoming events →" [ref=e3] [cursor=pointer]:
+      - /url: events.html
+    - button "Dismiss announcement" [ref=e4] [cursor=pointer]: ×
+  - banner [ref=e5]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - link "VEFS Foundation Logo VEFS Foundation Valluvam Ecological Farming and Social welfare foundation":
+          - /url: index.html
+          - generic:
+            - img "VEFS Foundation Logo"
+          - generic:
+            - generic: VEFS Foundation
+            - generic: Valluvam Ecological Farming
+            - generic: and Social welfare foundation
+      - navigation [ref=e10]:
+        - list [ref=e11]:
+          - listitem [ref=e12]:
+            - link "Home" [ref=e13] [cursor=pointer]:
+              - /url: index.html
+          - listitem [ref=e14]:
+            - link "About" [ref=e15] [cursor=pointer]:
+              - /url: about.html
+          - listitem [ref=e16]:
+            - link "Trainings" [ref=e17] [cursor=pointer]:
+              - /url: trainings.html
+          - listitem [ref=e18]:
+            - link "Events" [ref=e19] [cursor=pointer]:
+              - /url: events.html
+          - listitem [ref=e20]:
+            - link "Volunteer" [ref=e21] [cursor=pointer]:
+              - /url: volunteer.html
+          - listitem [ref=e22]:
+            - link "Gallery" [ref=e23] [cursor=pointer]:
+              - /url: gallery.html
+          - listitem [ref=e24]:
+            - link "Future Plans" [ref=e25] [cursor=pointer]:
+              - /url: future-plans.html
+          - listitem [ref=e26]:
+            - link "Contact" [ref=e27] [cursor=pointer]:
+              - /url: contact.html
+          - listitem [ref=e28]:
+            - link "Donate" [ref=e29] [cursor=pointer]:
+              - /url: donate.html
+      - generic [ref=e30]:
+        - link "Facebook" [ref=e31] [cursor=pointer]:
+          - /url: https://www.facebook.com/people/VEFS-Foundation/61582906514169/
+          - img "Facebook" [ref=e32]
+        - link "Instagram" [ref=e33] [cursor=pointer]:
+          - /url: https://www.instagram.com/vefsfoundation/
+          - img "Instagram" [ref=e34]
+        - link "YouTube" [ref=e35] [cursor=pointer]:
+          - /url: https://www.youtube.com/@VEFSFOUNDATION
+          - img "YouTube" [ref=e36]
+        - link "WhatsApp" [ref=e37] [cursor=pointer]:
+          - /url: https://www.whatsapp.com/channel/0029Vat5xFr6RGJJI5rJcv3D
+          - img "WhatsApp" [ref=e38]
+        - link "Email" [ref=e39] [cursor=pointer]:
+          - /url: mailto:vefsfoundation@gmail.com
+          - img [ref=e40]
+  - main [ref=e42]:
+    - generic [ref=e43]:
+      - generic [ref=e45]:
+        - generic [ref=e47]:
+          - img "VEFS Foundation - Ecological Conservation and Community Welfare" [ref=e49]
+          - generic [ref=e50]:
+            - heading "Valluvam Ecological Farming" [level=1] [ref=e51]
+            - paragraph [ref=e52]: Restoring biodiversity and empowering communities through ecological conservation and sustainable agriculture across Tamil Nadu.
+            - link "Learn About Us" [ref=e53] [cursor=pointer]:
+              - /url: about.html
+        - generic [ref=e55]:
+          - img "VEFS Events - Workshops, Field Visits, and Community Activities" [ref=e57]
+          - generic [ref=e58]:
+            - heading "Join VEFS' Vibrant Events" [level=2] [ref=e59]
+            - paragraph [ref=e60]: Register for our workshops, field visits, and environmental activities that foster community and celebrate ecological heritage.
+            - link "View Events" [ref=e61] [cursor=pointer]:
+              - /url: events.html
+        - generic [ref=e63]:
+          - img "VEFS Trainings - Ecological Education and Skill Development" [ref=e65]
+          - generic [ref=e66]:
+            - heading "Trainings & Workshops" [level=2] [ref=e67]
+            - paragraph [ref=e68]: Join our eco-education programs in organic farming, conservation, and sustainability to build practical skills.
+            - link "Browse Trainings" [ref=e69] [cursor=pointer]:
+              - /url: trainings.html
+        - generic [ref=e71]:
+          - img "Support VEFS - Help Restore Ecological Balance" [ref=e73]
+          - generic [ref=e74]:
+            - heading "Support Our Mission" [level=2] [ref=e75]
+            - paragraph [ref=e76]: Help us restore ecological balance across Tamil Nadu through your generous contribution and partnership.
+            - link "Donate Now" [ref=e77] [cursor=pointer]:
+              - /url: donate.html
+      - button "Previous slide" [ref=e78] [cursor=pointer]:
+        - generic [ref=e79]: ‹
+      - button "Next slide" [ref=e80] [cursor=pointer]:
+        - generic [ref=e81]: ›
+      - generic [ref=e82]:
+        - button "Slide 1" [ref=e83] [cursor=pointer]
+        - button "Slide 2" [ref=e84] [cursor=pointer]
+        - button "Slide 3" [ref=e85] [cursor=pointer]
+        - button "Slide 4" [ref=e86] [cursor=pointer]
+    - banner "Foundation identity banner" [ref=e87]:
+      - generic [ref=e88]:
+        - generic [ref=e89]:
+          - heading "வள்ளுவம் சூழலியல் உழவாண்மை, சமூக நலன் அறக்கட்டளை" [level=2] [ref=e90]
+          - paragraph [ref=e91]:
+            - generic [ref=e92]: • இயற்கை வேளாண்மை
+            - generic [ref=e93]: • பல்லுயிர் பாதுகாப்பு
+            - generic [ref=e94]: • சமூக நலன்
+        - generic:
+          - heading "Valluvam Ecological Farming & Social Welfare Foundation" [level=2]
+          - paragraph:
+            - generic: • Organic Farming
+            - generic: • Biodiversity Conservation
+            - generic: • Social Welfare
+      - generic [ref=e96]: ❧
+    - generic [ref=e99]:
+      - generic [ref=e100]:
+        - img "Vision icon" [ref=e101]
+        - heading "Our Vision" [level=2] [ref=e102]
+        - paragraph [ref=e103]: To drive community growth and ecological sustainability through innovative agricultural initiatives and indigenous tree conservation.
+      - generic [ref=e104]:
+        - img "Mission icon" [ref=e105]
+        - heading "Our Mission" [level=2] [ref=e106]
+        - paragraph [ref=e107]: A world where collective action and social responsibility shape a brighter future. Empowering communities through ecological farming and biodiversity conservation.
+      - generic [ref=e108]:
+        - img "Values icon" [ref=e109]
+        - heading "Our Values" [level=2] [ref=e110]
+        - list [ref=e111]:
+          - listitem [ref=e112]: Ecological Conservation
+          - listitem [ref=e113]: Community Empowerment
+          - listitem [ref=e114]: Sustainable Practices
+    - generic [ref=e116]:
+      - heading "Explore VEFS Foundation" [level=2] [ref=e117]
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - generic [ref=e120]: Educational Events
+          - heading "Workshops & Environmental Activities" [level=3] [ref=e121]
+          - paragraph [ref=e122]: Our chapters host informative events to promote ecological conservation. We collaborate with experts and hold gatherings in farms and community spaces to spread awareness about indigenous trees and sustainable farming.
+          - link "Discover Our Events" [ref=e123] [cursor=pointer]:
+            - /url: events.html
+        - img "VEFS environmental workshop and community event" [ref=e125]
+      - generic [ref=e126]:
+        - generic [ref=e127]:
+          - generic [ref=e128]: Skill Development
+          - heading "Trainings & Certification Programs" [level=3] [ref=e129]
+          - paragraph [ref=e130]: Build practical skills in organic farming, conservation, and sustainable practices. Our structured training programs empower farmers and community members with hands-on knowledge for self-reliant agriculture.
+          - link "Browse Trainings" [ref=e131] [cursor=pointer]:
+            - /url: trainings.html
+        - img "VEFS organic farming training session" [ref=e133]
+      - generic [ref=e134]:
+        - generic [ref=e135]:
+          - generic [ref=e136]: Photo Gallery
+          - heading "Our Programs in Action" [level=3] [ref=e137]
+          - paragraph [ref=e138]: Explore photos from our conservation drives, community events, and training programs. See the real impact of ecological farming and biodiversity restoration across Tamil Nadu.
+          - link "Visit Our Gallery" [ref=e139] [cursor=pointer]:
+            - /url: gallery.html
+        - img "VEFS conservation program in action" [ref=e141]
+      - generic [ref=e142]:
+        - generic [ref=e143]:
+          - generic [ref=e144]: Community
+          - heading "Volunteer With Us" [level=3] [ref=e145]
+          - paragraph [ref=e146]: Join our network of passionate volunteers. Whether you're interested in organic farming, tree planting, or community outreach, there's a place for you in the VEFS family.
+          - link "Get Involved" [ref=e147] [cursor=pointer]:
+            - /url: volunteer.html
+        - img "VEFS volunteers in community planting activity" [ref=e149]
+    - generic [ref=e151]:
+      - heading "Why VEFS Foundation?" [level=2] [ref=e152]
+      - generic [ref=e153]:
+        - group "Organic Farming & Skill Training" [ref=e154] [cursor=pointer]:
+          - generic [ref=e155]:
+            - generic [ref=e156]:
+              - img "Organic farming training session" [ref=e157]
+              - heading "Organic Farming & Skill Training" [level=3] [ref=e158]
+            - generic [ref=e159]:
+              - heading "Organic Farming & Skill Training" [level=4] [ref=e160]
+              - list [ref=e161]:
+                - listitem [ref=e162]: Promoting organic and natural farming rooted in traditional wisdom
+                - listitem [ref=e163]: Seed saving focused on native and indigenous varieties
+                - listitem [ref=e164]: Skill development for sustainable cultivation techniques
+                - listitem [ref=e165]: Workshops on natural fertilizers and soil regeneration
+                - listitem [ref=e166]: Eco-friendly pest management solutions
+                - listitem [ref=e167]: Empowering farmers towards self-reliant agriculture
+        - group "Biodiversity Activities" [ref=e168] [cursor=pointer]:
+          - generic [ref=e169]:
+            - generic [ref=e170]:
+              - img "Biodiversity conservation activity" [ref=e171]
+              - heading "Biodiversity Activities" [level=3] [ref=e172]
+            - generic [ref=e173]:
+              - heading "Biodiversity Activities" [level=4] [ref=e174]
+              - list [ref=e175]:
+                - listitem [ref=e176]: Lake restoration to revive natural water ecosystems
+                - listitem [ref=e177]: Afforestation with native and indigenous tree species
+                - listitem [ref=e178]: Habitat restoration for birds, insects, and wildlife
+                - listitem [ref=e179]: Community ecological conservation programs
+                - listitem [ref=e180]: Awareness activities to protect local biodiversity
+                - listitem [ref=e181]: Long-term environmental regeneration efforts
+        - group "Social Welfare Activities" [ref=e182] [cursor=pointer]:
+          - generic [ref=e183]:
+            - generic [ref=e184]:
+              - img "Social welfare community event" [ref=e185]
+              - heading "Social Welfare Activities" [level=3] [ref=e186]
+            - generic [ref=e187]:
+              - heading "Social Welfare Activities" [level=4] [ref=e188]
+              - list [ref=e189]:
+                - listitem [ref=e190]: Awareness on healthy and sustainable food choices
+                - listitem [ref=e191]: Good Food movement promoting chemical-free agriculture
+                - listitem [ref=e192]: Educating about harmful pesticide usage
+                - listitem [ref=e193]: Self-sustainable and mindful living practices
+                - listitem [ref=e194]: Healthier lifestyles through natural food awareness
+                - listitem [ref=e195]: Building conscious communities for a sustainable future
+        - group "Kids Activities" [ref=e196] [cursor=pointer]:
+          - generic [ref=e197]:
+            - generic [ref=e198]:
+              - img "Kids ecological learning activity" [ref=e199]
+              - heading "Kids Activities" [level=3] [ref=e200]
+            - generic [ref=e201]:
+              - heading "Kids Activities" [level=4] [ref=e202]
+              - list [ref=e203]:
+                - listitem [ref=e204]: Fun-filled workshops on farming and ecology
+                - listitem [ref=e205]: Hands-on learning with eco-friendly products
+                - listitem [ref=e206]: Creative sessions using recycled and natural materials
+                - listitem [ref=e207]: Natural color preparation for artistic exploration
+                - listitem [ref=e208]: Handmade craft activities inspired by nature
+                - listitem [ref=e209]: Environmental awareness through play and creativity
+        - group "Seed Banks" [ref=e210] [cursor=pointer]:
+          - generic [ref=e211]:
+            - generic [ref=e212]:
+              - img "Native seed bank collection" [ref=e213]
+              - heading "Seed Banks" [level=3] [ref=e214]
+            - generic [ref=e215]:
+              - heading "Seed Banks" [level=4] [ref=e216]
+              - list [ref=e217]:
+                - listitem [ref=e218]: Preservation of native and indigenous seed varieties
+                - listitem [ref=e219]: Community seed sharing for farmers and home growers
+                - listitem [ref=e220]: Promoting seed sovereignty and biodiversity conservation
+                - listitem [ref=e221]: Multiplication of traditional seed varieties
+                - listitem [ref=e222]: Supporting self-sustainable farming communities
+                - listitem [ref=e223]: Protecting agricultural heritage for future generations
+        - group "Nature Agro Tourism" [ref=e224] [cursor=pointer]:
+          - generic [ref=e225]:
+            - generic [ref=e226]:
+              - img "Nature agro tourism farm visit" [ref=e227]
+              - heading "Nature Agro Tourism" [level=3] [ref=e228]
+            - generic [ref=e229]:
+              - heading "Nature Agro Tourism" [level=4] [ref=e230]
+              - list [ref=e231]:
+                - listitem [ref=e232]: Curated visits to natural and organic farms
+                - listitem [ref=e233]: Learn directly from farmers with sustainable techniques
+                - listitem [ref=e234]: Guided forest walks exploring native tree species
+                - listitem [ref=e235]: Immersive experiences to reconnect with nature
+                - listitem [ref=e236]: Educational eco-tours blending learning and celebration
+                - listitem [ref=e237]: Experience farming, food, and forest naturally
+    - generic [ref=e239]:
+      - heading "Upcoming Events" [level=2] [ref=e240]
+      - paragraph [ref=e241]: Join our workshops, field visits, and environmental activities
+      - generic [ref=e243]:
+        - generic [ref=e244]:
+          - img "Valluvam Organic Market — Tambaram" [ref=e245]
+          - generic [ref=e246]: Featured
+        - generic [ref=e247]:
+          - generic [ref=e248]:
+            - generic [ref=e249]: 📅 12 Apr 2026
+            - generic [ref=e250]: 📍 Chennai
+          - heading "Valluvam Organic Market — Tambaram" [level=3] [ref=e251]
+          - paragraph [ref=e252]: வள்ளுவம் இயற்கை சந்தை திருவிழா | Organic vegetables, traditional grains, handloom, cold-pressed oils, clay pots & millet lunch. Every 2nd Sunday, 9am–6pm at Tambaram.
+          - generic [ref=e253]:
+            - generic [ref=e254]: ₹undefined
+            - link "Learn More" [ref=e255] [cursor=pointer]:
+              - /url: /events.html#evt-001
+      - link "View All Events" [ref=e257] [cursor=pointer]:
+        - /url: events.html
+    - generic [ref=e259]:
+      - heading "Featured Trainings" [level=2] [ref=e260]
+      - paragraph [ref=e261]: Build skills in organic farming, conservation, and sustainable practices
+      - generic [ref=e263]:
+        - img "One Month Intensive Practical Natural Farming Training" [ref=e265]
+        - generic [ref=e266]:
+          - generic [ref=e267]: Open for Registration
+          - heading "One Month Intensive Practical Natural Farming Training" [level=3] [ref=e268]
+          - paragraph [ref=e269]: One-month immersive practical training in natural farming, seed conservation, animal husbandry, and sustainable living practices.
+          - generic [ref=e270]:
+            - generic [ref=e271]:
+              - strong [ref=e272]: "Duration:"
+              - text: 1 month
+            - generic [ref=e273]:
+              - strong [ref=e274]: "Category:"
+              - text: Farming
+          - generic [ref=e275]:
+            - generic [ref=e276]: ₹6000
+            - link "Register Now" [ref=e277] [cursor=pointer]:
+              - /url: /trainings.html#trn-001
+      - link "View All Trainings" [ref=e279] [cursor=pointer]:
+        - /url: trainings.html
+    - generic [ref=e281]:
+      - heading "Our Future Plans" [level=2] [ref=e282]
+      - paragraph [ref=e283]: Building a greener tomorrow through strategic environmental action
+      - generic [ref=e284]:
+        - generic [ref=e285]:
+          - generic [ref=e286]: 📅
+          - heading "2026-2027" [level=3] [ref=e287]
+          - heading "Expansion Phase" [level=4] [ref=e288]
+          - list [ref=e289]:
+            - listitem [ref=e290]: Reach 200+ schools across Tamil Nadu
+            - listitem [ref=e291]: Establish 5 regional training centers
+            - listitem [ref=e292]: Plant 50,000 indigenous trees
+            - listitem [ref=e293]: Launch mobile education units
+        - generic [ref=e294]:
+          - generic [ref=e295]: 🎯
+          - heading "2028-2030" [level=3] [ref=e296]
+          - heading "Scale & Impact" [level=4] [ref=e297]
+          - list [ref=e298]:
+            - listitem [ref=e299]: Conservation of 100 sacred groves
+            - listitem [ref=e300]: Train 10,000+ farmers in organic methods
+            - listitem [ref=e301]: Digital platform for eco-education
+            - listitem [ref=e302]: Research center for indigenous species
+        - generic [ref=e303]:
+          - generic [ref=e304]: 🌎
+          - heading "2030+" [level=3] [ref=e305]
+          - heading "Legacy Vision" [level=4] [ref=e306]
+          - list [ref=e307]:
+            - listitem [ref=e308]: Model for environmental education globally
+            - listitem [ref=e309]: 1 million trees planted & thriving
+            - listitem [ref=e310]: Self-sustaining conservation network
+            - listitem [ref=e311]: Documented traditional ecological knowledge
+      - link "Explore Our Vision" [ref=e313] [cursor=pointer]:
+        - /url: future-plans.html
+    - generic [ref=e316]:
+      - generic [ref=e317]:
+        - img "Support icon" [ref=e318]
+        - heading "Support VEFS at just Rs. 10/day" [level=2] [ref=e319]
+        - paragraph [ref=e320]: Your contribution helps us plant indigenous trees, educate communities, and restore ecological balance across Tamil Nadu. Every donation makes a tangible impact on our environment and future generations.
+        - generic [ref=e321]:
+          - link "Donate Now" [ref=e322] [cursor=pointer]:
+            - /url: donate.html
+          - link "Become a Partner" [ref=e323] [cursor=pointer]:
+            - /url: contact.html?inquiry=partnership
+        - generic [ref=e324]:
+          - generic [ref=e325]: ✓ 80G Tax Exemption
+          - generic [ref=e326]: ✓ Transparent Utilization
+          - generic [ref=e327]: ✓ Impact Reports
+      - img "VEFS volunteers planting indigenous trees" [ref=e329]
+    - generic [ref=e332]:
+      - generic [ref=e333]:
+        - generic [ref=e334]: Community Outreach
+        - heading "Become a Volunteer" [level=2] [ref=e335]
+        - paragraph [ref=e336]: If you're passionate about ecological farming, tree conservation, and sustainable living, join our volunteer network. Help create awareness about indigenous trees and empower communities towards a greener future.
+        - link "Join Us Now" [ref=e337] [cursor=pointer]:
+          - /url: volunteer.html
+      - img "VEFS volunteers in community environmental activity" [ref=e339]
+    - generic [ref=e341]:
+      - img "Testimonials icon" [ref=e342]
+      - heading "What our participants and volunteers say" [level=2] [ref=e343]
+      - generic [ref=e344]:
+        - generic [ref=e345]:
+          - paragraph [ref=e346]: “ VEFS Foundation opened my eyes to the beauty and importance of indigenous tree species. Their workshops are truly transformative and changed how I see our environment.
+          - paragraph [ref=e347]: Community Member
+          - paragraph [ref=e348]: Workshop Participant
+        - text: “ “
+      - generic [ref=e349]:
+        - button "Testimonial 1" [ref=e350] [cursor=pointer]
+        - button "Testimonial 2" [ref=e351] [cursor=pointer]
+        - button "Testimonial 3" [ref=e352] [cursor=pointer]
+    - generic [ref=e354]:
+      - heading "Stay Updated" [level=2] [ref=e355]
+      - paragraph [ref=e356]: Subscribe to receive updates on our latest events, programs, and environmental news
+      - generic [ref=e357]:
+        - generic [ref=e358]:
+          - generic [ref=e359]:
+            - textbox "Email address for newsletter" [ref=e360]:
+              - /placeholder: Enter your email address
+            - text: ⚠
+          - button "Subscribe" [ref=e361] [cursor=pointer]
+        - paragraph [ref=e362]: We respect your privacy. Unsubscribe anytime.
+  - generic:
+    - link "Donate":
+      - /url: donate.html
+      - img
+    - link "WhatsApp":
+      - /url: https://wa.me/919342211488
+      - img
+  - contentinfo [ref=e363]:
+    - generic [ref=e364]:
+      - generic [ref=e365]:
+        - generic [ref=e366]:
+          - generic [ref=e367]:
+            - img "VEFS Foundation" [ref=e368]
+            - generic [ref=e369]: VEFS Foundation
+          - paragraph [ref=e370]: Valluvam Ecological Farming and Social Welfare Foundation - promoting organic farming, biodiversity conservation, and community empowerment across Tamil Nadu.
+        - generic [ref=e371]:
+          - heading "Follow Us" [level=3] [ref=e372]
+          - generic [ref=e373]:
+            - link "Facebook" [ref=e374] [cursor=pointer]:
+              - /url: https://www.facebook.com/people/VEFS-Foundation/61582906514169/
+              - img "Facebook" [ref=e375]
+            - link "Instagram" [ref=e376] [cursor=pointer]:
+              - /url: https://www.instagram.com/vefsfoundation/
+              - img "Instagram" [ref=e377]
+            - link "YouTube" [ref=e378] [cursor=pointer]:
+              - /url: https://www.youtube.com/@VEFSFOUNDATION
+              - img "YouTube" [ref=e379]
+            - link "WhatsApp" [ref=e380] [cursor=pointer]:
+              - /url: https://www.whatsapp.com/channel/0029Vat5xFr6RGJJI5rJcv3D
+              - img "WhatsApp" [ref=e381]
+            - link "Email" [ref=e382] [cursor=pointer]:
+              - /url: mailto:vefsfoundation@gmail.com
+              - img [ref=e383]
+        - generic [ref=e385]:
+          - heading "Quick Links" [level=3] [ref=e386]
+          - list [ref=e387]:
+            - listitem [ref=e388]:
+              - link "Home" [ref=e389] [cursor=pointer]:
+                - /url: index.html
+            - listitem [ref=e390]:
+              - link "About Us" [ref=e391] [cursor=pointer]:
+                - /url: about.html
+            - listitem [ref=e392]:
+              - link "Trainings" [ref=e393] [cursor=pointer]:
+                - /url: trainings.html
+            - listitem [ref=e394]:
+              - link "Events" [ref=e395] [cursor=pointer]:
+                - /url: events.html
+            - listitem [ref=e396]:
+              - link "Volunteer" [ref=e397] [cursor=pointer]:
+                - /url: volunteer.html
+            - listitem [ref=e398]:
+              - link "Gallery" [ref=e399] [cursor=pointer]:
+                - /url: gallery.html
+        - generic [ref=e400]:
+          - heading "Contact Us" [level=3] [ref=e401]
+          - list [ref=e402]:
+            - listitem [ref=e403]:
+              - img [ref=e404]
+              - text: Nilakottai, Dindigul, Tamil Nadu
+            - listitem [ref=e406]:
+              - img [ref=e407]
+              - link "vefsfoundation@gmail.com" [ref=e409] [cursor=pointer]:
+                - /url: mailto:vefsfoundation@gmail.com
+            - listitem [ref=e410]:
+              - img [ref=e411]
+              - link "+91 9342211488" [ref=e413] [cursor=pointer]:
+                - /url: tel:+919342211488
+            - listitem [ref=e414]:
+              - img [ref=e415]
+              - link "+91 8610457700" [ref=e417] [cursor=pointer]:
+                - /url: tel:+918610457700
+          - generic [ref=e418]:
+            - heading "Newsletter" [level=3] [ref=e419]
+            - paragraph [ref=e420]: Get updates on our environmental initiatives
+            - generic [ref=e421]:
+              - textbox "Email for newsletter" [ref=e422]:
+                - /placeholder: Your email
+              - button "Subscribe" [ref=e423] [cursor=pointer]
+      - generic [ref=e424]:
+        - paragraph [ref=e425]: © 2026 VEFS Foundation. All rights reserved.
+        - generic [ref=e426]:
+          - link "Privacy Policy" [ref=e427] [cursor=pointer]:
+            - /url: privacy.html
+          - link "Terms of Service" [ref=e428] [cursor=pointer]:
+            - /url: terms.html

@@ -2,41 +2,32 @@
    CARD COMPONENTS
    ============================================ */
 
-/* Base card styles — dark mud glassmorphism panel */
+/* Base card styles — clean light theme */
 .card {
-  background-color: rgba(63, 32, 8, 0.72);
-  backdrop-filter: blur(8px) saturate(1.2);
-  -webkit-backdrop-filter: blur(8px) saturate(1.2);
-  border: 1px solid rgba(247, 247, 228, 0.12);
+  background-color: #FEFCF6;
+  border: 1px solid #E5E7EB;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(247, 247, 228, 0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
   transition: transform var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-base);
   display: flex;
   flex-direction: column;
   height: 100%;
-  color: var(--color-off-white);
-}
-
-/* Fallback for browsers without backdrop-filter */
-@supports not (backdrop-filter: blur(1px)) {
-  .card {
-    background-color: rgba(50, 25, 5, 0.90);
-  }
+  color: #374151;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  background-color: rgba(80, 42, 12, 0.85);
-  border-color: rgba(247, 247, 228, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(247, 247, 228, 0.12);
+  background-color: #FEFCF6;
+  border-color: #D1D5DB;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* Card image */
 .card-image {
   position: relative;
   overflow: hidden;
-  background-color: var(--color-gray-100); /* dark mud placeholder */
+  background-color: var(--color-gray-100);
   aspect-ratio: 16 / 9;
 }
 
@@ -57,7 +48,7 @@
   top: var(--space-sm);
   right: var(--space-sm);
   padding: 0.25rem 0.75rem;
-  background-color: var(--color-primary);
+  background-color: #2D6A4F;
   color: var(--color-white);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
@@ -67,11 +58,11 @@
 }
 
 .card-badge.badge-secondary {
-  background-color: var(--color-secondary);
+  background-color: #C26E53;
 }
 
 .card-badge.badge-success {
-  background-color: var(--color-success);
+  background-color: #4DA238;
 }
 
 .card-badge.badge-warning {
@@ -93,7 +84,7 @@
   gap: var(--space-sm);
   margin-bottom: var(--space-sm);
   font-size: var(--font-size-sm);
-  color: rgba(247, 247, 228, 0.65); /* muted milky */
+  color: #6B7280;
 }
 
 .card-meta-item {
@@ -113,7 +104,7 @@
   font-family: var(--font-serif);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  color: var(--color-off-white);
+  color: #1B4332;
   margin-bottom: var(--space-sm);
   line-height: var(--line-height-tight);
 }
@@ -125,7 +116,7 @@
 }
 
 .card-link:hover {
-  color: var(--color-secondary); /* mustard hover */
+  color: #C26E53;
 }
 
 .card-link:focus-visible {
@@ -137,7 +128,7 @@
 /* Card description */
 .card-description {
   font-size: var(--font-size-base);
-  color: rgba(247, 247, 228, 0.75); /* slightly muted milky */
+  color: #4B5563;
   line-height: var(--line-height-normal);
   margin-bottom: var(--space-md);
   flex-grow: 1;
@@ -155,13 +146,13 @@
   align-items: center;
   justify-content: space-between;
   padding-top: var(--space-sm);
-  border-top: 1px solid rgba(247, 247, 228, 0.15);
+  border-top: 1px solid #E5E7EB;
 }
 
 .card-price {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
-  color: var(--color-secondary); /* mustard price */
+  color: #C26E53;
 }
 
 /* ============================================
@@ -188,14 +179,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(176, 23, 31, 0.25); /* crimson tint */
+  background-color: rgba(45,106,79,0.1);
   border-radius: var(--radius-lg);
 }
 
 .icon-lg {
   width: 40px;
   height: 40px;
-  fill: var(--color-secondary); /* mustard icon */
+  fill: #2D6A4F;
 }
 
 .card-features {
@@ -209,14 +200,14 @@
   padding: 0.5rem 0;
   padding-left: 1.5rem;
   position: relative;
-  color: rgba(247, 247, 228, 0.8);
+  color: #4B5563;
 }
 
 .card-features li::before {
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--color-leaf); /* sage green checkmark */
+  color: #4DA238;
   font-weight: var(--font-weight-bold);
 }
 
@@ -237,7 +228,7 @@
   align-items: center;
   gap: var(--space-xs);
   padding: var(--space-md);
-  background-color: rgba(92, 53, 24, 0.6); /* slightly lighter mud */
+  background-color: rgba(45,106,79,0.08);
   border-radius: var(--radius-md);
 }
 
@@ -251,7 +242,7 @@
 .card-date-month {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
-  color: var(--color-secondary); /* mustard month label */
+  color: #C26E53;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -259,7 +250,7 @@
 .card-date-day {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-off-white);
+  color: #1B4332;
   line-height: 1;
 }
 
@@ -289,7 +280,7 @@
 .card-category {
   display: inline-block;
   font-size: var(--font-size-sm);
-  color: var(--color-secondary); /* mustard category label */
+  color: #C26E53;
   font-weight: var(--font-weight-semibold);
   margin-bottom: var(--space-xs);
 }
@@ -392,14 +383,14 @@
   -webkit-line-clamp: 2;
 }
 
-/* Featured card - Crimson border, stands out */
+/* Featured card - Accent border, stands out */
 .card-featured {
-  border: 2px solid var(--color-accent); /* crimson */
+  border: 2px solid var(--color-accent);
 }
 
 .card-featured:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-xl);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 
 /* ============================================
@@ -423,6 +414,6 @@
 
 /* Focus visible for keyboard navigation */
 .card:focus-within {
-  outline: 2px solid var(--color-secondary); /* mustard focus */
+  outline: 2px solid #2D6A4F;
   outline-offset: 4px;
 }

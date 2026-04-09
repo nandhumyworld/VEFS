@@ -27,51 +27,10 @@ body {
   font-family: var(--font-sans);
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
-  color: var(--color-off-white);       /* milky white text throughout */
-  background-color: var(--color-primary); /* burnt clay #B05C17 */
+  color: var(--color-gray-600);
+  background-color: var(--color-beige); /* warm cream #FAF6F0 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  position: relative;
-}
-
-/* Layer 1: SVG fractal noise grain — organic mud texture */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='mud'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23mud)' opacity='0.18'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
-  mix-blend-mode: overlay;
-  opacity: 0.4;
-}
-
-/* Layer 2: Warm vignette depth — lighter center, darker edges */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  background: radial-gradient(
-    ellipse 80% 60% at 50% 30%,
-    rgba(192, 115, 42, 0.25) 0%,
-    rgba(140, 70, 16, 0.15) 40%,
-    rgba(63, 32, 8, 0.35) 100%
-  );
-  mix-blend-mode: multiply;
-}
-
-/* All page elements sit above texture layers */
-.header,
-main,
-.footer,
-.nav-overlay {
-  position: relative;
-  z-index: 1;
 }
 
 /* ===== Sections ===== */
@@ -81,7 +40,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
-  color: var(--color-off-white); /* milky white headings */
+  color: var(--color-primary-dark);
 }
 
 p {
@@ -309,11 +268,11 @@ table {
 /* ===== Selection ===== */
 
 ::selection {
-  background-color: var(--color-accent);  /* crimson selection */
-  color: var(--color-off-white);
+  background-color: var(--color-primary-light);
+  color: #FFFFFF;
 }
 
 ::-moz-selection {
-  background-color: var(--color-accent);
-  color: var(--color-off-white);
+  background-color: var(--color-primary-light);
+  color: #FFFFFF;
 }

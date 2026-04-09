@@ -1,54 +1,52 @@
 /**
  * VEFS Foundation - Theme CSS Variables
  *
- * This file defines the complete design system using CSS Custom Properties.
- * All colors, spacing, typography, and other design tokens are centralized here.
- *
- * Design System Reference: VEFS-requirements/styles/DESIGN_SYSTEM.md
+ * Redesigned: Light warm theme inspired by wegopals.com
+ * Forest Green + Terracotta palette on warm cream backgrounds.
  */
 
 :root {
-  /* ===== Brand Colors — "Leaf Grown from Mud" Palette ===== */
+  /* ===== Brand Colors — Ecological Green Identity ===== */
 
-  /* Primary - Burnt Clay (body bg tone, section headers) */
-  --color-primary: #B05C17;
-  --color-primary-light: #C4732A;
-  --color-primary-dark: #8C4610;
-  --color-primary-pale: #622d01;
+  /* Primary - Forest Green (headings, nav active, section bands) */
+  --color-primary: #2D6A4F;
+  --color-primary-light: #40916C;
+  --color-primary-dark: #1B4332;
+  --color-primary-pale: #D8F3DC;
 
-  /* Secondary - Mustard Olive (buttons, CTAs — leaf color) */
-  --color-secondary: #B0A817;
-  --color-secondary-light: #C8C01E;
-  --color-secondary-dark: #8A8312;
+  /* Secondary - Terracotta (CTAs, action buttons) */
+  --color-secondary: #C26E53;
+  --color-secondary-light: #D4896F;
+  --color-secondary-dark: #A85A42;
 
-  /* Accent - Crimson Red (highlights, gradients, dramatic accents) */
-  --color-accent: #B0171F;
-  --color-accent-light: #C93028;
-  --color-accent-dark: #8A1018;
+  /* Accent - Warm Gold (highlights, badges, subtle accents) */
+  --color-accent: #D4A373;
+  --color-accent-light: #E0B98A;
+  --color-accent-dark: #B8875A;
 
-  /* Leaf Green - tertiary sage accent (kept from original palette) */
-  --color-leaf: #6B8E23;
-  --color-leaf-light: #8AAA3F;
-  --color-leaf-dark: #5A7A1F;
+  /* Leaf Green - brighter green accent (checkmarks, success indicators) */
+  --color-leaf: #4DA238;
+  --color-leaf-light: #6BBF56;
+  --color-leaf-dark: #3D8A2D;
 
   /* ===== Neutral Colors ===== */
 
-  --color-white: #FFFFFF;
-  --color-off-white: #f7f7e4; /* Milky white — primary text color */
-  --color-beige: #3A1E08;     /* Dark mud panel */
+  --color-white: #FEFCF6;
+  --color-off-white: #FEFCF6;   /* Milky white — card/section backgrounds */
+  --color-beige: #FAF6F0;       /* Warm cream — body background */
 
-  /* Gray Scale — remapped to warm earthy spectrum (inverted: light values = deep mud, dark values = milky white) */
-  --color-gray-50: #3A2010;   /* deep mud */
-  --color-gray-100: #4A2C14;  /* medium mud */
-  --color-gray-200: #5C3518;  /* mid clay */
-  --color-gray-300: #7A4820;  /* warm clay */
-  --color-gray-400: #9B6835;  /* tan clay */
-  --color-gray-500: #C4904A;  /* light clay tan */
-  --color-gray-600: #E0C090;  /* warm sand — muted text */
-  --color-gray-700: #EDD5A8;  /* pale sand — secondary text */
-  --color-gray-800: #f7f7e4;  /* milky white — body text */
-  --color-gray-900: #f7f7e4;  /* milky white — headings */
-  --color-black: #0F0805;     /* deep root-black mud */
+  /* Gray Scale — standard light-mode (light values = light, dark values = dark) */
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+  --color-black: #030712;
 
   /* ===== Semantic Colors ===== */
 
@@ -76,11 +74,11 @@
 
   /* ===== Typography ===== */
 
-  /* Font Families — Nature Poetic Pairing */
---font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;  /* Headings: naturalist journal elegance */
---font-sans: 'Karla', system-ui, -apple-system, sans-serif;  /* Body: clean readable */
---font-poetic: 'Annie Use Your Telescope', 'Cherry Cream Soda', cursive;  /* decorative headings */
---font-mono: 'Courier New', Courier, monospace;
+  /* Font Families — Warm & Approachable */
+  --font-serif: 'Baloo 2', 'Segoe UI', system-ui, sans-serif;  /* Headings: rounded, warm display */
+  --font-sans: 'Lexend', system-ui, -apple-system, sans-serif;  /* Body: readability-optimized */
+  --font-tamil: 'Noto Sans Tamil', 'Baloo Thambi 2', sans-serif;  /* Tamil text */
+  --font-mono: 'Courier New', Courier, monospace;
 
   /* Font Sizes (13-point scale) */
   --font-size-xs: 0.694rem;     /* 11.1px */
@@ -139,12 +137,12 @@
 
   /* ===== Shadows ===== */
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 4px 16px 0 rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 8px 28px 0 rgba(0, 0, 0, 0.45);
-  --shadow-2xl: 0 16px 48px 0 rgba(0, 0, 0, 0.5);
-  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 8px 28px 0 rgba(0, 0, 0, 0.12);
+  --shadow-2xl: 0 16px 48px 0 rgba(0, 0, 0, 0.15);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
 
   /* ===== Transitions ===== */
 
@@ -208,7 +206,7 @@
   /* ===== Accessibility ===== */
 
   --focus-ring-width: 2px;
-  --focus-ring-color: var(--color-secondary); /* mustard olive focus ring */
+  --focus-ring-color: var(--color-primary); /* forest green focus ring */
   --focus-ring-offset: 2px;
 
   /* Minimum touch target size (WCAG AA) */
