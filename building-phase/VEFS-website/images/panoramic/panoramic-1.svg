@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Panoramic placeholder">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a8d8a8"/>
+      <stop offset="60%" stop-color="#e8d8a8"/>
+      <stop offset="100%" stop-color="#6B8E23"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6B8E23"/>
+      <stop offset="100%" stop-color="#3b5a14"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="2400" height="400" fill="url(#sky)"/>
+
+  <!-- Distant hills -->
+  <path d="M0,260 L200,210 L380,240 L560,200 L760,235 L960,205 L1160,240 L1360,210 L1560,240 L1760,205 L1960,235 L2160,210 L2400,245 L2400,400 L0,400 Z" fill="#8B7355" opacity="0.55"/>
+  <path d="M0,290 L180,255 L360,280 L540,250 L740,285 L940,255 L1140,285 L1340,255 L1540,285 L1740,255 L1940,285 L2140,255 L2400,290 L2400,400 L0,400 Z" fill="#6B8E23" opacity="0.75"/>
+
+  <!-- Ground -->
+  <rect y="310" width="2400" height="90" fill="url(#ground)"/>
+
+  <!-- Trees -->
+  <g fill="#2d4a1a">
+    <circle cx="120" cy="300" r="28"/>
+    <rect x="116" y="300" width="8" height="30" fill="#5a3a1a"/>
+    <circle cx="340" cy="295" r="34"/>
+    <rect x="336" y="295" width="8" height="35" fill="#5a3a1a"/>
+    <circle cx="620" cy="305" r="24"/>
+    <rect x="616" y="305" width="8" height="25" fill="#5a3a1a"/>
+    <circle cx="880" cy="298" r="30"/>
+    <rect x="876" y="298" width="8" height="32" fill="#5a3a1a"/>
+    <circle cx="1180" cy="302" r="26"/>
+    <rect x="1176" y="302" width="8" height="28" fill="#5a3a1a"/>
+    <circle cx="1460" cy="295" r="32"/>
+    <rect x="1456" y="295" width="8" height="35" fill="#5a3a1a"/>
+    <circle cx="1740" cy="300" r="28"/>
+    <rect x="1736" y="300" width="8" height="30" fill="#5a3a1a"/>
+    <circle cx="2020" cy="298" r="30"/>
+    <rect x="2016" y="298" width="8" height="32" fill="#5a3a1a"/>
+    <circle cx="2280" cy="303" r="26"/>
+    <rect x="2276" y="303" width="8" height="28" fill="#5a3a1a"/>
+  </g>
+
+  <!-- Sun -->
+  <circle cx="1800" cy="110" r="45" fill="#f4d58d" opacity="0.85"/>
+
+  <!-- Label -->
+  <text x="1200" y="210" font-family="Georgia, serif" font-size="48" fill="#ffffff" text-anchor="middle" opacity="0.85" font-weight="700">PANORAMIC PLACEHOLDER — 2400 x 400</text>
+  <text x="1200" y="248" font-family="Arial, sans-serif" font-size="22" fill="#ffffff" text-anchor="middle" opacity="0.75">Replace with your real panoramic collage (wide aspect ratio recommended)</text>
+</svg>

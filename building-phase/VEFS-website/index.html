@@ -167,28 +167,32 @@
       display: flex;
       align-items: center;
       width: 100%;
-      min-height: 480px;
-      padding: 2rem 0;
+      min-height: 560px;
+      padding: 1rem 0;
+      gap: 0;
     }
 
     .hero-split__image {
-      flex: 0 0 50%;
-      max-width: 50%;
-      padding: 2rem 1.5rem 2rem 2.5rem;
+      flex: 0 0 62%;
+      max-width: 62%;
+      padding: 0;
+      margin-left: -2rem;
     }
 
     .hero-split__image img {
       width: 100%;
-      max-height: 460px;
-      object-fit: cover;
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-lg);
+      max-height: none;
+      height: auto;
+      object-fit: contain;
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent;
     }
 
     .hero-split__content {
-      flex: 0 0 50%;
-      max-width: 50%;
-      padding: 2rem 3rem 2rem 1.5rem;
+      flex: 0 0 38%;
+      max-width: 38%;
+      padding: 2rem 2.5rem 2rem 0.5rem;
     }
 
     .hero-split__title {
@@ -241,8 +245,9 @@
         padding: 0.5rem 0.75rem;
       }
       .hero-split__image img {
-        max-height: 220px !important;
-        border-radius: 8px !important;
+        max-height: 240px !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
       }
       .hero-split__content {
         flex: 0 0 auto;
@@ -352,7 +357,7 @@
     .showcase-row__image img {
       width: 100%;
       border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-md);
+      box-shadow: none;
     }
 
     .showcase-tag {
@@ -428,6 +433,47 @@
     .superbox:hover {
       box-shadow: var(--shadow-lg);
       transform: translateY(-3px);
+    }
+
+    /* ===== Panoramic Marquee Banner ===== */
+    .panoramic-marquee {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: var(--color-primary-dark);
+      padding: 0;
+      margin: 0;
+    }
+
+    .panoramic-marquee__track {
+      display: flex;
+      width: max-content;
+      animation: panoramic-scroll 60s linear infinite;
+      will-change: transform;
+    }
+
+    .panoramic-marquee__track img {
+      display: block;
+      height: clamp(180px, 28vw, 360px);
+      width: auto;
+      flex-shrink: 0;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .panoramic-marquee:hover .panoramic-marquee__track {
+      animation-play-state: paused;
+    }
+
+    @keyframes panoramic-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .panoramic-marquee__track {
+        animation: none;
+      }
     }
 
     .superbox-wrap {
@@ -603,7 +649,7 @@
     .donate-image img {
       width: 100%;
       border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-md);
+      box-shadow: none;
     }
 
     @media (max-width: 768px) {
@@ -1109,7 +1155,7 @@
         <div class="carousel-slide">
           <div class="hero-split">
             <div class="hero-split__image">
-              <img src="images/hero/hero-slide-4.jpg" alt="Support VEFS - Help Restore Ecological Balance" loading="lazy">
+              <img src="images/hero/hero-slide-4.png" alt="Support VEFS - Help Restore Ecological Balance" loading="lazy">
             </div>
             <div class="hero-split__content">
               <h2 class="hero-split__title">Support Our <span class="accent">Mission</span></h2>
@@ -1206,6 +1252,15 @@
       </div>
     </section>
 
+    
+    <!-- Panoramic Photo Collage Marquee -->
+    <section class="panoramic-marquee" aria-label="VEFS panoramic highlights">
+      <div class="panoramic-marquee__track">
+        <img src="images/panoramic/panoramic-1.png" alt="VEFS panoramic collage" loading="lazy">
+        <img src="images/panoramic/panoramic-1.png" alt="" aria-hidden="true" loading="lazy">
+      </div>
+    </section>
+
     <!-- Explore VEFS - Alternating Showcase -->
     <section class="section section-cream" id="explore-vefs">
       <div class="container">
@@ -1233,7 +1288,7 @@
             <a href="trainings.html" class="btn-outline-green">Browse Trainings</a>
           </div>
           <div class="showcase-row__image">
-            <img src="images/home-sections/explore-trainings.jpg" alt="VEFS organic farming training session" loading="lazy">
+            <img src="images/home-sections/explore-trainings.png" alt="VEFS organic farming training session" loading="lazy">
           </div>
         </div>
 
