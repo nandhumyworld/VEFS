@@ -1,49 +1,52 @@
 /**
  * VEFS Foundation - Theme CSS Variables
  *
- * This file defines the complete design system using CSS Custom Properties.
- * All colors, spacing, typography, and other design tokens are centralized here.
- *
- * Design System Reference: VEFS-requirements/styles/DESIGN_SYSTEM.md
+ * Redesigned: Light warm theme inspired by wegopals.com
+ * Forest Green + Terracotta palette on warm cream backgrounds.
  */
 
 :root {
-  /* ===== Brand Colors ===== */
+  /* ===== Brand Colors — Ecological Green Identity ===== */
 
-  /* Primary - Sage Green */
-  --color-primary: #6B8E23;
-  --color-primary-light: #8AAA3F;
-  --color-primary-dark: #5A7A1F;
-  --color-primary-pale: #E8F0D8;
+  /* Primary - Forest Green (headings, nav active, section bands) */
+  --color-primary: #2D6A4F;
+  --color-primary-light: #40916C;
+  --color-primary-dark: #1B4332;
+  --color-primary-pale: #D8F3DC;
 
-  /* Secondary - Golden/Amber (for CTAs) */
-  --color-secondary: #FBBF24;
-  --color-secondary-light: #FCD34D;
-  --color-secondary-dark: #F59E0B;
+  /* Secondary - Terracotta (CTAs, action buttons) */
+  --color-secondary: #C26E53;
+  --color-secondary-light: #D4896F;
+  --color-secondary-dark: #A85A42;
 
-  /* Accent - Earth Brown */
-  --color-accent: #8B7355;
-  --color-accent-light: #A68968;
-  --color-accent-dark: #6B5A43;
+  /* Accent - Warm Gold (highlights, badges, subtle accents) */
+  --color-accent: #D4A373;
+  --color-accent-light: #E0B98A;
+  --color-accent-dark: #B8875A;
+
+  /* Leaf Green - brighter green accent (checkmarks, success indicators) */
+  --color-leaf: #4DA238;
+  --color-leaf-light: #6BBF56;
+  --color-leaf-dark: #3D8A2D;
 
   /* ===== Neutral Colors ===== */
 
-  --color-white: #FFFFFF;
-  --color-off-white: #f7f7e4; /* Milky white background */
-  --color-beige: #F3F0E8;
+  --color-white: #FEFCF6;
+  --color-off-white: #FEFCF6;   /* Milky white — card/section backgrounds */
+  --color-beige: #FAF6F0;       /* Warm cream — body background */
 
-  /* Gray Scale */
-  --color-gray-50: #FAFAF9;
-  --color-gray-100: #F5F5F5;
+  /* Gray Scale — standard light-mode (light values = light, dark values = dark) */
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
   --color-gray-200: #E5E7EB;
   --color-gray-300: #D1D5DB;
   --color-gray-400: #9CA3AF;
   --color-gray-500: #6B7280;
-  --color-gray-600: #5A5A5A;
+  --color-gray-600: #4B5563;
   --color-gray-700: #374151;
   --color-gray-800: #1F2937;
   --color-gray-900: #111827;
-  --color-black: #000000;
+  --color-black: #030712;
 
   /* ===== Semantic Colors ===== */
 
@@ -71,9 +74,10 @@
 
   /* ===== Typography ===== */
 
-  /* Font Families */
-  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Font Families — Warm & Approachable */
+  --font-serif: 'Baloo 2', 'Segoe UI', system-ui, sans-serif;  /* Headings: rounded, warm display */
+  --font-sans: 'Lexend', system-ui, -apple-system, sans-serif;  /* Body: readability-optimized */
+  --font-tamil: 'Noto Sans Tamil', 'Baloo Thambi 2', sans-serif;  /* Tamil text */
   --font-mono: 'Courier New', Courier, monospace;
 
   /* Font Sizes (13-point scale) */
@@ -111,15 +115,15 @@
   /* ===== Spacing (8px base unit) ===== */
 
   --space-0: 0;
-  --space-xs: 0.25rem;    /* 4px */
-  --space-sm: 0.5rem;     /* 8px */
-  --space-md: 1rem;       /* 16px */
-  --space-lg: 1.5rem;     /* 24px */
-  --space-xl: 2rem;       /* 32px */
-  --space-2xl: 3rem;      /* 48px */
-  --space-3xl: 4rem;      /* 64px */
-  --space-4xl: 6rem;      /* 96px */
-  --space-5xl: 8rem;      /* 128px */
+  --space-xs: 0.2rem;     /* 3.2px  — was 4px,   reduced 20% */
+  --space-sm: 0.4rem;     /* 6.4px  — was 8px,   reduced 20% */
+  --space-md: 0.8rem;     /* 12.8px — was 16px,  reduced 20% */
+  --space-lg: 1.2rem;     /* 19.2px — was 24px,  reduced 20% */
+  --space-xl: 1.6rem;     /* 25.6px — was 32px,  reduced 20% */
+  --space-2xl: 2.4rem;    /* 38.4px — was 48px,  reduced 20% */
+  --space-3xl: 3.2rem;    /* 51.2px — was 64px,  reduced 20% */
+  --space-4xl: 4.8rem;    /* 76.8px — was 96px,  reduced 20% */
+  --space-5xl: 6.4rem;    /* 102.4px— was 128px, reduced 20% */
 
   /* ===== Border Radius ===== */
 
@@ -133,11 +137,11 @@
 
   /* ===== Shadows ===== */
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   --shadow-md: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 4px 12px 0 rgba(0, 0, 0, 0.12);
-  --shadow-xl: 0 8px 24px 0 rgba(0, 0, 0, 0.15);
-  --shadow-2xl: 0 16px 48px 0 rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 8px 28px 0 rgba(0, 0, 0, 0.12);
+  --shadow-2xl: 0 16px 48px 0 rgba(0, 0, 0, 0.15);
   --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
 
   /* ===== Transitions ===== */
@@ -173,17 +177,17 @@
 
   /* ===== Component-Specific Variables ===== */
 
-  /* Buttons */
-  --button-padding-y: 0.75rem;      /* 12px */
-  --button-padding-x: 1.5rem;       /* 24px */
-  --button-padding-y-sm: 0.5rem;    /* 8px */
-  --button-padding-x-sm: 1rem;      /* 16px */
-  --button-padding-y-lg: 1rem;      /* 16px */
-  --button-padding-x-lg: 2rem;      /* 32px */
+  /* Buttons — vertical padding reduced 20% */
+  --button-padding-y: 0.6rem;       /* 9.6px  — was 12px */
+  --button-padding-x: 1.5rem;       /* 24px   — horizontal unchanged */
+  --button-padding-y-sm: 0.4rem;    /* 6.4px  — was 8px */
+  --button-padding-x-sm: 1rem;      /* 16px   — horizontal unchanged */
+  --button-padding-y-lg: 0.8rem;    /* 12.8px — was 16px */
+  --button-padding-x-lg: 2rem;      /* 32px   — horizontal unchanged */
 
-  /* Form Inputs */
-  --input-padding-y: 0.75rem;       /* 12px */
-  --input-padding-x: 1rem;          /* 16px */
+  /* Form Inputs — vertical padding reduced 20% */
+  --input-padding-y: 0.6rem;        /* 9.6px — was 12px */
+  --input-padding-x: 1rem;          /* 16px  — horizontal unchanged */
   --input-border-width: 1px;
   --input-border-color: var(--color-gray-300);
   --input-border-color-focus: var(--color-primary);
@@ -202,7 +206,7 @@
   /* ===== Accessibility ===== */
 
   --focus-ring-width: 2px;
-  --focus-ring-color: var(--color-primary);
+  --focus-ring-color: var(--color-primary); /* forest green focus ring */
   --focus-ring-offset: 2px;
 
   /* Minimum touch target size (WCAG AA) */

@@ -1,0 +1,675 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - dialog:
+      - button:
+        - img
+      - generic:
+        - navigation:
+          - list:
+            - listitem:
+              - link:
+                - /url: "#"
+                - text: About
+                - button:
+                  - img
+                  - generic: Submenu
+            - listitem:
+              - link:
+                - /url: "#"
+                - text: Go Chetana Seva
+                - button:
+                  - img
+                  - generic: Submenu
+            - listitem:
+              - link:
+                - /url: https://www.wegopals.com/events/
+                - text: Events
+                - button:
+                  - img
+                  - generic: Submenu
+            - listitem:
+              - link:
+                - /url: "#"
+                - text: Science & Sustainability
+                - button:
+                  - img
+                  - generic: Submenu
+            - listitem:
+              - link:
+                - /url: "#"
+                - text: Resources
+                - button:
+                  - img
+                  - generic: Submenu
+            - listitem:
+              - link:
+                - /url: "#"
+                - text: Know Your Cow
+                - button:
+                  - img
+                  - generic: Submenu
+            - listitem:
+              - link:
+                - /url: https://www.wegopals.com/support-a-cowherd/
+                - text: Support A Cowherd
+      - link:
+        - /url: https://sqr.co/gopals-app-download/
+        - text: Download App
+  - banner [ref=e2]:
+    - generic [ref=e5]:
+      - generic [ref=e7]:
+        - link "Join us" [ref=e8] [cursor=pointer]:
+          - /url: /events/
+        - text: for our sustainable living event! | Discover Gomātā’s timeless wisdom —
+        - link "explore our books" [ref=e9] [cursor=pointer]:
+          - /url: /books/
+      - img "White close icon" [ref=e10] [cursor=pointer]
+    - generic [ref=e12]:
+      - generic:
+        - link "GoPals Home Page":
+          - /url: /
+          - img "Logo of GoPals."
+      - list [ref=e17]:
+        - listitem [ref=e18]:
+          - link "About" [ref=e19] [cursor=pointer]:
+            - /url: "#"
+            - text: About
+            - img [ref=e21]
+        - listitem [ref=e23]:
+          - link "Go Chetana Seva" [ref=e24] [cursor=pointer]:
+            - /url: "#"
+            - text: Go Chetana Seva
+            - img [ref=e26]
+        - listitem [ref=e28]:
+          - link "Events" [ref=e29] [cursor=pointer]:
+            - /url: https://www.wegopals.com/events/
+            - text: Events
+            - img [ref=e31]
+        - listitem [ref=e33]:
+          - link "Science & Sustainability" [ref=e34] [cursor=pointer]:
+            - /url: "#"
+            - text: Science & Sustainability
+            - img [ref=e36]
+        - listitem [ref=e38]:
+          - link "Resources" [ref=e39] [cursor=pointer]:
+            - /url: "#"
+            - text: Resources
+            - img [ref=e41]
+        - listitem [ref=e43]:
+          - link "Know Your Cow" [ref=e44] [cursor=pointer]:
+            - /url: "#"
+            - text: Know Your Cow
+            - img [ref=e46]
+        - listitem [ref=e48]:
+          - link "Support A Cowherd" [ref=e49] [cursor=pointer]:
+            - /url: https://www.wegopals.com/support-a-cowherd/
+            - text: Support A Cowherd
+      - generic [ref=e51]:
+        - link [ref=e52] [cursor=pointer]:
+          - /url: /member-login/
+          - generic "Member Login" [ref=e53]:
+            - img [ref=e54]
+        - button "Open search" [ref=e57] [cursor=pointer]:
+          - img [ref=e58]
+        - link "Download App" [ref=e60] [cursor=pointer]:
+          - /url: https://sqr.co/gopals-app-download/
+  - generic [ref=e61]:
+    - generic [ref=e63]:
+      - generic [ref=e65]:
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - img "A kid playing with a calf." [ref=e70]
+            - generic [ref=e71]:
+              - heading "Serve Desi Gou" [level=1] [ref=e72]:
+                - text: Serve
+                - generic [ref=e73]: Desi Gou
+              - generic [ref=e74]: Promoting Desi Cows for a Healthy, Sustainable India through Community Partnership and Volunteering.
+              - link "Learn More" [ref=e75] [cursor=pointer]:
+                - /url: /what-we-do/
+          - generic [ref=e76]:
+            - img [ref=e78]
+            - generic [ref=e79]:
+              - heading [level=2] [ref=e80]:
+                - text: Join
+                - generic [ref=e81]: GoPals’
+              - heading [level=2] [ref=e82]: Vibrant Event
+              - generic [ref=e83]: GoPals' events foster community, celebrate heritage, and raise awareness for sustainable living through Desi Cows.
+              - link [ref=e84] [cursor=pointer]:
+                - /url: /events/
+                - text: Join An Event
+          - generic [ref=e85]:
+            - link [ref=e87] [cursor=pointer]:
+              - /url: /support-a-cowherd/
+              - img [ref=e88]
+            - generic [ref=e89]:
+              - heading [level=2] [ref=e90]:
+                - text: Support
+                - generic [ref=e92]: A Cowherd
+              - generic [ref=e93]: Support our Desi Calves and nurture a sustainable future for India through your sponsorship and generosity.
+              - link [ref=e94] [cursor=pointer]:
+                - /url: /support-a-cowherd/
+                - text: Donate Now
+          - generic [ref=e95]:
+            - generic [ref=e96]:
+              - img [ref=e97]
+              - generic [ref=e98]: "Image Credit: Wikipedia Creative common"
+            - generic [ref=e99]:
+              - heading [level=2] [ref=e100]:
+                - text: Malenad
+                - generic [ref=e102]: Gidda
+              - generic [ref=e103]: Despite being small in size, it has the ability to pull a plow with a height of 5 feet; milk and cow urine have significant medicinal properties.
+              - link [ref=e104] [cursor=pointer]:
+                - /url: /know-your-cow/#Malnad-Gidda
+                - text: Know Your Cow
+          - generic [ref=e105]:
+            - generic [ref=e106]:
+              - img [ref=e107]
+              - generic [ref=e108]: "Image Credit: Wikipedia Creative common"
+            - generic [ref=e109]:
+              - heading [level=2] [ref=e110]:
+                - text: Amrit
+                - generic [ref=e112]: Mahal
+              - generic [ref=e113]: Very fast, has a run around of 100 miles in 2 days & endures tough environmental conditions.
+              - link [ref=e114] [cursor=pointer]:
+                - /url: /know-your-cow/#Amrut-Mahal
+                - text: Know Your Cow
+          - generic [ref=e115]:
+            - generic [ref=e116]:
+              - img [ref=e117]
+              - generic [ref=e118]: "Image Credit: Wikipedia Creative common"
+            - generic [ref=e119]:
+              - heading [level=2] [ref=e120]: Deoni
+              - generic [ref=e121]: Characterized by its upward-curving horns & recognized for its distinctive tri-colored coat.
+              - link [ref=e122] [cursor=pointer]:
+                - /url: /know-your-cow/#deoni
+                - text: Know Your Cow
+          - generic [ref=e123]:
+            - generic [ref=e124]:
+              - img [ref=e125]
+              - generic [ref=e126]: "Image Credit: Wikipedia Creative common"
+            - generic [ref=e127]:
+              - heading [level=2] [ref=e128]: Hallikar
+              - generic [ref=e129]: Known for its distinct hump and lyre-shaped horns, primarily used for agricultural purposes.
+              - link [ref=e130] [cursor=pointer]:
+                - /url: /know-your-cow/#Hallikar
+                - text: Know Your Cow
+        - list [ref=e131]:
+          - listitem "Page dot 1" [ref=e132] [cursor=pointer]
+          - listitem "Page dot 2" [ref=e133] [cursor=pointer]
+          - listitem "Page dot 3" [ref=e134] [cursor=pointer]
+          - listitem "Page dot 4" [ref=e135] [cursor=pointer]
+          - listitem "Page dot 5" [ref=e136] [cursor=pointer]
+          - listitem "Page dot 6" [ref=e137] [cursor=pointer]
+          - listitem "Page dot 7" [ref=e138] [cursor=pointer]
+      - generic [ref=e139] [cursor=pointer]: Next
+      - generic [ref=e140] [cursor=pointer]: Prev
+    - generic [ref=e142]:
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - img "Icon of growth vision." [ref=e145]
+          - heading "Our Vision" [level=2] [ref=e146]:
+            - text: Our
+            - generic [ref=e147]: Vision
+          - generic [ref=e148]: To drive community growth and ecological sustainability through innovative agricultural initiatives.
+        - generic [ref=e149]:
+          - img "A decorative icon of our mission." [ref=e150]
+          - heading "Our Mission" [level=2] [ref=e151]:
+            - text: Our
+            - generic [ref=e152]: Mission
+          - generic [ref=e153]: A world where collective action and social responsibility shape a brighter future. Women empowerment by supporting rural livelihoods.
+        - generic [ref=e154]:
+          - img "Icon of our mission." [ref=e155]
+          - heading "Our Values" [level=2] [ref=e156]:
+            - text: Our
+            - generic [ref=e157]: Values
+          - list [ref=e159]:
+            - listitem [ref=e160]: Serve
+            - listitem [ref=e161]: Sustain
+            - listitem [ref=e162]: Survive
+      - heading "Our Focus areas:" [level=2] [ref=e163]:
+        - text: Our Focus
+        - generic [ref=e164]: "areas:"
+      - heading "H E A L - Health, Environment, Agriculture, Lifestyle" [level=3] [ref=e165]:
+        - generic [ref=e166]: H
+        - generic [ref=e167]: E
+        - generic [ref=e168]: A
+        - generic [ref=e169]: L
+        - text: "- Health, Environment, Agriculture, Lifestyle"
+      - img "An infographic showing the key focus areas of GoPals." [ref=e170]
+    - generic [ref=e173]:
+      - link "Image showing ploughing with desi cows. Sustainable Living Library Our Blogs" [ref=e174] [cursor=pointer]:
+        - /url: /blog/
+        - img "Image showing ploughing with desi cows." [ref=e175]
+        - heading "Sustainable Living Library" [level=2] [ref=e176]
+        - generic [ref=e177]: Our Blogs
+      - link "Volunteers of GoPals. Connect at Our Vibrant Events OUR EVENTS" [ref=e178] [cursor=pointer]:
+        - /url: /events/
+        - img "Volunteers of GoPals." [ref=e179]
+        - heading "Connect at Our Vibrant Events" [level=2] [ref=e180]
+        - generic [ref=e181]: OUR EVENTS
+      - link "Volunteers of GoPals with desi cow. Ask the GoPals Volunteers CONTACT US" [ref=e182] [cursor=pointer]:
+        - /url: /contact-us/
+        - img "Volunteers of GoPals with desi cow." [ref=e183]
+        - heading "Ask the GoPals Volunteers" [level=2] [ref=e184]
+        - generic [ref=e185]: CONTACT US
+    - generic [ref=e187]:
+      - heading "10 Years of GoPals" [level=2] [ref=e188]:
+        - text: 10 Years of
+        - generic [ref=e189]: GoPals
+      - iframe [ref=e193]:
+        - generic [active] [ref=f1e1]:
+          - generic "YouTube Video Player" [ref=f1e3]
+          - generic [ref=f1e5]:
+            - generic:
+              - generic:
+                - button "Play video" [ref=f1e10] [cursor=pointer]
+                - button "Hide player controls" [ref=f1e12] [cursor=pointer]
+                - generic [ref=f1e14]:
+                  - generic [ref=f1e19]:
+                    - generic [ref=f1e20]:
+                      - link "10 Years of GoPals | Empowering Farmers, Caring for Cows" [ref=f1e21] [cursor=pointer]:
+                        - /url: https://www.youtube.com/watch?v=tzd4fHd9b48
+                      - link "GoPals" [ref=f1e22] [cursor=pointer]:
+                        - /url: /channel/UCZXZF610GaJ7j2j_gAtLX1w
+                        - generic [ref=f1e23]: GoPals
+                    - generic [ref=f1e24]:
+                      - button [ref=f1e25] [cursor=pointer]
+                      - generic [ref=f1e27]:
+                        - generic: GoPals
+                        - generic: 5.05k subscribers
+                  - generic [ref=f1e28]:
+                    - button "Copy link" [ref=f1e31] [cursor=pointer]:
+                      - generic [ref=f1e35]:
+                        - img
+                    - link "Watch on YouTube" [ref=f1e42] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=tzd4fHd9b48
+                      - generic [ref=f1e45]:
+                        - text: Watch on
+                        - img [ref=f1e47]:
+                          - generic [ref=f1e49]:
+                            - img
+    - generic [ref=e195]:
+      - img "A decorative icon of diverse mind." [ref=e196]
+      - heading "Diverse Minds United for a Sustainable India" [level=2] [ref=e197]:
+        - text: Diverse Minds United for a
+        - generic [ref=e198]: Sustainable India
+      - generic [ref=e199]:
+        - generic [ref=e200]:
+          - generic [ref=e201]: EDUCATIONAL EVENTS
+          - heading "Spreading Desi Cow Awareness" [level=3] [ref=e202]
+          - generic [ref=e203]: Our chapters host informative events to promote the significance of Desi Cows. We collaborate with subject matter experts and often hold these gatherings in goushalas or in partnership with like-minded organizations.
+          - link "Discover Our Events" [ref=e204] [cursor=pointer]:
+            - /url: /events/
+        - img "Children and volunteers of GoPals with a desi calf." [ref=e206]
+      - generic [ref=e207]:
+        - img "Volunteers of GoPals in planting activity." [ref=e209]
+        - generic [ref=e210]:
+          - generic [ref=e211]: PARTNERS CONNECT
+          - heading "Collaborating for Sustainable Impact" [level=3] [ref=e212]
+          - generic [ref=e213]: Our success relies on a robust partner network, working with corporates through CSR initiatives and collaborating with Goushalas and NGOs like SayTrees, Meipporul, for sustainable projects in India.
+          - link "Our Team" [ref=e214] [cursor=pointer]:
+            - /url: /our-team/
+      - generic [ref=e215]:
+        - generic [ref=e216]:
+          - generic [ref=e217]: RURAL OUTREACH
+          - heading "Natural Cow-Based Farming Cooperatives" [level=3] [ref=e218]
+          - generic [ref=e219]: At GoPals, we value farmers' vital role in our economy. We work with them to promote cooperative, natural cow-based farming in villages, fostering sustainable growth for both the land and the nation.
+          - link "Visit Our Gallery" [ref=e220] [cursor=pointer]:
+            - /url: /gallery/
+        - img "Image of farmers ploughing with desi cows." [ref=e222]
+    - generic [ref=e224]:
+      - heading "Impact of all our events" [level=2] [ref=e225]:
+        - text: Impact
+        - generic [ref=e226]: of all our events
+      - generic [ref=e227]:
+        - generic [ref=e228]:
+          - generic [ref=e229]: 0L+
+          - generic [ref=e231]: Cows Impacted
+        - generic [ref=e232]:
+          - generic [ref=e233]: 0K+
+          - generic [ref=e235]: Farmers Empowered with Substainable Practices
+        - generic [ref=e236]:
+          - generic [ref=e237]: 0L+
+          - generic [ref=e239]: Families Transformed
+        - generic [ref=e240]:
+          - generic [ref=e241]: 0+
+          - generic [ref=e243]: Training Hubs Created
+        - generic [ref=e244]:
+          - generic [ref=e245]: 0K
+          - generic [ref=e247]: Saplings Planted
+        - generic [ref=e248]:
+          - generic [ref=e249]: 0L
+          - generic [ref=e251]: Youth Engaged
+    - generic [ref=e254]:
+      - generic [ref=e256] [cursor=pointer]:
+        - generic [ref=e257]:
+          - img "Desi cows in the shed at GoPals." [ref=e258]
+          - generic [ref=e259]: Infrastructure and Facilities
+        - list [ref=e262]:
+          - listitem [ref=e263]:
+            - text: Bore wells in SAC adopted villages (
+            - strong [ref=e264]: Kodumudi, Valliyur, Ravana Samudram
+            - text: "): 4"
+          - listitem [ref=e265]:
+            - text: Drinking water facility (tank) for cows in
+            - strong [ref=e266]: Bategera village, Kalaburagi
+            - text: ": Provided for all village farmers"
+          - listitem [ref=e267]:
+            - text: Karnataka - Fodder bank support in
+            - strong [ref=e268]: Sedam taluk
+            - text: ": 20 farmers benefitted"
+          - listitem [ref=e269]:
+            - text: Organic input centers in
+            - strong [ref=e270]: Gulbarga district
+            - text: ": 7 centers established"
+      - generic [ref=e272] [cursor=pointer]:
+        - generic [ref=e273]:
+          - img "A volunteer taking care of a desi cow." [ref=e274]
+          - generic [ref=e275]: Ethno Veterinary Programs
+        - list [ref=e278]:
+          - listitem [ref=e279]:
+            - text: Farmers benefitted through
+            - strong [ref=e280]: Ethno veterinary
+            - text: "practice sessions and programs: 500+"
+      - generic [ref=e282] [cursor=pointer]:
+        - generic [ref=e283]:
+          - img "Desi cows near the feeding tank." [ref=e284]
+          - generic [ref=e285]: Infrastructure Support
+        - list [ref=e288]:
+          - listitem [ref=e289]:
+            - text: Shed and fencing support in
+            - strong [ref=e290]: Kalaburagi, Kodumudi & Ravana Samudram
+            - text: for farmers - 5
+      - generic [ref=e292] [cursor=pointer]:
+        - generic [ref=e293]:
+          - img "Milk products from desi cows." [ref=e294]
+          - generic [ref=e295]: Goumaya Products
+        - list [ref=e298]:
+          - listitem [ref=e299]:
+            - text: "Supported farmers in making Goumaya products in adopted villages:"
+            - strong [ref=e300]: Vibhuti, lamps, Sustainable Gomaya Ganesha, Cow Dung Cakes, Key Chains and Dhoop.
+      - generic [ref=e302] [cursor=pointer]:
+        - generic [ref=e303]:
+          - img "Volunteers of GoPals." [ref=e304]
+          - generic [ref=e305]: Insurance Support
+        - list [ref=e308]:
+          - listitem [ref=e309]:
+            - text: Insurance support for cow herds in
+            - strong [ref=e310]: "TN: 70+ farmers"
+            - text: benefitted
+      - generic [ref=e312] [cursor=pointer]:
+        - generic [ref=e313]:
+          - img "Image of a group of Desi calves." [ref=e314]
+          - generic [ref=e315]: Yearly Honorarium for Cow Herds Conserving the local Breeds
+        - list [ref=e318]:
+          - listitem [ref=e319]:
+            - text: "Honorarium provided for farmers in all adopted villages: <"
+            - strong [ref=e320]: 10 Villages
+            - text: ">"
+      - generic [ref=e322] [cursor=pointer]:
+        - generic [ref=e323]:
+          - img "Visitors at GoPals." [ref=e324]
+          - generic [ref=e325]: Environmental Impact
+        - list [ref=e328]:
+          - listitem [ref=e329]:
+            - text: "Saplings planted in goshalas and villages:"
+            - strong [ref=e330]: 50,000+
+          - listitem [ref=e331]:
+            - text: Focus on
+            - strong [ref=e332]: native saplings and sustainability
+      - generic [ref=e334] [cursor=pointer]:
+        - generic [ref=e335]:
+          - img "Children and volunteers in desi activities." [ref=e336]
+          - generic [ref=e337]: Educational Initiatives
+        - list [ref=e340]:
+          - listitem [ref=e341]:
+            - text: "Alternative to chemical-free farming book availability:"
+            - strong [ref=e342]: Kannada, English, Hindi
+          - listitem [ref=e343]:
+            - text: Book Republished in
+            - strong [ref=e344]: Kannada
+            - text: ": 4th republication"
+          - listitem [ref=e345]:
+            - text: Book available across
+            - strong [ref=e346]: 130+ libraries in Karnataka
+      - generic [ref=e348] [cursor=pointer]:
+        - generic [ref=e349]:
+          - img "Products from desi cows on display." [ref=e350]
+          - generic [ref=e351]: Events and Workshops
+        - list [ref=e354]:
+          - listitem [ref=e355]:
+            - text: "Physical events and workshops:"
+            - strong [ref=e356]: Approximately 200
+          - listitem [ref=e357]:
+            - text: "Online events:"
+            - strong [ref=e358]: 1000+
+      - generic [ref=e361]:
+        - img "Desi cows in the shed." [ref=e362]
+        - generic [ref=e363]: My cow campaign
+    - generic [ref=e366]:
+      - img "A decorative love icon" [ref=e367]
+      - heading "Support A Cowherd at just Rs. 10/day" [level=2] [ref=e368]:
+        - text: Support A Cowherd at
+        - generic [ref=e369]: just Rs. 10/day
+      - generic [ref=e370]: Your contribution supports the creation of fodder banks, infrastructure development, and the livelihood of dedicated cow caregivers.
+      - link "Contribute Now" [ref=e371] [cursor=pointer]:
+        - /url: /support-a-cowherd/
+      - img "A happy volunteer with a desi calf." [ref=e372]
+    - generic [ref=e375]:
+      - generic [ref=e376]:
+        - generic [ref=e377]: RURAL OUTREACH
+        - heading "Become a Volunteer" [level=2] [ref=e378]: Become a Volunteer
+        - generic [ref=e379]: If you like to serve Desi Cow, learn importance of application of gomaya products and create awareness about Desi Cows towards holistic living in people then become a volunteer.
+        - link "Join Us Now" [ref=e380] [cursor=pointer]:
+          - /url: /get-involved/
+      - img "Female volunteers of GoPals with a calf." [ref=e382]
+    - generic [ref=e384]:
+      - img "A decorative icon of diverse mind." [ref=e385]
+      - heading "Gopals Adopted Farmers" [level=2] [ref=e386]:
+        - text: Gopals Adopted
+        - generic [ref=e387]: Farmers
+      - generic [ref=e388]:
+        - img "An infographic image shows the list of GoPal's adopted farmers and their contacts." [ref=e390]
+        - img "An infographic image shows another list of Gopals adopted farmersand their contacts." [ref=e392]
+    - generic [ref=e396]:
+      - heading "Scan the QR Code to Challenge Your Knowledge!" [level=2] [ref=e397]: Scan the QR Code to Challenge Your Knowledge!
+      - generic [ref=e398]: Explore the divine connection with Krishna through our engaging quiz. Challenge yourself and discover how well you know the stories and teachings of Lord Krishna!"
+      - link "Take the Quiz Now" [ref=e399] [cursor=pointer]:
+        - /url: /krishna-connect/
+    - generic [ref=e402]:
+      - img "A decorative testimonial icon." [ref=e403]
+      - heading "what our partners, participants and volunteers say" [level=2] [ref=e404]:
+        - text: what our partners,
+        - generic [ref=e405]: participants and volunteers say
+      - generic [ref=e406]:
+        - generic [ref=e407]:
+          - generic [ref=e409]:
+            - generic [ref=e410]:
+              - img [ref=e411]
+              - paragraph [ref=e413]: Volunteering with GoPals has been a life-changing experience. Their commitment to Desi Cows and sustainable living is inspiring. I'm proud to be part of this incredible mission
+              - generic [ref=e414]: Bhavani Prasad, Employed
+            - generic [ref=e415]:
+              - img [ref=e416]
+              - paragraph [ref=e418]: I joined GoPals as a volunteer, and it's been a journey of discovery. The events, the community, and the dedication to Desi Cows are truly remarkable. GoPals is making a difference.
+              - generic [ref=e419]: Ramachandran, Student
+            - generic [ref=e420]:
+              - img "An image of James Jani as a member in GoPals." [ref=e421]
+              - paragraph [ref=e423]: GoPals is more than an organization; it's a family. I've met wonderful like-minded individuals, and together, we're creating a sustainable future while cherishing our heritage. It's an honor to be part of it.
+              - generic [ref=e424]: James Jani, Doctor
+            - generic [ref=e425]:
+              - img [ref=e426]
+              - paragraph [ref=e428]: Amazing experience and I recommend each one of you to attend this kind of event at least once and spread the awareness and the greatness of Gomata!!
+              - generic [ref=e429]: Vamshi Banda
+          - list [ref=e430]:
+            - listitem "Page dot 1" [ref=e431] [cursor=pointer]
+            - listitem "Page dot 2" [ref=e432] [cursor=pointer]
+            - listitem "Page dot 3" [ref=e433] [cursor=pointer]
+            - listitem "Page dot 4" [ref=e434] [cursor=pointer]
+        - img [ref=e436] [cursor=pointer]
+        - img [ref=e439] [cursor=pointer]
+      - link "View More" [ref=e441] [cursor=pointer]:
+        - /url: /testimonials/
+    - generic [ref=e443]:
+      - heading "Frequently Asked Questions" [level=2] [ref=e444]:
+        - text: Frequently Asked
+        - generic [ref=e445]: Questions
+      - generic [ref=e446]:
+        - generic [ref=e448]:
+          - heading "Must Read" [level=2] [ref=e449]: Must Read
+          - list [ref=e451]:
+            - listitem [ref=e452]:
+              - text: Always refer to us as GoPals
+              - text: ( G caps P caps ).
+            - listitem [ref=e453]: Wegopals is a website and social media reference as we mean society included. But please refer when speaking to forums and the public as GoPals alone, not Team GoPals, etc.
+            - listitem [ref=e454]: Go means Cow and Pals means friends. Don't pronounce it differently.
+        - generic [ref=e456]:
+          - generic [ref=e459]:
+            - button "Who is our head?" [ref=e460] [cursor=pointer]:
+              - heading "Who is our head?" [level=4] [ref=e462]
+              - img [ref=e464]
+            - region "Who is our head?" [ref=e466]:
+              - generic [ref=e468]: Without hesitation, tell Gou is our head and all of us are coordinators or volunteers.
+          - button "How can someone who doesn't speak can be your head?" [ref=e472] [cursor=pointer]:
+            - heading "How can someone who doesn't speak can be your head?" [level=4] [ref=e474]
+            - img [ref=e476]
+          - button "Who will be your guiding principle?" [ref=e481] [cursor=pointer]:
+            - heading "Who will be your guiding principle?" [level=4] [ref=e483]
+            - img [ref=e485]
+          - button "What is your motto?" [ref=e490] [cursor=pointer]:
+            - heading "What is your motto?" [level=4] [ref=e492]
+            - img [ref=e494]
+          - button "Who founded?" [ref=e499] [cursor=pointer]:
+            - heading "Who founded?" [level=4] [ref=e501]
+            - img [ref=e503]
+  - generic [ref=e507]:
+    - generic [ref=e508]:
+      - heading "Stay Informed." [level=3] [ref=e509]
+      - heading "Subscribe for Updates." [level=3] [ref=e510]
+      - generic [ref=e511]: Stay Connected with GoPals - Subscribe for Updates on Desi Cows and Sustainable Living.
+    - generic [ref=e515]:
+      - generic [ref=e516]:
+        - generic [ref=e517]:
+          - generic [ref=e518]: Email *
+          - textbox "Email" [ref=e519]:
+            - /placeholder: Your Email...
+        - generic [ref=e521]:
+          - text: By Clicking Subscribe, You’re agreeing to GoPals’s
+          - link "Terms of Use" [ref=e522] [cursor=pointer]:
+            - /url: /terms-conditions/
+            - strong [ref=e523]: Terms of Use
+          - text: and
+          - link "Privacy Policy" [ref=e524] [cursor=pointer]:
+            - /url: /privacy-policy/
+            - strong [ref=e525]: Privacy Policy
+          - text: .
+        - generic [ref=e526]:
+          - generic [ref=e527]: Custom Captcha *
+          - generic [ref=e528]:
+            - generic [ref=e529]: 14 + 1 =
+            - textbox "Custom Captcha" [ref=e530]
+      - button "Subscribe" [ref=e532] [cursor=pointer]
+      - generic [ref=e533]:
+        - text: "Alternative:"
+        - textbox "Alternative:" [ref=e534]
+  - generic [ref=e536]:
+    - generic [ref=e537]:
+      - generic [ref=e538]:
+        - link "Gopals Home" [ref=e539] [cursor=pointer]:
+          - /url: /
+          - img "Logo of GoPals." [ref=e540]
+        - generic [ref=e541]: We strive to reconnect people with their roots, fostering a deep understanding of traditional practices and the invaluable role of Desi Cows in promoting eco-friendly living.
+        - generic [ref=e542]:
+          - link "FaceBook" [ref=e543] [cursor=pointer]:
+            - /url: https://www.facebook.com/wegopals/
+            - img [ref=e545]
+          - link "Twitter" [ref=e547] [cursor=pointer]:
+            - /url: https://twitter.com/wegopals
+            - img [ref=e549]
+          - link "YouTube" [ref=e551] [cursor=pointer]:
+            - /url: https://www.youtube.com/channel/UCZXZF610GaJ7j2j_gAtLX1w/
+            - img [ref=e553]
+          - link "Instagram" [ref=e555] [cursor=pointer]:
+            - /url: https://www.instagram.com/wegopals
+            - img [ref=e557]
+          - link "Instagram" [ref=e559] [cursor=pointer]:
+            - /url: https://www.whatsapp.com/channel/0029VbB4q0U4yltUNBeI1A1I
+            - img [ref=e561]
+      - img "Image of a desi cow." [ref=e564]
+      - generic [ref=e565]:
+        - generic [ref=e566]: Quick Links
+        - link "Our Vision" [ref=e567] [cursor=pointer]:
+          - /url: /about/
+        - link "Contact Us" [ref=e568] [cursor=pointer]:
+          - /url: /contact-us/
+        - link "Blog" [ref=e569] [cursor=pointer]:
+          - /url: /blog/
+        - link "News" [ref=e570] [cursor=pointer]:
+          - /url: /news/
+        - link "Careers" [ref=e571] [cursor=pointer]:
+          - /url: /careers/
+        - link "Recent Events" [ref=e572] [cursor=pointer]:
+          - /url: /events/
+        - link "Gallery" [ref=e573] [cursor=pointer]:
+          - /url: /gallery/
+      - generic [ref=e574]:
+        - generic [ref=e575]: Contact
+        - paragraph [ref=e577]:
+          - text: "Headquarters:"
+          - strong [ref=e578]: "GoPals Charitable Trust #78,"
+          - text: 2nd Main Road, Kanaka Layout,
+          - text: Banashankari 2nd Stage,
+          - text: Bengaluru, Karnataka - 560070,
+          - text: INDIA.
+        - link "info@wegopals.com" [ref=e579] [cursor=pointer]:
+          - /url: mailto:info@wegopals.com
+        - link "outreach@wegopals.com" [ref=e580] [cursor=pointer]:
+          - /url: mailto:outreach@wegopals.com
+        - link "+91 98802 33209" [ref=e581] [cursor=pointer]:
+          - /url: tel:+919880233209
+        - link "+91 99667 38644" [ref=e582] [cursor=pointer]:
+          - /url: tel:+919966738644
+        - link "+91 96325 61110" [ref=e583] [cursor=pointer]:
+          - /url: tel:+919632561110
+      - generic [ref=e584]:
+        - generic [ref=e585]: Our Locations
+        - generic [ref=e586]: Bangalore
+        - generic [ref=e587]: Mysore
+        - generic [ref=e588]: Chennai
+        - generic [ref=e589]: Hyderabad
+        - generic [ref=e590]: Coimbatore
+        - generic [ref=e591]: Kalaburagi
+        - generic [ref=e592]: Tirunelveli
+        - generic [ref=e593]: Erode
+        - generic [ref=e594]: Delhi
+    - generic [ref=e595]:
+      - generic [ref=e596]:
+        - text: (Call/Whatsapp) -
+        - generic [ref=e597]: Timing 10 AM - 7 PM
+      - generic [ref=e598]:
+        - link "+91 81486 94359" [ref=e599] [cursor=pointer]:
+          - /url: tel:+918148694359
+        - generic [ref=e600]: /
+        - link "Instagram" [ref=e601] [cursor=pointer]:
+          - /url: https://api.whatsapp.com/send?phone=918148694359&text=Hi
+          - img [ref=e603]
+  - generic [ref=e607]:
+    - generic [ref=e608]:
+      - text: © 2026
+      - link "GoPals" [ref=e609] [cursor=pointer]:
+        - /url: /
+      - text: . All rights reserved.
+    - generic [ref=e610]:
+      - link "Terms" [ref=e611] [cursor=pointer]:
+        - /url: /terms-conditions/
+      - link "Privacy" [ref=e612] [cursor=pointer]:
+        - /url: /privacy-policy/
+      - link "Refund and Cancellation Policy" [ref=e613] [cursor=pointer]:
+        - /url: /refund-and-cancellation-policy/
+      - link "Sitemap" [ref=e614] [cursor=pointer]:
+        - /url: /html-sitemap/
+  - generic:
+    - link "Support Us" [ref=e615] [cursor=pointer]:
+      - /url: /support-us/
+    - link "Donate" [ref=e616] [cursor=pointer]:
+      - /url: /support-a-cowherd/
+  - img

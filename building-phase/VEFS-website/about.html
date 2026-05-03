@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Learn about VEFS Foundation - empowering farmers through organic agriculture, bridging producers and consumers, and preserving Tamil Nadu's indigenous ecological heritage. Discover our story, mission, values, and impact.">
+  <meta name="description" content="Learn about VEFS Foundation - Organic Farming, Biodiversity Conservation & Social Welfare">
   <meta name="keywords" content="VEFS Foundation, about us, Tamil Nadu ecology, indigenous trees, environmental mission, social welfare, organic farming">
 
   <title>About VEFS Foundation - Our Mission, Story & Impact | Tamil Nadu</title>
@@ -11,16 +11,153 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="images/icons/vefs-favicon.ico">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cherry+Cream+Soda&family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/responsive-mobile.css">
+
+  <style>
+    /* Announcement Bar */
+    .announcement-bar {
+      background: #FFCB82;
+      color: var(--color-primary-dark);
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      position: relative;
+      z-index: 100;
+    }
+    .announcement-bar a {
+      color: var(--color-primary-dark);
+      font-weight: var(--font-weight-bold);
+      text-decoration: underline;
+    }
+    .announcement-bar a:hover { color: var(--color-primary); }
+    .announcement-bar .announcement-close {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: var(--color-primary-dark);
+      cursor: pointer;
+      opacity: 0.6;
+      padding: 0.25rem;
+      line-height: 1;
+    }
+    .announcement-bar .announcement-close:hover { opacity: 1; }
+
+    /* Floating CTAs */
+    .floating-ctas {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      z-index: 1050;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+    .floating-ctas.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .floating-cta-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      text-decoration: none;
+      box-shadow: var(--shadow-lg);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .floating-cta-btn:hover {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-xl);
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+    .floating-cta-donate { background: var(--color-secondary); }
+    .floating-cta-whatsapp { background: #25D366; }
+    @media (max-width: 768px) {
+      .floating-ctas { bottom: 1rem; right: 1rem; }
+      .floating-cta-btn { width: 48px; height: 48px; }
+    }
+
+    /* ===== Vision / Mission / Values Cards ===== */
+    .vmv-cards {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-2xl);
+      flex-wrap: wrap;
+    }
+
+    .vmv-card {
+      flex: 1;
+      min-width: 260px;
+      max-width: 380px;
+      text-align: center;
+      padding: var(--space-2xl) var(--space-xl);
+    }
+
+    .vmv-card img {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--space-lg);
+      display: block;
+    }
+
+    .vmv-card h2 {
+      font-family: var(--font-serif);
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: var(--space-md);
+    }
+
+    .vmv-card h2 .accent {
+      color: var(--color-primary);
+    }
+
+    .vmv-card p,
+    .vmv-card ul {
+      font-size: var(--font-size-base);
+      line-height: 1.7;
+      color: var(--color-gray-600);
+    }
+
+    .vmv-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .vmv-card ul li {
+      padding: 0.3rem 0;
+      font-weight: 500;
+    }
+
+    @media (max-width: 640px) {
+      .vmv-cards { flex-direction: column; align-items: center; gap: var(--space-lg); }
+    }
+  </style>
 </head>
 <body>
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" id="announcement-bar">
+    Join our next workshop! <a href="events.html">View upcoming events &rarr;</a>
+    <button class="announcement-close" aria-label="Dismiss announcement" onclick="this.parentElement.style.display='none'; try{localStorage.setItem('vefs-announcement-dismissed','1')}catch(e){}">&times;</button>
+  </div>
+
   <!-- Header / Navigation -->
 <header class="header" id="main-header">
   <div class="container">
@@ -87,6 +224,12 @@
                target="_blank" rel="noopener">
               <img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="24" height="24">
             </a>
+
+            <a href="mailto:vefsfoundation@gmail.com"
+               class="header-social-link"
+               aria-label="Email">
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
           </div>
 
           <ul class="nav-list">
@@ -132,6 +275,12 @@
            target="_blank" rel="noopener">
           <img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="20" height="20">
         </a>
+
+        <a href="mailto:vefsfoundation@gmail.com"
+           class="header-social-link"
+           aria-label="Email">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
       </div>
 
     </div>
@@ -140,25 +289,25 @@
 
   <main>
     <!-- Page Hero -->
-    <section class="section" style="background: linear-gradient(135deg, rgba(107, 142, 35, 0.9), rgba(212, 165, 116, 0.9)), url('/images/about/hero.jpg') center/cover; color: var(--color-white); text-align: center; padding: var(--space-3xl) 0;">
+    <section class="section section-primary" style="text-align: center; padding: var(--space-3xl) 0;">
       <div class="container">
-        <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-md); font-weight: 700; background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none;">About VEFS Foundation</h1>
-        <p style="font-size: var(--font-size-xl); max-width: 800px; margin: 0 auto; opacity: 0.95; line-height: 1.5;">From Seed to Soil: Reviving Tamil Heritage, Nurturing Sustainable Futures</p>
+        <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-md); font-weight: 700; color: #FFFFFF;">About <span class="accent">VEFS</span> Foundation</h1>
+        <p style="font-size: var(--font-size-xl); max-width: 800px; margin: 0 auto; line-height: 1.5; color: #FFFFFF; opacity: 0.95;">From Seed to Soil: Reviving Tamil Heritage, Nurturing Sustainable Futures</p>
       </div>
     </section>
 
     <!-- Foundation Story -->
     <section class="section section-py">
       <div class="container" style="max-width: 900px;">
-        <h2 class="section-title text-center">Our Story</h2>
+        <h2 class="section-title text-center">Our <span class="accent">Story</span></h2>
 
-        <div style="font-size: var(--font-size-lg); line-height: 1.8; color: var(--color-gray-700);">
+        <div style="font-size: var(--font-size-lg); line-height: 1.8; color: var(--color-gray-700); text-align: justify;">
           <p style="margin-bottom: var(--space-lg);">
             The story of VEFS Foundation began with R. Vetrimaran's transformative journey under the guidance of Nammalvar Ayya, the legendary pioneer of ecological agriculture in Tamil Nadu. Having witnessed the devastating effects of chemical farming on soil health, farmer livelihoods, and traditional knowledge systems, Vetrimaran recognized an urgent need for change. At Valluvam Pannai in Kulathupatti, Nilakottai, he established the Valluvam Ecological Farming and Social welfare foundation with a clear purpose: to revive the wisdom of our ancestors while building a sustainable future. The foundation was born from a simple yet powerful question—"Do we truly know what good food is?"—and a determination to help farmers and communities rediscover the answer through organic practices rooted in Tamil Nadu's rich agricultural heritage.
           </p>
 
           <p style="margin-bottom: var(--space-lg);">
-            What started as training sessions for local farmers has grown into a comprehensive movement touching every aspect of sustainable agriculture. Drawing on over a decade of hands-on experience, particularly in Zero Budget Five Layer Farming models, the foundation developed programs that empower farmers from production to marketing—breaking their dependence on middlemen and chemical inputs. A weekly organic market now connects farmers directly with consumers, ensuring fair returns and access to truly organic produce. The foundation expanded its reach through partnerships with schools and colleges, conducting eco-education programs, trekking expeditions, and competitions that have inspired a new generation to connect with nature. Having trained over 200 farmers to transition from chemical-based to natural farming, VEFS has become a trusted name in Tamil Nadu's organic farming community.
+            What started as training sessions for local farmers has grown into a comprehensive movement touching every aspect of sustainable agriculture. Drawing on over a decade of hands-on experience, the foundation developed programs that empower farmers from production to marketing—breaking their dependence on middlemen and chemical inputs. A weekly organic market now connects farmers directly with consumers, ensuring fair returns and access to truly organic produce. The foundation expanded its reach through partnerships with schools and colleges, conducting eco-education programs, trekking expeditions, and competitions that have inspired a new generation to connect with nature. Having trained over 200 farmers to transition from chemical-based to natural farming, VEFS has become a trusted name in Tamil Nadu's organic farming community.
           </p>
 
           <p style="margin-bottom: var(--space-lg);">
@@ -168,114 +317,113 @@
       </div>
     </section>
 
-    <!-- Mission & Vision -->
-    <section class="section section-py" style="background-color: var(--color-primary-light);">
+    <!-- Vision / Mission / Values Section -->
+    <section class="section section-white" id="about-vision-mission-values">
       <div class="container">
-        <div class="grid grid-cols-2 mission-vision-grid" style="gap: var(--space-2xl);">
-          <div class="card" style="text-align: center; padding: var(--space-2xl);">
-            <div style="font-size: 4rem; margin-bottom: var(--space-lg);">🎯</div>
-            <h2 style="background: linear-gradient(135deg, #2C5F2D 0%, #4A90E2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: var(--font-size-2xl); margin-bottom: var(--space-md); font-weight: 700;">Our Mission</h2>
-            <p style="font-size: var(--font-size-lg); line-height: 1.8; color: var(--color-gray-700);">
-              To empower farmers and communities through organic agriculture education, bridge the gap between producers and consumers, and preserve Tamil Nadu's indigenous ecological heritage—from Sangha Ilakiya trees to traditional farming wisdom—for sustainable livelihoods and a healthier planet.
-            </p>
+        <div class="vmv-cards">
+
+          <div class="vmv-card">
+            <img src="images/icons/Home-Our-Vision.svg" alt="Vision icon" width="80" height="80">
+            <h2>Our <span class="accent">Vision</span></h2>
+            <p>To create a harmonious world where ecological farming thrives, biodiversity is protected, and communities live with dignity, care, and sustainability.</p>
           </div>
 
-          <div class="card" style="text-align: center; padding: var(--space-2xl);">
-            <div style="font-size: 4rem; margin-bottom: var(--space-lg);">🌟</div>
-            <h2 style="background: linear-gradient(135deg, #2C5F2D 0%, #4A90E2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: var(--font-size-2xl); margin-bottom: var(--space-md); font-weight: 700;">Our Vision</h2>
-            <p style="font-size: var(--font-size-lg); line-height: 1.8; color: var(--color-gray-700);">
-              A Tamil Nadu where every farmer practices sustainable, chemical-free agriculture with confidence and dignity; where consumers know and trust their food sources; and where the indigenous trees and traditional knowledge of our ancestors thrive for generations to come.
-            </p>
+          <div class="vmv-card">
+            <img src="images/icons/Home-Our-Mission.svg" alt="Mission icon" width="80" height="80">
+            <h2>Our <span class="accent">Mission</span></h2>
+            <p>To drive sustainable change through ecological farming, biodiversity conservation, and social welfare, fostering harmony between nature and society.</p>
           </div>
+
+          <div class="vmv-card">
+            <img src="images/icons/Home-Our-Values.svg" alt="Values icon" width="80" height="80">
+            <h2>Our <span class="accent">Values</span></h2>
+            <ul>
+              <li>Ecological Conservation</li>
+              <li>Community Empowerment</li>
+              <li>Sustainable Practices</li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- Core Values -->
-    <section class="section section-py">
-      <div class="container">
-        <h2 class="section-title text-center">Our Core Values</h2>
-        <p class="section-subtitle text-center">The principles that guide our work and decisions</p>
+    <!-- Work Done Since 2019 -->
+    <section class="section section-py" style="background-color: var(--color-gray-50);">
+      <div class="container" style="max-width: 1000px;">
+        <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-2xl); text-align: center; color: var(--color-primary-dark);">Our <span class="accent">Work</span> Since 2019</h2>
 
-        <div class="card-grid card-grid-3" style="margin-top: var(--space-2xl);">
-          <div class="card" style="padding: var(--space-xl); text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: var(--space-md);">📖</div>
-            <h3 class="card-title">Traditional Wisdom (பாரம்பரிய அறிவு)</h3>
-            <p class="card-description">Honoring and reviving the agricultural and ecological knowledge passed down through generations.</p>
+        <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
+          <div class="card">
+            <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: var(--color-primary);">🌾 Farmer Training & Empowerment</h3>
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-sm);">
+              <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
+                <span style="position: absolute; left: 0; color: var(--color-primary);">&#10003;</span>
+                Trained 300+ farmers annually in natural farming and organic practices
+              </li>
+              <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
+                <span style="position: absolute; left: 0; color: var(--color-primary);">&#10003;</span>
+                Enabled native seed preservation and organic input preparation
+              </li>
+              <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
+                <span style="position: absolute; left: 0; color: var(--color-primary);">&#10003;</span>
+                Established weekly organic market connecting farmers directly with consumers
+              </li>
+            </ul>
           </div>
 
-          <div class="card" style="padding: var(--space-xl); text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: var(--space-md);">🌾</div>
-            <h3 class="card-title">Farmer Empowerment</h3>
-            <p class="card-description">Supporting farmers with complete knowledge and independence across the entire value chain.</p>
+          <div class="card">
+            <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: var(--color-primary);">🌳 Ecological Conservation</h3>
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-sm);">
+              <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
+                <span style="position: absolute; left: 0; color: var(--color-primary);">&#10003;</span>
+                Planted and conserved 250+ indigenous trees across Tamil Nadu
+              </li>
+              <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
+                <span style="position: absolute; left: 0; color: var(--color-primary);">&#10003;</span>
+                Launched Pond Restoration and Biodiversity Project at Senghataan Kulam, Batlagundu
+              </li>
+              <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
+                <span style="position: absolute; left: 0; color: var(--color-primary);">&#10003;</span>
+                Researched Sangha Ilakiya Maranghal — documenting indigenous species from ancient Tamil Sangam literature
+              </li>
+            </ul>
           </div>
 
-          <div class="card" style="padding: var(--space-xl); text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: var(--space-md);">🌳</div>
-            <h3 class="card-title">Ecological Balance</h3>
-            <p class="card-description">Protecting biodiversity, restoring water bodies, and nurturing soil health.</p>
+          <div class="card">
+            <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: var(--color-primary);">🌿 Sustainable Living & Awareness</h3>
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-sm);">
+              <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
+                <span style="position: absolute; left: 0; color: var(--color-primary);">&#10003;</span>
+                Launched the Know Your Food awareness program for families
+              </li>
+              <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
+                <span style="position: absolute; left: 0; color: var(--color-primary);">&#10003;</span>
+                Promoted terrace gardens and chemical-free living practices
+              </li>
+              <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
+                <span style="position: absolute; left: 0; color: var(--color-primary);">&#10003;</span>
+                Built awareness on healthy, sustainable food choices across communities
+              </li>
+            </ul>
           </div>
 
-          <div class="card" style="padding: var(--space-xl); text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: var(--space-md);">🤝</div>
-            <h3 class="card-title">Community Connection</h3>
-            <p class="card-description">Bridging producers and consumers through trust, transparency, and fair practices.</p>
-          </div>
-
-          <div class="card" style="padding: var(--space-xl); text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: var(--space-md);">🎓</div>
-            <h3 class="card-title">Education & Inspiration</h3>
-            <p class="card-description">Nurturing curiosity about nature in every generation through experiential learning.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Impact & Achievements -->
-    <section class="section section-py" style="background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); color: var(--color-white);">
-      <div class="container">
-        <h2 style="font-size: var(--font-size-3xl); text-align: center; margin-bottom: var(--space-sm); color: var(--color-white);">Our Impact Since 2019</h2>
-        <p style="text-align: center; font-size: var(--font-size-lg); margin-bottom: var(--space-2xl); opacity: 0.9;">Numbers that tell our conservation story</p>
-
-        <div class="grid grid-cols-4" style="gap: var(--space-xl);">
-          <div style="text-align: center; padding: var(--space-xl); background-color: rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg);">
-            <div style="font-size: var(--font-size-4xl); font-weight: 700; margin-bottom: var(--space-sm);">20,000+</div>
-            <div style="font-size: var(--font-size-md); opacity: 0.9;">Indigenous Trees Planted</div>
-          </div>
-
-          <div style="text-align: center; padding: var(--space-xl); background-color: rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg);">
-            <div style="font-size: var(--font-size-4xl); font-weight: 700; margin-bottom: var(--space-sm);">15,000+</div>
-            <div style="font-size: var(--font-size-md); opacity: 0.9;">Students Reached</div>
-          </div>
-
-          <div style="text-align: center; padding: var(--space-xl); background-color: rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg);">
-            <div style="font-size: var(--font-size-4xl); font-weight: 700; margin-bottom: var(--space-sm);">128</div>
-            <div style="font-size: var(--font-size-md); opacity: 0.9;">Schools Engaged</div>
-          </div>
-
-          <div style="text-align: center; padding: var(--space-xl); background-color: rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg);">
-            <div style="font-size: var(--font-size-4xl); font-weight: 700; margin-bottom: var(--space-sm);">700+</div>
-            <div style="font-size: var(--font-size-md); opacity: 0.9;">Farmers Trained</div>
-          </div>
-
-          <div style="text-align: center; padding: var(--space-xl); background-color: rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg);">
-            <div style="font-size: var(--font-size-4xl); font-weight: 700; margin-bottom: var(--space-sm);">485</div>
-            <div style="font-size: var(--font-size-md); opacity: 0.9;">Acres Converted to Organic</div>
-          </div>
-
-          <div style="text-align: center; padding: var(--space-xl); background-color: rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg);">
-            <div style="font-size: var(--font-size-4xl); font-weight: 700; margin-bottom: var(--space-sm);">420</div>
-            <div style="font-size: var(--font-size-md); opacity: 0.9;">Women Empowered</div>
-          </div>
-
-          <div style="text-align: center; padding: var(--space-xl); background-color: rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg);">
-            <div style="font-size: var(--font-size-4xl); font-weight: 700; margin-bottom: var(--space-sm);">15</div>
-            <div style="font-size: var(--font-size-md); opacity: 0.9;">Districts Covered</div>
-          </div>
-
-          <div style="text-align: center; padding: var(--space-xl); background-color: rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg);">
-            <div style="font-size: var(--font-size-4xl); font-weight: 700; margin-bottom: var(--space-sm);">58</div>
-            <div style="font-size: var(--font-size-md); opacity: 0.9;">Endangered Species Protected</div>
+          <div class="card">
+            <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: var(--color-primary);">🤝 Community & Youth Engagement</h3>
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-sm);">
+              <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
+                <span style="position: absolute; left: 0; color: var(--color-primary);">&#10003;</span>
+                Built a community of 26,000+ members committed to ecological change
+              </li>
+              <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
+                <span style="position: absolute; left: 0; color: var(--color-primary);">&#10003;</span>
+                Partnered with schools and colleges for eco-education programs and trekking expeditions
+              </li>
+              <li style="padding-left: var(--space-lg); position: relative; color: var(--color-gray-700);">
+                <span style="position: absolute; left: 0; color: var(--color-primary);">&#10003;</span>
+                Organized competitions and campaigns inspiring youth to connect with nature
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -284,7 +432,7 @@
     <!-- Timeline/Journey -->
     <section class="section section-py">
       <div class="container">
-        <h2 class="section-title text-center">Our Journey</h2>
+        <h2 class="section-title text-center">Our <span class="accent">Journey</span></h2>
         <p class="section-subtitle text-center">Milestones in our conservation movement</p>
 
         <div style="max-width: 800px; margin: var(--space-2xl) auto 0; overflow-x: hidden;">
@@ -295,67 +443,19 @@
             </div>
             <div style="flex: 1; border-left: 3px solid var(--color-primary-light); padding-left: var(--space-md); padding-bottom: var(--space-xl); position: relative; min-width: 0;">
               <div style="position: absolute; left: -8px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background-color: var(--color-primary);"></div>
-              <h3 style="margin-bottom: var(--space-sm); font-size: var(--font-size-xl); color: var(--color-primary);">Foundation Established</h3>
-              <p style="color: var(--color-gray-700); line-height: 1.7;">VEFS was officially founded with a mission to preserve indigenous trees mentioned in Tamil Sangam literature. Initial focus on documentation and awareness creation.</p>
-            </div>
-          </div>
-
-          <!-- Timeline Item -->
-          <div style="display: flex; gap: var(--space-md); margin-bottom: var(--space-2xl);">
-            <div style="flex-shrink: 0; min-width: 60px; max-width: 80px; text-align: right; padding-top: 4px;">
-              <span style="display: inline-block; background-color: var(--color-primary); color: var(--color-white); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-full); font-weight: 600; font-size: var(--font-size-sm);">2020</span>
-            </div>
-            <div style="flex: 1; border-left: 3px solid var(--color-primary-light); padding-left: var(--space-md); padding-bottom: var(--space-xl); position: relative; min-width: 0;">
-              <div style="position: absolute; left: -8px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background-color: var(--color-primary);"></div>
-              <h3 style="margin-bottom: var(--space-sm); font-size: var(--font-size-xl); color: var(--color-primary);">First Programs Launched</h3>
-              <p style="color: var(--color-gray-700); line-height: 1.7;">School awareness programs initiated in Chennai. First farmer training session conducted. Established conservation plots for endangered species. Reached 25 schools and 50 farmers in year one.</p>
-            </div>
-          </div>
-
-          <!-- Timeline Item -->
-          <div style="display: flex; gap: var(--space-md); margin-bottom: var(--space-2xl);">
-            <div style="flex-shrink: 0; min-width: 60px; max-width: 80px; text-align: right; padding-top: 4px;">
-              <span style="display: inline-block; background-color: var(--color-primary); color: var(--color-white); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-full); font-weight: 600; font-size: var(--font-size-sm);">2021</span>
-            </div>
-            <div style="flex: 1; border-left: 3px solid var(--color-primary-light); padding-left: var(--space-md); padding-bottom: var(--space-xl); position: relative; min-width: 0;">
-              <div style="position: absolute; left: -8px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background-color: var(--color-primary);"></div>
-              <h3 style="margin-bottom: var(--space-sm); font-size: var(--font-size-xl); color: var(--color-primary);">Expansion & Recognition</h3>
-              <p style="color: var(--color-gray-700); line-height: 1.7;">Expanded to Coimbatore and Madurai districts. Women empowerment program launched. First sacred grove restoration completed. Recognition from state forest department for conservation efforts.</p>
-            </div>
-          </div>
-
-          <!-- Timeline Item -->
-          <div style="display: flex; gap: var(--space-md); margin-bottom: var(--space-2xl);">
-            <div style="flex-shrink: 0; min-width: 60px; max-width: 80px; text-align: right; padding-top: 4px;">
-              <span style="display: inline-block; background-color: var(--color-primary); color: var(--color-white); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-full); font-weight: 600; font-size: var(--font-size-sm);">2022</span>
-            </div>
-            <div style="flex: 1; border-left: 3px solid var(--color-primary-light); padding-left: var(--space-md); padding-bottom: var(--space-xl); position: relative; min-width: 0;">
-              <div style="position: absolute; left: -8px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background-color: var(--color-primary);"></div>
-              <h3 style="margin-bottom: var(--space-sm); font-size: var(--font-size-xl); color: var(--color-primary);">Scaling Impact</h3>
-              <p style="color: var(--color-gray-700); line-height: 1.7;">Youth Environmental Champions program introduced. Urban tree awareness campaigns began. Crossed 10,000 trees planted. Formed partnerships with 15 schools and 3 agricultural universities.</p>
-            </div>
-          </div>
-
-          <!-- Timeline Item -->
-          <div style="display: flex; gap: var(--space-md); margin-bottom: var(--space-2xl);">
-            <div style="flex-shrink: 0; min-width: 60px; max-width: 80px; text-align: right; padding-top: 4px;">
-              <span style="display: inline-block; background-color: var(--color-primary); color: var(--color-white); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-full); font-weight: 600; font-size: var(--font-size-sm);">2023-24</span>
-            </div>
-            <div style="flex: 1; border-left: 3px solid var(--color-primary-light); padding-left: var(--space-md); padding-bottom: var(--space-xl); position: relative; min-width: 0;">
-              <div style="position: absolute; left: -8px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background-color: var(--color-primary);"></div>
-              <h3 style="margin-bottom: var(--space-sm); font-size: var(--font-size-xl); color: var(--color-primary);">Community-Led Conservation</h3>
-              <p style="color: var(--color-gray-700); line-height: 1.7;">Citizen science network established for biodiversity monitoring. Corporate partnerships launched. Documented traditional ecological knowledge from 100+ village elders. Operations now span 15 districts.</p>
+              <h3 style="margin-bottom: var(--space-sm); font-size: var(--font-size-xl); color: var(--color-secondary);">Foundation Established</h3>
+              <p style="color: var(--color-gray-700); line-height: 1.7; text-align: justify;">VEFS Foundation was established by R. Vetrimaran with a mission to drive sustainable change through ecological farming, biodiversity conservation, and social welfare. Rooted in the teachings of Nammalvar Ayya, the foundation began its journey in Dindigul, Tamil Nadu.</p>
             </div>
           </div>
 
           <!-- Timeline Item -->
           <div style="display: flex; gap: var(--space-md);">
             <div style="flex-shrink: 0; min-width: 60px; max-width: 80px; text-align: right; padding-top: 4px;">
-              <span style="display: inline-block; background-color: var(--color-secondary); color: var(--color-white); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-full); font-weight: 600; font-size: var(--font-size-sm);">2025+</span>
+              <span style="display: inline-block; background-color: var(--color-secondary); color: var(--color-white); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-full); font-weight: 600; font-size: var(--font-size-sm);">Today</span>
             </div>
             <div style="flex: 1; padding-left: var(--space-md); position: relative; min-width: 0;">
-              <h3 style="margin-bottom: var(--space-sm); font-size: var(--font-size-xl); color: var(--color-secondary);">Vision for the Future</h3>
-              <p style="color: var(--color-gray-700); line-height: 1.7;">Aiming to reach 200+ schools, establish 5 regional training centers, plant 50,000+ indigenous trees, and create a digital platform for eco-education accessible to all Tamil Nadu residents.</p>
+              <h3 style="margin-bottom: var(--space-sm); font-size: var(--font-size-xl); color: var(--color-secondary);">Growing Impact</h3>
+              <p style="color: var(--color-gray-700); line-height: 1.7; text-align: justify;">Today, VEFS trains 300+ farmers annually in natural farming and seed preservation, has planted and conserved 250+ indigenous trees, and built a community of 26,000+ members committed to ecological and social change. The journey continues — with a vision to reach 1 Lakh+ members and restore 160+ acres of land.</p>
             </div>
           </div>
         </div>
@@ -365,7 +465,7 @@
     <!-- Founder Profile -->
     <section class="section section-py" style="background-color: var(--color-gray-50);">
       <div class="container">
-        <h2 class="section-title text-center">Meet Our Founder</h2>
+        <h2 class="section-title text-center">Meet Our <span class="accent">Founder</span></h2>
 
         <div style="margin-top: var(--space-2xl); max-width: 1100px; margin-left: auto; margin-right: auto;">
           <!-- Founder Image -->
@@ -377,27 +477,25 @@
 
           <!-- Founder Name & Title -->
           <div style="text-align: center; margin-bottom: var(--space-2xl);">
-            <h3 style="font-size: var(--font-size-3xl); color: var(--color-primary); margin-bottom: var(--space-sm); font-weight: 700;">R. Vetrimaran (வெற்றிமாறன் .இரா)</h3>
+            <h3 style="font-size: var(--font-size-3xl); color: var(--color-primary); margin-bottom: var(--space-sm); font-weight: 700;">R. Vetrimaran (<span lang="ta">வெற்றிமாறன் .இரா</span>)</h3>
             <p style="font-size: var(--font-size-xl); color: var(--color-gray-600);">Founder & President, VEFS Foundation</p>
+            <p style="font-size: var(--font-size-md); color: var(--color-gray-600); margin-top: var(--space-sm);">Personal Appointment: <a href="tel:+919566667708" style="color: var(--color-primary);">+91 9566667708</a></p>
           </div>
 
           <!-- Founder Bio - Responsive Width -->
-          <div style="font-size: var(--font-size-md); line-height: 1.8; color: var(--color-gray-700);">
+          <div style="font-size: var(--font-size-md); line-height: 1.8; color: var(--color-gray-700); text-align: justify;">
             <p style="margin-bottom: var(--space-lg);">
-              R. Vetrimaran is a prominent organic farming expert and environmental mentor whose professional journey has been deeply shaped by the wisdom and guidance of Nammalvar Ayya, a pioneer in ecological agriculture and social activism. Starting as a dedicated student of Nammalvar Ayya, Vetrimaran absorbed the principles of poison-free food production, sustainable farming practices, and traditional knowledge systems that would become the foundation of his life's work.
+              R. Vetrimaran is the Founder and President of VEFS Foundation—a visionary committed to ecological farming, biodiversity conservation, and community empowerment. Shaped by the teachings of Nammalvar Ayya, a pioneer in natural farming and social activism, Vetrimaran has dedicated his life to reviving sustainable agricultural practices and fostering a harmonious relationship between people and the earth.
             </p>
             <p style="margin-bottom: var(--space-lg);">
-              Vetrimaran's career trajectory demonstrates progressive commitment to ecological farming. He progressed from being a student to serving as a training coordinator at Vanagham Nammalvar Foundation, where he was responsible for organizing and conducting hands-on training programs in ecological farming, seed saving, and traditional medicine. With more than a decade of hands-on experience in organic farming, he specializes in Zero Budget Five Layer Farming models and biodiversity improvement. His innovative soil management techniques have enhanced soil organic carbon levels and made farmlands more resilient to droughts and floods. Throughout his career, he has trained over 200 farmers across Tamil Nadu to transition from chemical-based farming to natural and organic practices.
+              With over a decade of hands-on experience, he has trained 300+ farmers annually in natural farming, native seed preservation, and organic input preparation. His work spans terrace gardening initiatives, the Know Your Food awareness program, and large-scale ecological restoration—including the planting and conservation of 250+ indigenous trees with a long-term vision to restore 160 acres of land. He has built a community of 26,000+ individuals committed to ecological and social change.
             </p>
             <p style="margin-bottom: var(--space-lg);">
-              In his role as a trustee at Vanagham Nammalvar Foundation, Vetrimaran gained invaluable experience in decision-making, resource management, and fostering partnerships for broader impact. This experience culminated in the founding of VEFS Foundation, where he serves as Founder and President. As a mentor and "friendly guru," he conducts field demonstrations, youth training programs, and maintains active media outreach through platforms like Pasumai Vikatan. His philosophy is deeply rooted in traditional knowledge, natural soil fertility management, and biodiversity conservation—principles learned directly from Nammalvar Ayya's teachings.
-            </p>
-            <p style="margin-bottom: var(--space-lg);">
-              Vetrimaran's remarkable contributions to organic farming and biodiversity have earned him both national and international recognition. He is driven by a vision to restore ecological balance and create a sustainable food system that empowers farmers and consumers alike. His commitment extends to preserving indigenous tree species mentioned in ancient Tamil literature (Sangha Ilakiya Maranghal) and establishing community-based biodiversity gardens. Through VEFS, he continues Dr. Nammalvar's legacy in ecological farming and community welfare, with ambitious plans to establish permanent eco-learning centers and collaborate with educational institutions to promote traditional ecological knowledge across Tamil Nadu and beyond.
+              Through VEFS, Vetrimaran is creating farmer-centric platforms for marketing organic produce, advancing biodiversity protection, and expanding VEFS's reach from Dindigul to across Tamil Nadu. His goal is to grow the movement to 1 Lakh+ members and bring sustainable living into every home by 2027—turning awareness into lasting action for a compassionate and sustainable future.
             </p>
 
             <blockquote style="border-left: 4px solid var(--color-primary); padding-left: var(--space-lg); margin-top: var(--space-2xl); font-style: italic; color: var(--color-primary); font-size: var(--font-size-lg);">
-              "Guided by the teachings of Nammalvar Ayya, we promote farming rooted in traditional knowledge, natural soil fertility management, and biodiversity conservation. Farming is not just about production—it's about restoring our connection to nature and ensuring food that is truly poison-free and nourishing for our communities."
+              "Farming is a living expression of our culture and our connection to the earth. When we grow with respect for nature, we cultivate not just food, but a sustainable future. Through conscious practices and shared knowledge, we can restore balance and create a way of life that nurtures both people and the planet."
             </blockquote>
           </div>
         </div>
@@ -407,7 +505,7 @@
     <!-- Trustees/Board -->
     <section class="section section-py">
       <div class="container" style="max-width: 900px;">
-        <h2 class="section-title text-center">Board of Trustees</h2>
+        <h2 class="section-title text-center">Board of <span class="accent">Trustees</span></h2>
         <p class="section-subtitle text-center">Experienced leaders guiding our mission</p>
 
         <div style="margin-top: var(--space-2xl);">
@@ -421,7 +519,7 @@
           <div class="card" style="margin-bottom: var(--space-lg); padding: var(--space-xl);">
             <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--space-xs);">K. Rajasekaran</h3>
             <p style="font-size: var(--font-size-md); color: var(--color-gray-600); margin-bottom: var(--space-sm);">Secretary, VEFS Foundation</p>
-            <p style="color: var(--color-gray-700); line-height: 1.7;">K. Rajasekaran serves as the Secretary of VEFS Foundation, bringing valuable expertise in organizational management and community development. His dedication to environmental conservation and agricultural sustainability strengthens the foundation's mission to empower farmers and preserve indigenous ecological heritage across Tamil Nadu.</p>
+            <p style="color: var(--color-gray-700); line-height: 1.7; text-align: justify;">K. Rajasekaran serves as the Secretary of VEFS Foundation, bringing valuable expertise in organizational management and community development. His dedication to environmental conservation and agricultural sustainability strengthens the foundation's mission to empower farmers and preserve indigenous ecological heritage across Tamil Nadu.</p>
           </div>
 
           <div style="display: flex; justify-content: center; margin-bottom: var(--space-2xl);">
@@ -433,7 +531,7 @@
           <div class="card" style="margin-bottom: var(--space-lg); padding: var(--space-xl);">
             <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin-bottom: var(--space-xs);">S. Prajana</h3>
             <p style="font-size: var(--font-size-md); color: var(--color-gray-600); margin-bottom: var(--space-sm);">Treasurer, VEFS Foundation</p>
-            <p style="color: var(--color-gray-700); line-height: 1.7;">S. Prajana serves as the Treasurer of VEFS Foundation, overseeing financial operations and ensuring transparent resource management. Her commitment to fiscal responsibility and sustainable development supports the foundation's initiatives in organic farming education, indigenous tree conservation, and community empowerment programs.</p>
+            <p style="color: var(--color-gray-700); line-height: 1.7; text-align: justify;">S. Prajana serves as the Treasurer of VEFS Foundation, overseeing financial operations and ensuring transparent resource management. Her commitment to fiscal responsibility and sustainable development supports the foundation's initiatives in organic farming education, indigenous tree conservation, and community empowerment programs.</p>
           </div>
         </div>
       </div>
@@ -442,7 +540,7 @@
     <!-- Call to Action -->
     <section class="section section-py" style="background-color: var(--color-primary); color: var(--color-white); text-align: center;">
       <div class="container" style="max-width: 800px;">
-        <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-md); background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none; font-weight: 700;">Join Our Mission</h2>
+        <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-md); font-weight: 700; color: var(--color-white);">Join Our <span class="accent">Mission</span></h2>
         <p style="color: var(--color-gray-50); font-size: var(--font-size-xl); margin-bottom: var(--space-xl); opacity: 0.95; line-height: 1.7;">
           Whether you're a student, farmer, professional, or nature enthusiast, there's a place for you in the VEFS community. Together, we can restore our ecological heritage and create a sustainable future.
         </p>
@@ -458,21 +556,19 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid footer-grid-2col">
-        <!-- Column 1: Quick Links + Social Media -->
+      <div class="footer-grid-4col">
+        <!-- Column 1: About VEFS -->
         <div class="footer-column">
-          <h3 class="footer-heading">Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="trainings.html">Trainings</a></li>
-            <li><a href="events.html">Events</a></li>
-            <li><a href="volunteer.html">Volunteer</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-          </ul>
+          <div class="footer-logo">
+            <img src="images/logos/vefs-logo.png" alt="VEFS Foundation" width="50" height="50">
+            <span class="footer-logo-text">VEFS Foundation</span>
+          </div>
+          <p class="footer-text">Valluvam Ecological Farming and Social Welfare Foundation - promoting organic farming, biodiversity conservation, and community empowerment across Tamil Nadu.</p>
+        </div>
 
-          <!-- Social Media below Quick Links -->
-          <h3 class="footer-heading" style="margin-top: var(--space-lg);">Follow Us</h3>
+        <!-- Column 2: Social Links -->
+        <div class="footer-column">
+          <h3 class="footer-heading">Follow Us</h3>
           <div class="footer-social">
             <a href="https://www.facebook.com/people/VEFS-Foundation/61582906514169/" class="social-link" data-platform="facebook" aria-label="Facebook" target="_blank" rel="noopener">
               <img src="images/icons/facebook_icon.png" alt="Facebook" width="24" height="24">
@@ -486,28 +582,46 @@
             <a href="https://www.whatsapp.com/channel/0029Vat5xFr6RGJJI5rJcv3D" class="social-link" data-platform="whatsapp" aria-label="WhatsApp" target="_blank" rel="noopener">
               <img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="24" height="24">
             </a>
+            <a href="mailto:vefsfoundation@gmail.com" class="social-link" data-platform="email" aria-label="Email">
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
           </div>
         </div>
 
-        <!-- Column 2: Contact + Newsletter -->
+        <!-- Column 3: Quick Links -->
+        <div class="footer-column">
+          <h3 class="footer-heading">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="trainings.html">Trainings</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="volunteer.html">Volunteer</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact + Newsletter -->
         <div class="footer-column">
           <h3 class="footer-heading">Contact Us</h3>
           <ul class="footer-contact">
             <li>
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
               Nilakottai, Dindigul, Tamil Nadu
             </li>
             <li>
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
               <a href="mailto:vefsfoundation@gmail.com">vefsfoundation@gmail.com</a>
             </li>
             <li>
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              <a href="tel:+919342211488">+91 9342211488</a>
+            </li>
+            <li>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
               <a href="tel:+918610457700">+91 8610457700</a>
             </li>
           </ul>
-
-          <!-- Newsletter below Contact -->
           <div style="margin-top: var(--space-lg);">
             <h3 class="footer-heading">Newsletter</h3>
             <p class="footer-text">Get updates on our environmental initiatives</p>
@@ -519,9 +633,8 @@
         </div>
       </div>
 
-      <!-- Footer Bottom -->
       <div class="footer-bottom">
-        <p class="footer-copyright">&copy; 2025 VEFS Foundation. All rights reserved.</p>
+        <p class="footer-copyright">&copy; 2026 VEFS Foundation. All rights reserved.</p>
         <div class="footer-legal">
           <a href="privacy.html">Privacy Policy</a>
           <a href="terms.html">Terms of Service</a>
@@ -530,8 +643,47 @@
     </div>
   </footer>
 
+  <!-- Floating Sticky CTAs -->
+  <div class="floating-ctas" id="floating-ctas">
+    <a href="donate.html" class="floating-cta-btn floating-cta-donate" aria-label="Donate">
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </a>
+    <a href="https://wa.me/919342211488" class="floating-cta-btn floating-cta-whatsapp" aria-label="WhatsApp" target="_blank" rel="noopener">
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+  </div>
+
   <!-- Scripts -->
   <script src="js/utils.js"></script>
   <script src="js/components/navigation.js"></script>
+  <script src="js/newsletter.js"></script>
+
+  <!-- Floating CTAs Scroll Script -->
+  <script>
+    (function () {
+      var ctas = document.getElementById('floating-ctas');
+      if (!ctas) return;
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+          ctas.classList.add('visible');
+        } else {
+          ctas.classList.remove('visible');
+        }
+      });
+    })();
+  </script>
+
+  <!-- Announcement Bar Dismiss Script -->
+  <script>
+    (function () {
+      var bar = document.getElementById('announcement-bar');
+      if (!bar) return;
+      try {
+        if (localStorage.getItem('vefs-announcement-dismissed') === '1') {
+          bar.style.display = 'none';
+        }
+      } catch(e) {}
+    })();
+  </script>
 </body>
 </html>

@@ -27,8 +27,8 @@ body {
   font-family: var(--font-sans);
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
-  color: var(--color-gray-800);
-  background-color: var(--color-off-white);
+  color: var(--color-gray-600);
+  background-color: var(--color-beige); /* warm cream #FAF6F0 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -40,7 +40,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
-  color: var(--color-gray-900);
+  color: var(--color-primary-dark);
 }
 
 p {
@@ -268,11 +268,11 @@ table {
 /* ===== Selection ===== */
 
 ::selection {
-  background-color: var(--color-primary-pale);
-  color: var(--color-gray-900);
+  background-color: var(--color-primary-light);
+  color: #FFFFFF;
 }
 
 ::-moz-selection {
-  background-color: var(--color-primary-pale);
-  color: var(--color-gray-900);
+  background-color: var(--color-primary-light);
+  color: #FFFFFF;
 }

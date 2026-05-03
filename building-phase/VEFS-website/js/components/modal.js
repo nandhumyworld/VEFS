@@ -59,23 +59,20 @@ class Modal {
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
 
+    // Scroll modal back to top
+    modal.scrollTop = 0;
+    const modalBody = modal.querySelector('.modal-body');
+    if (modalBody) modalBody.scrollTop = 0;
+
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
 
-    // Focus first focusable element in modal
-    const firstFocusable = modal.querySelector(
-      'button:not([data-modal-close]), a, input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-
-    if (firstFocusable) {
-      // Small delay to ensure modal is visible
-      setTimeout(() => firstFocusable.focus(), 100);
-    } else {
-      // If no focusable element, focus the close button
-      const closeButton = modal.querySelector('[data-modal-close]');
-      if (closeButton) {
-        setTimeout(() => closeButton.focus(), 100);
-      }
+    // Focus the close button so the modal stays scrolled to the top.
+    // Focusing a content element (input, button, link) causes the browser
+    // to scroll that element into view, which jumps the modal away from the top.
+    const closeButton = modal.querySelector('button.modal-close');
+    if (closeButton) {
+      setTimeout(() => closeButton.focus(), 100);
     }
 
     // Trigger custom event

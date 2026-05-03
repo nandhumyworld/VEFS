@@ -1,21 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find:*)",
-      "mcp__playwright__playwright_console_logs",
-      "mcp__playwright__playwright_navigate",
-      "Bash(python -m http.server:*)",
-      "mcp__playwright__playwright_screenshot",
-      "mcp__playwright__playwright_evaluate",
-      "mcp__playwright__playwright_click",
-      "mcp__playwright__playwright_fill",
-      "Bash(ping:*)",
-      "mcp__playwright__playwright_close"
+      "Bash(grep:*)",
+      "Bash(pip show:*)",
+      "Bash(python:*)",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "Skill(firecrawl:firecrawl)",
+      "WebFetch(domain:www.wegopals.com)",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "mcp__plugin_playwright_playwright__browser_close",
+      "mcp__plugin_playwright_playwright__browser_hover"
     ]
   },
-  "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [
+  "disabledMcpjsonServers": [
     "playwright"
-  ],
-  "outputStyle": "default"
+  ]
 }

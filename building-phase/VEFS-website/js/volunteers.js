@@ -4,7 +4,7 @@
  */
 
 // CONFIGURATION: Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw2vis0PY7STZ9yYqgHGyI0vxEkxH64c6-Ll31cj6qCU5_07QMQDHzwZc6H4NwMZJh/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw24TWvT6pK-DAD1KMNqfeAKBSpa4fRbs8vJQP3Pv63eoD7V5BEz89CTEX_O30PYshZ/exec';
 
 class VolunteersPage {
   constructor() {
@@ -65,7 +65,6 @@ class VolunteersPage {
     try {
       container.innerHTML = this.filteredVolunteers.map(volunteer => {
         const startDate = new Date(volunteer.dates.start);
-        const hasStipend = volunteer.benefits.stipend.provided;
         const spotsRemaining = volunteer.spots.available;
 
         return `
@@ -93,11 +92,6 @@ class VolunteersPage {
                 <div style="margin-bottom: var(--space-xs);">
                   <strong>⏰ Commitment:</strong> ${volunteer.commitment}
                 </div>
-                ${hasStipend ? `
-                  <div style="color: var(--color-success); margin-top: var(--space-xs);">
-                    💰 Stipend: ₹${volunteer.benefits.stipend.amount}/month
-                  </div>
-                ` : ''}
               </div>
 
               <div class="card-footer" style="margin-top: var(--space-md); display: flex; justify-content: space-between; align-items: center;">
@@ -145,13 +139,11 @@ class VolunteersPage {
       return;
     }
 
-    // Update URL hash
-    window.location.hash = volunteer.slug || volunteer.id;
+    // Update URL without triggering hashchange (which would re-call showDetails)
+    history.replaceState(null, '', '#' + (volunteer.slug || volunteer.id));
 
     const startDate = new Date(volunteer.dates.start);
     const endDate = new Date(volunteer.dates.end);
-    const hasStipend = volunteer.benefits.stipend.provided;
-
     modalBody.innerHTML = `
       <!-- Featured Image -->
       ${volunteer.media?.featuredImage ? `
@@ -236,13 +228,19 @@ class VolunteersPage {
             ${volunteer.benefits.certificate ? '<span style="color: var(--color-success);">✓ Certificate provided</span>' : ''}
             ${volunteer.benefits.meals ? '<span style="color: var(--color-success);">✓ Meals included</span>' : ''}
             ${volunteer.benefits.accommodation ? '<span style="color: var(--color-success);">✓ Accommodation provided</span>' : ''}
-            ${hasStipend ? `<span style="color: var(--color-success);">✓ Stipend: ₹${volunteer.benefits.stipend.amount}/month</span>` : ''}
           </div>
         </div>
       </div>
 
-      <!-- Registration Form -->
-      <div style="background: var(--color-gray-50); padding: var(--space-lg); border-radius: 8px;">
+      <!-- Apply CTA Button (shown on modal open) -->
+      <div id="volunteer-register-cta" style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--color-gray-200); text-align: center;">
+        <p style="color: var(--color-gray-600); margin-bottom: var(--space-md);">Interested in volunteering? Click below to apply.</p>
+        <button class="btn btn-primary btn-lg" onclick="document.getElementById('volunteer-form-container').style.display='block'; document.getElementById('volunteer-register-cta').style.display='none'; document.getElementById('volunteer-form-container').scrollIntoView({behavior:'smooth'});">
+          Apply for this Opportunity
+        </button>
+      </div>
+      <!-- Registration Form (hidden on modal open) -->
+      <div id="volunteer-form-container" style="display: none; background: var(--color-gray-50); padding: var(--space-lg); border-radius: 8px;">
         <h3 style="margin-bottom: var(--space-md); color: var(--color-primary);">Apply for This Opportunity</h3>
         <form id="volunteer-registration-form" class="form" data-volunteer-id="${volunteer.id}">
           ${this.generateVolunteerFormFields(volunteer)}
@@ -344,13 +342,14 @@ class VolunteersPage {
       const minAge = volunteer.requirements.age.min;
       const maxAge = volunteer.requirements.age.max;
 
-      new window.FormValidation(form, {
+      const fv = new window.FormValidation(form, {
         name: { required: true, minLength: 2 },
         email: { required: true, email: true },
         phone: { required: true, phone: true },
         age: { required: true, min: minAge, max: maxAge },
         motivation: { required: true, minLength: 20 }
       });
+      fv.onSuccess = () => {}; // prevent default form.submit() page reload
     }
 
     // Handle form submission
@@ -498,70 +497,44 @@ class VolunteersPage {
             Please check your email for confirmation.<br>
             We'll review your application and contact you soon.
           </p>
-          <button id="success-modal-btn" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: not-allowed; min-width: 120px; opacity: 0.6;" disabled>
+          <button id="success-modal-btn" style="background: #6B8E23; color: white; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; min-width: 120px;">
             OK
           </button>
         </div>
       </div>
     `;
 
+
     document.body.appendChild(modal);
 
-    // Track whether modal can be closed
-    let canClose = false;
-
-    // Function to close modal and navigate back to volunteer page
-    const closeModalAndNavigate = () => {
-      if (!canClose) return;
-
-      // Remove success modal
-      document.getElementById('volunteer-success-modal').remove();
-
-      // Clear the hash to go back to main volunteer page
-      window.location.hash = '';
-
-      // Scroll to top of page
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Shared close function
+    const closeSuccessModal = () => {
+      const el = document.getElementById('volunteer-success-modal');
+      if (el) el.remove();
+      document.removeEventListener('keydown', escHandler);
     };
 
-    // Enable closing after 3 seconds
-    setTimeout(() => {
-      canClose = true;
-      const button = document.getElementById('success-modal-btn');
-      if (button) {
-        button.disabled = false;
-        button.style.cursor = 'pointer';
-        button.style.opacity = '1';
-      }
-    }, 3000);
+    // ESC key support (modal.js ESC handler won't fire — activeModal is null after volunteer modal closes)
+    const escHandler = (e) => {
+      if (e.key === 'Escape') closeSuccessModal();
+    };
+    document.addEventListener('keydown', escHandler);
 
-    // Add event listener to OK button
-    const button = document.getElementById('success-modal-btn');
+    // OK button click
+    const button = modal.querySelector('#success-modal-btn');
     if (button) {
-      button.addEventListener('click', closeModalAndNavigate);
+      button.addEventListener('click', closeSuccessModal);
     }
 
-    // Add event listener to backdrop (click anywhere outside)
-    const backdrop = document.getElementById('success-modal-backdrop');
+    // Backdrop click (clicking dark area outside card)
+    const backdrop = modal.querySelector('#success-modal-backdrop');
     if (backdrop) {
       backdrop.addEventListener('click', (e) => {
-        // Only close if clicking the backdrop itself, not the modal content
-        if (e.target === backdrop) {
-          closeModalAndNavigate();
-        }
+        if (e.target === backdrop) closeSuccessModal();
       });
     }
 
-    // Prevent clicks on modal content from bubbling to backdrop
-    const content = document.getElementById('success-modal-content');
-    if (content) {
-      content.addEventListener('click', (e) => {
-        e.stopPropagation();
-      });
-    }
-
-    // Close the volunteer details modal immediately (matching events.js pattern)
-    // This ensures when success modal closes, user sees the main volunteer page
+    // Close the volunteer details modal immediately
     if (window.modalInstance) {
       window.modalInstance.close();
     }

@@ -11,16 +11,32 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="images/icons/vefs-favicon.ico">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cherry+Cream+Soda&family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/responsive-mobile.css">
+
+  <style>
+    .announcement-bar { background: #FFCB82; color: var(--color-primary-dark); text-align: center; padding: 0.6rem 1rem; font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); position: relative; z-index: 100; }
+    .announcement-bar a { color: var(--color-primary-dark); font-weight: var(--font-weight-bold); text-decoration: underline; }
+    .announcement-bar a:hover { color: var(--color-primary); }
+    .announcement-bar .announcement-close { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.2rem; color: var(--color-primary-dark); cursor: pointer; opacity: 0.6; padding: 0.25rem; line-height: 1; }
+    .announcement-bar .announcement-close:hover { opacity: 1; }
+    .floating-ctas { position: fixed; bottom: 2rem; right: 2rem; display: flex; flex-direction: column; gap: 0.75rem; z-index: 1050; opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
+    .floating-ctas.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .floating-cta-btn { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFFFF; text-decoration: none; box-shadow: var(--shadow-lg); transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
+    .floating-cta-btn:hover { transform: scale(1.1); box-shadow: var(--shadow-xl); text-decoration: none; color: #FFFFFF; }
+    .floating-cta-donate { background: var(--color-secondary); }
+    .floating-cta-whatsapp { background: #25D366; }
+    @media (max-width: 768px) { .floating-ctas { bottom: 1rem; right: 1rem; } .floating-cta-btn { width: 48px; height: 48px; } }
+  </style>
 </head>
 <body>
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" id="announcement-bar">
+    Join our next workshop! <a href="events.html">View upcoming events &rarr;</a>
+    <button class="announcement-close" aria-label="Dismiss announcement" onclick="this.parentElement.style.display='none'; try{localStorage.setItem('vefs-announcement-dismissed','1')}catch(e){}">&times;</button>
+  </div>
+
   <!-- Header/Navigation -->
     <!-- Header / Navigation -->
 <header class="header" id="main-header">
@@ -88,6 +104,12 @@
                target="_blank" rel="noopener">
               <img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="24" height="24">
             </a>
+
+            <a href="mailto:vefsfoundation@gmail.com"
+               class="header-social-link"
+               aria-label="Email">
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
           </div>
 
           <ul class="nav-list">
@@ -133,6 +155,12 @@
            target="_blank" rel="noopener">
           <img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="20" height="20">
         </a>
+
+        <a href="mailto:vefsfoundation@gmail.com"
+           class="header-social-link"
+           aria-label="Email">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
       </div>
 
     </div>
@@ -142,10 +170,10 @@
 
   <main>
     <!-- Page Hero -->
-    <section class="section" style="background: linear-gradient(135deg, rgba(107, 142, 35, 0.9), rgba(212, 165, 116, 0.9)); color: var(--color-white); text-align: center; padding: var(--space-3xl) 0;">
+    <section class="section section-primary" style="text-align: center; padding: var(--space-3xl) 0;">
       <div class="container">
-        <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-md); font-weight: 700; background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none;">Get in Touch</h1>
-        <p style="font-size: var(--font-size-xl); max-width: 700px; margin: 0 auto; opacity: 0.95;">We'd love to hear from you. Reach out for inquiries, partnerships, or just to say hello!</p>
+        <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-md); font-weight: 700; color: var(--color-white);">Get in <span class="accent">Touch</span></h1>
+        <p style="font-size: var(--font-size-xl); max-width: 700px; margin: 0 auto; color: var(--color-white); opacity: 0.95;">We'd love to hear from you. Reach out for inquiries, partnerships, or just to say hello!</p>
       </div>
     </section>
 
@@ -155,7 +183,7 @@
         <div class="grid grid-cols-2" style="gap: var(--space-3xl); align-items: start;">
           <!-- Contact Information -->
           <div>
-            <h2 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-xl);">Contact Information</h2>
+            <h2 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-xl);">Contact <span class="accent">Information</span></h2>
 
             <!-- Address -->
             <div class="card" style="margin-bottom: var(--space-lg); padding: var(--space-xl);">
@@ -183,8 +211,13 @@
               <div style="font-size: 2rem; margin-bottom: var(--space-md);">📞</div>
               <h3 style="font-size: var(--font-size-lg); margin-bottom: var(--space-sm); color: var(--color-primary);">Call Us</h3>
               <p style="color: var(--color-gray-700);">
-                <strong>Phone:</strong> <a href="tel:+918610457700" style="color: var(--color-primary);">+91 8610457700</a><br>
-                <strong>Office Hours:</strong> Monday - Saturday, 9:00 AM - 6:00 PM
+                <strong>Office/Enquiry (Events, Programs, Volunteers):</strong><br>
+                <a href="tel:+919342211488" style="color: var(--color-primary);">+91 9342211488</a><br><br>
+                <strong>Admin:</strong><br>
+                <a href="tel:+918610457700" style="color: var(--color-primary);">+91 8610457700</a> <span style="font-size: var(--font-size-sm); color: var(--color-gray-600);">(morning to 8pm)</span><br><br>
+                <strong>Vetrimaran (Personal Appointment):</strong><br>
+                <a href="tel:+919566667708" style="color: var(--color-primary);">+91 9566667708</a><br><br>
+                <strong>Office Hours:</strong> Monday - Saturday, 9:00 AM - 8:00 PM
               </p>
               <div style="margin-top: var(--space-md);">
                 <a href="https://wa.me/919342211488" target="_blank" rel="noopener" aria-label="WhatsApp" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background-color: #25D366; color: white; border-radius: 8px; text-decoration: none; transition: background-color 0.3s ease;">
@@ -221,7 +254,7 @@
 
           <!-- Contact Form -->
           <div>
-            <h2 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-md);">Send Us a Message</h2>
+            <h2 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-md);">Send Us a <span class="accent">Message</span></h2>
             <p style="color: var(--color-gray-600); margin-bottom: var(--space-xl);">Fill out the form below and we'll get back to you within 24-48 hours.</p>
 
             <form id="contact-form" class="form">
@@ -304,9 +337,14 @@
               </button>
 
               <p style="font-size: var(--font-size-sm); color: var(--color-gray-600); margin-top: var(--space-md); text-align: center;">
-                By submitting this form, you agree to our <a href="privacy.html" style="color: var(--color-primary);">Privacy Policy</a>.
+                By submitting this form, you agree to our <a href="privacy.html" style="color: var(--color-gray-700);">Privacy Policy</a>.
               </p>
             </form>
+
+            <!-- Logo below form -->
+            <div style="text-align: center; margin-top: var(--space-2xl); padding-top: var(--space-xl); padding-left: var(--space-lg); border-top: 1px solid rgba(247, 247, 228, 0.15);">
+              <img src="images/logos/vefs-logo-transparent.png" alt="VEFS Foundation" style="width: 1000px; height: auto; opacity: 0.85;">
+            </div>
           </div>
         </div>
       </div>
@@ -314,15 +352,46 @@
 
     <!-- Map Section -->
     <section class="section" style="padding: 0;">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3927.003101961746!2d77.8250898!3d10.180402499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b074e6c40000001%3A0xd9348ab1ebc30b6f!2sValluvam%20Ecological%20Organic%20Farm!5e0!3m2!1sen!2sin!4v1767164074884!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div id="map-container" style="width:100%;height:450px;background:#e8efe0;display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="loadMap()" aria-label="Click to load map">
+        <div style="text-align:center;color:#6B8E23;">
+          <div style="font-size:3rem;margin-bottom:12px;">📍</div>
+          <p style="font-size:1rem;font-weight:500;margin:0;">Valluvam Ecological Organic Farm</p>
+          <p style="font-size:0.875rem;margin:6px 0 16px;color:#8B7355;">Click to load map</p>
+          <button onclick="loadMap()" style="background:#6B8E23;color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:0.9rem;cursor:pointer;font-weight:500;">Show Map</button>
+        </div>
+      </div>
     </section>
+    <script>
+      function loadMap() {
+        const container = document.getElementById('map-container');
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3927.003101961746!2d77.8250898!3d10.180402499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b074e6c40000001%3A0xd9348ab1ebc30b6f!2sValluvam%20Ecological%20Organic%20Farm!5e0!3m2!1sen!2sin!4v1767164074884!5m2!1sen!2sin';
+        iframe.width = '100%';
+        iframe.height = '450';
+        iframe.style.border = '0';
+        iframe.allowFullscreen = true;
+        iframe.referrerPolicy = 'no-referrer-when-downgrade';
+        container.replaceWith(iframe);
+      }
+      // Auto-load map when section scrolls into view
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            loadMap();
+            observer.disconnect();
+          }
+        }, { threshold: 0.1 });
+        const el = document.getElementById('map-container');
+        if (el) observer.observe(el);
+      }
+    </script>
 
     <!-- CTA Section -->
     <section class="section section-py" style="background-color: var(--color-primary-light); text-align: center;">
       <div class="container" style="max-width: 800px;">
-        <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-md); background: linear-gradient(135deg, #1a4d2e 0%, #2563a0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">Have Questions?</h2>
+        <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-md); color: var(--color-primary-dark); font-weight: 700;">Have <span class="accent">Questions</span>?</h2>
         <p style="font-size: var(--font-size-lg); margin-bottom: var(--space-xl); color: var(--color-gray-700);">
-          Visit our FAQ page or explore our programs and events to learn more about VEFS Foundation's work in environmental conservation.
+          Send us your query above, or explore our programs and events to discover how VEFS Foundation is working towards environmental conservation.
         </p>
         <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
           <a href="trainings.html" class="btn btn-primary">Browse Trainings</a>
@@ -335,8 +404,27 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid footer-grid-2col">
-        <!-- Column 1: Quick Links + Social Media -->
+      <div class="footer-grid-4col">
+        <!-- Column 1: About VEFS -->
+        <div class="footer-column">
+          <div class="footer-logo">
+            <img src="images/logos/vefs-logo.png" alt="VEFS Foundation" width="50" height="50">
+            <span class="footer-logo-text">VEFS Foundation</span>
+          </div>
+          <p class="footer-text">Valluvam Ecological Farming and Social Welfare Foundation - promoting organic farming, biodiversity conservation, and community empowerment across Tamil Nadu.</p>
+        </div>
+        <!-- Column 2: Social Links -->
+        <div class="footer-column">
+          <h3 class="footer-heading">Follow Us</h3>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/people/VEFS-Foundation/61582906514169/" class="social-link" data-platform="facebook" aria-label="Facebook" target="_blank" rel="noopener"><img src="images/icons/facebook_icon.png" alt="Facebook" width="24" height="24"></a>
+            <a href="https://www.instagram.com/vefsfoundation/" class="social-link" data-platform="instagram" aria-label="Instagram" target="_blank" rel="noopener"><img src="images/icons/instagram_icon.png" alt="Instagram" width="24" height="24"></a>
+            <a href="https://www.youtube.com/@VEFSFOUNDATION" class="social-link" data-platform="youtube" aria-label="YouTube" target="_blank" rel="noopener"><img src="images/icons/youtube_icon.png" alt="YouTube" width="24" height="24"></a>
+            <a href="https://www.whatsapp.com/channel/0029Vat5xFr6RGJJI5rJcv3D" class="social-link" data-platform="whatsapp" aria-label="WhatsApp" target="_blank" rel="noopener"><img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="24" height="24"></a>
+            <a href="mailto:vefsfoundation@gmail.com" class="social-link" data-platform="email" aria-label="Email"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+          </div>
+        </div>
+        <!-- Column 3: Quick Links -->
         <div class="footer-column">
           <h3 class="footer-heading">Quick Links</h3>
           <ul class="footer-links">
@@ -347,44 +435,16 @@
             <li><a href="volunteer.html">Volunteer</a></li>
             <li><a href="gallery.html">Gallery</a></li>
           </ul>
-
-          <!-- Social Media below Quick Links -->
-          <h3 class="footer-heading" style="margin-top: var(--space-lg);">Follow Us</h3>
-          <div class="footer-social">
-            <a href="https://www.facebook.com/people/VEFS-Foundation/61582906514169/" class="social-link" data-platform="facebook" aria-label="Facebook" target="_blank" rel="noopener">
-              <img src="images/icons/facebook_icon.png" alt="Facebook" width="24" height="24">
-            </a>
-            <a href="https://www.instagram.com/vefsfoundation/" class="social-link" data-platform="instagram" aria-label="Instagram" target="_blank" rel="noopener">
-              <img src="images/icons/instagram_icon.png" alt="Instagram" width="24" height="24">
-            </a>
-            <a href="https://www.youtube.com/@VEFSFOUNDATION" class="social-link" data-platform="youtube" aria-label="YouTube" target="_blank" rel="noopener">
-              <img src="images/icons/youtube_icon.png" alt="YouTube" width="24" height="24">
-            </a>
-            <a href="https://www.whatsapp.com/channel/0029Vat5xFr6RGJJI5rJcv3D" class="social-link" data-platform="whatsapp" aria-label="WhatsApp" target="_blank" rel="noopener">
-              <img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="24" height="24">
-            </a>
-          </div>
         </div>
-
-        <!-- Column 2: Contact + Newsletter -->
+        <!-- Column 4: Contact + Newsletter -->
         <div class="footer-column">
           <h3 class="footer-heading">Contact Us</h3>
           <ul class="footer-contact">
-            <li>
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-              Nilakottai, Dindigul, Tamil Nadu
-            </li>
-            <li>
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              <a href="mailto:vefsfoundation@gmail.com">vefsfoundation@gmail.com</a>
-            </li>
-            <li>
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-              <a href="tel:+918610457700">+91 8610457700</a>
-            </li>
+            <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Nilakottai, Dindigul, Tamil Nadu</li>
+            <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> <a href="mailto:vefsfoundation@gmail.com">vefsfoundation@gmail.com</a></li>
+            <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg> <a href="tel:+919342211488">+91 9342211488</a></li>
+            <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg> <a href="tel:+918610457700">+91 8610457700</a></li>
           </ul>
-
-          <!-- Newsletter below Contact -->
           <div style="margin-top: var(--space-lg);">
             <h3 class="footer-heading">Newsletter</h3>
             <p class="footer-text">Get updates on our environmental initiatives</p>
@@ -397,7 +457,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copyright">&copy; 2025 VEFS Foundation. All rights reserved.</p>
+        <p class="footer-copyright">&copy; 2026 VEFS Foundation. All rights reserved.</p>
         <div class="footer-legal">
           <a href="privacy.html">Privacy Policy</a>
           <a href="terms.html">Terms of Service</a>
@@ -406,10 +466,49 @@
     </div>
   </footer>
 
+  <!-- Floating Sticky CTAs -->
+  <div class="floating-ctas" id="floating-ctas">
+    <a href="donate.html" class="floating-cta-btn floating-cta-donate" aria-label="Donate">
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </a>
+    <a href="https://wa.me/919342211488" class="floating-cta-btn floating-cta-whatsapp" aria-label="WhatsApp" target="_blank" rel="noopener">
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+  </div>
+
   <!-- Scripts -->
   <script src="js/utils.js"></script>
   <script src="js/components/navigation.js"></script>
   <script src="js/components/form-validation.js"></script>
   <script src="js/contact.js?v=2.0"></script>
+  <script src="js/newsletter.js"></script>
+
+  <!-- Floating CTAs Scroll Script -->
+  <script>
+    (function () {
+      var ctas = document.getElementById('floating-ctas');
+      if (!ctas) return;
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+          ctas.classList.add('visible');
+        } else {
+          ctas.classList.remove('visible');
+        }
+      });
+    })();
+  </script>
+
+  <!-- Announcement Bar Dismiss Script -->
+  <script>
+    (function () {
+      var bar = document.getElementById('announcement-bar');
+      if (!bar) return;
+      try {
+        if (localStorage.getItem('vefs-announcement-dismissed') === '1') {
+          bar.style.display = 'none';
+        }
+      } catch(e) {}
+    })();
+  </script>
 </body>
 </html>

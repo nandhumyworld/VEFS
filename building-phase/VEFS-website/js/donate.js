@@ -4,19 +4,23 @@
  */
 
 // Google Apps Script Web App URL for form submissions
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw2vis0PY7STZ9yYqgHGyI0vxEkxH64c6-Ll31cj6qCU5_07QMQDHzwZc6H4NwMZJh/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw24TWvT6pK-DAD1KMNqfeAKBSpa4fRbs8vJQP3Pv63eoD7V5BEz89CTEX_O30PYshZ/exec';
 
 class DonatePage {
   constructor() {
     this.selectedAmount = 0;
-    this.donationType = 'one-time';
     this.init();
   }
 
   init() {
+    // Attach FormValidation for real-time field feedback, but prevent it from
+    // calling form.submit() on success (which would reload the page).
+    if (window.FormValidation) {
+      const fv = new window.FormValidation(document.getElementById('donation-form'));
+      fv.onSuccess = () => {};
+    }
     this.setupAmountSelection();
     this.setupCustomAmount();
-    this.setupDonationType();
     this.setupFormSubmission();
     this.updateTotalDisplay();
   }
@@ -52,6 +56,7 @@ class DonatePage {
    */
   setupCustomAmount() {
     const customAmountInput = document.getElementById('custom-amount');
+    if (!customAmountInput) return;
 
     customAmountInput.addEventListener('input', (e) => {
       const value = parseInt(e.target.value) || 0;
@@ -70,35 +75,13 @@ class DonatePage {
   }
 
   /**
-   * Setup donation type radio buttons
-   */
-  setupDonationType() {
-    const typeRadios = document.querySelectorAll('input[name="donationType"]');
-
-    typeRadios.forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        this.donationType = e.target.value;
-        this.updateTotalDisplay();
-      });
-    });
-  }
-
-  /**
    * Update total amount display
    */
   updateTotalDisplay() {
     const totalDisplay = document.getElementById('total-amount-display');
+    if (!totalDisplay) return;
     const formattedAmount = this.selectedAmount.toLocaleString('en-IN');
-
-    if (this.selectedAmount > 0) {
-      if (this.donationType === 'monthly') {
-        totalDisplay.innerHTML = `₹${formattedAmount}<span style="font-size: var(--font-size-sm); font-weight: 400;">/month</span>`;
-      } else {
-        totalDisplay.textContent = `₹${formattedAmount}`;
-      }
-    } else {
-      totalDisplay.textContent = '₹0';
-    }
+    totalDisplay.textContent = this.selectedAmount > 0 ? `₹${formattedAmount}` : '₹0';
   }
 
   /**
@@ -109,17 +92,6 @@ class DonatePage {
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      // Validate amount
-      if (this.selectedAmount < 100) {
-        alert('Please select or enter a donation amount of at least ₹100');
-        return;
-      }
-
-      // Validate form using FormValidation component
-      if (window.formValidation && !window.formValidation.validateForm(form)) {
-        return;
-      }
 
       await this.processDonation();
     });
@@ -133,10 +105,12 @@ class DonatePage {
     const formData = new FormData(form);
 
     // Collect donation data
+    const donationAmount = parseInt(formData.get('donationAmount')) || 0;
     const donationData = {
-      amount: this.selectedAmount,
-      type: this.donationType,
+      amount: donationAmount,
+      type: 'one-time',
       category: formData.get('category'),
+      message: formData.get('message') || '',
       donor: {
         firstName: formData.get('firstName'),
         lastName: formData.get('lastName'),
@@ -145,7 +119,6 @@ class DonatePage {
         organization: formData.get('organization') || ''
       },
       options: {
-        anonymous: formData.get('anonymous') === 'on',
         newsletter: formData.get('newsletter') === 'on',
         taxBenefit: formData.get('taxBenefit') === 'on'
       },
@@ -167,6 +140,14 @@ class DonatePage {
       const response = await this.sendToBackend(donationData);
 
       if (response.success) {
+        // Subscribe to newsletter silently (no second popup — donation popup is already shown)
+        if (donationData.options.newsletter) {
+          fetch('forms/newsletter.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: donationData.donor.email, source: 'donate-page' })
+          }).catch(() => {});
+        }
         this.showSuccess(donationData);
         form.reset();
         this.selectedAmount = 0;
@@ -212,7 +193,7 @@ class DonatePage {
       amount: donationData.amount,
       donationType: donationData.type,
       category: donationData.category || 'General Fund',
-      anonymous: donationData.options.anonymous || false,
+      message: donationData.message || '',
       newsletter: donationData.options.newsletter || false,
       taxBenefit: donationData.options.taxBenefit || false,
       timestamp: donationData.timestamp
@@ -268,18 +249,22 @@ class DonatePage {
           <!-- Success Header -->
           <div style="text-align: center; margin-bottom: 32px;">
             <div style="font-size: 4rem; color: #6B8E23; margin-bottom: 16px;">✓</div>
-            <h3 style="font-size: 28px; color: #6B8E23; margin: 0 0 12px 0; font-weight: 600;">Thank You for Your Donation!</h3>
-            <p style="font-size: 18px; color: #4a5568; margin: 0;">
-              Your contribution of <strong>₹${donationData.amount.toLocaleString('en-IN')}</strong> will make a real difference.<br>
-              Please check your email for confirmation.
+            <h3 style="font-size: 28px; color: #6B8E23; margin: 0 0 12px 0; font-weight: 600;">Donation Request Received!</h3>
+            <p style="font-size: 18px; color: #4a5568; margin: 0 0 12px 0;">
+              Thank you! Your donation request of <strong>₹${donationData.amount.toLocaleString('en-IN')}</strong> has been submitted.
             </p>
+            <div style="background: #e8f5e9; padding: 14px 20px; border-radius: 8px; border-left: 4px solid #6B8E23; text-align: left;">
+              <p style="margin: 0; color: #2e7d32; font-size: 15px;">
+                📧 <strong>Please check your email</strong> — we have sent you the payment details to complete your donation.
+              </p>
+            </div>
           </div>
 
           <!-- Payment Instructions -->
           <div style="background: #FFF9E6; padding: 20px; border-radius: 8px; margin-bottom: 24px; border: 2px solid #D4A574;">
-            <h4 style="font-size: 20px; margin: 0 0 16px 0; color: #D4A574; text-align: center;">💳 Complete Your Donation</h4>
+            <h4 style="font-size: 20px; margin: 0 0 16px 0; color: #D4A574; text-align: center;">💳 Payment Options</h4>
             <p style="font-size: 16px; margin: 0 0 8px 0; font-weight: 600; color: #333; text-align: center;">Donation Amount: ₹${donationData.amount.toLocaleString('en-IN')}</p>
-            <p style="font-size: 14px; margin: 0; color: #666; text-align: center;">Please make your payment using one of the options below:</p>
+            <p style="font-size: 14px; margin: 0; color: #666; text-align: center;">You can also complete payment directly using one of the options below:</p>
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">

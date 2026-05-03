@@ -346,3 +346,166 @@
 .overflow-auto { overflow: auto; }
 .overflow-x-auto { overflow-x: auto; }
 .overflow-y-auto { overflow-y: auto; }
+
+/* ===== Section Background Variants ===== */
+
+/* Alternating section backgrounds */
+.section-cream {
+  background-color: var(--color-beige); /* #FAF6F0 */
+}
+
+.section-white {
+  background-color: var(--color-off-white); /* #FEFCF6 */
+}
+
+.section-primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.section-primary h1,
+.section-primary h2,
+.section-primary h3,
+.section-primary h4,
+.section-primary p,
+.section-primary .accent {
+  color: #FFFFFF;
+}
+
+.section-primary .accent {
+  color: var(--color-accent) !important;
+}
+
+.section-peach {
+  background-color: #EFE0C9;
+}
+
+/* Hero section — overlay on background image */
+[class*="-hero"],
+.hero-section {
+  background-color: var(--color-primary-dark);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+[class*="-hero"]::before,
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(27, 67, 50, 0.55);
+  z-index: 0;
+}
+
+[class*="-hero"] > *,
+.hero-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Announcement Bar ===== */
+
+.announcement-bar {
+  background: #FFCB82;
+  color: var(--color-primary-dark);
+  text-align: center;
+  padding: 0.6rem 1rem;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  position: relative;
+  z-index: 100;
+}
+
+.announcement-bar a {
+  color: var(--color-primary-dark);
+  font-weight: var(--font-weight-bold);
+  text-decoration: underline;
+}
+
+.announcement-bar a:hover {
+  color: var(--color-primary);
+}
+
+.announcement-bar .announcement-close {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--color-primary-dark);
+  cursor: pointer;
+  opacity: 0.6;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.announcement-bar .announcement-close:hover {
+  opacity: 1;
+}
+
+/* ===== Floating Sticky CTAs ===== */
+
+.floating-ctas {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 1050;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.floating-ctas.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.floating-cta-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  text-decoration: none;
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.floating-cta-btn:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-xl);
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.floating-cta-donate {
+  background: var(--color-secondary);
+}
+
+.floating-cta-whatsapp {
+  background: #25D366;
+}
+
+@media (max-width: 768px) {
+  .floating-ctas {
+    bottom: 1rem;
+    right: 1rem;
+  }
+  .floating-cta-btn {
+    width: 48px;
+    height: 48px;
+  }
+}

@@ -2,18 +2,20 @@
    NAVIGATION COMPONENT
    ============================================ */
 
-/* Header */
+/* Header — light warm milky white bar */
 .header {
-  background-color: var(--color-white);
-  box-shadow: var(--shadow-sm);
+  background-color: #FEFCF6;
+  border-bottom: 1px solid #E5E7EB;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
   position: sticky;
   top: 0;
-  z-index: var(--z-index-sticky);
-  transition: box-shadow var(--transition-base);
+  z-index: var(--z-index-fixed); /* must be above the fixed .nav panel on mobile */
+  transition: box-shadow var(--transition-base), background-color var(--transition-base);
 }
 
 .header.scrolled {
-  box-shadow: var(--shadow-md);
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .header-content {
@@ -60,11 +62,11 @@
 .header-logo {
   display: flex;
   align-items: center;
-  gap: var(--space-sm); /* Increased from xs to sm for better spacing */
+  gap: var(--space-sm);
   text-decoration: none;
-  color: var(--color-gray-800);
-  cursor: default; /* Remove pointer cursor */
-  pointer-events: none; /* Disable clicking - logo is not a link */
+  color: #1B4332;
+  cursor: default;
+  pointer-events: none;
 }
 
 /* Hover effect removed as requested */
@@ -93,28 +95,26 @@
 .header-logo .logo-text {
   font-family: var(--font-serif);
   font-weight: var(--font-weight-bold);
-  font-size: 20pt; /* 20px - explicit size instead of variable */
-  color: var(--color-gray-800) !important;
+  font-size: 20pt;
+  color: #1B4332 !important; /* deep forest green */
   line-height: 1.2;
-  letter-spacing: 0.3px; /* Improve readability */
+  letter-spacing: 0.3px;
   text-decoration: solid;
 }
 
 /* Full organization name */
 .header-logo .logo-text-full {
   font-family: 'Cherry Cream Soda', cursive;
-  font-size: 10pt; /* 12 point size as requested */
-  color: #5A5A5A !important; /* Explicit gray color - prevents link color override */
+  font-size: 10pt;
+  color: #6B7280 !important; /* gray */
   line-height: 1.3;
-  letter-spacing: 0.3px; /* Improve readability */
+  letter-spacing: 0.3px;
   text-decoration: none;
-  font-weight: 400; /* Normal weight for display font */
-
-  /* Prevent wrapping - force single line */
+  font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%; /* Allow full width, don't constrain */
+  max-width: 100%;
 }
 
 /* Mobile social icons - hidden on desktop, shown only in hamburger menu on mobile */
@@ -180,7 +180,7 @@
   display: block;
   width: 24px;
   height: 2px;
-  background-color: var(--color-gray-800);
+  background-color: #404040; /* dark gray hamburger bars */
   position: relative;
   transition: background-color var(--transition-fast);
 }
@@ -191,7 +191,7 @@
   display: block;
   width: 24px;
   height: 2px;
-  background-color: var(--color-gray-800);
+  background-color: #404040;
   position: absolute;
   transition: transform var(--transition-base);
 }
@@ -230,29 +230,29 @@
 .nav-link {
   display: block;
   padding: var(--space-xs) var(--space-sm);
-  color: var(--color-gray-700);
+  color: #404040; /* dark text on light bg */
   text-decoration: none;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
   border-radius: var(--radius-md);
   transition: color var(--transition-fast), background-color var(--transition-fast);
   position: relative;
-  white-space: nowrap; /* Prevent navigation links from wrapping to multiple lines */
+  white-space: nowrap;
 }
 
 .nav-link:hover {
-  color: var(--color-primary);
-  background-color: var(--color-gray-100);
+  color: #2D6A4F;
+  background-color: rgba(45, 106, 79, 0.08); /* subtle green tint */
 }
 
 .nav-link:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-secondary); /* mustard focus */
   outline-offset: 2px;
 }
 
 .nav-link.active {
-  color: var(--color-white); /* White text for better contrast */
-  background-color: var(--color-primary); /* Sage green background */
+  color: #FFFFFF;
+  background-color: #2D6A4F; /* forest green active */
   font-weight: var(--font-weight-semibold);
 }
 
@@ -261,9 +261,23 @@
   display: none;
 }
 
-/* CTA button in nav */
+/* CTA button in nav (Donate) */
 .nav-item-cta {
   margin-left: var(--space-sm);
+}
+
+.nav-item-cta .btn,
+.nav-item-cta .nav-link {
+  background-color: #C26E53; /* terracotta */
+  color: #FFFFFF !important;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.nav-item-cta .btn:hover,
+.nav-item-cta .nav-link:hover {
+  background-color: #A85A42; /* darker terracotta on hover */
+  color: #FFFFFF !important;
 }
 
 /* Mobile Navigation */
@@ -313,7 +327,7 @@
   .nav-toggle {
     display: block;
     position: relative;
-    z-index: var(--z-index-fixed);
+    z-index: var(--z-index-modal-backdrop); /* must be above .nav panel (z-index-fixed) */
   }
 
   .nav {
@@ -322,13 +336,13 @@
     right: 0;
     bottom: 0;
     width: 280px;
-    background-color: var(--color-white);
+    background-color: #FEFCF6; /* warm cream white */
     box-shadow: var(--shadow-xl);
     transform: translateX(100%);
     transition: transform var(--transition-base);
     overflow-y: auto;
     padding-top: 80px; /* Space for close button */
-    z-index: var(--z-index-fixed);
+    z-index: var(--z-index-sticky); /* below header (fixed) so toggle stays clickable */
     pointer-events: auto;
   }
 
@@ -350,7 +364,7 @@
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-lg) var(--space-md);
-    border-bottom: 2px solid var(--color-gray-300);
+    border-bottom: 2px solid #E5E7EB;
     margin-bottom: var(--space-sm);
   }
 
@@ -369,12 +383,12 @@
 
   .nav-link {
     padding: var(--space-md);
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid #E5E7EB;
   }
 
   /* Mobile: active link maintains background color styling (no ::after needed) */
   .nav-link.active {
-    border-bottom-color: var(--color-primary); /* Match background color for continuity */
+    border-bottom-color: #2D6A4F; /* Match background color for continuity */
   }
 
   .nav-item-cta {
@@ -396,8 +410,8 @@
   left: 0;
   right: 280px; /* Don't cover the menu - stop before menu area */
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
-  z-index: var(--z-index-sticky);
+  background-color: rgba(0, 0, 0, 0.3); /* lighter semi-transparent overlay */
+  z-index: var(--z-index-dropdown); /* below .nav panel (sticky) and header (fixed) */
   opacity: 0;
   transition: opacity var(--transition-base);
   pointer-events: auto; /* Make overlay clickable to close menu */

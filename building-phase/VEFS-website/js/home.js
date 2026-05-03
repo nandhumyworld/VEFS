@@ -19,7 +19,6 @@ class HomePage {
 
     this.renderUpcomingEvents();
     this.renderFeaturedTrainings();
-    this.setupNewsletterForm();
   }
 
   /**
@@ -140,7 +139,7 @@ class HomePage {
     try {
 
     container.innerHTML = featured.map(training => {
-      const isFree = training.registration.fee.amount === 0;
+      const isFree = (training.registration?.fee?.amount ?? 0) === 0;
       const statusClass = training.status === 'full' ? 'card-badge-danger' :
                          training.status === 'upcoming' ? 'card-badge-warning' :
                          'card-badge-success';
@@ -172,7 +171,7 @@ class HomePage {
             </div>
 
             <div class="card-footer" style="margin-top: var(--space-md); display: flex; justify-content: space-between; align-items: center;">
-              <span class="card-price">${isFree ? 'FREE' : '₹' + training.registration.fee.amount}</span>
+              <span class="card-price">${isFree ? 'FREE' : '₹' + (training.registration?.fee?.amount || '')}</span>
               <a href="/trainings.html#${training.id}" class="btn btn-sm ${training.status === 'full' ? 'btn-outline' : 'btn-primary'}">
                 ${training.status === 'full' ? 'View Details' : 'Register Now'}
               </a>
@@ -190,42 +189,6 @@ class HomePage {
         </div>
       `;
     }
-  }
-
-  /**
-   * Setup newsletter form submission
-   */
-  setupNewsletterForm() {
-    const form = document.getElementById('newsletter-form');
-    if (!form) return;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const emailInput = document.getElementById('newsletter-email');
-      const email = emailInput.value.trim();
-
-      // In production, this would send to backend
-      console.log('Newsletter subscription:', email);
-
-      // Show success message
-      const alertHtml = `
-        <div class="alert alert-success" role="alert" style="position: fixed; top: 80px; right: 20px; z-index: 1000; max-width: 400px; animation: slideInRight 0.3s ease-out;">
-          <strong>Success!</strong> You've been subscribed to our newsletter. Check your email for confirmation.
-          <button class="alert-close" onclick="this.parentElement.remove()" aria-label="Close alert">×</button>
-        </div>
-      `;
-      document.body.insertAdjacentHTML('beforeend', alertHtml);
-
-      // Clear form
-      emailInput.value = '';
-
-      // Remove alert after 5 seconds
-      setTimeout(() => {
-        const alert = document.querySelector('.alert-success');
-        if (alert) alert.remove();
-      }, 5000);
-    });
   }
 
   /**

@@ -14,13 +14,33 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cherry+Cream+Soda&family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/responsive-mobile.css">
+
+  <style>
+    .announcement-bar { background: #FFCB82; color: var(--color-primary-dark); text-align: center; padding: 0.6rem 1rem; font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); position: relative; z-index: 100; }
+    .announcement-bar a { color: var(--color-primary-dark); font-weight: var(--font-weight-bold); text-decoration: underline; }
+    .announcement-bar a:hover { color: var(--color-primary); }
+    .announcement-bar .announcement-close { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.2rem; color: var(--color-primary-dark); cursor: pointer; opacity: 0.6; padding: 0.25rem; line-height: 1; }
+    .announcement-bar .announcement-close:hover { opacity: 1; }
+    .floating-ctas { position: fixed; bottom: 2rem; right: 2rem; display: flex; flex-direction: column; gap: 0.75rem; z-index: 1050; opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
+    .floating-ctas.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .floating-cta-btn { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFFFFF; text-decoration: none; box-shadow: var(--shadow-lg); transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
+    .floating-cta-btn:hover { transform: scale(1.1); box-shadow: var(--shadow-xl); text-decoration: none; color: #FFFFFF; }
+    .floating-cta-donate { background: var(--color-secondary); }
+    .floating-cta-whatsapp { background: #25D366; }
+    @media (max-width: 768px) { .floating-ctas { bottom: 1rem; right: 1rem; } .floating-cta-btn { width: 48px; height: 48px; } }
+  </style>
 </head>
 <body>
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" id="announcement-bar">
+    Join our next workshop! <a href="events.html">View upcoming events &rarr;</a>
+    <button class="announcement-close" aria-label="Dismiss announcement" onclick="this.parentElement.style.display='none'; try{localStorage.setItem('vefs-announcement-dismissed','1')}catch(e){}">&times;</button>
+  </div>
+
   <!-- Header/Navigation -->
     <!-- Header / Navigation -->
 <header class="header" id="main-header">
@@ -88,6 +108,12 @@
                target="_blank" rel="noopener">
               <img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="24" height="24">
             </a>
+
+            <a href="mailto:vefsfoundation@gmail.com"
+               class="header-social-link"
+               aria-label="Email">
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
           </div>
 
           <ul class="nav-list">
@@ -133,6 +159,12 @@
            target="_blank" rel="noopener">
           <img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="20" height="20">
         </a>
+
+        <a href="mailto:vefsfoundation@gmail.com"
+           class="header-social-link"
+           aria-label="Email">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
       </div>
 
     </div>
@@ -144,7 +176,7 @@
     <!-- Page Header -->
     <section class="section" style="background-color: var(--color-primary); color: var(--color-white); text-align: center; padding: var(--space-2xl) 0;">
       <div class="container">
-        <h1 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-sm); font-weight: 700; background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 50%, #bae6fd 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none;">Terms of Service</h1>
+        <h1 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-sm); font-weight: 700; color: var(--color-white);">Terms of Service</h1>
         <p style="opacity: 0.9;">Last Updated: December 25, 2025</p>
       </div>
     </section>
@@ -156,7 +188,7 @@
         <!-- Introduction -->
         <div style="margin-bottom: var(--space-2xl);">
           <p style="font-size: var(--font-size-lg); color: var(--color-gray-700); line-height: 1.8;">
-            Welcome to the Valluvam Ecological Farming and Social welfare foundation ("VEFS," "we," "us," or "our") website. These Terms of Service ("Terms") govern your access to and use of our website <strong>vefsfoundation.org</strong> and all related services, programs, and activities.
+            Welcome to the Valluvam Ecological Farming and Social welfare foundation ("VEFS," "we," "us," or "our") website. These Terms of Service ("Terms") govern your access to and use of our website <strong>vefsfoundation.com</strong> and all related services, programs, and activities.
           </p>
           <p style="font-size: var(--font-size-lg); color: var(--color-gray-700); line-height: 1.8; margin-top: var(--space-md);">
             By accessing or using our website, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use our website or services.
@@ -165,7 +197,7 @@
 
         <!-- Section 1: Acceptance of Terms -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">1. Acceptance of Terms</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">1. Acceptance of Terms</h2>
 
           <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
             By using our website, you acknowledge that:
@@ -180,9 +212,9 @@
 
         <!-- Section 2: Use of Website -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">2. Use of Website</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">2. Use of Website</h2>
 
-          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-900); margin-bottom: var(--space-md); margin-top: var(--space-lg);">2.1 Permitted Use</h3>
+          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-700); margin-bottom: var(--space-md); margin-top: var(--space-lg);">2.1 Permitted Use</h3>
           <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
             You may use our website for lawful purposes only, including:
           </p>
@@ -194,7 +226,7 @@
             <li>Subscribing to our newsletter</li>
           </ul>
 
-          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-900); margin-bottom: var(--space-md); margin-top: var(--space-lg);">2.2 Prohibited Activities</h3>
+          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-700); margin-bottom: var(--space-md); margin-top: var(--space-lg);">2.2 Prohibited Activities</h3>
           <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
             You agree not to:
           </p>
@@ -212,7 +244,7 @@
 
         <!-- Section 3: Intellectual Property -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">3. Intellectual Property Rights</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">3. Intellectual Property Rights</h2>
 
           <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
             All content on this website, including but not limited to text, graphics, logos, images, videos, audio, and software, is the property of VEFS Foundation or its content suppliers and is protected by copyright, trademark, and other intellectual property laws.
@@ -233,14 +265,14 @@
 
         <!-- Section 4: Registrations and Programs -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">4. Program and Event Registrations</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">4. Program and Event Registrations</h2>
 
-          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-900); margin-bottom: var(--space-md); margin-top: var(--space-lg);">4.1 Registration Accuracy</h3>
+          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-700); margin-bottom: var(--space-md); margin-top: var(--space-lg);">4.1 Registration Accuracy</h3>
           <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-lg);">
             You agree to provide accurate, current, and complete information when registering for programs, trainings, or events. You are responsible for updating your information if it changes.
           </p>
 
-          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-900); margin-bottom: var(--space-md); margin-top: var(--space-lg);">4.2 Cancellations and Rescheduling</h3>
+          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-700); margin-bottom: var(--space-md); margin-top: var(--space-lg);">4.2 Cancellations and Rescheduling</h3>
           <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
             VEFS reserves the right to cancel or reschedule any program, training, or event due to unforeseen circumstances. In such cases:
           </p>
@@ -256,9 +288,9 @@
 
         <!-- Section 5: Donations -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">5. Donations and Payments</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">5. Donations and Payments</h2>
 
-          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-900); margin-bottom: var(--space-md); margin-top: var(--space-lg);">5.1 Donation Terms</h3>
+          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-700); margin-bottom: var(--space-md); margin-top: var(--space-lg);">5.1 Donation Terms</h3>
           <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
             All donations made to VEFS Foundation are:
           </p>
@@ -269,7 +301,7 @@
             <li><strong>Used as specified:</strong> Directed donations will be used for the specified purpose or similar charitable activities</li>
           </ul>
 
-          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-900); margin-bottom: var(--space-md); margin-top: var(--space-lg);">5.2 Payment Processing</h3>
+          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-700); margin-bottom: var(--space-md); margin-top: var(--space-lg);">5.2 Payment Processing</h3>
           <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
             We use secure third-party payment processors to handle donations and payments. By making a payment, you agree to:
           </p>
@@ -279,15 +311,15 @@
             <li>Authorize the charged amount</li>
           </ul>
 
-          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-900); margin-bottom: var(--space-md); margin-top: var(--space-lg);">5.3 Recurring Donations</h3>
+          <h3 style="font-size: var(--font-size-xl); color: var(--color-gray-700); margin-bottom: var(--space-md); margin-top: var(--space-lg);">5.3 Recurring Donations</h3>
           <p style="color: var(--color-gray-700); line-height: 1.8;">
-            For monthly recurring donations, you authorize VEFS to charge your payment method on a recurring basis until you cancel. You may cancel your recurring donation at any time by contacting us at <a href="mailto:donations@vefs.org" style="color: var(--color-primary);">donations@vefs.org</a>.
+            For monthly recurring donations, you authorize VEFS to charge your payment method on a recurring basis until you cancel. You may cancel your recurring donation at any time by contacting us at <a href="mailto:vefsfoundation@gmail.com" style="color: var(--color-primary);">vefsfoundation@gmail.com</a>.
           </p>
         </div>
 
         <!-- Section 6: User Content -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">6. User-Generated Content</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">6. User-Generated Content</h2>
 
           <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
             If you submit photos, testimonials, feedback, or other content to VEFS (e.g., through photo submissions or program feedback):
@@ -302,7 +334,7 @@
 
         <!-- Section 7: Disclaimer of Warranties -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">7. Disclaimer of Warranties</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">7. Disclaimer of Warranties</h2>
 
           <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
             Our website and services are provided on an "AS IS" and "AS AVAILABLE" basis. VEFS makes no warranties, expressed or implied, regarding:
@@ -320,7 +352,7 @@
 
         <!-- Section 8: Limitation of Liability -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">8. Limitation of Liability</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">8. Limitation of Liability</h2>
 
           <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
             To the fullest extent permitted by law, VEFS Foundation and its directors, officers, employees, and volunteers shall not be liable for:
@@ -338,7 +370,7 @@
 
         <!-- Section 9: Indemnification -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">9. Indemnification</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">9. Indemnification</h2>
 
           <p style="color: var(--color-gray-700); line-height: 1.8;">
             You agree to indemnify, defend, and hold harmless VEFS Foundation and its affiliates from any claims, liabilities, damages, losses, and expenses (including legal fees) arising from:
@@ -353,7 +385,7 @@
 
         <!-- Section 10: Governing Law -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">10. Governing Law and Jurisdiction</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">10. Governing Law and Jurisdiction</h2>
 
           <p style="color: var(--color-gray-700); line-height: 1.8;">
             These Terms shall be governed by and construed in accordance with the laws of India. Any disputes arising from these Terms or your use of our website shall be subject to the exclusive jurisdiction of the courts in Nilakottai, Dindigul, Tamil Nadu.
@@ -362,7 +394,7 @@
 
         <!-- Section 11: Changes to Terms -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">11. Changes to These Terms</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">11. Changes to These Terms</h2>
 
           <p style="color: var(--color-gray-700); line-height: 1.8;">
             We reserve the right to modify these Terms at any time. Changes will be effective immediately upon posting to this page with an updated "Last Updated" date. Your continued use of our website after changes are posted constitutes your acceptance of the revised Terms. We encourage you to review these Terms periodically.
@@ -371,7 +403,7 @@
 
         <!-- Section 12: Severability -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">12. Severability</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">12. Severability</h2>
 
           <p style="color: var(--color-gray-700); line-height: 1.8;">
             If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions shall remain in full force and effect. The invalid or unenforceable provision shall be replaced with a valid provision that most closely matches the intent of the original provision.
@@ -380,7 +412,7 @@
 
         <!-- Section 13: Contact Information -->
         <div style="margin-bottom: var(--space-2xl);">
-          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-primary-light);">13. Contact Us</h2>
+          <h2 style="font-size: var(--font-size-2xl); color: var(--color-primary-dark); margin-bottom: var(--space-lg); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-secondary);">13. Contact Us</h2>
 
           <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
             If you have any questions, concerns, or disputes regarding these Terms of Service, please contact us:
@@ -388,8 +420,8 @@
           <div style="padding: var(--space-lg); background-color: var(--color-gray-50); border-left: 4px solid var(--color-primary); border-radius: var(--radius-md);">
             <p style="margin-bottom: var(--space-sm);"><strong>Valluvam Ecological Farming and Social welfare foundation</strong></p>
             <p style="margin-bottom: var(--space-sm);">Email: <a href="mailto:vefsfoundation@gmail.com" style="color: var(--color-primary);">vefsfoundation@gmail.com</a></p>
-            <p style="margin-bottom: var(--space-sm);">Legal Inquiries: <a href="mailto:legal@vefs.org" style="color: var(--color-primary);">legal@vefs.org</a></p>
-            <p style="margin-bottom: var(--space-sm);">Phone: <a href="tel:+918610457700" style="color: var(--color-primary);">+91 8610457700</a></p>
+            <p style="margin-bottom: var(--space-sm);">Legal Inquiries: <a href="mailto:vefsfoundation@gmail.com" style="color: var(--color-primary);">vefsfoundation@gmail.com</a></p>
+            <p style="margin-bottom: var(--space-sm);">Phone: <a href="tel:+919342211488" style="color: var(--color-primary);">+91 9342211488</a> (Office) / <a href="tel:+918610457700" style="color: var(--color-primary);">+91 8610457700</a> (Admin)</p>
             <p>Address: Nilakottai, Dindigul, Tamil Nadu</p>
           </div>
         </div>
@@ -411,8 +443,24 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid footer-grid-2col">
-        <!-- Column 1: Quick Links + Social Media -->
+      <div class="footer-grid-4col">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <img src="images/logos/vefs-logo.png" alt="VEFS Foundation" width="50" height="50">
+            <span class="footer-logo-text">VEFS Foundation</span>
+          </div>
+          <p class="footer-text">Valluvam Ecological Farming and Social Welfare Foundation - promoting organic farming, biodiversity conservation, and community empowerment across Tamil Nadu.</p>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-heading">Follow Us</h3>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/people/VEFS-Foundation/61582906514169/" class="social-link" data-platform="facebook" aria-label="Facebook" target="_blank" rel="noopener"><img src="images/icons/facebook_icon.png" alt="Facebook" width="24" height="24"></a>
+            <a href="https://www.instagram.com/vefsfoundation/" class="social-link" data-platform="instagram" aria-label="Instagram" target="_blank" rel="noopener"><img src="images/icons/instagram_icon.png" alt="Instagram" width="24" height="24"></a>
+            <a href="https://www.youtube.com/@VEFSFOUNDATION" class="social-link" data-platform="youtube" aria-label="YouTube" target="_blank" rel="noopener"><img src="images/icons/youtube_icon.png" alt="YouTube" width="24" height="24"></a>
+            <a href="https://www.whatsapp.com/channel/0029Vat5xFr6RGJJI5rJcv3D" class="social-link" data-platform="whatsapp" aria-label="WhatsApp" target="_blank" rel="noopener"><img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="24" height="24"></a>
+            <a href="mailto:vefsfoundation@gmail.com" class="social-link" data-platform="email" aria-label="Email"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+          </div>
+        </div>
         <div class="footer-column">
           <h3 class="footer-heading">Quick Links</h3>
           <ul class="footer-links">
@@ -423,44 +471,15 @@
             <li><a href="volunteer.html">Volunteer</a></li>
             <li><a href="gallery.html">Gallery</a></li>
           </ul>
-
-          <!-- Social Media below Quick Links -->
-          <h3 class="footer-heading" style="margin-top: var(--space-lg);">Follow Us</h3>
-          <div class="footer-social">
-            <a href="https://www.facebook.com/people/VEFS-Foundation/61582906514169/" class="social-link" data-platform="facebook" aria-label="Facebook" target="_blank" rel="noopener">
-              <img src="images/icons/facebook_icon.png" alt="Facebook" width="24" height="24">
-            </a>
-            <a href="https://www.instagram.com/vefsfoundation/" class="social-link" data-platform="instagram" aria-label="Instagram" target="_blank" rel="noopener">
-              <img src="images/icons/instagram_icon.png" alt="Instagram" width="24" height="24">
-            </a>
-            <a href="https://www.youtube.com/@VEFSFOUNDATION" class="social-link" data-platform="youtube" aria-label="YouTube" target="_blank" rel="noopener">
-              <img src="images/icons/youtube_icon.png" alt="YouTube" width="24" height="24">
-            </a>
-            <a href="https://www.whatsapp.com/channel/0029Vat5xFr6RGJJI5rJcv3D" class="social-link" data-platform="whatsapp" aria-label="WhatsApp" target="_blank" rel="noopener">
-              <img src="images/icons/whatsapp_icon.png" alt="WhatsApp" width="24" height="24">
-            </a>
-          </div>
         </div>
-
-        <!-- Column 2: Contact + Newsletter -->
         <div class="footer-column">
           <h3 class="footer-heading">Contact Us</h3>
           <ul class="footer-contact">
-            <li>
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-              Nilakottai, Dindigul, Tamil Nadu
-            </li>
-            <li>
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              <a href="mailto:vefsfoundation@gmail.com">vefsfoundation@gmail.com</a>
-            </li>
-            <li>
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-              <a href="tel:+918610457700">+91 8610457700</a>
-            </li>
+            <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Nilakottai, Dindigul, Tamil Nadu</li>
+            <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> <a href="mailto:vefsfoundation@gmail.com">vefsfoundation@gmail.com</a></li>
+            <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg> <a href="tel:+919342211488">+91 9342211488</a></li>
+            <li><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg> <a href="tel:+918610457700">+91 8610457700</a></li>
           </ul>
-
-          <!-- Newsletter below Contact -->
           <div style="margin-top: var(--space-lg);">
             <h3 class="footer-heading">Newsletter</h3>
             <p class="footer-text">Get updates on our environmental initiatives</p>
@@ -473,7 +492,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copyright">&copy; 2025 VEFS Foundation. All rights reserved.</p>
+        <p class="footer-copyright">&copy; 2026 VEFS Foundation. All rights reserved.</p>
         <div class="footer-legal">
           <a href="privacy.html">Privacy Policy</a>
           <a href="terms.html" class="active" style="font-weight: 600;">Terms of Service</a>
@@ -482,8 +501,47 @@
     </div>
   </footer>
 
+  <!-- Floating Sticky CTAs -->
+  <div class="floating-ctas" id="floating-ctas">
+    <a href="donate.html" class="floating-cta-btn floating-cta-donate" aria-label="Donate">
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </a>
+    <a href="https://wa.me/919342211488" class="floating-cta-btn floating-cta-whatsapp" aria-label="WhatsApp" target="_blank" rel="noopener">
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+  </div>
+
   <!-- Scripts -->
   <script src="js/utils.js"></script>
   <script src="js/components/navigation.js"></script>
+  <script src="js/newsletter.js"></script>
+
+  <!-- Floating CTAs Scroll Script -->
+  <script>
+    (function () {
+      var ctas = document.getElementById('floating-ctas');
+      if (!ctas) return;
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+          ctas.classList.add('visible');
+        } else {
+          ctas.classList.remove('visible');
+        }
+      });
+    })();
+  </script>
+
+  <!-- Announcement Bar Dismiss Script -->
+  <script>
+    (function () {
+      var bar = document.getElementById('announcement-bar');
+      if (!bar) return;
+      try {
+        if (localStorage.getItem('vefs-announcement-dismissed') === '1') {
+          bar.style.display = 'none';
+        }
+      } catch(e) {}
+    })();
+  </script>
 </body>
 </html>

@@ -1,19 +1,19 @@
 /* ============================================
-   CAROUSEL COMPONENT (Hero Slider)
+   CAROUSEL COMPONENT (Hero Slider - 2-Column Split)
    ============================================ */
 
 .carousel {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background-color: var(--color-gray-900);
+  background-color: var(--color-off-white);
 }
 
 /* Carousel container */
 .carousel-inner {
   position: relative;
   width: 100%;
-  height: 600px;
+  min-height: 500px;
   overflow: hidden;
 }
 
@@ -27,74 +27,8 @@
 .carousel-slide {
   flex: 0 0 100%;
   width: 100%;
-  height: 100%;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* Carousel image */
-.carousel-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Carousel overlay */
-.carousel-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
-  z-index: 1;
-}
-
-/* Slide content overlay */
-.carousel-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: var(--space-xl);
-  color: var(--color-white);
-  z-index: 2;
-}
-
-.carousel-content.align-left {
-  align-items: flex-start;
-  text-align: left;
-}
-
-.carousel-content.align-right {
-  align-items: flex-end;
-  text-align: right;
-}
-
-/* Slide text */
-.carousel-title {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-md);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  max-width: 800px;
-}
-
-.carousel-subtitle {
-  font-size: var(--font-size-xl);
-  margin-bottom: var(--space-xl);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  max-width: 600px;
 }
 
 /* Navigation arrows */
@@ -113,11 +47,13 @@
   justify-content: center;
   cursor: pointer;
   transition: background-color var(--transition-fast), transform var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .carousel-control:hover {
   background-color: var(--color-white);
   transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
 
 .carousel-control:focus-visible {
@@ -161,7 +97,7 @@
   width: 12px;
   height: 12px;
   border-radius: var(--radius-full);
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--color-gray-300);
   border: none;
   cursor: pointer;
   transition: background-color var(--transition-fast), width var(--transition-fast);
@@ -169,11 +105,11 @@
 }
 
 .carousel-indicator:hover {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--color-gray-500);
 }
 
 .carousel-indicator.active {
-  background-color: var(--color-white);
+  background-color: var(--color-secondary);
   width: 32px;
 }
 
@@ -209,33 +145,29 @@
 /* Responsive behavior */
 @media (max-width: 1024px) {
   .carousel-inner {
-    height: 500px;
-  }
-
-  .carousel-title {
-    font-size: var(--font-size-3xl);
-  }
-
-  .carousel-subtitle {
-    font-size: var(--font-size-lg);
+    min-height: 420px;
   }
 }
 
 @media (max-width: 768px) {
+  .carousel {
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+
   .carousel-inner {
-    height: 400px;
+    min-height: auto;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
-  .carousel-title {
-    font-size: var(--font-size-2xl);
+  .carousel-slides {
+    height: auto;
   }
 
-  .carousel-subtitle {
-    font-size: var(--font-size-base);
-  }
-
-  .carousel-content {
-    padding: var(--space-md);
+  .carousel-slide {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .carousel-control {
@@ -258,21 +190,6 @@
 
   .carousel-control-next {
     right: var(--space-sm);
-  }
-}
-
-@media (max-width: 480px) {
-  .carousel-inner {
-    height: 300px;
-  }
-
-  .carousel-title {
-    font-size: var(--font-size-xl);
-  }
-
-  .carousel-subtitle {
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--space-md);
   }
 
   .carousel-indicators {
@@ -300,7 +217,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 600px;
+  min-height: 500px;
   background-color: var(--color-gray-200);
   color: var(--color-gray-600);
 }

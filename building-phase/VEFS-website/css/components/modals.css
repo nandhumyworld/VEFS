@@ -76,15 +76,17 @@
   }
 }
 
-/* Modal content */
+/* Modal content — light warm theme */
 .modal-content {
-  background-color: var(--color-white);
+  background-color: #FEFCF6;
+  border: 1px solid #E5E7EB;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
   overflow: hidden;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
+  color: #404040;
 }
 
 .modal-dialog-fullscreen .modal-content {
@@ -98,7 +100,7 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--space-lg);
-  border-bottom: 1px solid var(--color-gray-200);
+  border-bottom: 1px solid #E5E7EB;
   flex-shrink: 0;
 }
 
@@ -106,7 +108,7 @@
   font-family: var(--font-serif);
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-gray-800);
+  color: #1B4332;
   margin: 0;
   line-height: var(--line-height-tight);
 }
@@ -120,13 +122,14 @@
   background: none;
   border: none;
   border-radius: var(--radius-md);
+  color: #6B7280;
   cursor: pointer;
   transition: background-color var(--transition-fast);
   flex-shrink: 0;
 }
 
 .modal-close:hover {
-  background-color: var(--color-gray-200);
+  background-color: #F3F4F6;
 }
 
 .modal-close:focus-visible {
@@ -137,7 +140,7 @@
 .modal-close .icon {
   width: 20px;
   height: 20px;
-  fill: var(--color-gray-600);
+  fill: #6B7280;
 }
 
 /* Modal body */
@@ -162,8 +165,8 @@
   justify-content: flex-end;
   gap: var(--space-sm);
   padding: var(--space-lg);
-  border-top: 1px solid var(--color-gray-200);
-  background-color: var(--color-gray-50);
+  border-top: 1px solid #E5E7EB;
+  background-color: #F9FAFB;
   flex-shrink: 0;
 }
 
@@ -185,8 +188,7 @@
 /* Modal image (for event/training detail modals) */
 .modal-image {
   width: 100%;
-  max-height: 300px;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
 
@@ -214,7 +216,7 @@
   flex-wrap: wrap;
   gap: var(--space-md);
   padding: var(--space-md);
-  background-color: var(--color-gray-50);
+  background-color: #F3F4F6;
   border-radius: var(--radius-md);
   margin-bottom: var(--space-md);
 }
@@ -224,7 +226,7 @@
   align-items: center;
   gap: 0.5rem;
   font-size: var(--font-size-sm);
-  color: var(--color-gray-700);
+  color: #6B7280;
 }
 
 .modal-meta-item .icon {
@@ -325,8 +327,8 @@
 .modal-loading .spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid var(--color-gray-200);
-  border-top-color: var(--color-primary);
+  border: 4px solid #E5E7EB;
+  border-top-color: var(--color-secondary); /* mustard spinner */
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
