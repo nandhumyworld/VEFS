@@ -28,6 +28,14 @@
     .floating-cta-donate { background: var(--color-secondary); }
     .floating-cta-whatsapp { background: #25D366; }
     @media (max-width: 768px) { .floating-ctas { bottom: 1rem; right: 1rem; } .floating-cta-btn { width: 48px; height: 48px; } }
+
+    /* Donation form sits on a sage-green background — make its labels and helper text legible (white).
+       Inputs keep white backgrounds + dark text; error messages keep their own color. */
+    #donation-form-section .form-label { color: var(--color-white); }
+    #donation-form-section .form-step h3 { color: var(--color-white) !important; border-bottom-color: rgba(255, 255, 255, 0.3) !important; }
+    #donation-form-section .form-group span:not(.form-error),
+    #donation-form-section #donation-form > p { color: rgba(255, 255, 255, 0.92) !important; }
+    #donation-form-section .form-group a { color: #FFE8A3; }
   </style>
 </head>
 <body>
@@ -175,8 +183,8 @@
     <!-- Donation Confirmation Form -->
     <section class="section section-py" id="donation-form-section" style="background-color: var(--color-primary-light);">
       <div class="container" style="max-width: 700px;">
-        <h2 class="section-title text-center" style="margin-bottom: var(--space-sm);">Next Step: Let Us Know You've Donated</h2>
-        <p style="text-align: center; color: var(--color-gray-700); margin-bottom: var(--space-2xl); font-size: var(--font-size-lg); max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7;">
+        <h2 class="section-title text-center" style="color: var(--color-white); margin-bottom: var(--space-sm);">Next Step: Let Us Know You've Donated</h2>
+        <p style="text-align: center; color: var(--color-white); margin-bottom: var(--space-2xl); font-size: var(--font-size-lg); max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7;">
           Already made a payment? Fill this form so we can send your receipt and 80G certificate. You can also use this form to reach out if you'd like to discuss your contribution.
         </p>
 
@@ -253,7 +261,7 @@
             <div class="form-group">
               <label style="display: flex; align-items: start; cursor: pointer; gap: var(--space-sm);">
                 <input type="checkbox" name="terms" required style="margin-top: 4px;">
-                <span style="font-size: var(--font-size-sm); color: var(--color-gray-700);">I agree to the <a href="terms.html" style="color: var(--color-secondary);">terms and conditions</a> and <a href="privacy.html" style="color: var(--color-secondary);">privacy policy</a> *</span>
+                <span style="font-size: var(--font-size-sm); color: var(--color-gray-700);">I agree to the <a href="terms.html" style="color: var(--color-black);">terms and conditions</a> and <a href="privacy.html" style="color: var(--color-black);">privacy policy</a> *</span>
               </label>
             </div>
           </div>
@@ -442,7 +450,7 @@
           <a href="mailto:vefsfoundation@gmail.com" class="btn btn-outline-light">📧 vefsfoundation@gmail.com</a>
           <a href="tel:+919342211488" class="btn btn-outline-light">📞 +91 9342211488</a>
         </div>
-        <a href="contact.html?inquiry=donation" class="btn btn-primary">Contact Donations Team</a>
+        <a href="contact.html?inquiry=donation" class="btn btn-lg" style="background-color: var(--color-secondary); color: white;">Contact Donations Team</a>
       </div>
     </section>
   </main>
