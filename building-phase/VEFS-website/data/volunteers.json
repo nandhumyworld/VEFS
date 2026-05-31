@@ -1,65 +1,76 @@
 {
-  "metadata": {
-    "lastUpdated": "2026-01-03T00:00:00.000Z",
-    "version": "1.0",
-    "totalOpportunities": 5
-  },
-  "volunteers": [
-    {
-      "id": "vol-001",
-      "title": "Organic Farm Assistant",
-      "slug": "organic-farm-assistant",
-      "description": {
-        "brief": "Join our team to work hands-on with organic farming practices, learn sustainable agriculture, and help restore ecological balance in rural Tamil Nadu.",
-        "full": "As an Organic Farm Assistant, you'll immerse yourself in the daily operations of our demonstration farm in Nilakottai. You'll gain practical experience in organic cultivation methods, composting, seed preservation, and natural pest management. This is an excellent opportunity for students, agriculture enthusiasts, or anyone passionate about sustainable food systems to learn while contributing to environmental restoration. You'll work alongside experienced farmers and participate in community outreach programs to share organic farming knowledge with local farmers."
-      },
-      "dates": {
-        "start": "TBD",
-        "end": "TBD"
-      },
-      "duration": {
-        "value": 3,
-        "unit": "months"
-      },
-      "commitment": "Full-time/Part-time",
-      "requirements": {
-        "age": { "min": 18, "max": 60 },
-        "skills": ["Physical fitness", "Interest in agriculture", "Basic English/Tamil communication"],
-        "physical": "Must be comfortable with outdoor work, lifting up to 20kg, and working in variable weather conditions",
-        "education": "No formal education requirements - open to all passionate learners"
-      },
-      "benefits": {
-        "learning": [
-          "Hands-on organic farming techniques",
-          "Seed saving and propagation methods",
-          "Natural composting and soil management",
-          "Traditional agricultural knowledge"
-        ],
-        "certificate": true,
-        "meals": true,
-        "accommodation": true,
-        "stipend": { "provided": false, "amount": 3000 }
-      },
-      "relatedEvents": [],
-      "location": {
-        "city": "Nilakottai",
-        "state": "Tamil Nadu",
-        "type": "on-site"
-      },
-      "spots": {
-        "total": 4,
-        "filled": 1,
-        "available": 3
-      },
-      "status": "open",
-      "contact": {
-        "name": "K. Rajasekaran",
-        "email": "vefsfoundation@gmail.com",
-        "phone": "+91 95666 67708"
-      },
-      "media": {
-        "featuredImage": "/images/hero/hero-slide-4.jpg"
-      }
-    }
-  ]
+    "metadata": {
+        "lastUpdated": "2026-01-03T00:00:00.000Z",
+        "version": "1.0",
+        "totalOpportunities": 5
+    },
+    "volunteers": [
+        {
+            "id": "vol-001",
+            "title": "Organic Farm Assistant",
+            "slug": "organic-farm-assistant",
+            "description": {
+                "brief": "Join our team to work hands-on with organic farming practices, learn sustainable agriculture, and help restore ecological balance in rural Tamil Nadu.",
+                "full": "As an Organic Farm Assistant, you'll immerse yourself in the daily operations of our demonstration farm in Nilakottai. You'll gain practical experience in organic cultivation methods, composting, seed preservation, and natural pest management. This is an excellent opportunity for students, agriculture enthusiasts, or anyone passionate about sustainable food systems to learn while contributing to environmental restoration. You'll work alongside experienced farmers and participate in community outreach programs to share organic farming knowledge with local farmers."
+            },
+            "dates": {
+                "start": "TBD",
+                "end": "TBD"
+            },
+            "duration": {
+                "value": 3,
+                "unit": "months"
+            },
+            "commitment": "Full-time/Part-time",
+            "requirements": {
+                "age": {
+                    "min": 18,
+                    "max": 60
+                },
+                "skills": [
+                    "Physical fitness",
+                    "Interest in agriculture",
+                    "Basic English/Tamil communication"
+                ],
+                "physical": "Must be comfortable with outdoor work, lifting up to 20kg, and working in variable weather conditions",
+                "education": "No formal education requirements - open to all passionate learners"
+            },
+            "benefits": {
+                "learning": [
+                    "Hands-on organic farming techniques",
+                    "Seed saving and propagation methods",
+                    "Natural composting and soil management",
+                    "Traditional agricultural knowledge"
+                ],
+                "certificate": true,
+                "meals": true,
+                "accommodation": true,
+                "stipend": {
+                    "provided": false,
+                    "amount": 3000
+                }
+            },
+            "relatedEvents": [],
+            "location": {
+                "city": "Nilakottai",
+                "state": "Tamil Nadu",
+                "type": "on-site"
+            },
+            "spots": {
+                "total": 4,
+                "filled": 1,
+                "available": 3
+            },
+            "status": "open",
+            "contact": {
+                "name": "K. Rajasekaran",
+                "email": "vefsfoundation@gmail.com",
+                "phone": "+91 95666 67708"
+            },
+            "media": {
+                "featuredImage": "/images/hero/hero-slide-4.jpg"
+            },
+            "order": 10
+        }
+    ]
 }

@@ -1,218 +1,207 @@
 {
-  "metadata": {
-    "version": "1.0",
-    "lastUpdated": "2026-03-21T00:00:00+05:30",
-    "totalTrainings": 1,
-    "categories": ["farming", "conservation", "skills-development"],
-    "statusCounts": {
-      "open": 1,
-      "full": 0,
-      "upcoming": 0
-    }
-  },
-  "trainings": [
-    {
-  "id": "trn-001",
-  "title": "One Month Intensive Practical Natural Farming Training",
-  "slug": "one-month-practical-natural-farming-training",
-  "category": "farming",
-  "status": "open",
-  "featured": true,
-
-  "schedule": {
-    "type": "daily-immersive",
-    "sessions": [
-    ],
-    "dailyStructure": {
-      "morning": "Planning meeting, stand-up discussion, task allocation, group assignments (rotational responsibilities)",
-      "afternoon": "Field work, land-based practical execution, farm visits (as scheduled)",
-      "evening": "Learning review, status updates, book discussion, group activities, games",
-      "night": "Documentation of daily learning, volunteering activities, music, relaxation, informal sharing"
+    "metadata": {
+        "version": "1.0",
+        "lastUpdated": "2026-03-21T00:00:00+05:30",
+        "totalTrainings": 1,
+        "categories": [
+            "farming",
+            "conservation",
+            "skills-development"
+        ],
+        "statusCounts": {
+            "open": 1,
+            "full": 0,
+            "upcoming": 0
+        }
     },
-    "timezone": "Asia/Kolkata"
-  },
-
-  "totalDuration": {
-    "value": 1,
-    "unit": "month"
-  },
-
-  "location": {
-    "type": "offline",
-    "venue": "VEFS Training Farm",
-    "city": "Nilakottai",
-    "state": "Tamil Nadu",
-    "country": "India"
-  },
-
-  "audience": [
-    "aspiring farmers",
-    "volunteers",
-    "students",
-    "homesteaders",
-    "nature enthusiasts"
-  ],
-
-  "targetAudience": "Individuals interested in learning practical natural farming through hands-on experience and volunteering-based participation.",
-
-  "capacity": {
-    "total": 10,
-    "registered": 0,
-    "available": 10
-  },
-
-  "description": {
-    "brief": "One-month immersive practical training in natural farming, seed conservation, animal husbandry, and sustainable living practices.",
-
-    "full": "This one-month intensive training program is completely practical-based and designed for participants who are willing to engage in physical farm work and learn by doing. The training follows a structured daily routine including planning, field execution, reflection, and documentation. Participants will work on real land, manage crops, learn animal husbandry, build seed banks, and understand traditional ecological farming systems. The program also includes farm visits, group discussions, documentation, volunteering activities, and community-based learning.",
-
-    "objectives": [
-      "Provide hands-on training in natural and ecological farming",
-      "Teach land preparation and crop planning",
-      "Train participants in seed conservation and seed bank creation",
-      "Develop skills in animal husbandry and farm ecosystem management",
-      "Introduce traditional and ethnic medical practices",
-      "Build practical knowledge in nursery and bed preparation",
-      "Teach pest management and crop management",
-      "Provide exposure to farm-based value addition and marketing",
-      "Encourage documentation and reflective learning",
-      "Promote community-based collaborative farming practices"
-    ],
-
-    "curriculum": [
-      {
-        "module": "Land & Soil Preparation",
-        "topics": [
-          "Land preparation methods",
-          "Soil preparation techniques",
-          "Tool handling and safety",
-          "Permaculture Bed formation methods"
-        ]
-      },
-      {
-        "module": "Seeds & Nursery Management",
-        "topics": [
-          "Seed treatment techniques",
-          "Nursery bed preparation",
-          "Climber bed structures",
-          "Seed bank creation",
-          "Seed preservation methods"
-        ]
-      },
-      {
-        "module": "Crop Cultivation",
-        "topics": [
-          "Rain-fed millet cultivation",
-          "Crop planning",
-          "Seasonal crop selection",
-          "Mixed cropping methods",
-          "Crop management practices"
-        ]
-      },
-      {
-        "module": "Pest & Disease Management",
-        "topics": [
-          "Natural pest control methods",
-          "Traditional pest repellents",
-          "Plant-based formulations",
-          "Preventive crop care",
-          "Field monitoring"
-        ]
-      },
-      {
-        "module": "Animal Husbandry",
-        "topics": [
-          "Cow care and management",
-          "Goat rearing",
-          "Farm animal feeding",
-          "Animal shelter management",
-          "Basic animal health care",
-          "Ethnic veterinary practices"
-        ]
-      },
-      {
-        "module": "Forest & Ecology Learning",
-        "topics": [
-          "Forest visits",
-          "Understanding natural ecosystems",
-          "Biodiversity observation",
-          "Native species identification"
-        ]
-      },
-      {
-        "module": "Farm Structures & Infrastructure",
-        "topics": [
-          "Climber support structures",
-          "Multiple bed designs",
-          "Farm layout planning",
-          "Water management basics"
-        ]
-      },
-      {
-        "module": "Value Addition & Marketing",
-        "topics": [
-          "Farm produce value addition",
-          "Direct marketing methods",
-          "Community supported agriculture",
-          "Farmer market models",
-          "Pricing strategies"
-        ]
-      },
-      {
-        "module": "Documentation & Learning",
-        "topics": [
-          "Daily documentation",
-          "Farm log maintenance",
-          "Observation recording",
-          "Learning reflection"
-        ]
-      }
-    ],
-
-    "outcomes": [
-      "Hands-on experience in natural farming",
-      "Ability to prepare land and manage crops",
-      "Understanding of seed saving and seed banks",
-      "Basic skills in animal husbandry",
-      "Knowledge of pest management without chemicals",
-      "Experience in nursery and bed preparation",
-      "Understanding of farm-based livelihoods",
-      "Ability to document and plan farm activities",
-      "Confidence to start own small farm project"
-    ],
-
-    "requirements": [
-      "Participants must be willing to do physical farm work",
-      "Interest in learning through practical experience",
-      "Commitment to stay for full one month",
-      "Participation in daily activities is mandatory",
-      "Volunteering mindset required",
-      "Basic discipline and teamwork expected"
+    "trainings": [
+        {
+            "id": "trn-001",
+            "title": "One Month Intensive Practical Natural Farming Training",
+            "slug": "one-month-practical-natural-farming-training",
+            "category": "farming",
+            "status": "open",
+            "featured": true,
+            "order": 10,
+            "schedule": {
+                "type": "daily-immersive",
+                "sessions": [],
+                "dailyStructure": {
+                    "morning": "Planning meeting, stand-up discussion, task allocation, group assignments (rotational responsibilities)",
+                    "afternoon": "Field work, land-based practical execution, farm visits (as scheduled)",
+                    "evening": "Learning review, status updates, book discussion, group activities, games",
+                    "night": "Documentation of daily learning, volunteering activities, music, relaxation, informal sharing"
+                },
+                "timezone": "Asia/Kolkata"
+            },
+            "totalDuration": {
+                "value": 1,
+                "unit": "month"
+            },
+            "location": {
+                "type": "offline",
+                "venue": "VEFS Training Farm",
+                "city": "Nilakottai",
+                "state": "Tamil Nadu",
+                "country": "India"
+            },
+            "audience": [
+                "aspiring farmers",
+                "volunteers",
+                "students",
+                "homesteaders",
+                "nature enthusiasts"
+            ],
+            "targetAudience": "Individuals interested in learning practical natural farming through hands-on experience and volunteering-based participation.",
+            "capacity": {
+                "total": 10,
+                "registered": 0,
+                "available": 10
+            },
+            "description": {
+                "brief": "One-month immersive practical training in natural farming, seed conservation, animal husbandry, and sustainable living practices.",
+                "full": "This one-month intensive training program is completely practical-based and designed for participants who are willing to engage in physical farm work and learn by doing. The training follows a structured daily routine including planning, field execution, reflection, and documentation. Participants will work on real land, manage crops, learn animal husbandry, build seed banks, and understand traditional ecological farming systems. The program also includes farm visits, group discussions, documentation, volunteering activities, and community-based learning.",
+                "objectives": [
+                    "Provide hands-on training in natural and ecological farming",
+                    "Teach land preparation and crop planning",
+                    "Train participants in seed conservation and seed bank creation",
+                    "Develop skills in animal husbandry and farm ecosystem management",
+                    "Introduce traditional and ethnic medical practices",
+                    "Build practical knowledge in nursery and bed preparation",
+                    "Teach pest management and crop management",
+                    "Provide exposure to farm-based value addition and marketing",
+                    "Encourage documentation and reflective learning",
+                    "Promote community-based collaborative farming practices"
+                ],
+                "curriculum": [
+                    {
+                        "module": "Land & Soil Preparation",
+                        "topics": [
+                            "Land preparation methods",
+                            "Soil preparation techniques",
+                            "Tool handling and safety",
+                            "Permaculture Bed formation methods"
+                        ]
+                    },
+                    {
+                        "module": "Seeds & Nursery Management",
+                        "topics": [
+                            "Seed treatment techniques",
+                            "Nursery bed preparation",
+                            "Climber bed structures",
+                            "Seed bank creation",
+                            "Seed preservation methods"
+                        ]
+                    },
+                    {
+                        "module": "Crop Cultivation",
+                        "topics": [
+                            "Rain-fed millet cultivation",
+                            "Crop planning",
+                            "Seasonal crop selection",
+                            "Mixed cropping methods",
+                            "Crop management practices"
+                        ]
+                    },
+                    {
+                        "module": "Pest & Disease Management",
+                        "topics": [
+                            "Natural pest control methods",
+                            "Traditional pest repellents",
+                            "Plant-based formulations",
+                            "Preventive crop care",
+                            "Field monitoring"
+                        ]
+                    },
+                    {
+                        "module": "Animal Husbandry",
+                        "topics": [
+                            "Cow care and management",
+                            "Goat rearing",
+                            "Farm animal feeding",
+                            "Animal shelter management",
+                            "Basic animal health care",
+                            "Ethnic veterinary practices"
+                        ]
+                    },
+                    {
+                        "module": "Forest & Ecology Learning",
+                        "topics": [
+                            "Forest visits",
+                            "Understanding natural ecosystems",
+                            "Biodiversity observation",
+                            "Native species identification"
+                        ]
+                    },
+                    {
+                        "module": "Farm Structures & Infrastructure",
+                        "topics": [
+                            "Climber support structures",
+                            "Multiple bed designs",
+                            "Farm layout planning",
+                            "Water management basics"
+                        ]
+                    },
+                    {
+                        "module": "Value Addition & Marketing",
+                        "topics": [
+                            "Farm produce value addition",
+                            "Direct marketing methods",
+                            "Community supported agriculture",
+                            "Farmer market models",
+                            "Pricing strategies"
+                        ]
+                    },
+                    {
+                        "module": "Documentation & Learning",
+                        "topics": [
+                            "Daily documentation",
+                            "Farm log maintenance",
+                            "Observation recording",
+                            "Learning reflection"
+                        ]
+                    }
+                ],
+                "outcomes": [
+                    "Hands-on experience in natural farming",
+                    "Ability to prepare land and manage crops",
+                    "Understanding of seed saving and seed banks",
+                    "Basic skills in animal husbandry",
+                    "Knowledge of pest management without chemicals",
+                    "Experience in nursery and bed preparation",
+                    "Understanding of farm-based livelihoods",
+                    "Ability to document and plan farm activities",
+                    "Confidence to start own small farm project"
+                ],
+                "requirements": [
+                    "Participants must be willing to do physical farm work",
+                    "Interest in learning through practical experience",
+                    "Commitment to stay for full one month",
+                    "Participation in daily activities is mandatory",
+                    "Volunteering mindset required",
+                    "Basic discipline and teamwork expected"
+                ]
+            },
+            "facilitators": [
+                {
+                    "name": "VEFS Farming Team",
+                    "title": "Natural Farming Practitioners",
+                    "bio": "Experienced practitioners conducting hands-on ecological farming training."
+                }
+            ],
+            "registration": {
+                "required": true,
+                "fee": {
+                    "amount": 6000,
+                    "currency": "INR",
+                    "type": "donation"
+                },
+                "notes": "Donation covers training, learning materials, and participation in all practical activities."
+            },
+            "media": {
+                "featuredImage": "images/trainings/trn-001-thumbnail.jpg",
+                "heroImage": "images/trainings/trn-001-hero.jpg"
+            }
+        }
     ]
-  },
-
-  "facilitators": [
-    {
-      "name": "VEFS Farming Team",
-      "title": "Natural Farming Practitioners",
-      "bio": "Experienced practitioners conducting hands-on ecological farming training."
-    }
-  ],
-
-  "registration": {
-    "required": true,
-    "fee": {
-      "amount": 6000,
-      "currency": "INR",
-      "type": "donation"
-    },
-    "notes": "Donation covers training, learning materials, and participation in all practical activities."
-  },
-
-  "media": {
-    "featuredImage": "images/trainings/trn-001-thumbnail.jpg",
-    "heroImage": "images/trainings/trn-001-hero.jpg"
-  }
-}
-  ]
 }
