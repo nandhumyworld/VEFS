@@ -14,6 +14,7 @@
     "events": [
         {
             "id": "evt-001",
+            "enabled": true,
             "title": "வள்ளுவம் இயற்கை சந்தை — கோடை கால உணவு திருவிழா, தாம்பரம்",
             "slug": "valluvam-organic-market-summer-festival-tambaram-may-2026",
             "type": "market",
@@ -125,6 +126,7 @@
         },
         {
             "id": "evt-002",
+            "enabled": true,
             "title": "Valluvam Organic Farmers Market — Adyar",
             "slug": "valluvam-organic-farmers-market-adyar",
             "type": "market",

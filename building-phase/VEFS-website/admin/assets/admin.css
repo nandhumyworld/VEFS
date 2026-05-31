@@ -1,0 +1,54 @@
+:root {
+    --color-primary: #6B8E23;
+    --color-secondary: #D4A574;
+    --color-text: #2c2c2c;
+    --color-muted: #6b6b6b;
+    --color-border: #e0e0e0;
+    --color-error: #b00020;
+    --color-bg: #f7f5f0;
+    --color-surface: #ffffff;
+}
+* { box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--color-text); background: var(--color-bg); margin: 0; }
+.admin-login { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1rem; }
+.login-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; padding: 2rem; width: 100%; max-width: 360px; }
+.login-card h1 { margin: 0 0 1rem; color: var(--color-primary); }
+.login-card label { display: block; margin: 1rem 0 0.25rem; font-size: 0.9rem; }
+.login-card input[type=password] { width: 100%; padding: 0.6rem; border: 1px solid var(--color-border); border-radius: 4px; font-size: 1rem; }
+.login-card button { margin-top: 1.25rem; width: 100%; background: var(--color-primary); color: #fff; border: 0; padding: 0.75rem; border-radius: 4px; font-size: 1rem; cursor: pointer; }
+.login-card .error { color: var(--color-error); margin: 0.5rem 0; }
+.login-card .notice { background: #fff8e1; padding: 0.5rem 0.75rem; border-radius: 4px; margin: 0.5rem 0; font-size: 0.9rem; }
+.admin-shell { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.admin-tabs { display: flex; gap: 0.5rem; border-bottom: 2px solid var(--color-border); margin-bottom: 1.5rem; }
+.admin-tabs a { padding: 0.6rem 1rem; text-decoration: none; color: var(--color-muted); border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.admin-tabs a.active { color: var(--color-primary); border-bottom-color: var(--color-primary); font-weight: 600; }
+.admin-table { width: 100%; border-collapse: collapse; background: var(--color-surface); }
+.admin-table th, .admin-table td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
+.admin-table th { background: #faf8f3; font-weight: 600; font-size: 0.85rem; color: var(--color-muted); }
+.admin-table img { width: 60px; height: 40px; object-fit: cover; border-radius: 3px; }
+.admin-table input[type=number] { width: 70px; padding: 0.3rem; }
+.btn { display: inline-block; padding: 0.5rem 0.9rem; border-radius: 4px; border: 0; cursor: pointer; text-decoration: none; font-size: 0.9rem; }
+.btn-primary { background: var(--color-primary); color: #fff; }
+.btn-secondary { background: var(--color-secondary); color: #fff; }
+.btn-danger { background: var(--color-error); color: #fff; }
+.btn-ghost { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
+.form-grid { display: grid; gap: 1rem; max-width: 720px; }
+.form-grid label { font-weight: 600; font-size: 0.9rem; }
+.form-grid input[type=text], .form-grid input[type=url], .form-grid input[type=number], .form-grid select, .form-grid textarea { width: 100%; padding: 0.5rem 0.6rem; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.95rem; font-family: inherit; }
+.form-grid textarea { min-height: 240px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+.form-grid .field-error { color: var(--color-error); font-size: 0.85rem; }
+.toolbar { display: flex; gap: 0.25rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.toolbar button { background: #fff; border: 1px solid var(--color-border); padding: 0.3rem 0.6rem; border-radius: 3px; cursor: pointer; font-size: 0.85rem; }
+.preview { background: #fff; border: 1px dashed var(--color-border); border-radius: 4px; padding: 1rem; min-height: 200px; }
+.repeat-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 0.5rem; align-items: center; margin-bottom: 0.4rem; }
+.upload-status { font-size: 0.85rem; color: var(--color-muted); margin-top: 0.25rem; }
+.toast { position: fixed; bottom: 1rem; right: 1rem; padding: 0.75rem 1rem; border-radius: 4px; color: #fff; background: var(--color-primary); }
+.toast.error { background: var(--color-error); }
+.toggle { position: relative; display: inline-block; width: 40px; height: 22px; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle .slider { position: absolute; inset: 0; background: #ccc; border-radius: 22px; cursor: pointer; transition: background 0.2s; }
+.toggle .slider::before { content: ""; position: absolute; height: 16px; width: 16px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: transform 0.2s; }
+.toggle input:checked + .slider { background: var(--color-primary); }
+.toggle input:checked + .slider::before { transform: translateX(18px); }
+.admin-table tr.is-disabled td { opacity: 0.55; }

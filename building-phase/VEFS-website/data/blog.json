@@ -1,8 +1,37 @@
 {
-  "metadata": {
-    "version": "1.0",
-    "lastUpdated": "2026-05-28T00:00:00+05:30",
-    "total": 0
-  },
-  "posts": []
+    "metadata": {
+        "version": "1.0",
+        "lastUpdated": "2026-05-31T08:25:12+00:00",
+        "total": 2
+    },
+    "posts": [
+        {
+            "id": "valluvam-organic-farmers-market",
+            "enabled": true,
+            "order": 11,
+            "title": "Valluvam Organic Farmers Market",
+            "subtitle": "இம்முறை இயற்கையில் விளைந்த சுவையான மாம்பழங்களின் சிறப்பு விற்பனை அரங்குகளுடன்",
+            "cover_image_url": "https://res.cloudinary.com/dxwdnbnjo/image/upload/v1780215531/qnll2a0zfkgsfga7r0lc.jpg",
+            "body_html": "✨ 07-06-2026 (ஞாயிறு) Entry free #தாம்பரம்_சென்னை  #வள்ளுவம்_இயற்கை_சந்தை🛍️🥗🍝🥬🍒🛍️ (9am to 6pm)\r\n 🏛️ இடம் : பேபி உயர்நிலைப் பள்ளி, தாம்பரம் மேற்கு பேருந்து நிலையம் பின்புறம், தாம்பரம் T-1 காவல் நிலையம் எதிரில், மேற்கு தாம்பரம், சென்னை. ( MR திரையரங்கு பின்புறம்)\r\n🏛️ Google Map👉🏽https://maps.app.goo.gl/WL7Ais6QCcJHbTv38 \r\nதொலைபேசி : 7448558447 , 9566667708\r\n\r\n 🥭இம்முறை இயற்கையில் விளைந்த சுவையான மாம்பழங்களின் சிறப்பு விற்பனை அரங்குகளுடன் 🥭\r\n\r\n🛍️ சந்தையில் கிடைப்பவை : \r\n\r\n🥬 இயற்கை காய்கறி &amp; பழங்கள்🥭\r\n🌾பாரம்பரிய அரிசி, சிறுதானியம், அவுல்வகைகள் \r\n🍶தூய செக்கு எண்ணெய்கள்\r\n🥜ஆர்கானிக் பருப்பு &amp; மசால் வகைகள்\r\n🍯மலைத்தேன் &amp; தேன்‌மதிப்புக் கூட்டல் சீர்தானியங்கள்\r\n🫕சிறுதானிய உடனடி உணவு\r\n🥨மரபு திண்பண்டங்கள்\r\n🫘மரபு விதைகள் \r\n🧉 மண்பாண்ட பாத்திரங்கள் \r\n🎠மர விளையாட்டு பொருட்கள் \r\n🪔 கோசாலை தூய பூஜை பொருட்கள் \r\n🫙பயோ என்சைம் பொருட்கள்\r\n\r\n🏘️வீட்டு உபயோக பொருட்கள் இயற்கையானவை கிடைக்கும் 🏡\r\n\r\n🙏🏾 அனைவரும் வாருங்கள் அனுமதி இலவசம் 👣 \r\n🌱 இயற்கையான உணவு பொருட்களின் சந்தை 👉🏽\r\n\r\n நிறுவனர் - வெற்றிமாறன்.இரா    #VEFS_FOUNDATION - Valluvam ecological farming and social welfare foundation.\r\n 9566667708 \r\n ஒருங்கிணைப்பாளர்: \r\n✨ ஹீலர்.பிரஜனா வெற்றிமாறன் \r\n வள்ளுவம் இயற்கை சந்தை .\r\n 7448558447 \r\n\r\nhttps://whatsapp.com/channel/0029Va7qtOY002T6gcfepP2E\r\n(👆🏽அனைவரும் இணைந்து கொள்ளுங்கள்🙏🏾 வள்ளுவம் இயற்கை சந்தை👆🏽)\r\n\r\n🏛️ Venue :\r\nBaby high school, Behind Thambaram west Busstand, T-1 police station opposite. Thambaram west .\r\n🏛️ Google Map👉🏽https://maps.app.goo.gl/WL7Ais6QCcJHbTv38\r\n\r\nகாலை 9.00 மணி முதல் மாலை 6.00 மணி வரை. 🎉 அனுமதி இலவசம் 🎊",
+            "reference_links": [],
+            "cta_text": "JOIN US",
+            "cta_url": "",
+            "published_at": "2026-05-31T08:19:41+00:00",
+            "updated_at": "2026-05-31T08:19:41+00:00"
+        },
+        {
+            "id": "test",
+            "enabled": true,
+            "order": 1,
+            "title": "test",
+            "subtitle": "subtule test",
+            "cover_image_url": "https://res.cloudinary.com/dxwdnbnjo/image/upload/v1780215891/abls6s6azk5iatsyyvtu.jpg",
+            "body_html": "Body",
+            "reference_links": [],
+            "cta_text": "CLICK HERE",
+            "cta_url": "",
+            "published_at": "2026-05-31T08:25:08+00:00",
+            "updated_at": "2026-05-31T08:25:08+00:00"
+        }
+    ]
 }

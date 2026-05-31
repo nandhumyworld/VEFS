@@ -30,7 +30,8 @@ class VolunteersPage {
       const data = await response.json();
 
       // Filter for open opportunities and sort by start date
-      this.volunteers = data.volunteers
+      this.volunteers = (data.volunteers || [])
+        .filter(v => v.enabled !== false)
         .filter(v => v.status === 'open')
         .sort((a, b) => new Date(a.dates.start) - new Date(b.dates.start));
 

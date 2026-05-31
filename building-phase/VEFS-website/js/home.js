@@ -33,7 +33,8 @@ class HomePage {
 
       // Filter for upcoming events only
       const now = new Date();
-      this.events = data.events
+      this.events = (data.events || [])
+        .filter(e => e.enabled !== false)
         .filter(e => e.status === 'upcoming' && new Date(e.date.start) > now)
         .sort((a, b) => new Date(a.date.start) - new Date(b.date.start));
     } catch (error) {
@@ -53,7 +54,7 @@ class HomePage {
       const data = await response.json();
 
       // Filter for open/upcoming trainings
-      this.trainings = data.trainings.filter(t =>
+      this.trainings = (data.trainings || []).filter(t => t.enabled !== false).filter(t =>
         t.status === 'open' || t.status === 'upcoming'
       );
     } catch (error) {

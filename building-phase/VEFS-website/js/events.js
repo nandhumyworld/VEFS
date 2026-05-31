@@ -26,7 +26,7 @@ class EventsPage {
       const response = await fetch('data/events.json');
       if (!response.ok) throw new Error('Failed to load events');
       const data = await response.json();
-      this.events = data.events.sort((a, b) => new Date(a.date.start) - new Date(b.date.start));
+      this.events = (data.events || []).filter(e => e.enabled !== false).sort((a, b) => new Date(a.date.start) - new Date(b.date.start));
       this.filteredEvents = this.events;
     } catch (error) {
       console.error('Error loading events:', error);

@@ -17,6 +17,7 @@
     "trainings": [
         {
             "id": "trn-001",
+            "enabled": true,
             "title": "One Month Intensive Practical Natural Farming Training",
             "slug": "one-month-practical-natural-farming-training",
             "category": "farming",

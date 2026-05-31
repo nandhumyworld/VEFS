@@ -40,6 +40,22 @@ $items = $existing[$arrayKey] ?? [];
 
 $nowIso = date('c');
 
+// Preserve `enabled` across edits; default true for new items.
+if (!array_key_exists('enabled', $data)) {
+    $existingEnabled = true;
+    if ($originalId !== null) {
+        foreach ($items as $p) {
+            if (($p['id'] ?? null) === $originalId) {
+                $existingEnabled = !array_key_exists('enabled', $p) || !empty($p['enabled']);
+                break;
+            }
+        }
+    }
+    $data['enabled'] = $existingEnabled;
+} else {
+    $data['enabled'] = !empty($data['enabled']);
+}
+
 if ($type === 'blog') {
     // Slug handling
     $slug = trim((string)($data['id'] ?? ''));

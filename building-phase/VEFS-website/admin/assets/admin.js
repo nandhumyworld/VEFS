@@ -96,6 +96,35 @@ function wireDashboard() {
         });
     });
 
+    table.querySelectorAll('.enable-toggle').forEach(input => {
+        input.addEventListener('change', async () => {
+            const row = input.closest('tr');
+            const enabled = input.checked;
+            try {
+                await postJSON('/admin/api/toggle.php', { csrf, type, id: row.dataset.id, enabled });
+                row.classList.toggle('is-disabled', !enabled);
+                toast(enabled ? 'Enabled' : 'Disabled');
+            } catch (e) {
+                input.checked = !enabled;
+                toast(e.message, true);
+            }
+        });
+    });
+
+    table.querySelectorAll('.duplicate-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const row = btn.closest('tr');
+            btn.disabled = true;
+            try {
+                const res = await postJSON('/admin/api/duplicate.php', { csrf, type, id: row.dataset.id });
+                location.href = '/admin/form-' + type + '.php?id=' + encodeURIComponent(res.id);
+            } catch (e) {
+                btn.disabled = false;
+                toast(e.message, true);
+            }
+        });
+    });
+
     table.querySelectorAll('.arrow-up, .arrow-down').forEach(btn => {
         btn.addEventListener('click', async () => {
             const row = btn.closest('tr');

@@ -32,7 +32,7 @@ class TrainingsPage {
     try {
       const response = await fetch('data/trainings.json');
       const data = await response.json();
-      this.trainings = data.trainings || [];
+      this.trainings = (data.trainings || []).filter(t => t.enabled !== false);
 
       // Sort by start date (ascending - earliest first; no-date trainings go last)
       this.trainings.sort((a, b) => {

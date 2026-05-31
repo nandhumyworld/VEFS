@@ -59,22 +59,30 @@ $titleColLabel = $tab === 'social' ? 'Caption' : 'Title';
             <th style="width:80px">Image</th>
             <th><?= $titleColLabel ?></th>
             <th style="width:100px">Status</th>
+            <th style="width:70px">Enabled</th>
             <th style="width:90px">Order</th>
             <th style="width:60px"></th>
-            <th style="width:160px">Actions</th>
+            <th style="width:230px">Actions</th>
         </tr>
         </thead>
         <tbody>
         <?php if (empty($items)): ?>
-            <tr><td colspan="6" style="text-align:center;color:#888;padding:2rem">No items yet.</td></tr>
+            <tr><td colspan="7" style="text-align:center;color:#888;padding:2rem">No items yet.</td></tr>
         <?php else: foreach ($items as $i => $p): ?>
-            <tr data-id="<?= htmlspecialchars((string)$p['id'], ENT_QUOTES, 'UTF-8') ?>">
+            <?php $enabled = !array_key_exists('enabled', $p) || !empty($p['enabled']); ?>
+            <tr data-id="<?= htmlspecialchars((string)$p['id'], ENT_QUOTES, 'UTF-8') ?>" class="<?= $enabled ? '' : 'is-disabled' ?>">
                 <td>
                     <?php $img = admin_display_thumb($tab, $p); ?>
                     <?php if ($img): ?><img src="<?= htmlspecialchars($img, ENT_QUOTES, 'UTF-8') ?>" alt=""><?php endif; ?>
                 </td>
                 <td><?= htmlspecialchars(admin_display_title($tab, $p), ENT_QUOTES, 'UTF-8') ?></td>
                 <td><?= htmlspecialchars((string)($p['status'] ?? '—'), ENT_QUOTES, 'UTF-8') ?></td>
+                <td>
+                    <label class="toggle" title="<?= $enabled ? 'Click to disable' : 'Click to enable' ?>">
+                        <input type="checkbox" class="enable-toggle" <?= $enabled ? 'checked' : '' ?>>
+                        <span class="slider"></span>
+                    </label>
+                </td>
                 <td><input type="number" class="order-input" value="<?= (int)($p['order'] ?? 0) ?>" min="0"></td>
                 <td>
                     <button class="btn btn-ghost arrow-up" title="Move up" <?= $i===0?'disabled':'' ?>>&#9650;</button>
@@ -82,6 +90,7 @@ $titleColLabel = $tab === 'social' ? 'Caption' : 'Title';
                 </td>
                 <td>
                     <a class="btn btn-ghost" href="/admin/form-<?= $tab ?>.php?id=<?= urlencode((string)$p['id']) ?>">Edit</a>
+                    <button class="btn btn-secondary duplicate-btn" title="Duplicate">Duplicate</button>
                     <button class="btn btn-danger delete-btn">Delete</button>
                 </td>
             </tr>
