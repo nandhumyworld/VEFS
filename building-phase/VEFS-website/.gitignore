@@ -1,0 +1,5 @@
+admin/config.php
+data/.login-attempts.json
+data/.audit-log.json
+data/backups/
+data/*.json.tmp

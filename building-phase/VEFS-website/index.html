@@ -25,6 +25,7 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components/blog.css">
   <link rel="stylesheet" href="css/responsive-mobile.css">
 
   <!-- Page-specific Styles -->
@@ -1643,6 +1644,29 @@
         </form>
       </div>
     </section>
+
+    <!-- ============================================
+         LATEST FROM THE BLOG
+         ============================================ -->
+    <section class="section section-py home-blog-teaser">
+      <div class="container">
+        <h2 class="section-title">Latest from the blog</h2>
+        <div id="home-blog-grid" class="blog-grid blog-grid-3"></div>
+        <p class="section-cta-row"><a href="blog.html" class="btn btn-secondary">View all blogs &rarr;</a></p>
+      </div>
+    </section>
+
+    <!-- ============================================
+         FOLLOW OUR WORK (SOCIAL)
+         ============================================ -->
+    <section class="section section-py home-social-section">
+      <div class="container">
+        <h2 class="section-title">Follow our work</h2>
+        <p class="section-lede">Updates from our YouTube, Instagram, and Facebook.</p>
+        <div id="home-social-grid" class="social-grid"></div>
+        <p class="section-cta-row"><button id="social-load-more" class="btn btn-outline" hidden>Load more</button></p>
+      </div>
+    </section>
   </main>
 
   <!-- Floating Sticky CTAs -->
@@ -1754,6 +1778,8 @@
   <script src="js/components/form-validation.js"></script>
   <script src="js/home.js"></script>
   <script src="js/newsletter.js"></script>
+  <script src="js/blog-home.js"></script>
+  <script src="js/social-home.js"></script>
 
   <!-- Bilingual Banner Cycling Script -->
   <script>

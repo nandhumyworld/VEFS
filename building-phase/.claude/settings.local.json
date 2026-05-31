@@ -11,7 +11,19 @@
       "WebFetch(domain:www.wegopals.com)",
       "mcp__plugin_playwright_playwright__browser_resize",
       "mcp__plugin_playwright_playwright__browser_close",
-      "mcp__plugin_playwright_playwright__browser_hover"
+      "mcp__plugin_playwright_playwright__browser_hover",
+      "PowerShell($php = Get-Command php -ErrorAction SilentlyContinue; if \\($php\\) { Write-Output \"FOUND: $\\($php.Source\\)\"; php --version } else { Write-Output \"php not on PATH\" }; Write-Output \"---checking common locations---\"; @\\(\"C:\\\\xampp\\\\php\\\\php.exe\",\"C:\\\\php\\\\php.exe\",\"C:\\\\wamp64\\\\bin\\\\php\",\"C:\\\\laragon\\\\bin\\\\php\"\\) | ForEach-Object { if \\(Test-Path $_\\) { Write-Output \"EXISTS: $_\" } }; Write-Output \"---curl/tar---\"; \\(Get-Command curl.exe -ErrorAction SilentlyContinue\\).Source; \\(Get-Command tar.exe -ErrorAction SilentlyContinue\\).Source)",
+      "PowerShell(& \"C:\\\\xampp\\\\php\\\\php.exe\" --version; Write-Output \"---\"; \\(Get-Command curl.exe -ErrorAction SilentlyContinue\\).Source; \\(Get-Command tar.exe -ErrorAction SilentlyContinue\\).Source)",
+      "PowerShell($ProgressPreference='SilentlyContinue'; try { $r = Invoke-WebRequest -Uri \"https://windows.php.net/downloads/releases/\" -UseBasicParsing -TimeoutSec 40; \\($r.Content | Select-String -Pattern 'php-8\\\\.[0-9]+\\\\.[0-9]+-nts-Win32-vs1[0-9]-x64\\\\.zip' -AllMatches\\).Matches.Value | Sort-Object -Unique | Select-Object -First 8 } catch { Write-Output \"ERR: $\\($_.Exception.Message\\)\" })",
+      "PowerShell($out = curl.exe -s --max-time 60 \"https://windows.php.net/downloads/releases/\" ; if \\($out\\) { \\($out | Select-String -Pattern 'php-8\\\\.[0-9]+\\\\.[0-9]+-nts-Win32-vs1[0-9]-x64\\\\.zip' -AllMatches\\).Matches.Value | Sort-Object -Unique | Select-Object -First 8 } else { Write-Output \"no output / curl failed\" })",
+      "PowerShell(& { $out = curl.exe -s --max-time 90 \"https://windows.php.net/downloads/releases/\"; if \\($out\\) { \\($out | Select-String -Pattern 'php-8\\\\.[0-9]+\\\\.[0-9]+-nts-Win32-vs1[0-9]-x64\\\\.zip' -AllMatches\\).Matches.Value | Sort-Object -Unique | Select-Object -First 8 } else { Write-Output \"no output\" } })",
+      "PowerShell(New-Item *)",
+      "PowerShell(Expand-Archive *)",
+      "PowerShell($ProgressPreference='SilentlyContinue'; $tool = \"C:\\\\Users\\\\NANDHU\\\\Documents\\\\SocialEagle\\\\Digital Clients\\\\VEFS\\\\Workspace\\\\VEFS\\\\building-phase\\\\.tooling\"; $zip = Join-Path $tool \"php.zip\"; $url = \"https://windows.php.net/downloads/releases/php-8.3.31-nts-Win32-vs16-x64.zip\"; try { Invoke-WebRequest -Uri $url -OutFile $zip -UseBasicParsing -TimeoutSec 300; Write-Output \\(\"Downloaded: \" + [math]::Round\\(\\(Get-Item $zip\\).Length/1MB,1\\) + \" MB\"\\) } catch { Write-Output \\(\"ERR: \" + $_.Exception.Message\\) })",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(git -C $r add VEFS-website/data/blog.json VEFS-website/data/social.json \"VEFS-website/data/.htaccess\" VEFS-website/data/backups/.gitkeep .gitignore)",
+      "PowerShell($r = \"C:\\\\Users\\\\NANDHU\\\\Documents\\\\SocialEagle\\\\Digital Clients\\\\VEFS\\\\Workspace\\\\VEFS\\\\building-phase\")",
+      "PowerShell($r = \"C:\\\\Users\\\\NANDHU\\\\Documents\\\\SocialEagle\\\\Digital Clients\\\\VEFS\\\\Workspace\\\\VEFS\\\\building-phase\"; $env:GIT_PAGER=''; git -C $r --no-pager log --oneline -1 | Out-String | Write-Output; git -C $r status --short | Out-String | Write-Output)"
     ]
   },
   "disabledMcpjsonServers": [
