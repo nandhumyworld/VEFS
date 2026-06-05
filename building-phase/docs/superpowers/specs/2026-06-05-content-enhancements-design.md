@@ -198,7 +198,7 @@ Include this script on all 13 pages before `</body>`.
 
 **Files to modify:**
 - `index.html` — insert a new `<section class="blog-slider">…</section>` immediately after the social rail.
-- `js/blog-home.js` — fetch `data/blog.json`, filter disabled/hidden, sort by `date` (or `createdAt`) descending, slice to 10, render all slides, track `currentIndex`, wire prev/next buttons, keyboard left/right arrow handling when the slider is focused. **No auto-advance.**
+- `js/blog-home.js` — fetch `data/blog.json`, filter disabled/hidden, sort by the existing publish-date field on blog items (whichever of `publishedAt` / `date` / `createdAt` the current schema uses — to be confirmed against `data/blog.json` during implementation; one field is chosen and used consistently), descending, slice to 10, render all slides, track `currentIndex`, wire prev/next buttons, keyboard left/right arrow handling when the slider is focused. **No auto-advance.**
 
 **New CSS:** `css/components/blog-slider.css`
 - Single-slide visible; uses `transform: translateX(-N * 100%)` for transitions.
@@ -264,7 +264,7 @@ export function isItemNew(item) {
 }
 ```
 
-**Public render JS to update:** `events.js`, `trainings.js`, `volunteers.js`, `gallery.js`, `blog.js`, `blog-home.js`, `social-home.js`, and the server-rendered `blog-post.php` (the PHP equivalent of `isItemNew()` lives in `includes/admin-helpers.php` or a new `includes/content-helpers.php`).
+**Public render JS to update:** `events.js`, `trainings.js`, `volunteers.js`, `gallery.js`, `blog.js`, `blog-home.js`, `social-home.js`, and the server-rendered `blog-post.php`. A PHP equivalent `is_item_new($item)` is added to a new `includes/content-helpers.php` (kept separate from `admin-helpers.php` so public-page code does not have to load admin helpers).
 
 **Admin forms to update:** `form-blog.php`, `form-social.php`, `form-event.php`, `form-training.php`, `form-volunteer.php`, plus the new `form-gallery.php`. Each form gets a "NEW indicator" radio group (Auto / Force on / Force off, default Auto).
 
