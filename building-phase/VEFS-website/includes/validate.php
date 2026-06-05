@@ -391,6 +391,35 @@ function validate_volunteer(array $d): array {
     return $e;
 }
 
+function validate_gallery(array $d): array {
+    $e = [];
+
+    $title = trim((string)($d['title'] ?? ''));
+    if ($title === '') $e['title'] = 'Title is required.';
+    elseif (mb_strlen($title) > 200) $e['title'] = 'Title must be <= 200 characters.';
+
+    $desc = (string)($d['description'] ?? '');
+    if (mb_strlen($desc) > 500) $e['description'] = 'Description must be <= 500 characters.';
+
+    $year = $d['year'] ?? null;
+    $thisYear = (int)date('Y');
+    if (!is_numeric($year) || (int)$year < 2000 || (int)$year > $thisYear) {
+        $e['year'] = 'Year must be an integer between 2000 and ' . $thisYear . '.';
+    }
+
+    $url = (string)($d['imageUrl'] ?? '');
+    if ($url === '' || !_is_safe_url($url)) {
+        $e['imageUrl'] = 'Image URL is required and must be an http/https URL.';
+    }
+
+    if (array_key_exists('isNew', $d)) {
+        $err = _validate_is_new($d['isNew']);
+        if ($err !== null) $e['isNew'] = $err;
+    }
+
+    return $e;
+}
+
 function _parse_iso_date(string $s): ?int {
     if ($s === '') return null;
     $ts = strtotime($s);
