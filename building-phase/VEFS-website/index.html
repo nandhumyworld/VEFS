@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="css/components/blog.css">
   <link rel="stylesheet" href="css/components/badge-new.css">
   <link rel="stylesheet" href="css/components/horizontal-rail.css">
+  <link rel="stylesheet" href="css/components/blog-slider.css">
   <link rel="stylesheet" href="css/responsive-mobile.css">
 
   <!-- Page-specific Styles -->
@@ -1471,6 +1472,27 @@
       </div>
     </section>
 
+    <!-- From the Blog Section -->
+    <section class="blog-slider" aria-label="Latest blog posts">
+      <div class="container">
+        <h2 class="section-title text-center">From the <span class="accent">Blog</span></h2>
+        <div class="blog-slider__frame"
+             id="blog-slider-frame"
+             role="region"
+             aria-roledescription="carousel"
+             aria-live="polite"
+             tabindex="0">
+          <button type="button" class="blog-slider__arrow blog-slider__arrow--prev"
+                  aria-label="Previous post">&lsaquo;</button>
+          <div class="blog-slider__track" id="blog-slider-track">
+            <!-- slides injected by blog-home.js -->
+          </div>
+          <button type="button" class="blog-slider__arrow blog-slider__arrow--next"
+                  aria-label="Next post">&rsaquo;</button>
+        </div>
+      </div>
+    </section>
+
     <!-- Upcoming Events Section -->
     <section class="section section-white">
       <div class="container">
@@ -1661,17 +1683,6 @@
             We respect your privacy. Unsubscribe anytime.
           </p>
         </form>
-      </div>
-    </section>
-
-    <!-- ============================================
-         LATEST FROM THE BLOG
-         ============================================ -->
-    <section class="section section-py home-blog-teaser">
-      <div class="container">
-        <h2 class="section-title">Latest from the blog</h2>
-        <div id="home-blog-grid" class="blog-grid blog-grid-3"></div>
-        <p class="section-cta-row"><a href="blog.html" class="btn btn-secondary">View all blogs &rarr;</a></p>
       </div>
     </section>
 
