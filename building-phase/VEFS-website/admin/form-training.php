@@ -185,6 +185,24 @@ $h = fn($v) => htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8');
             </label>
         </fieldset>
 
+        <?php
+            $isNewRaw = $post['isNew'] ?? 'auto';
+            $isNewVal = $isNewRaw === true ? 'true' : ($isNewRaw === false ? 'false' : 'auto');
+        ?>
+        <fieldset class="form-fieldset">
+            <legend>"NEW" badge</legend>
+            <p class="hint">Auto: shows for 7 days after creation. Use Force on / off to override.</p>
+            <label>
+                <input type="radio" name="isNew" value="auto" <?= $isNewVal==='auto'?'checked':'' ?>> Auto
+            </label>
+            <label>
+                <input type="radio" name="isNew" value="true" <?= $isNewVal==='true'?'checked':'' ?>> Force on
+            </label>
+            <label>
+                <input type="radio" name="isNew" value="false" <?= $isNewVal==='false'?'checked':'' ?>> Force off
+            </label>
+        </fieldset>
+
         <div>
             <button type="submit" class="btn btn-primary">Save</button>
             <a class="btn btn-ghost" href="/admin/dashboard.php?tab=training">Cancel</a>

@@ -19,6 +19,8 @@
 
     document.getElementById('volunteer-form').addEventListener('submit', async (e) => {
         e.preventDefault();
+        const _chosenIsNew = (document.querySelector('input[name="isNew"]:checked') || {}).value || 'auto';
+        const isNewPayload = _chosenIsNew === 'true' ? true : _chosenIsNew === 'false' ? false : 'auto';
         const payload = {
             csrf: document.querySelector('[name=csrf]').value,
             type: 'volunteer',
@@ -79,6 +81,7 @@
                 media: {
                     featuredImage: document.getElementById('featured-url').value,
                 },
+                isNew: isNewPayload,
             },
         };
         try {

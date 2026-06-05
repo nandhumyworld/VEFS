@@ -100,6 +100,9 @@
             url: row.children[1].value.trim(),
         })).filter(r => r.label || r.url);
 
+        const _chosenIsNew = (document.querySelector('input[name="isNew"]:checked') || {}).value || 'auto';
+        const isNewPayload = _chosenIsNew === 'true' ? true : _chosenIsNew === 'false' ? false : 'auto';
+
         const payload = {
             csrf: document.querySelector('[name=csrf]').value,
             type: 'blog',
@@ -114,6 +117,7 @@
                 reference_links: refLinks,
                 cta_text: document.getElementById('cta_text').value,
                 cta_url: document.getElementById('cta_url').value,
+                isNew: isNewPayload,
             },
         };
         try {

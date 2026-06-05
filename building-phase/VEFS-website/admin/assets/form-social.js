@@ -32,6 +32,8 @@
 
     document.getElementById('social-form').addEventListener('submit', async (e) => {
         e.preventDefault();
+        const _chosenIsNew = (document.querySelector('input[name="isNew"]:checked') || {}).value || 'auto';
+        const isNewPayload = _chosenIsNew === 'true' ? true : _chosenIsNew === 'false' ? false : 'auto';
         const payload = {
             csrf: document.querySelector('[name=csrf]').value,
             type: 'social',
@@ -42,6 +44,7 @@
                 thumbnail_url: document.getElementById('thumb-url').value,
                 caption: document.getElementById('caption').value,
                 order: parseInt(document.getElementById('order').value, 10) || 0,
+                isNew: isNewPayload,
             },
         };
         try {

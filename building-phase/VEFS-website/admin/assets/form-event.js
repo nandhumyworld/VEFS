@@ -51,6 +51,8 @@
     document.getElementById('event-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const capRaw = document.getElementById('capacity').value.trim();
+        const _chosenIsNew = (document.querySelector('input[name="isNew"]:checked') || {}).value || 'auto';
+        const isNewPayload = _chosenIsNew === 'true' ? true : _chosenIsNew === 'false' ? false : 'auto';
         const payload = {
             csrf: document.querySelector('[name=csrf]').value,
             type: 'event',
@@ -120,6 +122,7 @@
                     hero:     document.getElementById('hero-url').value,
                 },
                 tags: splitCsv(document.getElementById('tags').value),
+                isNew: isNewPayload,
             },
         };
         try {
