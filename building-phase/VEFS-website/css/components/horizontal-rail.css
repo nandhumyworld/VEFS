@@ -1,0 +1,70 @@
+/* Shared horizontal scroll rail (used by homepage social media rail). */
+
+.social-rail { padding: var(--space-2xl, 64px) 0; }
+
+.social-rail__viewport {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.social-rail__track {
+  display: flex;
+  gap: var(--space-md, 24px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-sm, 16px) var(--space-xs, 8px);
+  flex: 1;
+  scrollbar-width: none;
+}
+.social-rail__track::-webkit-scrollbar { display: none; }
+
+.social-rail__card {
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.social-rail__card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #f3f3f3;
+  display: block;
+}
+
+.social-rail__card-body {
+  padding: var(--space-sm, 16px);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.social-rail__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px; height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+.social-rail__arrow--prev { left: -10px; }
+.social-rail__arrow--next { right: -10px; }
+
+@media (max-width: 768px) {
+  .social-rail__arrow { display: none; }
+  .social-rail__card { flex-basis: 80vw; }
+}
