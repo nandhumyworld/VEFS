@@ -30,15 +30,22 @@ class GalleryPage {
 
   async loadPhotos() {
     try {
-      // Try PHP first (Hostinger live server — auto-discovers new images)
-      let files = await this.fetchJSON('get-gallery-images.php');
+      // Primary source: admin-managed JSON (new schema: { metadata, items: [...] })
+      let json = await this.fetchJSON('data/gallery.json');
 
-      // Fallback: static JSON (works on local Python server)
-      if (!files) {
-        files = await this.fetchJSON('data/gallery.json');
+      // Detect new schema {items: [...]} vs legacy flat array
+      if (json && Array.isArray(json.items)) {
+        this.photos = json.items
+          .filter(it => !it.disabled && !it.hiddenFromPublic)
+          .map((it, index) => this.buildPhotoFromItem(it, index));
+      } else if (Array.isArray(json) && json.length > 0) {
+        // Legacy flat array shape (pre-migration)
+        this.photos = json.map((file, index) => this.buildPhotoObject(file, index));
+      } else {
+        // Fallback: PHP scanner (Hostinger live server — auto-discovers raw image files)
+        const files = await this.fetchJSON('get-gallery-images.php');
+        this.photos = (files || []).map((file, index) => this.buildPhotoObject(file, index));
       }
-
-      this.photos = (files || []).map((file, index) => this.buildPhotoObject(file, index));
     } catch (err) {
       console.warn('Could not load gallery images:', err);
       this.photos = [];
@@ -49,7 +56,7 @@ class GalleryPage {
 
   async fetchJSON(url) {
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, { cache: 'no-store' });
       if (!res.ok) return null;
       const text = await res.text();
       if (text.trim().startsWith('<?')) return null; // PHP not executed
@@ -57,6 +64,27 @@ class GalleryPage {
     } catch {
       return null;
     }
+  }
+
+  // ─── Build a photo object from the new admin schema item ───────────────────
+
+  buildPhotoFromItem(item, index) {
+    const year = item.year
+      ? parseInt(item.year)
+      : (item.createdAt ? new Date(item.createdAt).getFullYear() : new Date().getFullYear());
+
+    return {
+      id:          item.id || `photo-${index}`,
+      filename:    '',
+      title:       item.title || `Photo ${index + 1}`,
+      description: item.description || '',
+      category:    'general',
+      year:        Number.isFinite(year) ? year : new Date().getFullYear(),
+      date:        item.createdAt || `${year}-01-01`,
+      url:         item.imageUrl || '',
+      isNew:       item.isNew,
+      createdAt:   item.createdAt || null,
+    };
   }
 
   // ─── Build a photo metadata object from a filename ─────────────────────────
@@ -230,19 +258,28 @@ class GalleryPage {
     noResults.style.display  = 'none';
     photosGrid.style.display = 'block';
 
-    photosGrid.innerHTML = this.filteredPhotos.map((photo, index) => `
+    const renderBadge = (typeof window !== 'undefined' && typeof window.renderNewBadge === 'function')
+      ? window.renderNewBadge
+      : () => '';
+
+    photosGrid.innerHTML = this.filteredPhotos.map((photo, index) => {
+      const cacheBust = photo.modified ? `?v=${photo.modified}` : '';
+      const altText = photo.title ? this.escapeAttr(photo.title) : `VEFS photo ${photo.year}`;
+      return `
       <div class="photo-item animate-fade-in" onclick="galleryPageInstance.openLightbox(${index})" role="button" tabindex="0" aria-label="View photo ${photo.year}">
         <img
-          src="${photo.url}?v=${photo.modified}"
-          alt="VEFS photo ${photo.year}"
+          src="${photo.url}${cacheBust}"
+          alt="${altText}"
           loading="lazy"
           onerror="this.parentElement.style.display='none'"
         >
+        ${renderBadge(photo)}
         <div class="photo-overlay">
           <div style="font-size:var(--font-size-sm);opacity:0.9;">${photo.year}</div>
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
 
     // Keyboard support
     photosGrid.querySelectorAll('.photo-item').forEach((item, i) => {
@@ -303,6 +340,12 @@ class GalleryPage {
 
   capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  escapeAttr(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
   }
 }
 
