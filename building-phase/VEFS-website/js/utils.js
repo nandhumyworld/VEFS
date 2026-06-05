@@ -356,3 +356,40 @@ window.VEFSUtils = {
   debounce,
   throttle
 };
+
+/* ===== "NEW" Badge Helpers ===== */
+
+/**
+ * Returns true if the item should display the "NEW" badge.
+ *  - item.isNew === true  -> always show
+ *  - item.isNew === false -> never show
+ *  - item.isNew === "auto" or undefined -> show if createdAt within 7 days
+ * @param {Object} item - Content item (event, training, blog post, etc.)
+ * @returns {boolean}
+ */
+function isItemNew(item) {
+  if (!item || typeof item !== 'object') return false;
+  if (item.isNew === true) return true;
+  if (item.isNew === false) return false;
+  // auto / undefined
+  const created = item.createdAt || item.created_at || null;
+  if (!created) return false;
+  const ageMs = Date.now() - new Date(created).getTime();
+  if (Number.isNaN(ageMs)) return false;
+  return ageMs >= 0 && ageMs < 7 * 24 * 60 * 60 * 1000;
+}
+
+/**
+ * Returns the markup for the NEW badge (or empty string).
+ * @param {Object} item
+ * @returns {string}
+ */
+function renderNewBadge(item) {
+  return isItemNew(item) ? '<span class="badge-new">NEW</span>' : '';
+}
+
+// Expose globally for non-module scripts.
+window.isItemNew = isItemNew;
+window.renderNewBadge = renderNewBadge;
+window.VEFSUtils.isItemNew = isItemNew;
+window.VEFSUtils.renderNewBadge = renderNewBadge;
