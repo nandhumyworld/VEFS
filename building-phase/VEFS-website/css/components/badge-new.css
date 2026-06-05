@@ -1,0 +1,28 @@
+/* Shared "NEW" indicator badge — blinks red/yellow.
+   Respects prefers-reduced-motion. */
+
+.badge-new {
+  display: inline-block;
+  padding: 2px 8px;
+  margin-left: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  background: #d32f2f;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  animation: badge-new-blink 1s steps(2, end) infinite;
+}
+
+@keyframes badge-new-blink {
+  0%, 100% { background: #d32f2f; color: #fff; }
+  50%      { background: #f9a825; color: #1a1a1a; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-new { animation: none; }
+}
