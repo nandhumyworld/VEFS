@@ -377,3 +377,15 @@ function _is_safe_url(string $url): bool {
     $scheme = strtolower((string)parse_url($url, PHP_URL_SCHEME));
     return in_array($scheme, ['http', 'https'], true);
 }
+
+/**
+ * Validates the isNew flag.
+ *  - Allowed: true, false, 'auto', null (treated as auto).
+ * Returns an error message on invalid value, or null on valid.
+ */
+function _validate_is_new($v): ?string {
+    if ($v === null) return null;
+    if ($v === true || $v === false) return null;
+    if ($v === 'auto') return null;
+    return 'isNew must be true, false, or "auto".';
+}
