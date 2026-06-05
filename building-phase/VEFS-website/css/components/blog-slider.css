@@ -1,52 +1,72 @@
-/* Manual blog slider for the homepage (no auto-advance). */
+/* Blog homepage carousel: 3 cards visible, auto-advances every 5s, wraps. */
 
 .blog-slider { padding: var(--space-2xl, 64px) 0; background: #f7f6f3; }
 
 .blog-slider__frame {
   position: relative;
   overflow: hidden;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 var(--space-xl, 48px);
 }
 
 .blog-slider__track {
   display: flex;
-  transition: transform 0.4s ease;
+  gap: var(--space-md, 24px);
+  transition: transform 0.5s ease;
   will-change: transform;
 }
 
 .blog-slider__slide {
-  flex: 0 0 100%;
-  padding: var(--space-md, 24px);
-  text-align: center;
+  /* 3 cards visible with two gaps between them */
+  flex: 0 0 calc((100% - 2 * var(--space-md, 24px)) / 3);
   box-sizing: border-box;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .blog-slider__slide a {
   text-decoration: none;
   color: inherit;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .blog-slider__slide img {
   width: 100%;
-  max-height: 360px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 8px;
   display: block;
-  margin: 0 auto;
+  background: #f3f3f3;
+}
+
+.blog-slider__slide-body {
+  padding: var(--space-md, 24px);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .blog-slider__slide h3 {
-  margin: var(--space-md, 24px) 0 var(--space-xs, 8px);
+  margin: 0 0 var(--space-xs, 8px);
   font-family: 'Lora', serif;
-  font-size: 1.6rem;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: #1a1a1a;
 }
 
 .blog-slider__slide .date {
   font-family: 'Inter', sans-serif;
   color: #666;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  margin: 0;
+  margin-top: auto;
+  padding-top: var(--space-sm, 16px);
 }
 
 .blog-slider__arrow {
@@ -65,4 +85,16 @@
 }
 .blog-slider__arrow--prev { left: 8px; }
 .blog-slider__arrow--next { right: 8px; }
-.blog-slider__arrow[disabled] { opacity: .3; cursor: not-allowed; }
+.blog-slider__arrow:hover { background: #f5f5f5; }
+
+@media (max-width: 900px) {
+  .blog-slider__slide {
+    flex-basis: calc((100% - var(--space-md, 24px)) / 2);
+  }
+}
+
+@media (max-width: 600px) {
+  .blog-slider__frame { padding: 0 var(--space-md, 24px); }
+  .blog-slider__slide { flex-basis: 100%; }
+  .blog-slider__arrow { width: 36px; height: 36px; font-size: 1.2rem; }
+}
