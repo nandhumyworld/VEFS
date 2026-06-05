@@ -20,11 +20,12 @@
         facebook: '<svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2" aria-label="Facebook"><path d="M22 12a10 10 0 1 0-11.6 9.9V15h-2.5v-3h2.5V9.8c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 3h-2.3v6.9A10 10 0 0 0 22 12z"/></svg>',
     };
 
+    const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const cld = (u) => (typeof u === 'string' && u.includes('res.cloudinary.com')) ? u.replace('/upload/', '/upload/f_auto,q_auto,w_500/') : u;
+
     let shown = 0;
     function renderBatch() {
         const batch = posts.slice(shown, shown + PER_BATCH);
-        const cld = (u) => (typeof u === 'string' && u.includes('res.cloudinary.com')) ? u.replace('/upload/', '/upload/f_auto,q_auto,w_500/') : u;
-        const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
         const html = batch.map(p => `
             <a class="social-card social-card-${esc(p.platform)}" href="${esc(p.post_url)}" target="_blank" rel="noopener noreferrer">
                 <div class="social-card-thumb-wrap">
@@ -39,4 +40,57 @@
     }
     renderBatch();
     more.addEventListener('click', renderBatch);
+
+    // ----- Recent Posts horizontal rail (above Upcoming Events) -----
+    const track = document.getElementById('social-rail-track');
+    if (track) {
+        const railHtml = posts.map(p => `
+            <article class="social-rail__card">
+                <a href="${esc(p.post_url || '#')}" target="_blank" rel="noopener noreferrer">
+                    <img src="${cld(p.thumbnail_url || '')}" alt="" loading="lazy">
+                </a>
+                <div class="social-rail__card-body">
+                    ${renderNewBadge(p)}
+                    <p>${esc(p.caption || '')}</p>
+                </div>
+            </article>`).join('');
+        track.innerHTML = railHtml;
+        wireRail(track);
+    }
+
+    function wireRail(track) {
+        const viewport = track.parentElement;
+        const prev = viewport.querySelector('.social-rail__arrow--prev');
+        const next = viewport.querySelector('.social-rail__arrow--next');
+        const getCardStep = () => {
+            const card = track.querySelector('.social-rail__card');
+            return card ? card.getBoundingClientRect().width + 24 /* gap */ : 320;
+        };
+        if (prev) prev.addEventListener('click', () => track.scrollBy({ left: -getCardStep(), behavior: 'smooth' }));
+        if (next) next.addEventListener('click', () => track.scrollBy({ left:  getCardStep(), behavior: 'smooth' }));
+
+        let paused = false;
+        ['mouseenter','touchstart','focusin'].forEach(ev =>
+            viewport.addEventListener(ev, () => { paused = true; }, { passive: true }));
+        ['mouseleave','touchend','focusout'].forEach(ev =>
+            viewport.addEventListener(ev, () => { paused = false; }, { passive: true }));
+        document.addEventListener('visibilitychange',
+            () => { paused = document.visibilityState !== 'visible'; });
+
+        let last = performance.now();
+        const PX_PER_SEC = 20;
+        function step(now) {
+            const dt = (now - last) / 1000;
+            last = now;
+            if (!paused) {
+                const max = track.scrollWidth - track.clientWidth;
+                if (max > 0) {
+                    const nextLeft = track.scrollLeft + PX_PER_SEC * dt;
+                    track.scrollLeft = nextLeft >= max - 1 ? 0 : nextLeft;
+                }
+            }
+            requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
 })();

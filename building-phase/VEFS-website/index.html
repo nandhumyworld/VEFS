@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components/blog.css">
   <link rel="stylesheet" href="css/components/badge-new.css">
+  <link rel="stylesheet" href="css/components/horizontal-rail.css">
   <link rel="stylesheet" href="css/responsive-mobile.css">
 
   <!-- Page-specific Styles -->
@@ -1449,6 +1450,23 @@
             </div>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Social Media Section -->
+    <section class="social-rail" aria-label="Recent social media posts">
+      <div class="container">
+        <h2 class="section-title text-center">Recent <span class="accent">Posts</span></h2>
+        <div class="social-rail__viewport">
+          <button type="button" class="social-rail__arrow social-rail__arrow--prev"
+                  aria-label="Scroll left">&lsaquo;</button>
+          <div class="social-rail__track" id="social-rail-track"
+               tabindex="0" role="region" aria-roledescription="carousel">
+            <!-- cards injected by social-home.js -->
+          </div>
+          <button type="button" class="social-rail__arrow social-rail__arrow--next"
+                  aria-label="Scroll right">&rsaquo;</button>
         </div>
       </div>
     </section>
