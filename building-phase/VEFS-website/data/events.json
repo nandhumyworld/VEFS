@@ -1,7 +1,7 @@
 {
     "metadata": {
         "version": "1.0",
-        "lastUpdated": "2026-05-31T10:31:18+00:00",
+        "lastUpdated": "2026-06-05T13:18:15+00:00",
         "totalEvents": 2,
         "categories": [
             "market"
@@ -9,27 +9,26 @@
         "statusCounts": {
             "upcoming": 2,
             "completed": 0
-        }
+        },
+        "total": 2
     },
     "events": [
         {
-            "id": "evt-001",
-            "enabled": true,
-            "title": "வள்ளுவம் இயற்கை சந்தை — கோடை கால உணவு திருவிழா, தாம்பரம்",
             "slug": "valluvam-organic-market-summer-festival-tambaram-may-2026",
+            "title": "வள்ளுவம் இயற்கை சந்தை — கோடை கால உணவு திருவிழா, தாம்பரம்",
             "type": "market",
             "status": "upcoming",
             "featured": true,
             "order": 10,
             "recurring": {
-                "isRecurring": true,
+                "isRecurring": false,
                 "frequency": "monthly",
                 "pattern": "2nd-sunday",
                 "label": "Every Month — 2nd Sunday"
             },
             "date": {
-                "start": "2026-05-10T09:00:00+05:30",
-                "end": "2026-05-10T18:00:00+05:30",
+                "start": "2026-06-07T09:00:00+05:30",
+                "end": "2026-06-07T18:00:00+05:30",
                 "timezone": "Asia/Kolkata"
             },
             "duration": {
@@ -44,8 +43,8 @@
                 "state": "Tamil Nadu",
                 "mapUrl": "https://maps.app.goo.gl/WL7Ais6QCcJHbTv38"
             },
-            "shortDescription": "வள்ளுவம் இயற்கை சந்தை — கோடை கால உணவு திருவிழா! இயற்கை சுவையில் மாம்பழங்கள் கிடைக்கும் 🥭 | Organic market with summer mangoes, traditional food & free entry. May 10, 2026 — Tambaram.",
-            "fullDescription": "🥬 வள்ளுவம் இயற்கை சந்தை — கோடை கால உணவு திருவிழா 🥭\n\nநம்மாழ்வார் மக்கள் குழு நடத்தும் இச்சந்தையில் இம்முறை கோடை கால உணவுத் திருவிழாவுடன், இயற்கை சுவையில் மாம்பழங்கள் கிடைக்கும்! 🥭\n\n📅 தேதி: மே 10, 2026 (ஞாயிற்றுக்கிழமை) — அனுமதி இலவசம்\n⏰ நேரம்: காலை 9 மணி முதல் மாலை 6 மணி வரை\n🏛️ இடம்: பேபி உயர்நிலைப்பள்ளி, தாம்பரம் மேற்கு பேருந்து நிலையம் பின்புறம், T-1 காவல் நிலையம் எதிரில், மேற்கு தாம்பரம், சென்னை.\n\n🛍️ சந்தையின் சிறப்பம்சங்கள்:\n• 🥦 இயற்கை காய்கறிகள் & பழங்கள்\n• 🥭 இயற்கை மாம்பழங்கள் (கோடை சிறப்பு)\n• 🌾 பாரம்பரிய அரிசிகள், அவல் வகைகள் & சிறுதானியம்\n• 🫘 நாட்டு விதைகள்\n• 🍯 மலைத் தேன் & மதிப்பு கூட்டு பொருட்கள்\n• 🥥 செக்கு எண்ணெய்கள்\n• 🌶️ பருப்பு, மசாலாப் பொருட்கள் & பொடி வகைகள்\n• 👜 சுற்றுச்சூழலுக்கு உகந்த துணிப்பைகள் & விளையாட்டு பொருட்கள்\n• 🙏🏽 பூசை பொருட்கள்\n• 🥨 சுவையான சிற்றுண்டிகள் (Snacks), இயற்கை பானங்கள் (Juices) & சூப்பு (Soups)\n\n🥗 மதிய உணவு: பாரம்பரிய அரிசி & சிறுதானியங்களில் சுவையான உணவுகள் (Parcel available) — பாத்திரங்கள் கொண்டு வரவும்.\n\n🙏🏾 முக்கிய அறிவிப்பு: துணிப்பையைக் கொண்டு வரவும். நண்பர்களுக்கு பகிருங்கள், அனைவரையும் அழைத்து வாருங்கள்!\n\nஇந்தத் திருவிழாவில் அனுமதி இலவசம்! உங்கள் குடும்பத்துடன் வருகை தந்து, நஞ்சில்லா உணவுகளை வாங்கி ஆரோக்கியமான வாழ்வைத் தொடங்குங்கள்.\n\n📞 கூடுதல் விவரங்கள்: 74485 58447 | 95666 67708",
+            "shortDescription": "வள்ளுவம் இயற்கை சந்தை — கோடை கால உணவு திருவிழா! இயற்கை சுவையில் மாம்பழங்கள் கிடைக்கும் 🥭 | Organic market with summer mangoes, traditional food & free entry. June 07, 2026 — Tambaram.",
+            "fullDescription": "\n 🥭இம்முறை இயற்கையில் விளைந்த சுவையான மாம்பழங்களின் சிறப்பு விற்பனை அரங்குகளுடன் 🥭\n\n🛍️ சந்தையில் கிடைப்பவை : \n\n🥬 இயற்கை காய்கறி & பழங்கள்🥭\n🌾பாரம்பரிய அரிசி, சிறுதானியம், அவுல்வகைகள் \n🍶தூய செக்கு எண்ணெய்கள்\n🥜ஆர்கானிக் பருப்பு & மசால் வகைகள்\n🍯மலைத்தேன் & தேன்‌மதிப்புக் கூட்டல் சீர்தானியங்கள்\n🫕சிறுதானிய உடனடி உணவு\n🥨மரபு திண்பண்டங்கள்\n🫘மரபு விதைகள் \n🧉 மண்பாண்ட பாத்திரங்கள் \n🎠மர விளையாட்டு பொருட்கள் \n🪔 கோசாலை தூய பூஜை பொருட்கள் \n🫙பயோ என்சைம் பொருட்கள்\n\n🏘️வீட்டு உபயோக பொருட்கள் இயற்கையானவை கிடைக்கும் 🏡\n\n🙏🏾 அனைவரும் வாருங்கள் அனுமதி இலவசம் 👣 \n🌱 இயற்கையான உணவு பொருட்களின் சந்தை 👉🏽",
             "agenda": [
                 {
                     "time": "9:00 AM",
@@ -106,11 +105,12 @@
             },
             "links": {
                 "whatsapp": "https://whatsapp.com/channel/0029Va7qtOY002T6gcfepP2E",
+                "youtube": "",
                 "map": "https://maps.app.goo.gl/WL7Ais6QCcJHbTv38"
             },
             "images": {
-                "featured": "images/events/evt-001-thumbnail.jpg",
-                "hero": "images/events/evt-003.jpeg"
+                "featured": "https://res.cloudinary.com/dxwdnbnjo/image/upload/v1780665304/ejn57nhfy5kc6mjwankb.jpg",
+                "hero": "https://res.cloudinary.com/dxwdnbnjo/image/upload/v1780665310/wh9vpe0hxlwq5n3ynoki.jpg"
             },
             "tags": [
                 "market",
@@ -122,11 +122,14 @@
                 "mango",
                 "kodai-kalam",
                 "natural-farming"
-            ]
+            ],
+            "isNew": "auto",
+            "enabled": true,
+            "id": "evt-001"
         },
         {
             "id": "evt-002",
-            "enabled": true,
+            "enabled": false,
             "title": "Valluvam Organic Farmers Market — Adyar",
             "slug": "valluvam-organic-farmers-market-adyar",
             "type": "market",

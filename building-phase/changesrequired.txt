@@ -1,4 +1,7 @@
-1. in events modal remove event organizer section since we have event coordinator, disable that section
-2. While applying fo vollunterring after entering the form the confirmation is not showing like other forms and also the email is send twice, it has to sent only one email with confirmation message appearring
-3. Donation form is not working after submit button i want eveything to be captured inthe forms inthe mail all checkbox user is checking in the form for 80g receipt and for subscribtion.
-4. want o know how the news letter subscription emails are tracked where these mail ids are stored ?
+1. Admin page implemenation i want the Gallery also to be added in admin so that user should able to add photos to gallery from admin page add remove edit and delete with a photo and desctiption/title whisch is alreay shown along with the year of phot to be mentioned, try to match the current UI info and add those to admin
+2. I want to add the Blog a one of the sepearate page after About with a smal flash of GIF telling "NEW" red and yellow color
+3. Similarty like a image scroll i want social media post added to be scrolled left to right with image and description. About Upcomming Event section
+4. Below Social Media show the Blog content with image tha fits into the thumbnail and title and date it was posted.
+5. I want you to add a field like enable diabled one more slider says "New" by toggling on it should show same GIF new blink on any post common for events, training, volunterring, social media post, blog and gallery
+
+Let me know if you have questions or clarity required before writing a spec o r plan to execute this. lets branstom this 1st and find out any discrpencies and feasabilty and alternatives

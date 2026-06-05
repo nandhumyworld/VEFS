@@ -23,7 +23,10 @@
       "PowerShell(Get-ChildItem *)",
       "PowerShell(git -C $r add VEFS-website/data/blog.json VEFS-website/data/social.json \"VEFS-website/data/.htaccess\" VEFS-website/data/backups/.gitkeep .gitignore)",
       "PowerShell($r = \"C:\\\\Users\\\\NANDHU\\\\Documents\\\\SocialEagle\\\\Digital Clients\\\\VEFS\\\\Workspace\\\\VEFS\\\\building-phase\")",
-      "PowerShell($r = \"C:\\\\Users\\\\NANDHU\\\\Documents\\\\SocialEagle\\\\Digital Clients\\\\VEFS\\\\Workspace\\\\VEFS\\\\building-phase\"; $env:GIT_PAGER=''; git -C $r --no-pager log --oneline -1 | Out-String | Write-Output; git -C $r status --short | Out-String | Write-Output)"
+      "PowerShell($r = \"C:\\\\Users\\\\NANDHU\\\\Documents\\\\SocialEagle\\\\Digital Clients\\\\VEFS\\\\Workspace\\\\VEFS\\\\building-phase\"; $env:GIT_PAGER=''; git -C $r --no-pager log --oneline -1 | Out-String | Write-Output; git -C $r status --short | Out-String | Write-Output)",
+      "PowerShell(php -l \"C:\\\\Users\\\\NANDHU\\\\Documents\\\\SocialEagle\\\\Digital Clients\\\\VEFS\\\\Workspace\\\\VEFS\\\\building-phase\\\\VEFS-website\\\\includes\\\\content-helpers.php\")",
+      "PowerShell($candidates = @\\(\"C:\\\\php\\\\php.exe\",\"C:\\\\Program Files\\\\PHP\\\\php.exe\",\"C:\\\\tools\\\\php\\\\php.exe\",\"C:\\\\xampp\\\\php\\\\php.exe\",\"C:\\\\wamp64\\\\bin\\\\php\"\\); foreach \\($p in $candidates\\) { if \\(Test-Path $p\\) { Write-Output \"FOUND: $p\" } }; Write-Output \"---\"; Get-ChildItem -Path \"C:\\\\\" -Filter \"php.exe\" -ErrorAction SilentlyContinue -Recurse -Depth 3 2>$null | Select-Object -First 5 -ExpandProperty FullName)",
+      "PowerShell(php --version 2>&1 | Select-Object -First 1)"
     ]
   },
   "disabledMcpjsonServers": [

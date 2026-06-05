@@ -4,426 +4,167 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**VEFS Website** - Valluvam Ecological Farming and Social Welfare Foundation
-A static website for a Trust focused on creating awareness about indigenous tree species, ecological conservation, and conducting educational programs.
+**VEFS Foundation Website** — Valluvam Ecological Farming and Social Welfare Foundation (Tamil Nadu non-profit Trust, founded 2019). Public marketing/info site plus a password-protected PHP admin panel for managing dynamic content.
 
-**Hosting Environment:** Hostinger static hosting (PHP + JavaScript)
-**Status:** Requirements documentation complete - Ready for implementation
+**Hosting:** Hostinger shared hosting — Apache + PHP 7.4+, no Node runtime in production.
+**Status:** Active implementation. Current branch `feature/restructure` is building out the admin panel (CRUD forms for events, trainings, volunteers, blog, social — Duplicate / Enable-Disable / hide-from-public actions recently landed).
 
-## Critical Constraints
-
-### What IS Available
-- Static HTML, CSS, JavaScript files (starts from `index.html`)
-- PHP support for form processing and email delivery
-- MySQL database (available but not initially used)
-- FTP/SFTP access via Hostinger File Manager
-- Apache web server with .htaccess configuration
-
-### What IS NOT Available
-- **No Node.js** runtime or npm packages
-- **No build tools** (Webpack, Vite, Parcel, etc.)
-- **No frameworks** (React, Vue, Next.js, etc.)
-- **No CI/CD pipelines** or auto-deployment
-- **No custom server applications** or WebSocket servers
-
-### What This Means for Development
-1. Use **vanilla JavaScript only** - No JSX, no TypeScript compilation
-2. Write plain CSS - No Sass, Less, or CSS-in-JS compilation
-3. Files are deployed **directly via FTP** - What you write is what gets served
-4. Changes take effect **immediately after upload** - No build step
-5. All third-party libraries must be **CDN-linked** or vendored as static files
-
-## Technology Stack
-
-### Frontend (Client-Side)
-- **HTML5** with semantic markup and ARIA labels
-- **CSS3** with CSS Custom Properties (CSS Variables) for theming
-- **Vanilla JavaScript (ES6+)** - No frameworks, use native Fetch API
-- **Google Fonts** - Lora (serif headings) and Inter (sans-serif body)
-
-### Backend (Server-Side)
-- **PHP 7.4+** for form processing only
-- **Gmail API** via Google API PHP Client for email delivery (2,000/day quota)
-- **JSON files** as lightweight data storage (no database initially)
-
-### Development Workflow
-```
-1. Edit files locally (HTML/CSS/JS/PHP)
-2. Test in browser (local file system or localhost)
-3. Validate JSON, HTML, CSS
-4. Optimize images (<200KB each)
-5. Upload via FTP to Hostinger
-6. Verify on live site
-```
-
-## Data Architecture
-
-### JSON-Based Content Management
-All dynamic content (events, trainings, volunteers) is stored in JSON files:
+## Repository Layout
 
 ```
-public_html/data/
-├── events.json       # All events with metadata
-├── trainings.json    # Training programs and schedules
-├── volunteers.json   # Volunteer opportunities with requirements and benefits
-└── recent-registrations.json  # For duplicate checking
+building-phase/                  ← repo root (working copy / dev workspace)
+├── VEFS-website/                ← THE SITE — deploy this folder's contents to Hostinger public_html/
+│   ├── *.html                   ← 9 public pages (index, about, trainings, events, volunteer,
+│   │                              gallery, contact, donate, future-plans) + blog.html, privacy, terms
+│   ├── blog-post.php            ← dynamic blog post renderer (/blog/<slug>)
+│   ├── router.php               ← LOCAL DEV ONLY — used by `php -S` to mimic Apache rewrites
+│   ├── admin/                   ← password-protected admin panel (PHP, see below)
+│   ├── includes/                ← shared PHP: auth, csrf, json-store, validate, sanitize-html, admin-helpers
+│   ├── forms/newsletter.php     ← public newsletter signup handler
+│   ├── data/*.json              ← single source of truth for dynamic content
+│   ├── data/backups/            ← auto-rotated JSON backups written on every admin save
+│   ├── css/                     ← theme.css, layout.css, components/, responsive-mobile.css, etc.
+│   ├── js/                      ← per-page scripts (events.js, trainings.js, …) + components/ + utils.js
+│   ├── images/, videos/, vendor/htmlpurifier
+│   ├── tests/                   ← PHP unit tests for includes/ (csrf, json-store, validate, sanitize-html)
+│   └── llms.txt                 ← AI-agent-readable summary of the org
+├── VEFS-requirements/           ← original spec docs (pages/, technical/, data-schemas/, styles/)
+├── VEFS-builder/                ← project mgmt, testing artifacts, deployment guides, content docs
+├── docs/                        ← additional design/architecture notes
+├── package.json + node_modules/ ← Playwright (dev/test only — NOT shipped to prod)
+└── test_modal_scroll.spec.js    ← root-level Playwright spec
 ```
 
-**Key Points:**
-- Client-side JavaScript loads JSON via `fetch('/data/events.json')`
-- Updates require manual FTP upload - changes are immediate
-- No database queries - all filtering/sorting happens in JavaScript
-- See `VEFS-requirements/data-schemas/DATA_MANAGEMENT.md` for complete schema
+The repo root also contains working-notes files (`bug_list.txt`, `changesrequired.txt`, `newfeature_list.txt`, `information needed.txt`, `mobil_version_need fix.jpg`). These are scratch notes — read them when relevant but don't deploy them.
 
-### Email-Based Data Collection
-The site has **no admin dashboard**. Form submissions are:
-1. Validated client-side (JavaScript)
-2. Processed server-side (PHP)
-3. Delivered via **Gmail API** to admin email
-4. Confirmed to user via auto-response email
+## Critical Constraints (Production)
 
-## File Organization
+**Available:** Static HTML/CSS/JS, PHP 7.4+, MySQL (unused so far), FTP/SFTP, `.htaccess`.
+**NOT available:** Node.js runtime, build tools, JS frameworks, CI/CD, custom long-running servers, WebSockets.
 
-### Directory Structure
-```
-public_html/
-├── index.html, about.html, volunteer.html, etc.  # 9 main pages
-├── css/
-│   ├── theme.css          # CSS variables and theming
-│   ├── layout.css         # Grid and responsive layouts
-│   └── components/        # Button, card, form, modal styles
-├── js/
-│   ├── components/        # Reusable JS modules
-│   ├── events.js          # Event page logic
-│   ├── trainings.js       # Training page logic
-│   └── volunteers.js      # Volunteer page logic
-├── data/                  # JSON content files
-├── images/
-│   ├── hero/, events/, trainings/, volunteers/
-│   └── gallery/           # Organized by year/month
-├── forms/                 # PHP form processors
-└── email-templates/       # HTML email templates
-```
+Implications:
+- Vanilla JS only (no JSX/TS compilation). Plain CSS (no Sass/PostCSS).
+- **What you write is what ships.** No build step — FTP upload is the deploy.
+- Third-party libs must be CDN-linked or vendored (see `vendor/htmlpurifier`).
+- Playwright in `package.json` is **dev-only** for local automated testing; it is not part of the deploy.
 
-See `VEFS-requirements/technical/FILE_MANAGEMENT_SYSTEM.md` for complete structure.
+## Architecture
 
-### VEFS-builder Project Organization
-
-**CRITICAL:** All generated documentation, test artifacts, and deployment files MUST be organized within the `VEFS-builder/` folder structure:
+### Two-tier system: JSON-as-database
 
 ```
-VEFS-builder/
-├── 00-PROJECT-MANAGEMENT/    # Project planning, timelines, status tracking
-├── 01-CORE-COMPONENTS/        # Reusable component specifications
-├── 02-CONTENT-PREPARATION/    # Content templates and preparation guides
-├── 04-TESTING/                # Testing documentation and artifacts
-│   ├── TESTING-GUIDE.md       # Testing procedures and checklists
-│   └── screenshots/           # Test screenshots and visual verification
-├── 05-DEPLOYMENT/             # Deployment guides and scripts
-│   ├── DEPLOYMENT_CHECKLIST.md
-│   ├── GOOGLE_APPS_SCRIPT.js
-│   └── GOOGLE_SHEETS_SETUP_GUIDE.md
-└── 06-DOCUMENTATION/          # User guides and content documentation
-    ├── CONTENT_QUICKSTART_GUIDE.md
-    ├── CONTENT_REPLACEMENT_MAP.md
-    └── CONTENT_TO_PROVIDE.md
+┌────────────────────────┐         ┌─────────────────────┐         ┌────────────────────┐
+│  Admin panel (PHP)     │ writes  │  data/*.json        │  reads  │  Public pages      │
+│  /admin/* + api/*.php  │────────▶│  events, trainings, │◀────────│  fetch() from JS,  │
+│  CSRF + session auth   │         │  volunteers, blog,  │         │  or PHP renders    │
+│                        │         │  social, gallery    │         │  (blog-post.php)   │
+└────────────────────────┘         └─────────────────────┘         └────────────────────┘
 ```
 
-**File Organization Rules:**
-- **Never** create documentation files in the project root directory
-- **Always** place test screenshots in `VEFS-builder/04-TESTING/screenshots/`
-- **Always** place deployment guides and scripts in `VEFS-builder/05-DEPLOYMENT/`
-- **Always** place content documentation in `VEFS-builder/06-DOCUMENTATION/`
-- Keep the root directory clean - only essential files (CLAUDE.md, package.json, .mcp.json) should be in the root
+`includes/json-store.php` is the single read/write gateway — handles atomic writes, backups into `data/backups/`, and locking. **Never write JSON files by hand from PHP**; go through `json_store_*` functions.
 
-## Design System
+### Five content types, one CRUD pipeline
 
-### Brand Colors (CSS Variables)
+Admin handles five content types uniformly: `blog`, `social`, `event`, `training`, `volunteer`. Each has:
+- A form page: `admin/form-<type>.php` + matching `admin/assets/form-<type>.js`
+- Shared API endpoints under `admin/api/`: `save.php`, `delete.php`, `duplicate.php`, `toggle.php` (enable/disable / hide-from-public), `reorder.php`
+- A JSON file in `data/` (key inside the file determined by `admin_array_key_for_type()` in `includes/admin-helpers.php`)
+
+All admin API calls are JSON POSTs, require a valid session (`auth.php`) AND a CSRF token (`csrf.php`), and sanitize rich-text fields through HTMLPurifier (`sanitize-html.php`) and `validate.php`.
+
+### Public-page data loading
+
+Per-page JS (e.g. `js/events.js`, `js/trainings.js`, `js/volunteers.js`, `js/gallery.js`, `js/blog-home.js`, `js/social-home.js`) does `fetch('/data/<type>.json')` and renders client-side. The blog detail page is the exception — `blog-post.php` server-renders so individual posts have crawlable HTML and clean URLs (`/blog/<slug>` via `.htaccess` rewrite, mirrored in `router.php` for local dev).
+
+Admin-driven flags like "disabled" or "hide from public page" are filtered out **client-side** by the public JS reading the JSON — keep that filter in mind when adding new fields.
+
+### Form submissions (public → email)
+
+Public registration/contact/donation forms use the legacy flow specified in `VEFS-requirements/technical/REGISTRATION_SYSTEM.md`: client-side validation → PHP handler → Gmail API → email to admin + user confirmation. Currently `forms/newsletter.php` exists; other registration handlers are being built out.
+
+### Auth model
+
+Single shared admin password stored hashed in `admin/config.php` (gitignored — `config.sample.php` is the template). Sessions are short-lived; 15-minute lockout after failed attempts. There is no user table or role system.
+
+## Tech Stack Snapshot
+
+- **Frontend:** HTML5, CSS3 (CSS custom properties for theming), vanilla ES6+. Google Fonts: Lora (serif headings), Inter (sans body).
+- **Backend:** PHP 7.4+ for admin, form handlers, blog rendering. HTMLPurifier vendored for HTML sanitization.
+- **Email:** Gmail API via Google API PHP Client (OAuth2, 2,000/day quota). Setup: `VEFS-requirements/technical/JSON_API_GMAIL_INTEGRATION.md`.
+- **Storage:** JSON files in `data/`. MySQL is available but not used.
+- **Testing:** Playwright (`@playwright/test`) for browser E2E; PHP test scripts in `VEFS-website/tests/`.
+
+## Common Commands
+
+Run from the **repo root** (`building-phase/`) unless noted.
+
+```bash
+# Local dev server (run from VEFS-website/) — uses router.php to mimic Apache rewrites
+cd VEFS-website && php -S localhost:8000 router.php
+
+# Static-only alternative (no PHP — won't run admin / blog-post.php)
+cd VEFS-website && python -m http.server 8000
+
+# Playwright E2E (devDependency installed at repo root)
+npx playwright test                              # all specs
+npx playwright test test_modal_scroll.spec.js    # single spec
+npx playwright test --ui                         # interactive mode
+
+# PHP unit tests for includes/ (run from VEFS-website/)
+php tests/test-runner.php                        # runs all test-*.php
+php tests/test-csrf.php                          # individual suite
+```
+
+No npm/lint/build commands — `package.json` only carries the Playwright devDependency.
+
+## Design System (essentials)
+
 ```css
---color-primary: #6B8E23;        /* Sage Green - primary brand */
---color-secondary: #D4A574;      /* Golden/Amber - CTAs */
---color-accent: #8B7355;         /* Earth Brown */
+--color-primary:   #6B8E23;  /* Sage Green   — primary brand */
+--color-secondary: #D4A574;  /* Golden/Amber — CTAs */
+--color-accent:    #8B7355;  /* Earth Brown  */
 ```
 
-### Typography
-- **Headings:** Serif font (Lora, Georgia fallback) - Professional, trustworthy
-- **Body:** Sans-serif (Inter, system font stack) - Clean, readable
-- **Type Scale:** 13-point scale from 11.1px to 47.8px
+- 8px spacing scale: xs(8) sm(16) md(24) lg(32) xl(48) 2xl(64) 3xl(96).
+- Mobile-first; design for ≥320px, enhance up.
+- WCAG 2.1 AA required (4.5:1 contrast, keyboard nav, 2px sage focus ring, alt text everywhere).
+- Full spec: `VEFS-requirements/styles/DESIGN_SYSTEM.md`, components in `VEFS-requirements/technical/COMPONENT_LIBRARY.md`.
 
-### Spacing
-- **Base unit:** 8px
-- **Scale:** xs(8px), sm(16px), md(24px), lg(32px), xl(48px), 2xl(64px), 3xl(96px)
+## Performance Targets
 
-### Component Patterns
-All components are defined in `VEFS-requirements/technical/COMPONENT_LIBRARY.md`:
-- Buttons (primary/secondary variants)
-- Cards (event, training, volunteer)
-- Forms (validation, accessibility)
-- Modals (with focus trap)
-- Navigation (responsive, mobile-first)
+FCP < 1.5s · LCP < 2.5s · Page size < 2MB · < 50 requests/page · JPEG photos < 200KB · `loading="lazy"` on below-fold images.
 
-**Complete design specifications:** `VEFS-requirements/styles/DESIGN_SYSTEM.md`
+## Security Notes
 
-## Page Architecture
+- All admin API endpoints check **session AND CSRF token** — never add an endpoint that skips either.
+- All user-supplied HTML must pass through `sanitize-html.php` (HTMLPurifier) before being stored.
+- `.htaccess` enforces HTTPS and sets `X-Frame-Options`, `X-Content-Type-Options`, `X-XSS-Protection`.
+- Public forms use CSRF + honeypot + rate limiting; duplicate registrations checked against `data/recent-registrations.json` (per spec).
+- `admin/config.php`, `/backups/`, `/logs/` must not be web-readable. Permissions: dirs 755, files 644.
 
-### Nine Main Pages
-1. **Home** - Hero carousel (3 slides), video, featured content
-2. **About** - Story, mission/vision, values, impact metrics, timeline, founder profile
-3. **Trainings** - Timeline view with calendar, registration forms
-4. **Events** - Grid view with filters, detail modals
-5. **Volunteer** - Opportunity grid with requirements, benefits, and embedded registration forms
-6. **Gallery** - Masonry grid with lightbox, organized by year/category
-7. **Contact** - Multiple contact methods, inquiry form, Google Maps embed
-8. **Donation** - Impact showcase, payment integration (UPI QR, bank transfer, optional Razorpay)
-9. **Future Plans** - Vision timeline and strategic goals
+## Where Spec Lives
 
-**Detailed page specifications:** `VEFS-requirements/pages/` directory
+`VEFS-requirements/` is the source of truth for design intent and was written before code. When code and spec disagree, ask which one is current — the implementation is the authoritative answer in most cases now, but a few areas (registration form handlers) still defer to the spec.
 
-## Registration System Architecture
+Key indexes:
+- Pages: `VEFS-requirements/pages/*.md` (one per public page)
+- System architecture: `VEFS-requirements/technical/{TECHNICAL_IMPLEMENTATION,REGISTRATION_SYSTEM,FILE_MANAGEMENT_SYSTEM,INTEGRATION_SPECIFICATIONS,JSON_API_GMAIL_INTEGRATION}.md`
+- Data schemas: `VEFS-requirements/data-schemas/*.md`
 
-### Four Registration Types
-1. **Event Registration** - Community events, workshops
-2. **Training Registration** - Structured programs with detailed participant requirements
-3. **Volunteer Applications** - Opportunity-based applications with age validation and motivation assessment
-4. **Donation Processing** - Contribution form with 80G compliance
+`VEFS-builder/` holds project-management, deployment, and content-handoff docs — never write new docs at the repo root; put them in the appropriate `VEFS-builder/0X-*` subfolder.
 
-### Registration Flow
-```
-User fills form → Client-side validation → Duplicate check (JSON) →
-PHP processing → Gmail API email delivery → User confirmation + Admin CC
-```
+## Working-File Conventions
 
-**Key Features:**
-- CSRF token protection on all forms
-- Rate limiting and honeypot spam prevention
-- Duplicate registration checking via `recent-registrations.json`
-- Multi-step forms with progress indicators
-- Accessible, keyboard-navigable
-
-**Complete architecture:** `VEFS-requirements/technical/REGISTRATION_SYSTEM.md`
-
-## Performance & SEO Requirements
-
-### Performance Targets
-- **First Contentful Paint (FCP):** < 1.5s
-- **Largest Contentful Paint (LCP):** < 2.5s
-- **Page Size:** < 2MB per page
-- **Requests:** < 50 per page
-
-### Image Optimization
-- Format: JPEG for photos (<200KB), PNG for graphics, SVG for icons
-- Use `loading="lazy"` for below-fold images
-- Provide responsive images with `srcset`
-
-### SEO Essentials
-- Meta tags (title, description, OG tags) on every page
-- Schema.org structured data (Organization, Event schemas)
-- `sitemap.xml` and `robots.txt` configured
-- HTTPS enforced via .htaccess
-
-### Accessibility (WCAG 2.1 AA)
-- Semantic HTML with ARIA labels
-- Color contrast ratio ≥ 4.5:1 for text
-- Keyboard navigation support
-- Focus indicators visible (2px sage green outline)
-- Alt text for all images
-
-**Complete specifications:** `VEFS-requirements/technical/TECHNICAL_IMPLEMENTATION.md`
-
-## Integration Specifications
-
-### Gmail API Integration
-- **Purpose:** Reliable email delivery for registrations and confirmations
-- **Quota:** 2,000 emails/day (free tier)
-- **Authentication:** OAuth 2.0
-- **Implementation:** PHP with Google API Client library
-
-**Setup guide:** `VEFS-requirements/technical/JSON_API_GMAIL_INTEGRATION.md`
-
-### Payment Integration
-- **Primary:** UPI QR codes and bank transfer (manual)
-- **Optional:** Razorpay/Instamojo gateway for online payments
-- **80G Certificate:** Provided for tax exemption
-
-### Analytics
-- Google Analytics 4 for traffic tracking
-- Facebook Pixel for social media tracking (optional)
-
-### Maps
-- Google Maps embedded iframe for office location
-- Custom markers and styling
-
-**Complete integration specs:** `VEFS-requirements/technical/INTEGRATION_SPECIFICATIONS.md`
-
-## Security Measures
-
-### .htaccess Security
-```apache
-# Force HTTPS
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# Security headers
-Header always set X-Frame-Options "SAMEORIGIN"
-Header always set X-XSS-Protection "1; mode=block"
-Header always set X-Content-Type-Options "nosniff"
-```
-
-### Form Security
-- CSRF tokens on all forms
-- Server-side input validation and sanitization (prevent XSS)
-- Rate limiting to prevent spam
-- Honeypot fields
-
-### File Permissions
-- Folders: 755
-- Files: 644
-- Protected directories: `/backups/`, `/logs/`, `/forms/`
-
-## Code Standards
-
-### HTML
-- Semantic HTML5 elements
-- Lowercase tags and attributes
-- Quote all attribute values
-- Include alt text for images
-
-### CSS
-- Use CSS variables for theming
-- BEM naming convention (optional but recommended)
-- Mobile-first media queries
-- Component-based organization
-
-### JavaScript
-- Use `const`/`let` (never `var`)
-- Descriptive names for variables/functions
-- Async/await for asynchronous operations
-- ES6 class syntax for components
-- Error handling with try/catch
-
-## Common Development Tasks
-
-### Updating Events/Trainings Data
-1. Edit `data/events.json` or `data/trainings.json` locally
-2. Validate JSON at jsonlint.com
-3. Upload via FTP to `/public_html/data/`
-4. Changes appear immediately (consider cache-busting: `?v=1.1`)
-
-### Adding New Images
-1. Optimize image (<200KB, appropriate dimensions)
-2. Use descriptive filename: `event-organic-farming-march-2025.jpg`
-3. Upload to appropriate folder (`images/events/`, etc.)
-4. Reference in JSON or HTML with absolute path: `/images/events/...`
-
-### Deploying Changes
-1. Backup current production files (download via FTP)
-2. Upload new/modified files
-3. Clear browser cache and test
-4. Check browser console for errors
-5. Verify forms, links, and images load correctly
-
-### Testing Checklist
-- [ ] All pages load correctly
-- [ ] Navigation works (desktop + mobile)
-- [ ] Forms submit and validate
-- [ ] Images load with proper lazy loading
-- [ ] Registration emails deliver successfully
-- [ ] PageSpeed Insights score > 80
-- [ ] Keyboard navigation works
-- [ ] Color contrast meets WCAG AA
-
-### Automated Testing with Playwright MCP
-
-**IMPORTANT:** This project has Playwright MCP server configured for automated browser testing.
-
-**When to Use Playwright MCP:**
-- **Phase 8: Testing & QA** - Use for comprehensive automated testing
-- **Bug Fixes** - Test fixes before marking as complete
-- **Visual Verification** - Take screenshots to verify CSS/layout changes
-- **Regression Testing** - Ensure changes don't break existing functionality
-
-**What Playwright MCP Can Do:**
-1. Navigate to pages and verify CSS/JS loading
-2. Take screenshots for visual verification
-3. Test responsive design across viewports (mobile 375px, tablet 768px, desktop 1920px)
-4. Verify accessibility (WCAG AA compliance)
-5. Test form validation and interactions
-6. Check for JavaScript console errors
-7. Verify navigation and links work correctly
-8. Test dynamic content loading (when using local server)
-
-**Configuration:**
-- MCP Server: Configured in `.mcp.json` at project root
-- Base URL: `file://` protocol for static files (local testing)
-- Browsers: Chromium, Firefox (configured)
-- Screenshots: Automatically saved on test failures
-
-**Testing Workflow:**
-1. **Manual fixes first** - Make code changes as needed
-2. **Local verification** - Open in browser to verify visually
-3. **Playwright MCP testing** - Use MCP tools to automate verification
-4. **Take screenshots** - Capture before/after for visual comparison
-5. **Check console** - Verify no JavaScript errors
-6. **Test responsiveness** - Check mobile/tablet/desktop viewports
-7. **Mark complete** - Only after automated tests pass
-
-**Example Usage (for Claude):**
-When fixing a bug like "CSS not loading":
-1. Fix the paths in HTML files
-2. Use Playwright MCP to navigate to `index.html`
-3. Take screenshot to verify CSS applied
-4. Check browser console for errors
-5. Test on mobile viewport (375px)
-6. Confirm fix successful before reporting to user
-
-**For Local Server Testing:**
-If testing dynamic features (JSON loading, etc.):
-1. Start Python server: `cd VEFS-website && python -m http.server 8000`
-2. Update base URL in tests to `http://localhost:8000`
-3. Run Playwright tests with full JavaScript functionality
-
-**Note:** Test scripts will be created during Phase 8. For now, the MCP server is configured and ready for use when needed.
-
-## Documentation Index
-
-All requirements are fully documented in `VEFS-requirements/`:
-
-### Pages
-- `pages/HOME_PAGE.md` - Hero carousel, video container, featured content
-- `pages/ABOUT_PAGE.md` - Story, mission, values, impact, timeline
-- `pages/PROGRAMS_PAGE.md` - Program cards organized by audience
-- `pages/TRAININGS_PAGE.md` - Calendar view with registration
-- `pages/EVENTS_PAGE.md` - Grid with filters and detail modals
-- `pages/GALLERY_PAGE.md` - Masonry grid with lightbox
-- `pages/CONTACT_PAGE.md` - Contact form and Google Maps
-- `pages/DONATION_PAGE.md` - Payment integration and impact showcase
-- `pages/FUTURE_PLANS_PAGE.md` - Vision timeline
-
-### Technical
-- `technical/TECHNICAL_IMPLEMENTATION.md` - Technology stack, browser support, performance
-- `technical/COMPONENT_LIBRARY.md` - Reusable components (buttons, cards, forms, modals)
-- `technical/REGISTRATION_SYSTEM.md` - Event/training/donation form architecture
-- `technical/FILE_MANAGEMENT_SYSTEM.md` - Directory structure and content workflows
-- `technical/INTEGRATION_SPECIFICATIONS.md` - Payment, analytics, maps, social media
-- `technical/JSON_API_GMAIL_INTEGRATION.md` - Email delivery system setup
-
-### Data & Design
-- `data-schemas/DATA_MANAGEMENT.md` - JSON schemas for events, trainings, programs
-- `data-schemas/PROGRAMS_DATA_SCHEMA.md` - Programs JSON structure
-- `styles/DESIGN_SYSTEM.md` - Complete visual identity and component guidelines
-
-### Project Management
-- `project-overview.md` - Scope, features, priorities
-- `PROGRESS.md` - Session log and completion status (all requirements complete)
+- **Generated docs / test screenshots / deployment scripts** → `VEFS-builder/0X-*/` subfolders (see `04-TESTING/screenshots/`, `05-DEPLOYMENT/`, `06-DOCUMENTATION/`).
+- **Site code** → `VEFS-website/`.
+- **Repo root** stays clean: only `CLAUDE.md`, `package.json`, `.mcp.json`, and the working-notes `.txt` files belong there.
 
 ## Key Reminders
 
-1. **No Build Process** - Everything you write goes directly to production via FTP
-2. **Vanilla JavaScript Only** - No frameworks, no JSX, no TypeScript compilation
-3. **Email-Based Content Management** - No admin dashboard, registrations go to email
-4. **JSON for Dynamic Content** - Events/trainings/programs stored in JSON files
-5. **Mobile-First** - Design for 320px+ first, enhance for larger screens
-6. **Performance Matters** - Keep images <200KB, total page size <2MB
-7. **Accessibility is Required** - WCAG AA compliance for all components
-8. **Hostinger-Specific** - Use FTP for uploads, PHP for forms, Gmail API for email
+1. **No build process** — FTP-deployed VEFS-website/ contents go straight to prod.
+2. **Vanilla JS only** — no frameworks, no TS, no JSX.
+3. **JSON is the database.** All dynamic content lives in `data/*.json`. The admin panel is the canonical writer; public JS is a reader.
+4. **Admin endpoints = session + CSRF + sanitize.** Don't shortcut any of the three.
+5. **Email-based contact flow** — there is no admin notifications dashboard; registrations land in inbox via Gmail API.
+6. **Mobile-first + WCAG AA** are hard requirements, not nice-to-haves.
+7. **Playwright MCP** is configured (`.mcp.json`) for browser-driven verification — use it for visual / regression checks before declaring UI work done.

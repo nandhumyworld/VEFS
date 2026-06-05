@@ -277,7 +277,7 @@ class TrainingsPage {
           <!-- Training Image -->
           <div style="flex-shrink: 0; width: 120px; height: 120px; border-radius: var(--radius-md); overflow: hidden; background-color: var(--color-gray-200);">
             <img
-              src="${training.media?.featuredImage || '/images/trainings/default-training.jpg'}"
+              src="${training.media?.featuredImage || ''}"
               alt="${training.title}"
               style="width: 100%; height: 100%; object-fit: cover;"
               loading="lazy"

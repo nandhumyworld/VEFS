@@ -1,7 +1,6 @@
 /**
  * Gallery Page JavaScript
- * Loads images dynamically from get-gallery-images.php
- * Any image uploaded to images/gallery-optimized/ appears here automatically.
+ * Loads photos from data/gallery.json (admin-managed, Cloudinary-hosted).
  */
 
 class GalleryPage {
@@ -26,26 +25,15 @@ class GalleryPage {
     this.renderGallery();
   }
 
-  // ─── Load photos from PHP scanner ──────────────────────────────────────────
+  // ─── Load photos from admin-managed JSON ──────────────────────────────────
 
   async loadPhotos() {
     try {
-      // Primary source: admin-managed JSON (new schema: { metadata, items: [...] })
-      let json = await this.fetchJSON('data/gallery.json');
-
-      // Detect new schema {items: [...]} vs legacy flat array
-      if (json && Array.isArray(json.items)) {
-        this.photos = json.items
-          .filter(it => !it.disabled && !it.hiddenFromPublic)
-          .map((it, index) => this.buildPhotoFromItem(it, index));
-      } else if (Array.isArray(json) && json.length > 0) {
-        // Legacy flat array shape (pre-migration)
-        this.photos = json.map((file, index) => this.buildPhotoObject(file, index));
-      } else {
-        // Fallback: PHP scanner (Hostinger live server — auto-discovers raw image files)
-        const files = await this.fetchJSON('get-gallery-images.php');
-        this.photos = (files || []).map((file, index) => this.buildPhotoObject(file, index));
-      }
+      const json = await this.fetchJSON('data/gallery.json');
+      const items = (json && Array.isArray(json.items)) ? json.items : [];
+      this.photos = items
+        .filter(it => !it.disabled && !it.hiddenFromPublic)
+        .map((it, index) => this.buildPhotoFromItem(it, index));
     } catch (err) {
       console.warn('Could not load gallery images:', err);
       this.photos = [];
@@ -85,66 +73,6 @@ class GalleryPage {
       isNew:       item.isNew,
       createdAt:   item.createdAt || null,
     };
-  }
-
-  // ─── Build a photo metadata object from a filename ─────────────────────────
-
-  buildPhotoObject(file, index) {
-    const filename = file.filename;
-    const year     = this.extractYear(filename);
-    const title    = this.buildTitle(filename, index);
-    const category = this.detectCategory(filename);
-
-    return {
-      id:          `photo-${index}`,
-      filename,
-      title,
-      description: '',
-      category,
-      year,
-      date:        `${year}-01-01`,
-      url:         file.url,
-    };
-  }
-
-  // Extract a 4-digit year (2010–2029) from a filename
-  extractYear(filename) {
-    const match = filename.match(/20[1-2]\d/);
-    if (match) return parseInt(match[0]);
-
-    // FB_IMG timestamps: 13-digit millisecond epoch
-    const tsMatch = filename.match(/(\d{13})/);
-    if (tsMatch) {
-      const yr = new Date(parseInt(tsMatch[1])).getFullYear();
-      if (yr >= 2010 && yr <= 2099) return yr;
-    }
-
-    return new Date().getFullYear();
-  }
-
-  // Turn a raw filename into a readable title
-  buildTitle(filename, index) {
-    let name = filename.replace(/\.[^/.]+$/, '');   // remove extension
-    // Remove common camera/app prefixes
-    name = name.replace(/^(IMG[-_]?|FB_IMG_|VideoCapture_|Screenshot_)/i, '');
-    // Replace separators with spaces
-    name = name.replace(/[-_]/g, ' ').trim();
-    // Remove long numeric-only segments (timestamps)
-    name = name.replace(/\b\d{7,}\b/g, '').trim();
-    // Collapse multiple spaces
-    name = name.replace(/\s{2,}/g, ' ').trim();
-
-    return name || `Photo ${index + 1}`;
-  }
-
-  // Detect category from filename keywords (optional — defaults to 'general')
-  detectCategory(filename) {
-    const f = filename.toLowerCase();
-    if (/train|workshop|learn|class/i.test(f))   return 'trainings';
-    if (/event|fest|camp|rally/i.test(f))         return 'events';
-    if (/tree|plant|nature|forest|seed/i.test(f)) return 'nature';
-    if (/program|program|volunt/i.test(f))        return 'programs';
-    return 'general';
   }
 
   // ─── Build year filter buttons dynamically ─────────────────────────────────
