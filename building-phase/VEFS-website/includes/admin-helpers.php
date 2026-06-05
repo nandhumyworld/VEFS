@@ -12,6 +12,7 @@ function admin_array_key_for_type(string $type): ?string {
         'event'     => 'events',
         'training'  => 'trainings',
         'volunteer' => 'volunteers',
+        'gallery'   => 'items',
     ][$type] ?? null;
 }
 
@@ -30,6 +31,7 @@ function admin_display_thumb(string $type, array $row): string {
     return (string)(
         $row['cover_image_url']
         ?? $row['thumbnail_url']
+        ?? $row['imageUrl']
         ?? $row['images']['featured']
         ?? $row['media']['featuredImage']
         ?? ''
@@ -47,6 +49,7 @@ function admin_data_filename(string $type): string {
         'event'     => 'events.json',
         'training'  => 'trainings.json',
         'volunteer' => 'volunteers.json',
+        'gallery'   => 'gallery.json',
     ][$type];
 }
 

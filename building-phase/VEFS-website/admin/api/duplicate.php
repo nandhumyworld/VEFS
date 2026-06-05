@@ -15,7 +15,7 @@ if (!is_array($body) || !csrf_verify($body['csrf'] ?? null)) {
     http_response_code(403); echo json_encode(['error' => 'CSRF']); exit;
 }
 $type = $body['type'] ?? '';
-if (!in_array($type, ['blog', 'social', 'event', 'training', 'volunteer'], true)) {
+if (!in_array($type, ['blog', 'social', 'event', 'training', 'volunteer', 'gallery'], true)) {
     http_response_code(400); echo json_encode(['error' => 'bad type']); exit;
 }
 $id = (string)($body['id'] ?? '');
@@ -41,6 +41,7 @@ $copy = $src;
 if ($type === 'event')          $copy['id'] = admin_next_id('evt', $items);
 elseif ($type === 'training')   $copy['id'] = admin_next_id('trn', $items);
 elseif ($type === 'volunteer')  $copy['id'] = admin_next_id('vol', $items);
+elseif ($type === 'gallery')    $copy['id'] = admin_next_id('gal', $items);
 elseif ($type === 'social')     $copy['id'] = ($src['platform'] ?? 'social') . '-' . date('Ymd-His');
 elseif ($type === 'blog') {
     // Blog id is a slug; pick a fresh unique one

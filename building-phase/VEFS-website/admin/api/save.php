@@ -23,7 +23,7 @@ if (!is_array($body)) json_fail(400, 'Invalid JSON body');
 if (!csrf_verify($body['csrf'] ?? null)) json_fail(403, 'CSRF token mismatch');
 
 $type = $body['type'] ?? '';
-if (!in_array($type, ['blog', 'social', 'event', 'training', 'volunteer'], true)) json_fail(400, 'Invalid type');
+if (!in_array($type, ['blog', 'social', 'event', 'training', 'volunteer', 'gallery'], true)) json_fail(400, 'Invalid type');
 
 $data = $body['data'] ?? null;
 if (!is_array($data)) json_fail(400, 'Missing data');
