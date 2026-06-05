@@ -3,18 +3,20 @@
 
 .badge-new {
   display: inline-block;
-  padding: 2px 8px;
-  margin-left: 6px;
+  padding: 1px 4px;
+  margin-left: 3px;
   font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.5rem;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.1;
   color: #fff;
   background: #d32f2f;
-  border-radius: 4px;
-  letter-spacing: 0.04em;
+  border-radius: 3px;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  vertical-align: middle;
+  vertical-align: super;
+  position: relative;
+  top: -0.15em;
   animation: badge-new-blink 1s steps(2, end) infinite;
 }
 
