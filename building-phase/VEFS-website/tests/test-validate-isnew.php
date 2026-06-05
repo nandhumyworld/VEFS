@@ -22,5 +22,16 @@ _assert(_validate_is_new(1)       !== null, "integer 1 is rejected");
 _assert(_validate_is_new(0)       !== null, "integer 0 is rejected");
 _assert(_validate_is_new([])      !== null, "array is rejected");
 
+echo "\ntest: each validator surfaces isNew errors\n";
+
+$bad = ['isNew' => 'maybe'];
+
+foreach (['blog' => 'validate_blog', 'social' => 'validate_social',
+          'event' => 'validate_event', 'training' => 'validate_training',
+          'volunteer' => 'validate_volunteer'] as $name => $fn) {
+    $errs = $fn($bad);
+    _assert(isset($errs['isNew']), "$name flags invalid isNew");
+}
+
 echo "\n$pass passed, $fail failed\n";
 exit($fail === 0 ? 0 : 1);

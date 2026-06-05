@@ -46,6 +46,11 @@ function validate_blog(array $d): array {
         }
     }
 
+    if (array_key_exists('isNew', $d)) {
+        $err = _validate_is_new($d['isNew']);
+        if ($err !== null) $e['isNew'] = $err;
+    }
+
     return $e;
 }
 
@@ -69,6 +74,11 @@ function validate_social(array $d): array {
         $e['order'] = 'Order must be a non-negative integer.';
     } elseif ((int)$d['order'] < 0) {
         $e['order'] = 'Order must be a non-negative integer.';
+    }
+
+    if (array_key_exists('isNew', $d)) {
+        $err = _validate_is_new($d['isNew']);
+        if ($err !== null) $e['isNew'] = $err;
     }
 
     return $e;
@@ -165,6 +175,11 @@ function validate_event(array $d): array {
         if ($v !== '' && !_is_safe_url($v)) {
             $e["links.$linkKey"] = ucfirst($linkKey) . ' link must be a valid http/https URL.';
         }
+    }
+
+    if (array_key_exists('isNew', $d)) {
+        $err = _validate_is_new($d['isNew']);
+        if ($err !== null) $e['isNew'] = $err;
     }
 
     return $e;
@@ -271,6 +286,11 @@ function validate_training(array $d): array {
         }
     }
 
+    if (array_key_exists('isNew', $d)) {
+        $err = _validate_is_new($d['isNew']);
+        if ($err !== null) $e['isNew'] = $err;
+    }
+
     return $e;
 }
 
@@ -361,6 +381,11 @@ function validate_volunteer(array $d): array {
     $mi = (string)($d['media']['featuredImage'] ?? '');
     if ($mi !== '' && !_is_safe_url($mi) && !preg_match('#^/#', $mi)) {
         $e['media.featuredImage'] = 'Featured image must be a valid http/https URL or root-relative path.';
+    }
+
+    if (array_key_exists('isNew', $d)) {
+        $err = _validate_is_new($d['isNew']);
+        if ($err !== null) $e['isNew'] = $err;
     }
 
     return $e;
