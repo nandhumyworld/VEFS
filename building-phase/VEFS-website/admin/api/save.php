@@ -200,6 +200,46 @@ elseif ($type === 'volunteer') {
 
     $items = _upsert($items, $data, $originalId);
 }
+elseif ($type === 'gallery') {
+    $errs = validate_gallery($data);
+    if (!empty($errs)) json_fail(422, 'Validation failed', ['fields' => $errs]);
+
+    if ($originalId === null) {
+        $id = admin_next_id('gal', $items);
+    } else {
+        $id = $originalId;
+    }
+
+    $existingItem = null;
+    if ($originalId !== null) {
+        foreach ($items as $p) {
+            if (($p['id'] ?? null) === $originalId) { $existingItem = $p; break; }
+        }
+    }
+
+    $isNew = $data['isNew'] ?? 'auto';
+    if (is_string($isNew) && $isNew !== 'auto') {
+        $lower = strtolower($isNew);
+        if ($lower === 'true') $isNew = true;
+        elseif ($lower === 'false') $isNew = false;
+    }
+
+    $item = [
+        'id'               => $id,
+        'title'            => trim((string)($data['title'] ?? '')),
+        'description'      => trim((string)($data['description'] ?? '')),
+        'year'             => (int)($data['year'] ?? 0),
+        'imageUrl'         => (string)($data['imageUrl'] ?? ''),
+        'isNew'            => $isNew,
+        'disabled'         => !empty($data['disabled']),
+        'hiddenFromPublic' => !empty($data['hiddenFromPublic']),
+        'createdAt'        => (string)($existingItem['createdAt'] ?? gmdate('c')),
+        'updatedAt'        => gmdate('c'),
+    ];
+
+    $data = $item;
+    $items = _upsert($items, $item, $originalId);
+}
 
 $existing[$arrayKey] = $items;
 $existing['metadata']['lastUpdated'] = $nowIso;
