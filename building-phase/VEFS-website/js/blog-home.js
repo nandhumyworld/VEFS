@@ -13,7 +13,7 @@
                 <a class="blog-card-link" href="/blog/${encodeURIComponent(p.id)}">
                     ${p.cover_image_url ? `<img class="blog-card-cover" src="${cld(p.cover_image_url)}" alt="" loading="lazy" width="600" height="375">` : ''}
                     <div class="blog-card-body">
-                        <h3 class="blog-card-title">${esc(p.title || '')}</h3>
+                        <h3 class="blog-card-title">${esc(p.title || '')}${renderNewBadge(p)}</h3>
                         ${p.subtitle ? `<p class="blog-card-subtitle">${esc(p.subtitle)}</p>` : ''}
                     </div>
                 </a>

@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require __DIR__ . '/includes/json-store.php';
+require_once __DIR__ . '/includes/content-helpers.php';
 
 $id = $_GET['id'] ?? '';
 $post = null;
@@ -42,6 +43,7 @@ $canonical = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'vefs.org') . '/blog/' . htm
 <link rel="icon" type="image/x-icon" href="/images/icons/vefs-favicon.ico">
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/components/blog.css">
+<link rel="stylesheet" href="/css/components/badge-new.css">
 <link rel="stylesheet" href="/css/responsive-mobile.css">
 </head>
 <body>
@@ -116,7 +118,7 @@ $canonical = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'vefs.org') . '/blog/' . htm
                 <?php if ($cover): ?>
                     <img class="blog-single-cover" src="<?= htmlspecialchars($cover, ENT_QUOTES, 'UTF-8') ?>" alt="" fetchpriority="high" width="1200" height="600">
                 <?php endif; ?>
-                <h1 class="blog-single-title"><?= htmlspecialchars((string)$post['title'], ENT_QUOTES, 'UTF-8') ?></h1>
+                <h1 class="blog-single-title"><?= htmlspecialchars((string)$post['title'], ENT_QUOTES, 'UTF-8') ?> <?= render_new_badge($post) ?></h1>
                 <?php if (!empty($post['subtitle'])): ?>
                     <p class="blog-single-subtitle"><?= htmlspecialchars((string)$post['subtitle'], ENT_QUOTES, 'UTF-8') ?></p>
                 <?php endif; ?>

@@ -88,7 +88,7 @@ class EventsPage {
               }
               <span>📍 ${event.location.city}</span>
             </div>
-            <h3 class="card-title">${event.title}</h3>
+            <h3 class="card-title">${event.title}${renderNewBadge(event)}</h3>
             <p class="card-description">${event.shortDescription}</p>
 
             <div class="card-footer" style="margin-top: var(--space-md); display: flex; justify-content: space-between; align-items: center;">

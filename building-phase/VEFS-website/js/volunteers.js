@@ -80,7 +80,7 @@ class VolunteersPage {
               </div>
             ` : ''}
             <div class="card-body">
-              <h3 class="card-title">${volunteer.title}</h3>
+              <h3 class="card-title">${volunteer.title}${renderNewBadge(volunteer)}</h3>
               <p class="card-description">${volunteer.description.brief}</p>
 
               <div class="card-meta" style="margin-top: var(--space-md);">

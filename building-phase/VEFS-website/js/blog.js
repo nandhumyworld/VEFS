@@ -34,7 +34,7 @@
             <a class="blog-card-link" href="/blog/${encodeURIComponent(p.id)}">
                 ${p.cover_image_url ? `<img class="blog-card-cover" src="${cldOpt(p.cover_image_url)}" alt="" loading="lazy" width="800" height="500">` : ''}
                 <div class="blog-card-body">
-                    <h2 class="blog-card-title">${escapeHtml(p.title || '')}</h2>
+                    <h2 class="blog-card-title">${escapeHtml(p.title || '')}${renderNewBadge(p)}</h2>
                     ${p.subtitle ? `<p class="blog-card-subtitle">${escapeHtml(p.subtitle)}</p>` : ''}
                     <p class="blog-card-meta">${formatDate(p.published_at)}</p>
                     <span class="blog-card-cta">Read more →</span>

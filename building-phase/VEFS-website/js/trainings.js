@@ -287,7 +287,7 @@ class TrainingsPage {
           <!-- Training Info -->
           <div style="flex: 1;">
             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--space-sm);">
-              <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin: 0;">${training.title}</h3>
+              <h3 style="font-size: var(--font-size-xl); color: var(--color-primary); margin: 0;">${training.title}${renderNewBadge(training)}</h3>
               ${statusBadge ? `<span style="background-color: ${statusColor}; color: white; padding: var(--space-2xs) var(--space-sm); border-radius: var(--radius-full); font-size: var(--font-size-sm); font-weight: 600; white-space: nowrap;">${statusBadge}</span>` : ''}
             </div>
 

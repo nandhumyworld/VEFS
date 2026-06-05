@@ -31,7 +31,7 @@
                     <img class="social-card-thumb" src="${cld(p.thumbnail_url)}" alt="" loading="lazy">
                     <span class="social-card-badge">${ICONS[p.platform] || ''}</span>
                 </div>
-                <p class="social-card-caption">${esc(p.caption || '')}</p>
+                <p class="social-card-caption">${esc(p.caption || '')}${renderNewBadge(p)}</p>
             </a>`).join('');
         grid.insertAdjacentHTML('beforeend', html);
         shown += batch.length;
