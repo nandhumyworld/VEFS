@@ -82,6 +82,7 @@
                     featuredImage: document.getElementById('featured-url').value,
                 },
                 isNew: isNewPayload,
+                project_id: (document.getElementById('project_id')?.value || null),
             },
         };
         try {

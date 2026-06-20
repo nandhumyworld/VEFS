@@ -22,6 +22,7 @@
                 year: parseInt(document.getElementById('year').value, 10) || 0,
                 imageUrl: document.getElementById('image-url').value,
                 isNew: isNewPayload,
+                project_id: (document.getElementById('project_id')?.value || null),
                 disabled: document.querySelector('[name=disabled]').checked,
                 hiddenFromPublic: document.querySelector('[name=hiddenFromPublic]').checked,
             },

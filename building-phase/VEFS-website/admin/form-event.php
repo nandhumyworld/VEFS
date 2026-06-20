@@ -44,6 +44,13 @@ if ($id) {
 $token = csrf_token();
 $isEdit = $id !== null;
 $h = fn($v) => htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8');
+
+$projectsList = [];
+$projectsFile = __DIR__ . '/../data/projects.json';
+if (file_exists($projectsFile)) {
+    $projectsList = json_store_read($projectsFile)['projects'] ?? [];
+}
+$preselectedProjectId = $_GET['project_id'] ?? ($post['project_id'] ?? '');
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -82,6 +89,14 @@ $h = fn($v) => htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8');
             </label>
             <label>Order<input id="order" name="order" type="number" min="0" value="<?= (int)$post['order'] ?>"></label>
             <label class="checkbox"><input id="featured" name="featured" type="checkbox" <?= $post['featured']?'checked':'' ?>> Featured</label>
+            <label>Linked Project (optional)
+                <select id="project_id">
+                    <option value="">— None —</option>
+                    <?php foreach ($projectsList as $proj): if (!empty($proj['disabled'])) continue; ?>
+                        <option value="<?= $h($proj['id']) ?>" <?= $preselectedProjectId === $proj['id'] ? 'selected' : '' ?>><?= $h($proj['name']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </label>
         </fieldset>
 
         <fieldset><legend>Recurring</legend>

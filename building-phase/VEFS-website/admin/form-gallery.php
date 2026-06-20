@@ -28,6 +28,13 @@ if ($id) {
 $token = csrf_token();
 $isEdit = $id !== null;
 
+$projectsList = [];
+$projectsFile = __DIR__ . '/../data/projects.json';
+if (file_exists($projectsFile)) {
+    $projectsList = json_store_read($projectsFile)['projects'] ?? [];
+}
+$preselectedProjectId = $_GET['project_id'] ?? ($post['project_id'] ?? '');
+
 $isNewRaw = $post['isNew'] ?? 'auto';
 $isNewVal = $isNewRaw === true ? 'true' : ($isNewRaw === false ? 'false' : 'auto');
 ?><!doctype html>
@@ -71,6 +78,18 @@ $isNewVal = $isNewRaw === true ? 'true' : ($isNewRaw === false ? 'false' : 'auto
         <div>
             <label for="year">Year <span style="color:var(--color-error)">*</span></label>
             <input id="year" name="year" type="number" min="2000" max="<?= (int)date('Y') ?>" required value="<?= htmlspecialchars((string)$post['year'], ENT_QUOTES, 'UTF-8') ?>">
+        </div>
+
+        <div>
+            <label for="project_id">Linked Project (optional)</label>
+            <select id="project_id" name="project_id">
+                <option value="">— None —</option>
+                <?php foreach ($projectsList as $proj): if (!empty($proj['disabled'])) continue; ?>
+                    <option value="<?= htmlspecialchars((string)$proj['id'], ENT_QUOTES, 'UTF-8') ?>" <?= $preselectedProjectId === $proj['id'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars((string)$proj['name'], ENT_QUOTES, 'UTF-8') ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
 
         <fieldset class="form-fieldset">

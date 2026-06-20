@@ -123,6 +123,7 @@
                 },
                 tags: splitCsv(document.getElementById('tags').value),
                 isNew: isNewPayload,
+                project_id: (document.getElementById('project_id')?.value || null),
             },
         };
         try {
