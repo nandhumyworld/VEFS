@@ -31,9 +31,7 @@ function admin_display_title(string $type, array $row): string {
  */
 function admin_display_thumb(string $type, array $row): string {
     if ($type === 'project') {
-        $publicId = (string)($row['hero_image'] ?? '');
-        if ($publicId === '') return '';
-        return cloudinary_url($publicId, 'w_200,h_120,c_fill');
+        return (string)($row['hero_image_url'] ?? '');
     }
     return (string)(
         $row['cover_image_url']

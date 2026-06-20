@@ -304,9 +304,9 @@ elseif ($type === 'project') {
     $photos = [];
     foreach ((array)($data['photos'] ?? []) as $row) {
         if (!is_array($row)) continue;
-        $pid = trim((string)($row['public_id'] ?? ''));
-        if ($pid === '') continue;
-        $photos[] = ['public_id' => $pid, 'caption' => trim((string)($row['caption'] ?? ''))];
+        $url = trim((string)($row['url'] ?? ''));
+        if ($url === '') continue;
+        $photos[] = ['url' => $url, 'caption' => trim((string)($row['caption'] ?? ''))];
     }
 
     $story = sanitize_blog_html((string)($data['story'] ?? ''));
@@ -325,7 +325,7 @@ elseif ($type === 'project') {
         'location'                   => trim((string)$data['location']),
         'start_date'                 => (string)$data['start_date'],
         'end_date'                   => trim((string)($data['end_date'] ?? '')) ?: null,
-        'hero_image'                 => trim((string)($data['hero_image'] ?? '')),
+        'hero_image_url'             => trim((string)($data['hero_image_url'] ?? '')),
         'photos'                     => $photos,
         'impact_metrics'             => $metrics,
         'fundraising'                => [
@@ -348,6 +348,47 @@ elseif ($type === 'project') {
 
     $data = $item;
     $items = _upsert($items, $item, $originalId);
+
+    // Auto-tag project photos in gallery.json. For each project photo URL not
+    // already present in gallery items, add a gallery row tagged with project_id.
+    $galleryFile = $dataDir . '/gallery.json';
+    if (file_exists($galleryFile)) {
+        $galleryData = json_store_read($galleryFile);
+        $galleryItems = $galleryData['items'] ?? [];
+        $existingUrls = [];
+        foreach ($galleryItems as $g) $existingUrls[(string)($g['imageUrl'] ?? '')] = true;
+
+        $added = false;
+        $allUrls = $photos;
+        if ($item['hero_image_url'] !== '') {
+            array_unshift($allUrls, ['url' => $item['hero_image_url'], 'caption' => $item['name']]);
+        }
+        foreach ($allUrls as $row) {
+            $url = $row['url'];
+            if (isset($existingUrls[$url])) continue;
+            $galleryItems[] = [
+                'id'               => admin_next_id('gal', $galleryItems),
+                'title'            => $row['caption'] !== '' ? $row['caption'] : $item['name'],
+                'description'      => '',
+                'year'             => (int)substr($item['start_date'], 0, 4),
+                'imageUrl'         => $url,
+                'isNew'            => 'auto',
+                'project_id'       => $item['id'],
+                'disabled'         => false,
+                'hiddenFromPublic' => false,
+                'createdAt'        => gmdate('c'),
+                'updatedAt'        => gmdate('c'),
+            ];
+            $existingUrls[$url] = true;
+            $added = true;
+        }
+        if ($added) {
+            $galleryData['items'] = $galleryItems;
+            $galleryData['metadata']['lastUpdated'] = $nowIso;
+            $galleryData['metadata']['total'] = count($galleryItems);
+            json_store_write($galleryFile, $galleryData, $backupDir);
+        }
+    }
 }
 
 $existing[$arrayKey] = $items;

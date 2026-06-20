@@ -542,11 +542,16 @@ function validate_project(array $d): array {
         }
     }
 
+    if (isset($d['hero_image_url']) && $d['hero_image_url'] !== '' && !_is_safe_url((string)$d['hero_image_url'])) {
+        $e['hero_image_url'] = 'Hero image URL must be a valid http/https URL.';
+    }
+
     if (isset($d['photos']) && is_array($d['photos'])) {
         foreach ($d['photos'] as $i => $row) {
-            if (!is_array($row) || trim((string)($row['public_id'] ?? '')) === '') {
-                $e["photos.$i.public_id"] = 'Each photo needs a Cloudinary public_id.';
-            }
+            if (!is_array($row)) { $e["photos.$i"] = 'Invalid photo row.'; continue; }
+            $url = trim((string)($row['url'] ?? ''));
+            if ($url === '') { $e["photos.$i.url"] = 'Each photo needs a URL.'; continue; }
+            if (!_is_safe_url($url)) $e["photos.$i.url"] = 'Photo URL must be http/https.';
         }
     }
 

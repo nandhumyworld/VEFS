@@ -93,10 +93,22 @@ test('project: skips fully-empty metric rows', function() use ($base) {
     assert_eq([], $errs);
 });
 
-test('project: rejects photo without public_id', function() use ($base) {
+test('project: rejects photo without url', function() use ($base) {
     $bad = $base; $bad['photos'] = [['caption' => 'oops']];
     $errs = validate_project($bad);
-    assert_true(isset($errs['photos.0.public_id']));
+    assert_true(isset($errs['photos.0.url']));
+});
+
+test('project: rejects bad hero_image_url', function() use ($base) {
+    $bad = $base; $bad['hero_image_url'] = 'not-a-url';
+    $errs = validate_project($bad);
+    assert_true(isset($errs['hero_image_url']));
+});
+
+test('project: accepts valid hero_image_url', function() use ($base) {
+    $ok = $base; $ok['hero_image_url'] = 'https://res.cloudinary.com/vefs/image/upload/sample.jpg';
+    $errs = validate_project($ok);
+    assert_true(!isset($errs['hero_image_url']));
 });
 
 summary();
