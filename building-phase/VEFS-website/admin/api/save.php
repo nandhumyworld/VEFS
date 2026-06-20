@@ -23,7 +23,7 @@ if (!is_array($body)) json_fail(400, 'Invalid JSON body');
 if (!csrf_verify($body['csrf'] ?? null)) json_fail(403, 'CSRF token mismatch');
 
 $type = $body['type'] ?? '';
-if (!in_array($type, ['blog', 'social', 'event', 'training', 'volunteer', 'gallery'], true)) json_fail(400, 'Invalid type');
+if (!in_array($type, ['blog', 'social', 'event', 'training', 'volunteer', 'gallery', 'project'], true)) json_fail(400, 'Invalid type');
 
 $data = $body['data'] ?? null;
 if (!is_array($data)) json_fail(400, 'Missing data');
@@ -134,6 +134,8 @@ elseif ($type === 'event') {
         fn($r) => is_array($r) && trim((string)($r['name'] ?? '')) !== ''
     ));
 
+    $data['project_id'] = (isset($data['project_id']) && trim((string)$data['project_id']) !== '') ? trim((string)$data['project_id']) : null;
+
     $items = _upsert($items, $data, $originalId);
 }
 elseif ($type === 'training') {
@@ -172,6 +174,8 @@ elseif ($type === 'training') {
         fn($r) => is_array($r) && trim((string)($r['name'] ?? '')) !== ''
     ));
 
+    $data['project_id'] = (isset($data['project_id']) && trim((string)$data['project_id']) !== '') ? trim((string)$data['project_id']) : null;
+
     $items = _upsert($items, $data, $originalId);
 }
 elseif ($type === 'volunteer') {
@@ -197,6 +201,8 @@ elseif ($type === 'volunteer') {
     foreach (['brief', 'full'] as $f) {
         $data['description'][$f] = strip_tags((string)($data['description'][$f] ?? ''));
     }
+
+    $data['project_id'] = (isset($data['project_id']) && trim((string)$data['project_id']) !== '') ? trim((string)$data['project_id']) : null;
 
     $items = _upsert($items, $data, $originalId);
 }
@@ -231,10 +237,113 @@ elseif ($type === 'gallery') {
         'year'             => (int)($data['year'] ?? 0),
         'imageUrl'         => (string)($data['imageUrl'] ?? ''),
         'isNew'            => $isNew,
+        'project_id'       => (isset($data['project_id']) && trim((string)$data['project_id']) !== '') ? trim((string)$data['project_id']) : null,
         'disabled'         => !empty($data['disabled']),
         'hiddenFromPublic' => !empty($data['hiddenFromPublic']),
         'createdAt'        => (string)($existingItem['createdAt'] ?? gmdate('c')),
         'updatedAt'        => gmdate('c'),
+    ];
+
+    $data = $item;
+    $items = _upsert($items, $item, $originalId);
+}
+elseif ($type === 'project') {
+    $errs = validate_project($data);
+    if (!empty($errs)) json_fail(422, 'Validation failed', ['fields' => $errs]);
+
+    if ($originalId === null) {
+        $id = admin_next_id('prj', $items);
+    } else {
+        $id = $originalId;
+    }
+
+    $slug = trim((string)($data['slug'] ?? ''));
+    if ($slug === '') $slug = _slugify((string)($data['name'] ?? ''));
+    $selfIdx = _findIndex($items, $originalId);
+    $selfSlug = $selfIdx === null ? null : ($items[$selfIdx]['slug'] ?? null);
+    foreach ($items as $p) {
+        if (($p['slug'] ?? null) === $slug && $slug !== $selfSlug) {
+            json_fail(409, 'A project with this slug already exists', ['field' => 'slug']);
+        }
+    }
+
+    $existingItem = null;
+    if ($originalId !== null) {
+        foreach ($items as $p) {
+            if (($p['id'] ?? null) === $originalId) { $existingItem = $p; break; }
+        }
+    }
+
+    $status = (string)$data['status'];
+    $futureVals = [
+        'proposed_budget' => null,
+        'expected_beneficiaries' => null,
+        'required_volunteers' => null,
+        'sponsorship_opportunities' => null,
+    ];
+    if ($status === 'planning') {
+        foreach ($futureVals as $k => $_) {
+            if (isset($data[$k]) && $data[$k] !== '') $futureVals[$k] = $data[$k];
+        }
+    }
+
+    $metrics = [];
+    foreach ((array)($data['impact_metrics'] ?? []) as $row) {
+        if (!is_array($row)) continue;
+        $label = trim((string)($row['label'] ?? ''));
+        $val   = $row['value'] ?? null;
+        if ($label === '' && ($val === null || $val === '')) continue;
+        $metrics[] = [
+            'label' => $label,
+            'value' => is_numeric($val) ? (0 + $val) : 0,
+            'unit'  => trim((string)($row['unit'] ?? '')),
+            'icon'  => trim((string)($row['icon'] ?? '')),
+        ];
+    }
+
+    $photos = [];
+    foreach ((array)($data['photos'] ?? []) as $row) {
+        if (!is_array($row)) continue;
+        $pid = trim((string)($row['public_id'] ?? ''));
+        if ($pid === '') continue;
+        $photos[] = ['public_id' => $pid, 'caption' => trim((string)($row['caption'] ?? ''))];
+    }
+
+    $story = sanitize_blog_html((string)($data['story'] ?? ''));
+    $sponsorship = $futureVals['sponsorship_opportunities'] === null
+        ? null
+        : sanitize_blog_html((string)$futureVals['sponsorship_opportunities']);
+
+    $item = [
+        'id'                         => $id,
+        'slug'                       => $slug,
+        'name'                       => trim((string)$data['name']),
+        'objective'                  => trim((string)$data['objective']),
+        'story'                      => $story,
+        'theme'                      => (string)$data['theme'],
+        'status'                     => $status,
+        'location'                   => trim((string)$data['location']),
+        'start_date'                 => (string)$data['start_date'],
+        'end_date'                   => trim((string)($data['end_date'] ?? '')) ?: null,
+        'hero_image'                 => trim((string)($data['hero_image'] ?? '')),
+        'photos'                     => $photos,
+        'impact_metrics'             => $metrics,
+        'fundraising'                => [
+            'target_amount'  => (float)($data['fundraising']['target_amount'] ?? 0),
+            'raised_amount'  => (float)($data['fundraising']['raised_amount'] ?? 0),
+            'donor_count'    => (int)($data['fundraising']['donor_count'] ?? 0),
+            'show_progress'  => !empty($data['fundraising']['show_progress']),
+        ],
+        'proposed_budget'            => $futureVals['proposed_budget'] === null ? null : (float)$futureVals['proposed_budget'],
+        'expected_beneficiaries'     => $futureVals['expected_beneficiaries'],
+        'required_volunteers'        => $futureVals['required_volunteers'] === null ? null : (int)$futureVals['required_volunteers'],
+        'sponsorship_opportunities'  => $sponsorship,
+        'featured'                   => !empty($data['featured']),
+        'order'                      => (int)($data['order'] ?? 0),
+        'disabled'                   => !empty($data['disabled']),
+        'hiddenFromPublic'           => !empty($data['hiddenFromPublic']),
+        'createdAt'                  => (string)($existingItem['createdAt'] ?? gmdate('c')),
+        'updatedAt'                  => gmdate('c'),
     ];
 
     $data = $item;

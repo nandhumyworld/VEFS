@@ -182,6 +182,10 @@ function validate_event(array $d): array {
         if ($err !== null) $e['isNew'] = $err;
     }
 
+    if (isset($d['project_id']) && $d['project_id'] !== null && $d['project_id'] !== '' && !preg_match('/^prj-\d+$/', (string)$d['project_id'])) {
+        $e['project_id'] = 'Linked project must be a valid project id.';
+    }
+
     return $e;
 }
 
@@ -291,6 +295,10 @@ function validate_training(array $d): array {
         if ($err !== null) $e['isNew'] = $err;
     }
 
+    if (isset($d['project_id']) && $d['project_id'] !== null && $d['project_id'] !== '' && !preg_match('/^prj-\d+$/', (string)$d['project_id'])) {
+        $e['project_id'] = 'Linked project must be a valid project id.';
+    }
+
     return $e;
 }
 
@@ -388,6 +396,10 @@ function validate_volunteer(array $d): array {
         if ($err !== null) $e['isNew'] = $err;
     }
 
+    if (isset($d['project_id']) && $d['project_id'] !== null && $d['project_id'] !== '' && !preg_match('/^prj-\d+$/', (string)$d['project_id'])) {
+        $e['project_id'] = 'Linked project must be a valid project id.';
+    }
+
     return $e;
 }
 
@@ -417,6 +429,10 @@ function validate_gallery(array $d): array {
         if ($err !== null) $e['isNew'] = $err;
     }
 
+    if (isset($d['project_id']) && $d['project_id'] !== null && $d['project_id'] !== '' && !preg_match('/^prj-\d+$/', (string)$d['project_id'])) {
+        $e['project_id'] = 'Linked project must be a valid project id.';
+    }
+
     return $e;
 }
 
@@ -442,4 +458,97 @@ function _validate_is_new($v): ?string {
     if ($v === true || $v === false) return null;
     if ($v === 'auto') return null;
     return 'isNew must be true, false, or "auto".';
+}
+
+function validate_project(array $d): array {
+    $e = [];
+
+    $name = trim((string)($d['name'] ?? ''));
+    if ($name === '') $e['name'] = 'Name is required.';
+    elseif (mb_strlen($name) > 200) $e['name'] = 'Name must be ≤ 200 characters.';
+
+    $obj = trim((string)($d['objective'] ?? ''));
+    if ($obj === '') $e['objective'] = 'Objective is required.';
+    elseif (mb_strlen($obj) > 140) $e['objective'] = 'Objective must be ≤ 140 characters.';
+
+    if (isset($d['slug']) && $d['slug'] !== '' && !preg_match('/^[a-z0-9-]+$/', (string)$d['slug'])) {
+        $e['slug'] = 'Slug must contain only lowercase letters, numbers, and hyphens.';
+    }
+
+    $themes = ['ecology', 'livelihood', 'women', 'education', 'heritage'];
+    if (!in_array((string)($d['theme'] ?? ''), $themes, true)) {
+        $e['theme'] = 'Theme must be one of: ' . implode(', ', $themes);
+    }
+
+    $statuses = ['planning', 'active', 'completed', 'paused'];
+    $status = (string)($d['status'] ?? '');
+    if (!in_array($status, $statuses, true)) {
+        $e['status'] = 'Status must be one of: ' . implode(', ', $statuses);
+    }
+
+    if (trim((string)($d['location'] ?? '')) === '') $e['location'] = 'Location is required.';
+
+    $sd = (string)($d['start_date'] ?? '');
+    if ($sd === '' || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $sd)) {
+        $e['start_date'] = 'Start date is required (YYYY-MM-DD).';
+    }
+    $ed = (string)($d['end_date'] ?? '');
+    if ($ed !== '') {
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $ed)) $e['end_date'] = 'End date must be YYYY-MM-DD.';
+        elseif ($sd !== '' && strcmp($ed, $sd) < 0) $e['end_date'] = 'End date must be on or after start date.';
+    }
+
+    if (!isset($d['order']) || (!is_int($d['order']) && !ctype_digit((string)$d['order'])) || (int)$d['order'] < 0) {
+        $e['order'] = 'Order must be a non-negative integer.';
+    }
+
+    if (isset($d['fundraising']) && is_array($d['fundraising'])) {
+        $t = $d['fundraising']['target_amount'] ?? null;
+        $r = $d['fundraising']['raised_amount'] ?? null;
+        if ($t !== null && $t !== '' && (!is_numeric($t) || $t < 0)) $e['fundraising.target_amount'] = 'Target must be a non-negative number.';
+        if ($r !== null && $r !== '' && (!is_numeric($r) || $r < 0)) $e['fundraising.raised_amount'] = 'Raised must be a non-negative number.';
+        if (is_numeric($t) && is_numeric($r) && (float)$r > (float)$t) {
+            $e['fundraising.raised_amount'] = 'Raised cannot exceed target.';
+        }
+        if (isset($d['fundraising']['donor_count']) && $d['fundraising']['donor_count'] !== '' && (!ctype_digit((string)$d['fundraising']['donor_count']) || (int)$d['fundraising']['donor_count'] < 0)) {
+            $e['fundraising.donor_count'] = 'Donor count must be a non-negative integer.';
+        }
+    }
+
+    if (isset($d['impact_metrics']) && is_array($d['impact_metrics'])) {
+        foreach ($d['impact_metrics'] as $i => $row) {
+            if (!is_array($row)) { $e["impact_metrics.$i"] = 'Invalid metric row.'; continue; }
+            $label = trim((string)($row['label'] ?? ''));
+            $val   = $row['value'] ?? null;
+            $hasVal = ($val !== null && $val !== '');
+            if ($label === '' && !$hasVal) continue;
+            if ($label === '') $e["impact_metrics.$i.label"] = 'Metric label required.';
+            if (!is_numeric($val)) $e["impact_metrics.$i.value"] = 'Metric value must be numeric.';
+        }
+    }
+
+    $futureOnly = ['proposed_budget', 'expected_beneficiaries', 'required_volunteers', 'sponsorship_opportunities'];
+    foreach ($futureOnly as $f) {
+        if (isset($d[$f]) && $d[$f] !== null && $d[$f] !== '' && $status !== 'planning') {
+            $e[$f] = ucfirst(str_replace('_', ' ', $f)) . ' is only valid when status is "planning".';
+        }
+    }
+    if ($status === 'planning') {
+        if (isset($d['proposed_budget']) && $d['proposed_budget'] !== null && $d['proposed_budget'] !== '' && (!is_numeric($d['proposed_budget']) || $d['proposed_budget'] < 0)) {
+            $e['proposed_budget'] = 'Proposed budget must be a non-negative number.';
+        }
+        if (isset($d['required_volunteers']) && $d['required_volunteers'] !== null && $d['required_volunteers'] !== '' && (!ctype_digit((string)$d['required_volunteers']) || (int)$d['required_volunteers'] < 0)) {
+            $e['required_volunteers'] = 'Required volunteers must be a non-negative integer.';
+        }
+    }
+
+    if (isset($d['photos']) && is_array($d['photos'])) {
+        foreach ($d['photos'] as $i => $row) {
+            if (!is_array($row) || trim((string)($row['public_id'] ?? '')) === '') {
+                $e["photos.$i.public_id"] = 'Each photo needs a Cloudinary public_id.';
+            }
+        }
+    }
+
+    return $e;
 }

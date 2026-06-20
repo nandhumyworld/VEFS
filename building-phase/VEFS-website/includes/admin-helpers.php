@@ -13,6 +13,7 @@ function admin_array_key_for_type(string $type): ?string {
         'training'  => 'trainings',
         'volunteer' => 'volunteers',
         'gallery'   => 'items',
+        'project'   => 'projects',
     ][$type] ?? null;
 }
 
@@ -20,7 +21,8 @@ function admin_array_key_for_type(string $type): ?string {
  * Returns the human display title for a row, regardless of type.
  */
 function admin_display_title(string $type, array $row): string {
-    if ($type === 'social') return (string)($row['caption'] ?? '');
+    if ($type === 'social')  return (string)($row['caption'] ?? '');
+    if ($type === 'project') return (string)($row['name'] ?? '');
     return (string)($row['title'] ?? '');
 }
 
@@ -28,6 +30,11 @@ function admin_display_title(string $type, array $row): string {
  * Returns the thumbnail URL for a row, regardless of type.
  */
 function admin_display_thumb(string $type, array $row): string {
+    if ($type === 'project') {
+        $publicId = (string)($row['hero_image'] ?? '');
+        if ($publicId === '') return '';
+        return cloudinary_url($publicId, 'w_200,h_120,c_fill');
+    }
     return (string)(
         $row['cover_image_url']
         ?? $row['thumbnail_url']
@@ -50,7 +57,14 @@ function admin_data_filename(string $type): string {
         'training'  => 'trainings.json',
         'volunteer' => 'volunteers.json',
         'gallery'   => 'gallery.json',
+        'project'   => 'projects.json',
     ][$type];
+}
+
+function cloudinary_url(string $publicId, string $transform = ''): string {
+    $cloud = getenv('CLOUDINARY_CLOUD_NAME') ?: 'vefs';
+    $tx = $transform === '' ? '' : ('/' . $transform);
+    return "https://res.cloudinary.com/{$cloud}/image/upload{$tx}/{$publicId}";
 }
 
 /**
