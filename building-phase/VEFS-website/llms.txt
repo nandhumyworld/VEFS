@@ -42,7 +42,7 @@
 - [Gallery](https://www.vefsfoundation.com/gallery.html): Photos from farm activities, events, and training programs
 - [Donate](https://www.vefsfoundation.com/donate.html): Donation options (UPI, bank transfer) and 80G tax benefit information
 - [Contact](https://www.vefsfoundation.com/contact.html): Office address, phone numbers, email, and inquiry form
-- [Future Plans](https://www.vefsfoundation.com/future-plans.html): Strategic vision and upcoming initiatives
+- [Projects](https://www.vefsfoundation.com/projects.html): Current and future projects, with impact, fundraising progress, and volunteer opportunities
 
 ## Training Programs
 

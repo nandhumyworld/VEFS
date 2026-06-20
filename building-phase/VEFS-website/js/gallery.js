@@ -11,6 +11,7 @@ class GalleryPage {
     this.filters = {
       category: 'all',
       year: null,
+      project: null,
       search: ''
     };
     this.init();
@@ -19,6 +20,7 @@ class GalleryPage {
   async init() {
     await this.loadPhotos();
     this.buildYearFilters();
+    await this.buildProjectFilters();
     this.setupFilters();
     this.setupSearch();
     this.setupLightbox();
@@ -70,9 +72,33 @@ class GalleryPage {
       year:        Number.isFinite(year) ? year : new Date().getFullYear(),
       date:        item.createdAt || `${year}-01-01`,
       url:         item.imageUrl || '',
+      project_id:  item.project_id || null,
       isNew:       item.isNew,
       createdAt:   item.createdAt || null,
     };
+  }
+
+  async buildProjectFilters() {
+    const projectIds = [...new Set(this.photos.map(p => p.project_id).filter(Boolean))];
+    if (projectIds.length === 0) return;
+    let projects = [];
+    try {
+      const json = await this.fetchJSON('data/projects.json');
+      projects = (json && Array.isArray(json.projects)) ? json.projects : [];
+    } catch { return; }
+    const byId = Object.fromEntries(projects.map(p => [p.id, p]));
+    const container = document.getElementById('gallery-filters');
+    if (!container) return;
+    projectIds.forEach(id => {
+      const p = byId[id];
+      if (!p || p.disabled || p.hiddenFromPublic || p.enabled === false) return;
+      const btn = document.createElement('button');
+      btn.className = 'btn btn-outline btn-sm gallery-filter-btn';
+      btn.dataset.filterType  = 'project';
+      btn.dataset.filterValue = id;
+      btn.textContent = p.name;
+      container.appendChild(btn);
+    });
   }
 
   // ─── Build year filter buttons dynamically ─────────────────────────────────
@@ -116,10 +142,11 @@ class GalleryPage {
 
       this.filters[filterType] = filterValue === 'all' ? (filterType === 'category' ? 'all' : null) : filterValue;
 
-      // "All Photos" clears year filter too
+      // "All Photos" clears year and project filters too
       if (filterType === 'category' && filterValue === 'all') {
         this.filters.year = null;
-        document.querySelectorAll('[data-filter-type="year"]').forEach(btn => btn.classList.remove('active'));
+        this.filters.project = null;
+        document.querySelectorAll('[data-filter-type="year"], [data-filter-type="project"]').forEach(btn => btn.classList.remove('active'));
       }
 
       this.applyFilters();
@@ -144,6 +171,9 @@ class GalleryPage {
       if (this.filters.year) {
         if (photo.year.toString() !== this.filters.year) return false;
       }
+      if (this.filters.project) {
+        if (photo.project_id !== this.filters.project) return false;
+      }
       if (this.filters.search) {
         const text = `${photo.title} ${photo.category} ${photo.year}`.toLowerCase();
         if (!text.includes(this.filters.search)) return false;
@@ -156,7 +186,7 @@ class GalleryPage {
   }
 
   resetFilters() {
-    this.filters = { category: 'all', year: null, search: '' };
+    this.filters = { category: 'all', year: null, project: null, search: '' };
     document.querySelectorAll('[data-filter-type]').forEach(btn => btn.classList.remove('active'));
     document.querySelector('[data-filter-value="all"]').classList.add('active');
     document.getElementById('gallery-search').value = '';

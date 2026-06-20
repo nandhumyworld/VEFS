@@ -97,7 +97,7 @@
             <li><a href="events.html" class="nav-link">Events</a></li>
             <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
             <li><a href="gallery.html" class="nav-link">Gallery</a></li>
-            <li><a href="future-plans.html" class="nav-link">Future Plans</a></li>
+            <li><a href="projects.html" class="nav-link">Projects</a></li>
             <li><a href="contact.html" class="nav-link">Contact</a></li>
             <li><a href="donate.html" class="btn btn-primary btn-sm active" aria-current="page">Donate</a></li>
           </ul>
@@ -536,6 +536,29 @@
   <script src="js/components/navigation.js"></script>
   <script src="js/components/form-validation.js"></script>
   <script src="js/donate.js"></script>
+  <script>
+    // Pre-select a project from ?project=<slug>
+    (function () {
+      var params = new URLSearchParams(location.search);
+      var slug = params.get('project');
+      if (!slug) return;
+      fetch('/data/projects.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (json) {
+        var match = (json.projects || []).find(function (p) {
+          return p.slug === slug && !p.disabled && !p.hiddenFromPublic && p.enabled !== false;
+        });
+        if (!match) return;
+        var sel = document.getElementById('donation-category');
+        if (!sel) return;
+        var opt = document.createElement('option');
+        opt.value = 'project:' + match.id;
+        opt.textContent = 'Project: ' + match.name;
+        opt.selected = true;
+        sel.insertBefore(opt, sel.firstChild);
+        var label = document.querySelector('label[for="donation-category"]');
+        if (label) label.textContent = 'Donating to';
+      }).catch(function () { /* silent */ });
+    })();
+  </script>
   <script src="js/newsletter.js"></script>
 
   <!-- Floating CTAs Scroll Script -->
