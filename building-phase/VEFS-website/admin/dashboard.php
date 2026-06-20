@@ -8,7 +8,7 @@ require __DIR__ . '/../includes/admin-helpers.php';
 auth_require();
 
 $tab = $_GET['tab'] ?? 'blog';
-if (!in_array($tab, ['blog', 'social', 'event', 'training', 'volunteer', 'gallery'], true)) {
+if (!in_array($tab, ['blog', 'social', 'event', 'training', 'volunteer', 'gallery', 'project'], true)) {
     $tab = 'blog';
 }
 
@@ -28,6 +28,7 @@ $tabLabels = [
     'volunteer' => 'Volunteers',
     // Note: form-gallery.php ships in Task 12 — New/Edit links will 404 until then.
     'gallery'   => 'Gallery Items',
+    'project'   => 'Projects',
 ];
 $titleColLabel = $tab === 'social' ? 'Caption' : 'Title';
 ?><!doctype html>
