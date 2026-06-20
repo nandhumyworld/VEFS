@@ -8,6 +8,9 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # Clean URL for blog single posts
 RewriteRule ^blog/([a-z0-9-]+)/?$ blog-post.php?id=$1 [L,QSA]
 
+# Clean URL for project detail pages
+RewriteRule ^projects/([a-z0-9-]+)/?$ project-detail.php?slug=$1 [L,QSA]
+
 # Deny tmp/log artifacts
 <FilesMatch "\.(tmp|log)$">
     Require all denied

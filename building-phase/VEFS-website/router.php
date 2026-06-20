@@ -14,6 +14,14 @@ if (preg_match('#^/blog/([a-z0-9-]+)/?$#', $uri, $m)) {
     return true;
 }
 
+// 1b) /projects/<slug>  ->  project-detail.php?slug=<slug>
+if (preg_match('#^/projects/([a-z0-9-]+)/?$#', $uri, $m)) {
+    $_GET['slug'] = $m[1];
+    $_SERVER['SCRIPT_NAME'] = '/project-detail.php';
+    require $root . '/project-detail.php';
+    return true;
+}
+
 // 2) Existing static file?  Let the built-in server serve it as-is.
 if ($uri !== '/' && is_file($path)) {
     return false;
