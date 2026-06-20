@@ -133,8 +133,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-full);
   background-color: transparent; /* No background - let brand colors shine */
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
@@ -144,8 +144,8 @@
 /* Icon sizing for PNG images */
 .header-social-link img {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
 }
 
 /* Hover: Subtle scale and shadow */
@@ -278,6 +278,54 @@
 .nav-item-cta .nav-link:hover {
   background-color: #A85A42; /* darker terracotta on hover */
   color: #FFFFFF !important;
+}
+
+/* Small desktop / tablet-landscape: header tries to fit logo + 10 nav links + 5 social
+   icons. At < 1280px the row overflows and the last two social icons get clipped past
+   the container edge. Compress gaps + shrink icons so everything fits. */
+@media (min-width: 769px) and (max-width: 1599px) {
+  .header-content {
+    gap: var(--space-sm);
+  }
+  .header-logo-section {
+    min-width: 0;
+  }
+  .logo-image-wrapper img {
+    width: 48px;
+    height: 48px;
+  }
+  .header-logo .logo-text {
+    font-size: 14pt;
+  }
+  .header-logo .logo-text-full {
+    font-size: 8pt;
+  }
+  .header-nav-section {
+    margin: 0;
+  }
+  .nav-list {
+    gap: 0;
+  }
+  .nav-link {
+    padding: var(--space-xs) 6px;
+    font-size: 0.85rem;
+  }
+  .nav-item-cta {
+    margin-left: 4px;
+  }
+  .header-social-section {
+    min-width: auto;
+    gap: 2px;
+  }
+  .header-social-link {
+    width: 32px;
+    height: 32px;
+  }
+  .header-social-link img,
+  .header-social-link svg {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 /* Mobile Navigation */

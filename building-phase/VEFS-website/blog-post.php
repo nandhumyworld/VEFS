@@ -83,7 +83,7 @@ $canonical = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'vefs.org') . '/blog/' . htm
             <li><a href="/events.html" class="nav-link">Events</a></li>
             <li><a href="/volunteer.html" class="nav-link">Volunteer</a></li>
             <li><a href="/gallery.html" class="nav-link">Gallery</a></li>
-            <li><a href="/projects.html" class="nav-link">Projects</a></li>
+            <li><a href="/projects.html" class="nav-link">Projects <span id="projects-nav-new" class="projects-nav-new-slot" aria-hidden="true"></span></a></li>
             <li><a href="/contact.html" class="nav-link">Contact</a></li>
             <li><a href="/donate.html" class="btn btn-primary btn-sm">Donate</a></li>
           </ul>

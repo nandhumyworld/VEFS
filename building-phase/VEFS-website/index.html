@@ -1060,7 +1060,7 @@
             <li><a href="events.html" class="nav-link">Events</a></li>
             <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
             <li><a href="gallery.html" class="nav-link">Gallery</a></li>
-            <li><a href="projects.html" class="nav-link">Projects</a></li>
+            <li><a href="projects.html" class="nav-link">Projects <span id="projects-nav-new" class="projects-nav-new-slot" aria-hidden="true"></span></a></li>
             <li><a href="contact.html" class="nav-link">Contact</a></li>
             <li><a href="donate.html" class="btn btn-primary btn-sm">Donate</a></li>
           </ul>
@@ -1534,6 +1534,18 @@
       </div>
     </section>
 
+    <!-- ============================================
+         FOLLOW OUR WORK (SOCIAL)
+         ============================================ -->
+    <section class="section section-py home-social-section">
+      <div class="container">
+        <h2 class="section-title">Follow our work</h2>
+        <p class="section-lede">Updates from our YouTube, Instagram, and Facebook.</p>
+        <div id="home-social-grid" class="social-grid"></div>
+        <p class="section-cta-row"><button id="social-load-more" class="btn btn-outline" hidden>Load more</button></p>
+      </div>
+    </section>
+
     <!-- Future Plans Section -->
     <section class="section section-white">
       <div class="container">
@@ -1687,17 +1699,6 @@
       </div>
     </section>
 
-    <!-- ============================================
-         FOLLOW OUR WORK (SOCIAL)
-         ============================================ -->
-    <section class="section section-py home-social-section">
-      <div class="container">
-        <h2 class="section-title">Follow our work</h2>
-        <p class="section-lede">Updates from our YouTube, Instagram, and Facebook.</p>
-        <div id="home-social-grid" class="social-grid"></div>
-        <p class="section-cta-row"><button id="social-load-more" class="btn btn-outline" hidden>Load more</button></p>
-      </div>
-    </section>
   </main>
 
   <!-- Floating Sticky CTAs -->
@@ -1907,5 +1908,6 @@
     })();
   </script>
   <script src="js/components/blog-nav-badge.js"></script>
+  <script src="js/components/projects-nav-badge.js"></script>
 </body>
 </html>

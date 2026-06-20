@@ -35,6 +35,8 @@ class GalleryPage {
       const items = (json && Array.isArray(json.items)) ? json.items : [];
       this.photos = items
         .filter(it => !it.disabled && !it.hiddenFromPublic)
+        .slice()
+        .sort((a, b) => (a.order ?? 9e9) - (b.order ?? 9e9))
         .map((it, index) => this.buildPhotoFromItem(it, index));
     } catch (err) {
       console.warn('Could not load gallery images:', err);
